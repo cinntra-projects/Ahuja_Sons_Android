@@ -1,0 +1,26 @@
+package com.ahuja.sons.model
+
+data class CreateContactData(
+    var Address: String,
+    var CardCode: String,
+    var CreateDate: String,
+    var CreateTime: String,
+    var DateOfBirth: String,
+    var E_Mail: String,
+    var Fax: String,
+    var FirstName: String,
+    var Gender: String,
+    var LastName: String,
+    var MiddleName: String,
+    var MobilePhone: String,
+    var Position: String,
+    var Profession: String,
+    var Remarks1: String,
+    var Title: String,
+    var U_BPID: String,
+    var U_BRANCHID: String,
+    var U_NATIONALTY: String,
+    var UpdateDate: String,
+    var UpdateTime: String,
+    var CountryCode: String,
+)

@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:orientation="vertical">
+
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:background="@color/colorPrimary"
+            android:layout_width="match_parent"
+            app:layout_collapseMode="pin"
+            app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+            android:layout_height="?attr/actionBarSize">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/heading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Account"
+                    android:textSize="@dimen/text_size_18"
+                    android:textColor="@color/white"/>
+
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_10"
+            android:layout_marginTop="@dimen/size_10">
+
+            <TextView
+                android:layout_gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="01:03:34"
+
+                android:layout_weight="1"
+                android:textSize="@dimen/text_size_14"
+                android:textColor="@color/black" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+
+
+                <ImageView
+                    android:layout_width="@dimen/size_30"
+                    android:layout_height="@dimen/size_30"
+                    android:layout_marginLeft="@dimen/size_10"
+                    android:background="@drawable/play_238046" />
+                <ImageView
+
+                    android:layout_width="@dimen/size_30"
+                    android:layout_centerInParent="true"
+                    android:layout_height="@dimen/size_30"
+                    android:src="@drawable/ic_baseline_check_box_outline_blank_24"
+                    app:tint="@color/white"
+                    android:background="@drawable/ic_grey_dot"
+                    android:backgroundTint="@color/red"/>
+
+                <ImageView
+                    android:layout_width="@dimen/size_30"
+                    android:layout_height="@dimen/size_30"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_baseline_refresh_24"
+                    app:tint="@color/white"
+                    android:layout_marginRight="@dimen/size_10"
+                    android:background="@drawable/ic_grey_dot"
+                    android:backgroundTint="@color/safron_barChart" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_15"
+            android:layout_marginTop="@dimen/size_15"
+            android:background="#F1F1F1"/>
+        <RelativeLayout
+            android:layout_margin="@dimen/size_10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Need a AC installation"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_15"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textview"
+                android:id="@+id/message_icon"
+                android:layout_marginTop="@dimen/size_10"
+                android:background="@drawable/ic_vector__19_"/>
+
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_marginLeft="@dimen/size_10"
+                android:layout_marginTop="@dimen/size_5"
+                android:layout_toRightOf="@id/message_icon"
+                android:layout_below="@id/textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sophia jones"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text_size_12"
+               />
+
+            <TextView
+                android:id="@+id/company_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textview"
+                android:layout_marginLeft="@dimen/size_10"
+                android:layout_marginTop="@dimen/size_5"
+                android:layout_toRightOf="@id/name"
+                android:drawableLeft="@drawable/ic_grey_dot"
+                android:drawablePadding="@dimen/size_5"
+                android:text="26/08/2022, 05:40 pm"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_12"
+                android:textStyle="normal" />
+
+
+            <ImageView
+                android:id="@+id/imageman"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_5"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/ic_group_18584" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/lightGrey"
+            android:layout_marginTop="@dimen/size_10"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+
+            android:layout_marginTop="@dimen/size_10"
+            android:layout_height="wrap_content">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_24"
+                    android:drawableTint="@color/colorPrimary"
+                    android:gravity="center"
+                    android:text="Open"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_14" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_14"
+                    android:text="High"
+                    android:textColor="@color/red"
+                    android:gravity="center"
+                    android:drawableTint="@color/colorPrimary"
+                    android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_24"
+                    />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_24"
+                    android:drawableTint="@color/colorPrimary"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:text="1d 9h left"
+                    android:textSize="@dimen/text_size_14" />
+            </RelativeLayout>
+
+
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_15"
+    android:layout_marginTop="@dimen/size_15"
+            android:background="#F1F1F1"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/size_15"
+            android:layout_marginLeft="@dimen/size_10"
+            android:layout_marginRight="@dimen/size_10"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/name_icon"
+                android:layout_marginTop="@dimen/size_5"
+                android:layout_width="@dimen/size_30"
+                android:layout_height="@dimen/size_30"
+                android:background="@drawable/ic_group_18584"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/name_icon"
+                android:text="Sophia Jones"
+                android:id="@+id/name_value"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_14"
+                android:layout_marginLeft="@dimen/size_15"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/name_value"
+                android:layout_toRightOf="@id/name_icon"
+                android:text="24/09/2022, 06:30 pm"
+                android:textColor="@color/black"
+                android:layout_marginLeft="@dimen/size_15"/>
+
+
+            <ImageView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/threedots"
+                android:backgroundTint="@color/grey" />
+
+
+
+        </RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_10"
+            android:layout_marginRight="@dimen/size_10"
+            android:text="@string/cl"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_14"
+            android:layout_marginTop="@dimen/size_10"/>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

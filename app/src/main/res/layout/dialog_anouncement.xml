@@ -1,0 +1,28 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_background"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Add your dialog content here -->
+
+    <TextView
+        android:id="@+id/tvAnnouncement"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/this_is_announcement"
+        android:singleLine="true"
+        android:drawablePadding="@dimen/size_4"
+        android:background="#C2F3D0"
+        android:layout_gravity="center"
+
+        android:layout_marginTop="@dimen/size_4"
+        android:drawableStart="@drawable/ic_announcement_icon"
+        android:textColor="@color/text_color"
+        android:fontFamily="@font/montserrat_bold"
+        android:padding="6dp"
+
+        />
+
+</LinearLayout>

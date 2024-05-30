@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainframelayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/veryLightGrey">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsetoolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:contentScrim="@color/white"
+            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/size_60"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_15"
+                    android:layout_marginTop="@dimen/size_10">
+
+
+                    <ImageView
+                        android:id="@+id/name_icon"
+                        android:layout_width="@dimen/size_35"
+                        android:layout_height="@dimen/size_35"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/ic_group_18584" />
+
+
+                    <TextView
+                        android:id="@+id/company_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size_15"
+                        android:layout_marginTop="@dimen/size_5"
+                        android:layout_toLeftOf="@id/call_view"
+                        android:layout_toRightOf="@id/name_icon"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+
+                        android:text="Cinntra Infotech"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16"
+                        android:textStyle="bold" />
+
+
+                    <LinearLayout
+                        android:id="@+id/gps_view"
+                        android:layout_width="@dimen/size_30"
+                        android:layout_height="@dimen/size_30"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/size_15"
+                        android:layout_toLeftOf="@id/linearPdf"
+                        android:background="@drawable/rounded_blue_background"
+                        android:backgroundTint="#1A4AC5E4"
+                        android:gravity="center"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:id="@+id/gps"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/ic_gps_"
+                            android:backgroundTint="@color/colorPrimary"
+                            android:padding="@dimen/size_5" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/linearPdf"
+                        android:layout_width="@dimen/size_30"
+                        android:layout_height="@dimen/size_30"
+                        android:layout_alignParentRight="true"
+
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/size_15"
+                        android:background="@drawable/rounded_blue_background"
+                        android:backgroundTint="#1A4AC5E4"
+
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/ivPdf"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:background="@drawable/ic_pdf_icon"
+                            android:backgroundTint="@color/colorPrimary"
+                            android:padding="@dimen/size_5" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/chat_view"
+                        android:layout_width="@dimen/size_30"
+                        android:layout_height="@dimen/size_30"
+                        android:layout_centerVertical="true"
+
+                        android:layout_marginRight="@dimen/size_15"
+                        android:layout_toLeftOf="@id/gps_view"
+                        android:background="@drawable/rounded_blue_background"
+                        android:backgroundTint="#1AE4574A"
+
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/chat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:background="@drawable/message_icon"
+                            android:backgroundTint="@color/red"
+                            android:padding="@dimen/size_5" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/call_view"
+                        android:layout_width="@dimen/size_30"
+
+                        android:layout_height="@dimen/size_30"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/size_15"
+                        android:layout_toLeftOf="@id/chat_view"
+                        android:background="@drawable/rounded_grey_background"
+                        android:backgroundTint="#1A4CAF50"
+
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/phone"
+                            android:layout_width="@dimen/size_15"
+                            android:layout_height="@dimen/size_15"
+                            android:background="@drawable/ic_baseline_local_phone_24"
+                            android:backgroundTint="@color/green" />
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_2"
+                    android:layout_marginTop="@dimen/size_10"
+                    android:background="@color/divider_color" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_10"
+                    android:layout_marginTop="@dimen/size_10">
+
+                    <TextView
+                        android:id="@+id/main_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/size_10"
+                        android:text="Install an invertor AC"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:id="@+id/id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/main_title"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:text="#104"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14" />
+
+                    <TextView
+                        android:id="@+id/priority"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/main_title"
+                        android:layout_marginLeft="@dimen/size_15"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:layout_toRightOf="@id/id"
+                        android:drawableLeft="@drawable/ic_grey_dot"
+                        android:drawablePadding="@dimen/size_10"
+                        android:text="Medium"
+                        android:textColor="@color/orange"
+                        android:textSize="@dimen/text_size_14"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/createddate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/main_title"
+                        android:layout_marginLeft="@dimen/size_15"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:layout_toRightOf="@id/priority"
+                        android:drawableLeft="@drawable/ic_grey_dot"
+                        android:drawablePadding="@dimen/size_10"
+                        android:text="26/08/2022, 05:40 am"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14"
+                        android:textStyle="normal" />
+
+                    <LinearLayout
+                        android:layout_width="@dimen/size_80"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="@dimen/size_5"
+                        android:layout_marginRight="@dimen/size_15"
+                        android:background="@drawable/rounded_blue_background"
+                        android:backgroundTint="#1A95DA45"
+                        android:gravity="center"
+                        android:minHeight="@dimen/size_35">
+
+                        <TextView
+                            android:id="@+id/status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:padding="2dp"
+                            android:text="In Progress"
+                            android:textColor="@color/green"
+                            android:textStyle="bold" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearManTrap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/id"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginTop="@dimen/size_8"
+                        android:layout_marginBottom="@dimen/size_8"
+                        android:background="@drawable/rounded_blue_background"
+                        android:backgroundTint="#F10D0D"
+                        android:gravity="center"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:id="@+id/tvManTrapStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:padding="2dp"
+                            android:paddingStart="4dp"
+                            android:paddingEnd="4dp"
+                            android:text="@string/rescue_log"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/size_10"
+                            android:textStyle="bold" />
+
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_5"
+                    android:layout_marginTop="@dimen/size_10"
+                    android:background="@color/divider_color" />
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/colorPrimary"
+                app:layout_collapseMode="pin"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:navigationIcon="@drawable/ic_baseline_arrow_back_24">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <TextView
+                        android:id="@+id/heading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tickets"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_18" />
+
+                    <LinearLayout
+                        android:id="@+id/openThreeDotMenu"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:gravity="end"
+                        android:layout_marginRight="10dp"
+                        android:paddingEnd="10dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/threedots"
+                            android:backgroundTint="@color/white"/>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appbar">
+
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/size_10"
+                android:paddingRight="@dimen/size_10"
+                android:visibility="visible"
+                app:tabIndicatorColor="@color/colorPrimary"
+                app:tabIndicatorHeight="2dp"
+                app:tabMode="fixed"
+                app:tabSelectedTextColor="@color/colorPrimary"
+                app:tabTextAppearance="@style/MyCustomTextAppearance" />
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+

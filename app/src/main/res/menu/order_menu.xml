@@ -1,0 +1,51 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.learn2crack.recyclerviewsearch.MainActivity">
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/filter"
+            android:icon="@drawable/ic_filter"
+            android:iconTint="@color/white"
+            android:title="Search"
+            app:showAsAction="ifRoom|collapseActionView">
+            <menu>
+                <group>
+
+                    <item
+                        android:id="@+id/order_all"
+                        android:title="All" />
+
+                    <item
+                        android:id="@+id/pending"
+                        android:title="Pending" />
+
+
+                    <item
+                        android:id="@+id/approved"
+                        android:title="Approved" />
+                    <item
+                        android:id="@+id/reject"
+                        android:title="Rejected" />
+
+
+                </group>
+
+
+            </menu>
+
+        </item>
+
+        <item
+            android:id="@+id/search"
+            android:icon="@drawable/ic_search"
+            android:iconTint="@color/white"
+            android:title="Search"
+            app:actionViewClass="androidx.appcompat.widget.SearchView"
+            app:showAsAction="ifRoom|collapseActionView" />
+
+
+    </group>
+
+</menu>

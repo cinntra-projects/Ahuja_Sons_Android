@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_margin="@dimen/size_4"
+        android:src="@drawable/mantrap"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/dividerBottom"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+
+        android:background="@color/accentColor"
+        app:layout_constraintBottom_toTopOf="@id/dividerAnnuncement"
+        app:layout_constraintEnd_toStartOf="@id/linearAnnouncementData"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@id/imageView2" />
+
+    <View
+        android:id="@+id/dividerAnnuncement"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+
+        android:layout_marginEnd="@dimen/size_8"
+        android:background="@color/barchart_line"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/linearAnnouncementData"
+        app:layout_constraintTop_toBottomOf="@id/linearAnnouncementData" />
+
+    <LinearLayout
+        android:id="@+id/linearAnnouncementData"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_8"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="@id/imageView2">
+
+        <TextView
+            android:id="@+id/tvCurrentStatus"
+            style="@style/textViewBold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_8"
+            android:text="@string/update_current_status"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dialogLoader" />
+
+        <TextView
+            android:id="@+id/tvAnnouncementDesc"
+            style="@style/textViewSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="@dimen/size_4"
+            android:layout_marginBottom="@dimen/size_4"
+            android:text="@string/description"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dialogLoader" />
+
+        <TextView
+            android:id="@+id/tvDateOfManTrap"
+            style="@style/textViewSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+
+            android:layout_marginBottom="@dimen/size_8"
+            android:text="@string/description"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dialogLoader" />
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

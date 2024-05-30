@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:scrollbarStyle="insideInset"
+    android:nestedScrollingEnabled="false"
+    android:background="@color/greyish_backgroynd"
+    android:focusable="true"
+
+    android:clickable="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+<include
+    android:nestedScrollingEnabled="false"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:id="@+id/toolbar"
+
+    app:layout_collapseMode="pin"
+    layout="@layout/custom_toolbar"/>
+
+
+
+
+
+
+
+
+
+
+
+
+            <LinearLayout
+                android:id="@+id/customer_view"
+                app:layout_constraintTop_toBottomOf="@id/toolbar"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_margin="@dimen/size_15"
+                android:layout_height="wrap_content">
+
+
+
+                <LinearLayout
+                    android:id="@+id/preventive_maintence"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="@dimen/size_60"
+                        app:cardCornerRadius="@dimen/size_8"
+                        app:cardBackgroundColor="#E7BFFF"
+                        app:cardUseCompatPadding="true"
+                        app:cardPreventCornerOverlap="false"
+                        android:layout_height="@dimen/size_60">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Prevetive maintainence"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16"
+                        android:layout_marginLeft="@dimen/size_10"
+                        android:layout_gravity="center"/>
+
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:id="@+id/machine_installation"
+                    android:layout_marginTop="@dimen/size_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="@dimen/size_60"
+                        app:cardCornerRadius="@dimen/size_8"
+                        app:cardBackgroundColor="#FA7A7A"
+                        app:cardUseCompatPadding="true"
+                        app:cardPreventCornerOverlap="false"
+                        android:layout_height="@dimen/size_60">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Machine installation"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16"
+                        android:layout_marginLeft="@dimen/size_10"
+                        android:layout_gravity="center"/>
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/customer_complaints"
+                    android:layout_marginTop="@dimen/size_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="@dimen/size_60"
+                        app:cardCornerRadius="@dimen/size_8"
+                        app:cardBackgroundColor="#F9C486"
+                        app:cardUseCompatPadding="true"
+                        app:cardPreventCornerOverlap="false"
+                        android:layout_height="@dimen/size_60">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Customer complaints"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16"
+                        android:layout_marginLeft="@dimen/size_10"
+                        android:layout_gravity="center"/>
+
+
+                </LinearLayout>
+
+
+
+
+
+
+
+            </LinearLayout>
+
+
+
+
+
+
+
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_ticket"
+        app:layout_constraintTop_toBottomOf="@id/customer_view"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_60"
+        android:layout_marginEnd="@dimen/size_30"
+        app:backgroundTint="@color/colorPrimary"
+        android:layout_gravity="end|bottom"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+        android:clickable="true"
+        android:visibility="visible"
+        app:elevation="8dp"
+        app:tint="@color/white"
+
+        android:src="@drawable/ic_baseline_add_24"
+        />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

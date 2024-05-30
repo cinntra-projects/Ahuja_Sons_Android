@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/rounded_box_background"
+    android:backgroundTint="#224A79E4"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content">
+
+
+    <RelativeLayout
+        android:id="@+id/main_view"
+        android:layout_width="match_parent"
+        android:padding="@dimen/size_10"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:gravity="center_vertical"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_height="@dimen/size_70">
+
+        <ImageView
+            android:id="@+id/profile_pic"
+            android:layout_width="@dimen/size_45"
+            android:layout_height="@dimen/size_45"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ic_group_18584" />
+
+        <TextView
+            android:layout_marginTop="@dimen/size_4"
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_10"
+            android:layout_toRightOf="@id/profile_pic"
+            android:text="PAtrica Brown"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_14" />
+
+
+
+
+
+
+        <TextView
+            android:layout_toRightOf="@id/profile_pic"
+            android:id="@+id/email"
+            android:layout_marginLeft="@dimen/size_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/name"
+            android:text="sophia@gmail.com"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/text_size_14"
+            android:textStyle="normal" />
+
+
+
+
+
+
+
+    </RelativeLayout>
+
+
+
+    <View
+        app:layout_constraintTop_toBottomOf="@id/main_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_4"
+        android:background="@color/white"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

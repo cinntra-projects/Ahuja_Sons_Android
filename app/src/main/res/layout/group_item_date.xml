@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/greyish_backgroynd"
+    android:gravity="center_vertical"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/text_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="24 Sep,2019"
+        android:padding="@dimen/size_10"
+        style="@style/text_bold"
+        android:textSize="@dimen/text_size_14"
+        android:layout_marginTop="@dimen/size_15"
+        android:layout_marginBottom="@dimen/size_10"/>
+
+</LinearLayout>

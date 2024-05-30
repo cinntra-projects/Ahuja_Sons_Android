@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- <item
+         android:id="@+id/watch"
+         android:icon="@drawable/ic_stopwatch"
+         app:showAsAction="ifRoom"
+         android:title="Add">
+     </item>-->
+    <item
+        android:id="@+id/edit"
+        android:icon="@drawable/ic_baseline_edit_24"
+        android:iconTint="@color/white"
+        android:title="Edit"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/empty"
+        android:icon="@drawable/threedots"
+        android:iconTint="@color/white"
+        android:orderInCategory="101"
+        android:title="Options"
+        app:showAsAction="always">
+
+        <menu>
+
+            <item
+                android:id="@+id/action_settings"
+                android:title="Sign &amp; Confirm"
+                app:showAsAction="ifRoom" />
+
+
+            <item
+                android:id="@+id/machine_replacement"
+                android:title="Machine Replacement"
+                android:visible="false"
+                app:showAsAction="ifRoom" />
+
+            <item
+                android:id="@+id/breakDown"
+                android:title="Break Down"
+                android:visible="false"
+                app:showAsAction="ifRoom" />
+
+            <item
+                android:id="@+id/technical_assign"
+                android:title="Technical Assign"
+                android:visible="false"
+                app:showAsAction="ifRoom" />
+            <item
+                android:id="@+id/repair_assign"
+                android:title="Repair Assign"
+                android:visible="false"
+                app:showAsAction="ifRoom" />
+
+            <item
+                android:id="@+id/escallation"
+                android:title="Escalation"
+                android:visible="true"
+                app:showAsAction="ifRoom" />
+
+            <item
+                android:id="@+id/addOnTime"
+                android:title="Add On Time"
+                android:visible="false"
+                app:showAsAction="ifRoom" />
+
+            <item
+                android:id="@+id/closedTicket"
+                android:title="Closed Ticket"
+                android:visible="true"
+                app:showAsAction="ifRoom" />
+
+
+        </menu>
+
+    </item>
+
+</menu>

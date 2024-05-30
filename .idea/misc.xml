@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/massaed_service_support/app/src/main/res/drawable-v24/rounded_border.xml" value="0.123" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/drawable/background_bottom_round.xml" value="0.1485" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/drawable/button_disable.xml" value="0.1385" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/drawable/button_enabled.xml" value="0.1395" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/drawable/button_enabled_background.xml" value="0.1395" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/drawable/dialog_background_round.xml" value="0.13" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/drawable/ic_app_icon_logo.xml" value="0.1275" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/drawable/ic_attachment.xml" value="0.1345" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/drawable/ic_launcher_massaed_icon_foreground.xml" value="0.16" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/drawable/ic_log_item.xml" value="0.1215" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/drawable/ic_login_back.xml" value="0.1575" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/drawable/ic_product.xml" value="0.123" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/drawable/login_background.xml" value="0.1575" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/drawable/rounded_blue_background.xml" value="0.133" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/drawable/spinner_border.xml" value="0.136" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/drawable/tab_color.xml" value="0.188" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/account_details_view.xml" value="0.49625468164794007" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/account_view.xml" value="0.1" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/activity_all_part_request.xml" value="0.14749893116716545" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/activity_announcement.xml" value="0.13333333333333333" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/activity_item.xml" value="0.14749893116716545" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/activity_main.xml" value="0.13333333333333333" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/activity_man_trap_rescue_log.xml" value="0.16666666666666666" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/activity_other_type_ticket.xml" value="0.10666666666666667" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/activity_report.xml" value="0.14749893116716545" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/add_contact.xml" value="0.14666666666666667" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/add_icon_toolbar.xml" value="0.14666666666666667" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/add_tickets.xml" value="0.16666666666666666" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/aftersubmitrequest.xml" value="0.16666666666666666" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/allpartrequestfragment.xml" value="0.14666666666666667" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/app_bar_main.xml" value="0.22" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/categorysee_all_fragment.xml" value="0.12" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/chatter_layout.xml" value="0.14749893116716545" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/chatterfragment.xml" value="0.10004275331338179" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/comment_dialog.xml" value="0.16666666666666666" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/contact_activty.xml" value="0.14666666666666667" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/conv_ticekt_detail.xml" value="0.22" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/createpartrequestfragment.xml" value="0.22" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/custom_drawer.xml" value="0.16666666666666666" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/customer_details.xml" value="0.3333333333333333" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/customer_order_view.xml" value="0.38589211618257263" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/customercontact.xml" value="0.1796875" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/dialog_anouncement.xml" value="0.16666666666666666" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/dialog_check_list_status_changer.xml" value="0.16666666666666666" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/dialog_create_man_trap_log.xml" value="0.16666666666666666" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/dialog_man_trap_rescue.xml" value="0.14666666666666667" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/dialog_progress.xml" value="0.22" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/dialog_quality_inspection.xml" value="0.16666666666666666" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/dialog_ticket_details.xml" value="0.22" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/dialog_ticket_type_assign.xml" value="0.1" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/dialog_ticket_type_log.xml" value="0.22" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/dropdownview.xml" value="0.3333333333333333" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/edit_ticket_details.xml" value="0.12697734074390765" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/edit_tickets.xml" value="0.22" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/fragment_accout.xml" value="0.14666666666666667" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/fragment_announcement_list.xml" value="0.16666666666666666" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/fragment_customer_order.xml" value="0.1" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/fragment_home.xml" value="0.1796875" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/item_announcement.xml" value="0.22" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/item_check_list.xml" value="0.16666666666666666" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/item_dialog_checklist_data.xml" value="0.22" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/item_man_tap_list.xml" value="0.5" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/layout_progress_dialog.xml" value="0.22" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/listing_view.xml" value="0.16666666666666666" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/log_ticket_detail.xml" value="0.22" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/login_ui.xml" value="0.16666666666666666" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/main_activity.xml" value="0.1" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/nav_header_main.xml" value="0.16666666666666666" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/no_icon_toolbar.xml" value="0.13467293715262932" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/overview_ticket.xml" value="0.13467293715262932" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/part_request_itemview.xml" value="0.14749893116716545" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/part_request_view.xml" value="0.14749893116716545" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/particular_item_details.xml" value="0.12708333333333333" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/particular_order_details.xml" value="0.22" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/particulart_ticket_information.xml" value="0.128125" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/partrequatachitem.xml" value="0.14666666666666667" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/product_item.xml" value="0.13333333333333333" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/profile_page.xml" value="0.16666666666666666" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/quantity_alert.xml" value="0.22" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/scanner_view.xml" value="0.1796875" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/search_page.xml" value="0.22" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/select_department.xml" value="0.11970927746900385" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/select_order_fragment.xml" value="0.1" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/servce_ticket_adapter.xml" value="0.4466666666666667" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/service_ticket.xml" value="0.22" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/spinner_row.xml" value="0.1" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/spinner_with_border.xml" value="0.16666666666666666" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/static_ui_dashboard.xml" value="0.14749893116716545" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/static_ui_page_one.xml" value="0.14666666666666667" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/static_ui_page_two.xml" value="0.16666666666666666" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/ticekt_details.xml" value="0.14666666666666667" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/ticket_detail_newpage.xml" value="0.14666666666666667" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/ticket_detail_viewpager.xml" value="0.16666666666666666" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/ticket_details.xml" value="0.22" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/ticket_information.xml" value="0.13333333333333333" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/tickets_view.xml" value="0.16666666666666666" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/layout/toolbar_global.xml" value="0.1" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/menu/account_detail_menu.xml" value="0.121875" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/menu/bottom_menu.xml" value="0.14749893116716545" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/menu/menu_log.xml" value="0.14749893116716545" />
+        <entry key="..\:/massaed_service_support/app/src/main/res/menu/ticket_detail_menu.xml" value="0.14749893116716545" />
+      </map>
+    </option>
+  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

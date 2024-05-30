@@ -1,0 +1,50 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.ServiceSupportPortal" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/colorMassaedPrimary</item>
+        <item name="colorPrimaryVariant">@color/accentColor</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/colorMassaedSecondary</item>
+        <item name="colorSecondaryVariant">@color/teal_200</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" >?attr/colorPrimaryVariant</item>
+        <item name="android:windowActionBar">false</item>
+        <!-- Customize your theme here. -->
+    </style> <style name="FullScreen" parent="@style/Theme.MaterialComponents.Light.NoActionBar">
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowActionBar">false</item>
+    <item name="android:windowFullscreen">true</item>
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="colorPrimary">@color/colorMassaedPrimary</item>
+    <item name="colorPrimaryDark">@color/colorMassaedPrimary</item>
+    <item name="colorAccent">@color/accentColor</item>
+    <item name="android:statusBarColor">@color/colorMassaedPrimary</item>
+</style>
+
+
+    <style name="noDarkMode" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/colorMassaedPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorMassaedPrimary</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorAccent">@color/black</item>
+        <item name="android:name">Massaed Service Support</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/colorMassaedSecondary</item>
+        <item name="colorSecondaryVariant">@color/accentColor</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+
+
+
+<!--        <style name="SpinnerStyle" parent="Widget.AppCompat.Spinner">-->
+<!--            <item name="android:background">@drawable/spinner_border</item>-->
+<!--        </style>-->
+
+    </style>
+
+</resources>

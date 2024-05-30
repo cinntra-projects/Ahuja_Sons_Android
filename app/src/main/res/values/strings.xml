@@ -1,0 +1,313 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Ahuja App</string>
+    <string name="app_version">Version :- 1.1.1 20240501</string>
+    <!--    <string name="app_name">Indo</string>-->
+    <string name="menu_home">Home</string>
+    <string name="search_product">"Search "</string>
+    <string name="nav_header_desc">Navigation Header</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="no_gmail_found">No Gmail Found</string>
+    <string name="description_dynamic">%s work</string>
+    <string name="cl">With the idea of imparting programming
+      knowledge, Mr. Sandeep Jain, an IIT Roorkee alumnus started a
+      dream, GeeksforGeeks. Whether programming excites you or you feel
+      stifled, wondering how to prepare for interview questions or how to
+      ace data structures and algorithms, GeeksforGeeks is a one-stop solution.
+      With every tick of time, we are adding arrows in our quiver. From articles
+      on various computer science subjects to programming problems for practice,
+      from basic to premium courses, from technologies to entrance examinations,
+      we have been building ample content with superior quality. In a short span,
+      we have built a community of 1 Million+ Geeks around the world, 20,000+
+      Contributors and 500+ Campus Ambassadors in various colleges across the nation.
+      Our success stories include a lot of students who benefitted in their placements
+      and landed jobs at tech giants. Our vision is to build a gigantic network of
+      geeks and we are only a fraction of it yet.
+  </string>
+    <string name="extended_fab_label">Live Chat</string>
+    <string name="exitmsz">Press again to exit</string>
+    <string name="department">Department <font color='#FF0000'>*</font></string>
+    <string name="business_partner_mand">Business Partner <font color='#FF0000'>*</font></string>
+    <string name="customer_name_mand">Customer Name<font color='#FF0000'>*</font></string>
+    <string name="business_partner">Business Partner </string>
+    <string name="layout">Layout <font color='#FF0000'>*</font></string>
+    <string name="order_mand">Order <font color='#FF0000'>*</font></string>
+    <string name="order">Order</string>
+    <string name="item">Item</string>
+    <string name="cotact_name">Contact Name <font color='#FF0000'>*</font></string>
+    <string name="branchnameMand">Branch <font color='#FF0000'>*</font></string>
+
+    <string name="item2">Item <font color='#FF0000'>*</font></string>
+    <string name="item_mand">Item <font color='#FF0000'>*</font></string>
+    <string name="item_name_mand">Item Name <font color='#FF0000'>*</font></string>
+    <string name="item_group_mand1">Item Group<font color='#FF0000'>*</font></string>
+    <string name="scopOfWork_mand">Scope of Work <font color='#FF0000'>*</font></string>
+    <string name="request_type_mand">Request Type <font color='#FF0000'>*</font></string>
+    <string name="case_origin_mand">Case Origin <font color='#FF0000'>*</font></string>
+    <string name="prodname_mand">Product Name <font color='#FF0000'>*</font></string>
+    <string name="first_name">First Name <font color='#FF0000'>*</font></string>
+    <string name="employee_id">Employee ID </string>
+    <string name="name_mand">Name<font color='#FF0000'>*</font></string>
+    <string name="subject">Subject <font color='#FF0000'>*</font></string>
+    <string name="product_team">Product Team</string>
+    <string name="account_name">Account Name</string>
+    <string name="email">E-mail</string>
+    <string name="email_mand">E-mail <font color='#FF0000'>*</font></string>
+    <string name="phone">Phone </string>
+    <string name="phone_mand">Phone <font color='#FF0000'>*</font> </string>
+    <string name="status">Status</string>
+    <string name="zone">Zone</string>
+    <string name="zone_mand">Zone  <font color='#FF0000'>*</font></string>
+    <string name="ticket_owner">Ticket Owner</string>
+    <string name="product_name">Product Name</string>
+    <string name="skills">Skills</string>
+    <string name="description">Description</string>
+    <string name="due_date">Due Date</string>
+    <string name="language">Language</string>
+    <string name="priority">Priority</string>
+    <string name="priority_mand">Priority  <font color='#FF0000'>*</font></string>
+    <string name="channel">Channel</string>
+    <string name="classification">Classification</string>
+    <string name="delete">Delete</string>
+    <string name="reply">Reply</string>
+    <string name="forward">Forward</string>
+    <string name="type">Type</string>
+    <string name="contact_person">Contact Name</string>
+    <string name="check_internet">Check Internet Connection</string>
+
+    <array name="ticket_status">
+        <item>New</item>
+        <item>Assigned</item>
+        <item>Pending</item>
+        <item>In Progress</item>
+        <item>Resolved</item>
+
+    </array>
+
+    <array name="ticket_type">
+
+        <item>Installation</item>
+        <item>Maintenance</item>
+        <item>On Complaints</item>
+
+    </array>
+
+    <array name="zone_list">
+        <item>North</item>
+        <item>East</item>
+        <item>West</item>
+        <item>South</item>
+
+
+    </array>
+
+    <array name="yesList">
+        <item>Yes</item>
+        <item>No</item>
+        <item>N/A</item>
+
+
+    </array>
+
+    <array name="priority_list">
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+
+    </array>
+
+    <array name="languagelist">
+        <item>English</item>
+        <item>Hindi</item>
+        <item>Spanish</item>
+        <item>French</item>
+    </array>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="account_owner">Account Owner</string>
+    <string name="country">Country</string>
+    <string name="website">Website</string>
+    <string name="address">Address</string>
+    <string name="address_mand">Address  <font color='#FF0000'>*</font></string>
+    <string name="assignto">Assign To</string>
+    <string name="assignto_mand">Assign To  <font color='#FF0000'>*</font></string>
+    <string name="name">Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="last_name_mand">Last Name <font color='#FF0000'>*</font></string>
+    <string name="customer">Customers</string>
+    <string name="customer_mand">Customer <font color='#FF0000'>*</font></string>
+    <string name="announcement">Announcement</string>
+    <string name="contact_owner">Contact Owner</string>
+    <string name="mobile">Mobile</string>
+    <string name="role">Role</string>
+    <string name="role_mand">Role <font color='#FF0000'>*</font></string>
+    <string name="create">Create</string>
+    <string name="bussiness_partner">Business Partner</string>
+    <string name="position">Position</string>
+    <string name="send_message">Send message</string>
+    <string name="cardname">Cardname</string>
+    <string name="cardcode">CardCode</string>
+    <string name="contact_owner_mand">Contact Owner</string>
+    <string name="contact_detail">Contact Detail</string>
+    <string name="mobile_mand">Mobile</string>
+    <string name="website_mand">Website</string>
+    <string name="bill_to">Bill to</string>
+    <string name="ship_to">Ship to</string>
+    <string name="remarks">Remarks</string>
+    <string name="attachment">Attachment</string>
+    <string name="zip_code">ZipCode</string>
+    <string name="billing_name_mand">Billing Name</string>
+    <string name="state">State</string>
+    <string name="shipping_type_mand">Shipping type</string>
+    <string name="billing_address_mand">Billing Address</string>
+    <string name="ship_to_different">Ship to diffrent address</string>
+    <string name="shipping_namemand">Shipping name</string>
+    <string name="shipping_address">Shipping Address</string>
+    <string name="general">General</string>
+    <string name="contact">Contact</string>
+    <string name="company_name_mand">Company name</string>
+    <string name="company_email">Company Email</string>
+    <string name="company_email_mand">Company email</string>
+    <string name="sales_employee_mand">Sales employee</string>
+    <string name="industry_mand">Industry</string>
+    <string name="annual_revenue">Annual Revenue</string>
+    <string name="account_balance">Account Balance</string>
+    <string name="company_id">Company ID</string>
+    <string name="gst_no">GST No</string>
+    <string name="credit_limit">Credit Limit</string>
+    <string name="payment_term_mand">Payment Term</string>
+    <string name="ratings">Ratings</string>
+    <string name="parent_account">Parent Account</string>
+    <string name="discount_percent">Discount percent</string>
+    <string name="qty">Quantity</string>
+    <string name="enter_qty">Enter Quantity</string>
+    <string name="enter_price">Enter Price</string>
+    <string name="branch_name">Branch Name</string>
+    <string name="choose_item">Choose Item</string>
+    <string name="save">Save</string>
+    <string name="alterna_phone">Alternate Phone</string>
+    <string name="alterna_phone_mand">Alternate Phone  <font color='#FF0000'>*</font></string>
+    <string name="contactphone">Contact Phone No.</string>
+    <string name="uploading_it_may_take_a_while">Getting.. It may take a while</string>
+    <string name="product_serial_number">Product Serial No.</string>
+    <string name="subtype">Sub Type</string>
+    <string name="sub_type">Sub Type</string>
+    <string name="product_serial_no">Product Serial No.</string>
+    <string name="ticket_details">Ticket Details</string>
+
+
+    <array name="shippingType">
+        <item>Motor Express</item>
+        <item>UPS Ground</item>
+        <item>UPS Red</item>
+        <item>Fedex EM</item>
+        <item>Fedex ON</item>
+    </array>
+
+
+    <string-array name="examples">
+        <item>Hello</item>
+        <item>Fading TextView</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="this_is_announcement">This is announcement.</string>
+    <string name="yet_to_start">Yet to Start Service</string>
+
+    <string name="title">Title</string>
+    <string name="ticket_type_status">Ticket Type Status</string>
+    <string name="delivery_id">Delivery id</string>
+
+    <string name="logPrevType_dynamic">Previous Type: %s </string>
+    <string name="ticket_reassign_dynamic">Ticket reassign to $1%s by $2%s </string>
+    <string name="quality_inspection">Quality Inspection</string>
+    <string name="update_ticket_details_dialog_heading">Update Ticket Details</string>
+    <string name="spinner_hint">Select Issue Category</string>
+    <string name="cannot_empty">Can\'t be empty</string>
+    <string name="updated_successfully">Updated Successfully</string>
+    <string name="dr">Doctor</string>
+    <string name="chemist">Chemist</string>
+    <string name="update_current_status"><u>Update Current Status</u></string>
+    <string name="Man_Trap_Rescue_Log">Man Trap Rescue Log</string>
+    <string name="Man_Trap_Rescue_operation">Man-Trap Rescue Opeartion</string>
+    <string name="report">Report</string>
+    <string name="select_attachment">Select Attachment</string>
+    <string name="accept">Accept</string>
+    <string name="partdetial">Part Detail</string>
+    <string name="rescue_log">Rescue Log</string>
+    <string name="default_notification_channel_id">channel sos</string>
+    <string name="default_notification_channel_name">channel name sos</string>
+    <string name="repair_request_needed">Repair Request Needed</string>
+    <string name="material_used">Material Used</string>
+    <string name="schedule_visit_type">Schedule Visit Date</string>
+    <string name="corrective_action">Corrective Actions</string>
+    <string name="correct_issue_type">Correct Issue Type</string>
+    <string name="google_map_api_key">AIzaSyC0N8O3nEBclMJ1qcrXderid0HscxWU4kA </string>
+    <string name="contract_type">Contract Type <font color='#FF0000'>*</font></string>
+    <string name="contract_Name">Contract Name <font color='#FF0000'>*</font></string>
+    <string name="frequency">Frequency <font color='#FF0000'>*</font></string>
+    <string name="unit_price_mand">Unit Price <font color='#FF0000'>*</font></string>
+    <string name="from_date_mand">From Date <font color='#FF0000'>*</font></string>
+    <string name="to_date_mand">To Date <font color='#FF0000'>*</font></string>
+    <string name="service_manager_mand">Service Manager <font color='#FF0000'>*</font></string>
+    <string name="reporting_to_mand">Reporting To <font color='#FF0000'>*</font></string>
+    <string name="product_type_mand">Product Type <font color='#FF0000'>*</font></string>
+    <string name="model_no_mand">Model No <font color='#FF0000'>*</font></string>
+    <string name="tds_input_mand">TDS Input <font color='#FF0000'>*</font></string>
+    <string name="tds_output_mand">TDS Output <font color='#FF0000'>*</font></string>
+    <string name="date_of_installation_mand">Date Of Installation <font color='#FF0000'>*</font></string>
+    <string name="machine_loc_floor_mand">Machine Loc. Floor <font color='#FF0000'>*</font></string>
+    <string name="machine_loc_area_mand">Machine Loc. Area <font color='#FF0000'>*</font></string>
+    <string name="contract_type_mand">Contract Type <font color='#FF0000'>*</font></string>
+    <string name="no_of_employee_in_that_area_mand">No. Of Employee in that Area <font color='#FF0000'>*</font></string>
+    <string name="remark_mand">Remark <font color='#FF0000'>*</font></string>
+    <string name="attachment_mand">Attachment <font color='#FF0000'>*</font></string>
+    <string name="membrane_ml_min_mand">Membrane (ml./min.) <font color='#FF0000'>*</font></string>
+    <string name="rejected_ml_min_mand">Rejected (ml./min.) <font color='#FF0000'>*</font></string>
+    <string name="ro_pump_psi_mand">RO Pump (psi) <font color='#FF0000'>*</font></string>
+    <string name="machine_model_type_mand">Machine Model Type <font color='#FF0000'>*</font></string>
+    <string name="hot_water_c_mand">Hot Water (.C) <font color='#FF0000'>*</font></string>
+    <string name="cold_water_c_mand">Cold Water (.C) <font color='#FF0000'>*</font></string>
+    <string name="ventillation_mand">Ventillation </string>
+    <string name="raw_water_pressure_mand">Raw Water Pressure</string>
+    <string name="power_availability_in_amp_mand">Power Availability in AMP </string>
+    <string name="customer_name">Customer Name <font color='#FF0000'>*</font></string>
+    <string name="customer_number_mand">Customer Number <font color='#FF0000'>*</font></string>
+    <string name="customer_designation_mand">Customer Designation </string>
+    <string name="complain_detail_from_client_mand">Complain detail From Client <font color='#FF0000'>*</font></string>
+    <string name="defect_found_mand">Defect Found <font color='#FF0000'>*</font></string>
+    <string name="reason_of_defect_mand">Reason for Defect <font color='#FF0000'>*</font></string>
+    <string name="remedial_action_mand">Remedial Action <font color='#FF0000'>*</font></string>
+    <string name="spare_part_mand">Spare Part </string>
+    <string name="tds_of_water_mand">TDS of Water </string>
+    <string name="treated_ppm_mand">Treated (ppm) <font color='#FF0000'>*</font></string>
+    <string name="number_mand">Number <font color='#FF0000'>*</font></string>
+    <string name="total_floor_building_mand">Total Floor Building <font color='#FF0000'>*</font></string>
+    <string name="source_of_water_mand">Source of Water  <font color='#FF0000'>*</font></string>
+    <string name="overhead_tank_volume_mand">Overhead Tank Volume  <font color='#FF0000'>*</font></string>
+    <string name="tank_cleaning_capacity_mand">Tank Cleaning Capacity  <font color='#FF0000'>*</font></string>
+    <string name="tank_filling_frequency_mand">Tank Filling Frequency  <font color='#FF0000'>*</font></string>
+    <string name="floor_mand">Floor  <font color='#FF0000'>*</font></string>
+    <string name="no_of_shifts_mand">No. of Shifts  <font color='#FF0000'>*</font></string>
+    <string name="working_timings_of_shifts_mand">Working Timings of Shifts  <font color='#FF0000'>*</font></string>
+    <string name="tank_height_from_machine_level_mand">Tank Height From Machine Level  <font color='#FF0000'>*</font></string>
+    <string name="no_of_employees_mand">No. of Employees  <font color='#FF0000'>*</font></string>
+    <string name="no_of_visitors_mand">No. of Visitors  <font color='#FF0000'>*</font></string>
+    <string name="no_of_pantries_on_floor_mand">No. of Pantries on Floor  <font color='#FF0000'>*</font></string>
+    <string name="electricity_point_specification_mand">Electricity Point Specification  <font color='#FF0000'>*</font></string>
+    <string name="power_backup_capacity_mand">Power Backup Capacity  <font color='#FF0000'>*</font></string>
+    <string name="tds_of_raw_water_mand">TDS of Raw Water  <font color='#FF0000'>*</font></string>
+    <string name="chlorinated_water_mand">Chlorinated Water  <font color='#FF0000'>*</font></string>
+    <string name="water_pressure_psi_mand">Water Pressure Psi  <font color='#FF0000'>*</font></string>
+    <string name="level_of_ph_value_mand">Level of PH Value  <font color='#FF0000'>*</font></string>
+    <string name="no_of_dispensers_installed_in_this_floor_mand">No. of Dispensers Installed in this Floor  <font color='#FF0000'>*</font></string>
+    <string name="existing_water_dispensers_make_mand">Existing Water Dispensers Make  <font color='#FF0000'>*</font></string>
+    <string name="daily_consumption_of_water_bottles_mand">Daily Consumption of Water Bottles  <font color='#FF0000'>*</font></string>
+    <string name="capacity_of_water_bottles_mand">Capacity Of Water Bottles  <font color='#FF0000'>*</font></string>
+    <string name="existing_water_bottles_make_mand">Existing Water Bottles Make  <font color='#FF0000'>*</font></string>
+    <!--    <string name="availability_in_no_s_mand">Availability in No\'s  <font color='#FF0000'>*</font></string>-->
+    <string name="availability_in_no_s_mand">Installation Requirement Floorwise <font color='#FF0000'>*</font></string>
+    <string name="area_mand">Area  <font color='#FF0000'>*</font></string>
+    <string name="raw_mand" tools:ignore="ExtraTranslation">Raw (ppm) <font color='#FF0000'>*</font></string>
+
+
+</resources>

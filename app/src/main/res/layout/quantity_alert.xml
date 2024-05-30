@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/graph_size_350"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/dialog_background"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+
+            android:orientation="vertical"
+            android:padding="@dimen/size_10">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10sp"
+                android:text="@string/enter_price"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16" />
+
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="@dimen/size_300"
+                android:layout_height="44dp"
+                android:layout_marginTop="@dimen/text_size_20"
+                android:background="@drawable/rounded_box_background"
+                android:elevation="1dp"
+                android:hint="@string/enter_price"
+                android:inputType="number"
+                android:editable="false"
+                android:clickable="false"
+                android:maxLength="15"
+                android:paddingLeft="10dp"
+                android:text="0.0"
+                android:textSize="15sp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Enter Quantity"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16" />
+
+            <EditText
+                android:id="@+id/discount_value"
+                android:layout_width="@dimen/size_300"
+                android:layout_height="44dp"
+                android:layout_marginTop="@dimen/text_size_20"
+                android:background="@drawable/rounded_box_background"
+                android:elevation="1dp"
+                android:hint="Enter Quantity"
+                android:inputType="number"
+                android:maxLength="15"
+                android:paddingLeft="10dp"
+                android:text="1"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select Type"
+                android:textColor="@color/black"
+                android:layout_marginTop="@dimen/size_20"
+                android:textSize="@dimen/text_size_15" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:hint="Select Type"
+                android:layout_marginTop="@dimen/size_20"
+                app:boxCornerRadiusBottomEnd="8dp"
+                app:boxCornerRadiusBottomStart="8dp"
+                app:boxCornerRadiusTopEnd="8dp"
+                app:boxCornerRadiusTopStart="8dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/ac_part_request_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:editable="false"
+                    android:textColor="@color/black"
+                    android:maxLines="1"
+                    android:textSize="12sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/item_mand"
+                android:textColor="@color/black"
+                android:layout_marginTop="@dimen/size_20"
+                android:textSize="@dimen/text_size_15" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:hint="Select Item"
+                android:layout_marginTop="@dimen/size_20"
+                app:boxCornerRadiusBottomEnd="8dp"
+                app:boxCornerRadiusBottomStart="8dp"
+                app:boxCornerRadiusTopEnd="8dp"
+                app:boxCornerRadiusTopStart="8dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/acItems"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:editable="false"
+                    android:textColor="@color/black"
+                    android:maxLines="1"
+                    android:textSize="12sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/contract_type_mand"
+                android:textColor="@color/black"
+                android:layout_marginTop="@dimen/size_20"
+                android:textSize="@dimen/text_size_15" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:hint="Select Type"
+                android:layout_marginTop="@dimen/size_20"
+                app:boxCornerRadiusBottomEnd="8dp"
+                app:boxCornerRadiusBottomStart="8dp"
+                app:boxCornerRadiusTopEnd="8dp"
+                app:boxCornerRadiusTopStart="8dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/acContractType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:editable="false"
+                    android:textColor="@color/black"
+                    android:maxLines="1"
+                    android:textSize="12sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!--    <TextView-->
+            <!--        android:layout_width="wrap_content"-->
+            <!--        android:layout_height="wrap_content"-->
+            <!--        android:text="@string/department"-->
+            <!--        android:textSize="@dimen/text_size_16"-->
+            <!--        android:textColor="@color/black"-->
+            <!--        android:layout_marginTop="20dp"/>-->
+
+            <!--    <RelativeLayout-->
+            <!--        android:layout_width="@dimen/size_300"-->
+            <!--        android:layout_height="wrap_content"-->
+            <!--        android:layout_marginTop="@dimen/size_10"-->
+            <!--        -->
+            <!--        android:layout_marginEnd="@dimen/size_8"-->
+
+            <!--        android:paddingRight="@dimen/size_10"-->
+            <!--        android:background="@drawable/rounded_box_background">-->
+
+            <!--        <Spinner-->
+            <!--            android:id="@+id/spinnerDepartment"-->
+            <!--            android:layout_width="match_parent"-->
+            <!--            android:layout_height="@dimen/text_45"-->
+            <!--            android:layout_toLeftOf="@id/img2"-->
+            <!--            android:background="@null"-->
+            <!--            android:dropDownWidth="wrap_content"-->
+            <!--            android:dropDownVerticalOffset="@dimen/text_45"-->
+            <!--            android:forceHasOverlappingRendering="false"-->
+            <!--            android:gravity="center_vertical|start"-->
+            <!--            android:paddingLeft="@dimen/size_5"-->
+            <!--            android:prompt="@string/spinner_hint"-->
+            <!--            android:spinnerMode="dropdown"-->
+            <!--            android:textSize="@dimen/text_size_14" />-->
+            <!--        <ImageView-->
+            <!--            android:id="@+id/img2"-->
+            <!--            android:layout_alignParentRight="true"-->
+            <!--            android:layout_centerVertical="true"-->
+            <!--            android:layout_width="wrap_content"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:src="@drawable/ic_baseline_keyboard_arrow_down_24"-->
+            <!--            />-->
+
+            <!--    </RelativeLayout>-->
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Remarks"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16" />
+
+            <EditText
+                android:id="@+id/remarks_value"
+                android:layout_width="@dimen/size_300"
+                android:layout_height="@dimen/size_110"
+                android:layout_marginTop="@dimen/text_size_20"
+                android:background="@drawable/rounded_box_background"
+                android:elevation="1dp"
+                android:gravity="start"
+                android:hint="Enter Remarks"
+                android:inputType="textMultiLine"
+                android:maxLines="5"
+                android:paddingLeft="10dp"
+                android:paddingTop="@dimen/size_10"
+                android:textSize="15sp" />
+
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/text_size_20"
+                android:layout_marginBottom="6sp"
+                android:background="@drawable/rounded_blue_background"
+                android:text="OK"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                app:backgroundTint="@color/colorPrimary" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

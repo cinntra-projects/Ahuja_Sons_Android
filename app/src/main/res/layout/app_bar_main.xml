@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsetoolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:contentScrim="@color/colorPrimary"
+            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
+            app:scrimAnimationDuration="400">
+
+
+            <LinearLayout
+                android:id="@+id/collapseview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fitsSystemWindows="true"
+                android:orientation="vertical"
+                app:layout_collapseMode="parallax">
+
+                <LinearLayout
+                    android:id="@+id/search"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_50"
+                    android:layout_marginLeft="@dimen/size_20"
+                    android:layout_marginTop="@dimen/size_60"
+                    android:layout_marginRight="@dimen/size_20"
+                    android:layout_marginBottom="@dimen/size_30"
+                    android:background="@drawable/rounded_grey_background"
+                    android:clickable="true"
+                    android:fitsSystemWindows="true"
+                    android:focusable="false"
+                    android:orientation="horizontal"
+                    app:layout_collapseMode="parallax">
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/size_10"
+                        android:background="@drawable/search"
+                        android:backgroundTint="@color/lightGrey"
+                        android:fitsSystemWindows="true"
+                        app:layout_collapseMode="parallax" />
+
+
+                    <com.tomer.fadingtextview.FadingTextView
+                        android:id="@+id/fadigtextview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/size_10"
+                        android:fitsSystemWindows="true"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/lightGrey"
+                        android:textSize="@dimen/text_size_16"
+                        app:layout_collapseMode="parallax"
+                        app:texts="@array/examples"
+                        app:timeout="200" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvAnnouncement"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/size_4"
+                        android:background="#C2F3D0"
+                        android:drawableStart="@drawable/ic_announcement_icon"
+                        android:drawablePadding="@dimen/size_4"
+                        android:visibility="gone"
+                        android:padding="6dp"
+                        android:singleLine="true"
+                        android:text="This is announcement."
+                        android:textColor="@color/text_color" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/size_10"
+                        android:animationCache="true"
+                        app:cardBackgroundColor="@color/colorMassaedSecondary"
+                        app:cardCornerRadius="@dimen/size_8"
+                        app:cardElevation="@dimen/size_1"
+                        app:cardPreventCornerOverlap="true"
+                        app:cardUseCompatPadding="true">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentTop="true"
+                                android:layout_centerInParent="true"
+                                android:layout_marginLeft="@dimen/size_8"
+                                android:layout_marginTop="@dimen/size_5"
+                                android:text="No. of Orders"
+                                android:textColor="#333333"
+                                android:textSize="@dimen/text_size_16"
+                                android:textStyle="bold" />
+
+                            <LinearLayout
+
+                                android:id="@+id/about_customer_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/size_100"
+                                android:gravity="center_horizontal"
+                                android:orientation="horizontal">
+
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+
+                                    <TextView
+                                        android:id="@+id/total_points"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerHorizontal="true"
+                                        android:layout_marginTop="@dimen/size_25"
+                                        android:autoSizeMaxTextSize="@dimen/text_size_18"
+                                        android:autoSizeMinTextSize="@dimen/text_size_16"
+                                        android:text="0"
+                                        android:textColor="@color/colorPrimary"
+                                        android:textSize="@dimen/text_size_18"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/total_points"
+                                        android:layout_centerInParent="true"
+                                        android:layout_marginTop="@dimen/size_5"
+                                        android:text="Assigned"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/text_size_14"
+                                        android:textStyle="bold" />
+
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:visibility="visible">
+
+                                    <TextView
+                                        android:id="@+id/active_points"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerHorizontal="true"
+                                        android:layout_marginTop="@dimen/size_25"
+                                        android:autoSizeMaxTextSize="@dimen/text_size_18"
+                                        android:autoSizeMinTextSize="@dimen/text_size_16"
+                                        android:text="0"
+                                        android:textColor="@color/colorPrimary"
+                                        android:textSize="@dimen/text_size_18"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/active_points"
+                                        android:layout_centerInParent="true"
+                                        android:layout_marginTop="@dimen/size_5"
+                                        android:text="Pending"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/text_size_14"
+                                        android:textStyle="bold" />
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+
+
+                                    <TextView
+                                        android:id="@+id/inactive"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerHorizontal="true"
+                                        android:layout_marginTop="@dimen/size_25"
+                                        android:autoSizeMaxTextSize="@dimen/text_size_18"
+                                        android:autoSizeMinTextSize="@dimen/text_size_16"
+                                        android:text="0"
+                                        android:textColor="@color/colorPrimary"
+                                        android:textSize="@dimen/text_size_18"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/no_visit_value"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/inactive"
+                                        android:layout_centerInParent="true"
+                                        android:layout_marginTop="@dimen/size_5"
+                                        android:text="In Progress"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/text_size_14"
+                                        android:textStyle="bold" />
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+
+
+                                    <TextView
+                                        android:id="@+id/resolved"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerHorizontal="true"
+                                        android:layout_marginTop="@dimen/size_25"
+                                        android:autoSizeMaxTextSize="@dimen/text_size_18"
+                                        android:autoSizeMinTextSize="@dimen/text_size_16"
+                                        android:text="0"
+                                        android:textColor="@color/colorPrimary"
+                                        android:textSize="@dimen/text_size_18"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/resolved_value"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/resolved"
+                                        android:layout_centerInParent="true"
+                                        android:layout_marginTop="@dimen/size_5"
+                                        android:text="Resolved"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/text_size_14"
+                                        android:textStyle="bold" />
+
+                                </RelativeLayout>
+
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:layout_scrollFlags="scroll|enterAlways">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/size_15">
+
+                    <TextView
+                        android:id="@+id/heading"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <ImageView
+
+                        android:id="@+id/search_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/size_20"
+                        android:layout_toLeftOf="@id/calendar"
+                        android:background="@drawable/search"
+                        android:backgroundTint="@color/white"
+                        android:padding="@dimen/size_10" />
+
+                    <ImageView
+                        android:id="@+id/calendar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/notification_view"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/ic_baseline_calendar_month_24"
+                        android:backgroundTint="@color/white"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+
+                    <RelativeLayout
+                        android:id="@+id/notification_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="center_vertical">
+
+
+                        <ImageView
+                            android:id="@+id/notification"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            app:tint="@color/white"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/baseline_notifications_24" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/count_layout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/notification"
+                            android:visibility="visible"
+                            android:layout_marginBottom="3dp"
+                            app:layout_constraintEnd_toEndOf="@id/notification">
+
+                            <ImageView
+                                android:id="@+id/red_offer_img"
+                                android:layout_width="@dimen/size_25"
+                                android:layout_height="@dimen/size_25"
+                                android:background="@drawable/ic_red_dot"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/size_1"
+                                android:text="0"
+                                android:textColor="@color/white"
+                                app:layout_constraintBottom_toBottomOf="@id/red_offer_img"
+                                app:layout_constraintEnd_toEndOf="@id/red_offer_img"
+                                app:layout_constraintStart_toStartOf="@id/red_offer_img"
+                                app:layout_constraintTop_toTopOf="@id/red_offer_img" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/appbar"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <FrameLayout
+
+            android:id="@+id/fragment_quotes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        </FrameLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <!--    <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottomappbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/white"
+            app:fabCradleRoundedCornerRadius="@dimen/size_50"
+            app:fabCradleMargin="@dimen/size_10"
+            app:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+            app:hideOnScroll="true">
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/navigationView"
+                android:elevation="@dimen/size_10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                app:itemTextAppearanceInactive="@color/black"
+                app:itemTextAppearanceActive="@color/colorPrimary"
+                app:menu="@menu/bottom_menu"
+
+                app:labelVisibilityMode="labeled"
+                android:fitsSystemWindows="true"
+                app:itemIconTint="@drawable/tab_color"
+                app:itemTextColor="@drawable/tab_color"
+                />
+
+        </com.google.android.material.bottomappbar.BottomAppBar>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/new_contact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/size_30"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintVertical_bias="0.5"
+            app:backgroundTint="@color/colorPrimary"
+            android:clickable="true"
+            app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+            app:layout_anchor="@id/bottomappbar"
+            app:elevation="8dp"
+            android:padding="@dimen/size_20"
+            app:tint="@color/white"
+            android:src="@drawable/ic_scan"
+            tools:ignore="MissingConstraints" />-->
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

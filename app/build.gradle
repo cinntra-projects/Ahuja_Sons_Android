@@ -1,0 +1,152 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-parcelize'
+    id 'kotlin-android'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
+    id 'androidx.navigation.safeargs.kotlin'
+
+}
+
+android {
+    buildFeatures {
+        viewBinding = true
+
+    }
+}
+
+android {
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.ahuja.sons"
+        minSdk 26
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation 'com.google.firebase:firebase-messaging-ktx:23.1.2'
+    implementation 'com.google.firebase:firebase-bom:32.3.1'
+    implementation 'com.google.firebase:firebase-messaging:23.0.3'
+//    implementation 'com.google.firebase:firebase-analytics-ktx'
+    def nav_version = "2.5.3"
+
+    implementation 'com.google.firebase:firebase-crashlytics:18.3.2'
+    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation 'androidx.appcompat:appcompat:1.5.0'
+    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.baoyz.pullrefreshlayout:library:1.2.0'
+    implementation 'com.google.firebase:firebase-analytics:21.2.0'
+    implementation 'com.google.firebase:firebase-auth-ktx:21.1.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    implementation "com.github.skydoves:powermenu:2.2.0"
+    implementation 'com.tomer:fadingtextview:2.5'
+    implementation 'com.google.android.material:material:1.8.0-alpha01'
+    implementation 'co.lujun:androidtagview:1.1.7'
+    implementation 'it.xabaras.android:recyclerview-swipedecorator:1.2.3'
+//    implementation 'com.github.ibrahimsn98:SmoothBottomBar:1.7.9'
+    implementation 'com.archit.calendar:awesome-calendar:2.0.0'
+    implementation 'ru.noties:scrollable:1.3.0'
+    implementation 'com.github.aabhasr1:OtpView:v1.1.2-ktx'
+    implementation 'com.github.divyanshub024:AndroidDraw:v0.1'
+    implementation 'us.belka:androidtoggleswitch:1.2.2'
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0-RC"
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.0.1'
+    implementation "com.squareup.okhttp3:logging-interceptor:4.5.0"
+    implementation 'com.github.OzcanAlasalvar:DatePicker:1.0.4'
+    implementation 'android.arch.lifecycle:extensions:1.1.1'
+    implementation "android.arch.lifecycle:viewmodel:1.1.1"
+    implementation 'androidx.browser:browser:1.4.0'
+
+    //todo circular image view..
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'com.samigehi:loadingview:1.1'
+
+    implementation 'com.karumi:dexter:6.2.3'
+    implementation 'com.pixplicity.easyprefs:EasyPrefs:1.10.0'
+    implementation 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
+    implementation 'com.github.SimformSolutionsPvtLtd:SSPullToRefresh:1.3'
+    implementation 'com.zhihu.android:matisse:0.5.3-beta3'
+    implementation 'com.github.valkriaine:Bouncy:2.3'
+    implementation 'com.google.code.gson:gson:2.8.9'
+    implementation 'com.budiyev.android:code-scanner:2.1.0'
+    /*implementation 'com.karumi:dexter:6.0.2'*/
+    implementation 'org.imaginativeworld.oopsnointernet:oopsnointernet:2.0.0'
+    implementation 'com.github.Spikeysanju:MotionToast:1.4'
+    implementation 'com.github.taimoorsultani:android-sweetalert2:2.0.2'
+    implementation 'com.github.linger1216:labelview:v1.1.2'
+    implementation 'com.droidninja:filepicker:2.2.5'
+
+//glide
+    implementation 'com.github.bumptech.glide:glide:4.14.2'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
+
+    //Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
+
+    //  Lifecycle Scopes
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
+
+    //Easy Permissions
+    implementation 'pub.devrel:easypermissions:3.0.0'
+    //navigation kotlin
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+
+
+    //country code picker
+    implementation 'com.hbb20:ccp:2.5.0'
+
+
+    //maps
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
+
+    def work_version = "2.8.1"
+    implementation "androidx.work:work-runtime:$work_version"
+
+
+    // navigationDependency
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    //searchable spiner
+    //searchable spinner
+    implementation 'com.toptoche.searchablespinner:searchablespinnerlibrary:1.3.1'
+
+
+
+
+}

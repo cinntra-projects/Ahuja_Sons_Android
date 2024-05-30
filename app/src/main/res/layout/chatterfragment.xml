@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:clickable="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/chat_toolbar"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedSV"
+        android:layout_width="match_parent"
+        android:layout_below="@id/toolbar"
+
+
+        android:layout_above="@id/createmsz"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <com.factor.bouncy.BouncyRecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="@dimen/size_55"
+                android:id="@+id/recyclerView"
+               />
+
+
+            <ProgressBar
+                android:visibility="gone"
+                android:id="@+id/idPBLoading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+    <RelativeLayout
+        android:id="@+id/createmsz"
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/size_10"
+        android:gravity="center_vertical"
+        android:background="@drawable/rounded_grey_background"
+        android:layout_alignParentBottom="true"
+        android:layout_height="50dp">
+
+        <EditText
+            android:id="@+id/sendmessage_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/size_10"
+            android:layout_toLeftOf="@id/send"
+            android:background="@null"
+            android:hint="@string/send_message"
+            android:paddingLeft="@dimen/size_15" />
+
+        <ImageView
+            android:id="@+id/send"
+            android:layout_width="@dimen/size_25"
+            android:layout_height="@dimen/size_30"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/size_10"
+            android:layout_alignParentRight="true"
+            android:backgroundTint="@color/colorPrimary"
+            android:background="@drawable/ic_baseline_send_24"/>
+
+
+    </RelativeLayout>
+
+
+    <FrameLayout
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="match_parent"
+        android:id="@+id/loadingback"
+        android:clickable="true"
+        android:layout_height="match_parent"
+        android:background="#3B505050">
+    <com.github.loadingview.LoadingView
+        android:id="@+id/loadingview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    </FrameLayout>
+
+    <ImageView
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:background="@drawable/nodatafound"
+        android:layout_above="@id/createmsz"
+        android:id="@+id/nodatafound"/>
+
+</RelativeLayout>

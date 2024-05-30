@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="@dimen/size_2"
+    android:layout_marginLeft="@dimen/size_10"
+    android:layout_marginRight="@dimen/size_10"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cleaning Liquid"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_15"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/size_10"
+            android:layout_marginLeft="@dimen/size_15"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stock quantity : 24"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_15"
+            android:layout_marginTop="@dimen/size_10"
+            android:layout_marginLeft="@dimen/size_15"/>
+
+
+
+
+
+
+</LinearLayout>
+
+    <RelativeLayout
+        android:layout_gravity="right|center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/add"
+            android:layout_width="@dimen/size_30"
+            android:layout_height="@dimen/size_30"
+            android:text="-"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_toLeftOf="@id/count"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_18"
+            android:background="@drawable/rounded_blue_background"
+            android:backgroundTint="@color/colorPrimary"
+            android:layout_marginTop="@dimen/size_10"
+            android:layout_marginLeft="@dimen/size_15"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_toRightOf="@id/add"
+            android:layout_centerVertical="true"
+            android:text="2"
+            android:layout_toLeftOf="@id/message"
+            android:textSize="@dimen/text_size_16"
+            android:textColor="@color/black"
+            android:layout_marginLeft="@dimen/size_15"
+            android:layout_marginRight="@dimen/size_15"
+            android:id="@+id/count"
+            android:layout_marginTop="@dimen/size_10"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:id="@+id/message"
+            android:background="@drawable/rounded_blue_background"
+            android:backgroundTint="@color/colorPrimary"
+            android:layout_width="@dimen/size_30"
+            android:layout_height="@dimen/size_30"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/size_15"
+            android:layout_marginTop="@dimen/size_5"
+            android:text="+"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_18"
+            android:textStyle="bold"/>
+    </RelativeLayout>
+
+
+
+</LinearLayout>

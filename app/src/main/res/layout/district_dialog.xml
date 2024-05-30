@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginRight="@dimen/size_15"
+    android:layout_marginLeft="@dimen/size_15"
+    style="@style/CustomShapeAppearanceBottomSheetDialog"
+    android:background="@drawable/rounded_bottombar">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+
+            android:orientation="horizontal"
+            android:gravity="start"
+            android:layout_margin="@dimen/size_15"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary">
+
+            <TextView
+                android:id="@+id/select_dialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/text_size_2"
+                android:layout_marginTop="@dimen/text_size_2"
+                android:layout_marginEnd="@dimen/text_size_2"
+                android:layout_marginBottom="@dimen/text_size_2"
+                android:clickable="true"
+
+                android:elevation="@dimen/size_5"
+                android:gravity="center_vertical"
+                android:text="@string/choose_item"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text_size_16" />
+            <ImageView
+                android:visibility="gone"
+                android:layout_alignParentRight="true"
+                android:id="@+id/cross"
+                android:layout_marginRight="@dimen/size_15"
+                android:layout_gravity="center_vertical"
+                android:layout_width="@dimen/size_25"
+                android:clickable="true"
+                android:layout_height="@dimen/size_25"
+                android:src="@drawable/ic_cross"/>
+        </RelativeLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/dist"
+            android:layout_marginBottom="@dimen/size_25"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+
+    </LinearLayout>
+        <Button
+            android:id="@+id/done"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/text_size_20"
+            android:layout_marginBottom="@dimen/text_size_15"
+            android:background="@drawable/rounded_blue_background"
+            android:text="@string/done"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:backgroundTint="@color/colorPrimary" />
+    </LinearLayout>
+
+</FrameLayout>

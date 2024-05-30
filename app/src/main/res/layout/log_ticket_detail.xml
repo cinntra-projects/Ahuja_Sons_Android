@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/size_10"
+    android:layout_marginTop="@dimen/size_2"
+    android:layout_marginRight="@dimen/size_10"
+    android:orientation="horizontal">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+
+            android:id="@+id/roundview"
+            android:layout_width="@dimen/size_35"
+            android:layout_height="@dimen/size_35"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_log_item" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="@dimen/size_2"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/size_15"
+            android:background="@color/lightGrey" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/size_15"
+            android:layout_marginTop="@dimen/size_10"
+
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Robert Smith updated the Ticket"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_15" />
+
+
+        <TextView
+            android:id="@+id/message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title"
+            android:layout_marginLeft="@dimen/size_15"
+            android:layout_marginTop="@dimen/size_5"
+            android:text="Priority changed from none to medium"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/text_size_14" />
+
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/message"
+            android:layout_marginLeft="@dimen/size_15"
+            android:layout_marginTop="@dimen/size_5"
+            android:text="04:42 PM"
+            android:textColor="@color/grey" />
+    </RelativeLayout>
+
+
+</LinearLayout>

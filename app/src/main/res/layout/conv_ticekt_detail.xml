@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_10"
+        android:layout_marginTop="@dimen/size_2"
+        android:layout_marginRight="@dimen/size_10"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_15"
+            android:layout_marginTop="@dimen/size_10">
+
+
+            <ImageView
+                android:id="@+id/name_icon"
+                android:layout_width="@dimen/size_35"
+                android:layout_height="@dimen/size_35"
+                android:layout_centerVertical="true"
+                android:background="@drawable/ic_group_18584" />
+
+
+            <LinearLayout
+                android:id="@+id/threedot"
+                android:layout_width="@dimen/size_15"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginStart="@dimen/size_10"
+                android:layout_marginTop="@dimen/size_10"
+                android:layout_marginEnd="@dimen/size_10"
+                android:layout_marginBottom="@dimen/size_10"
+                android:gravity="center"
+                android:visibility="invisible">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/threedots"
+                    android:backgroundTint="@color/grey" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/private_view"
+                android:layout_width="@dimen/size_70"
+                android:layout_height="@dimen/size_30"
+                android:layout_marginTop="@dimen/size_5"
+                android:layout_marginRight="@dimen/size_10"
+                android:layout_toLeftOf="@id/threedot"
+                android:background="@drawable/rounded_box_background"
+                android:backgroundTint="@color/veryLightGrey"
+                android:gravity="center"
+                android:visibility="invisible">
+
+                <TextView
+                    android:id="@+id/status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/company_name"
+                    android:text="Private"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_13" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/company_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_15"
+                android:layout_marginTop="@dimen/size_5"
+                android:layout_toLeftOf="@id/private_view"
+                android:layout_toRightOf="@id/name_icon"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Cinntra Infotech"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_14" />
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/company_name"
+                android:layout_marginLeft="@dimen/size_15"
+                android:layout_marginTop="@dimen/size_5"
+                android:layout_toLeftOf="@id/private_view"
+                android:layout_toRightOf="@id/name_icon"
+                android:text="28/08/2022, 05:40 PM"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_14" />
+
+
+            <TextView
+                android:id="@+id/message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/date"
+                android:layout_marginLeft="@dimen/size_15"
+                android:layout_marginTop="@dimen/size_5"
+                android:layout_toRightOf="@id/name_icon"
+                android:paddingRight="@dimen/size_5"
+                android:text="Welcome to cinntra new unified text screen. Lorem Ipsum is the simply dummy text"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_14" />
+
+        </RelativeLayout>
+
+
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_2"
+        android:layout_marginTop="@dimen/size_5"
+        android:background="@color/divider_color" />
+
+</LinearLayout>

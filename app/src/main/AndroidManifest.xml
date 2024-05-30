@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.ahuja.sons" >
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission
+        android:name="android.permission.BROADCAST_SMS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+
+    <uses-feature android:name="android.hardware.camera2" />
+
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <application
+        android:name="com.ahuja.sons.globals.MyApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher_bridge_service_icon"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher_bridge_service_icon_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.ServiceSupportPortal"
+        android:usesCleartextTraffic="true"
+        tools:replace="android:icon" >
+        <activity
+            android:name=".ahujaSonsClasses.activity.AddSalesOrderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ahujaSonsClasses.activity.ParticularOrderDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.ahuja.sons.activity.AddAttachmentActivity"
+            android:exported="false"
+            android:label="Update Attachment"
+            android:theme="@style/ActionBar" />
+        <activity
+            android:name="com.ahuja.sons.activity.EditSiteSurveyTypeActivity"
+            android:exported="false"
+            android:label="Update Site Survey"
+            android:theme="@style/ActionBar" />
+        <activity
+            android:name="com.ahuja.sons.activity.EditPreventiveMaintenanceTicketActivity"
+            android:exported="false"
+            android:label="Update Service/Preventive Maintenance"
+            android:theme="@style/ActionBar" />
+        <activity
+            android:name="com.ahuja.sons.activity.EditInstallationTypeTicketActivity"
+            android:exported="false"
+            android:label="Update Installation"
+            android:theme="@style/ActionBar" />
+        <activity
+            android:name="com.ahuja.sons.activity.TicketSiteSurveyTypeActivity"
+            android:exported="false"
+            android:label="Site Survey"
+            android:theme="@style/ActionBar" />
+        <activity
+            android:name="com.ahuja.sons.activity.TicketItemPreventiveMaintenanceActivity"
+            android:exported="false"
+            android:label="Service/Preventive Maintenance"
+            android:theme="@style/ActionBar" />
+        <activity
+            android:name="com.ahuja.sons.activity.TicketInstallationTypeActivity"
+            android:exported="false"
+            android:label="Installation"
+            android:theme="@style/ActionBar" />
+        <activity
+            android:name="com.ahuja.sons.activity.OrderDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.ahuja.sons.activity.OrderListActivity"
+            android:exported="false"
+            android:label="Order"
+            android:theme="@style/ActionBar" />
+        <activity
+            android:name="com.ahuja.sons.activity.UpdateProductActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.ahuja.sons.activity.AddProductActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.ahuja.sons.activity.EmployeeDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.ahuja.sons.activity.UpdateEmployeeActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.ahuja.sons.activity.AddEmployeeActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.ahuja.sons.activity.EmployeeActivity"
+            android:exported="false"
+            android:label="Employee Management"
+            android:theme="@style/ActionBar" />
+        <activity
+            android:name="com.ahuja.sons.activity.ProductDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.ahuja.sons.activity.ProductListActivity"
+            android:exported="false"
+            android:label="Product List"
+            android:theme="@style/ActionBar" />
+        <activity
+            android:name="com.ahuja.sons.activity.ServiceContractDetailActivity"
+            android:exported="false" /> <!-- android:theme="@style/ActionBar" -->
+        <activity
+            android:name="com.ahuja.sons.activity.AddServiceContractActivty"
+            android:exported="false" />
+        <activity
+            android:name="com.ahuja.sons.activity.ServiceContractActivity"
+            android:exported="false"
+            android:label="Service Contract List"
+            android:theme="@style/ActionBar" />
+        <activity
+            android:name="com.ahuja.sons.activity.EditTicketActivity"
+            android:exported="false"
+            android:theme="@style/MaterialComponent" />
+        <activity
+            android:name="com.ahuja.sons.activity.NotificationActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullScreen" />
+        <activity
+            android:name="com.ahuja.sons.activity.AllPartRequestActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullScreen" />
+        <activity
+            android:name="com.ahuja.sons.activity.OtherTypeTicketActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullScreen" />
+        <activity
+            android:name="com.ahuja.sons.activity.ReportActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullScreen" />
+        <activity
+            android:name="com.ahuja.sons.activity.ManTrapRescueLogActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullScreen" />
+        <activity
+            android:name="com.ahuja.sons.activity.AnnouncementActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.ahuja.sons.activity.LoginActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.ahuja.sons.activity.Searchactivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.ahuja.sons.activity.MainActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.ahuja.sons.activity.AddTicketActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MaterialComponent"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.ahuja.sons.activity.AddAccountActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.ahuja.sons.activity.AccountDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MaterialComponent"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.ahuja.sons.activity.TicketDetailsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MaterialComponent"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.ahuja.sons.activity.AccountActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.ahuja.sons.activity.AllPartRequestItemList"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.ahuja.sons.activity.SignedConfirmActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name="com.ahuja.sons.activity.CreateRequestSubmitReport"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.ahuja.sons.activity.ScannerAct"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.ahuja.sons.activity.AddContactPerson"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.ahuja.sons.activity.ChatActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.ahuja.sons.activity.ContactActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.ahuja.sons.activity.ParticularorderDetailsActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.ahuja.sons.activity.ParticularItemDetailsActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.ahuja.sons.activity.ItemsList"
+            android:label="ItemList"
+            android:screenOrientation="portrait"
+            android:theme="@style/ActionBar"
+            android:windowSoftInputMode="adjustResize" /> <!-- android:theme="@style/MaterialComponent" -->
+        <activity
+            android:name="com.ahuja.sons.activity.OpenPdfView"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.ahuja.sons.activity.CreatePartRequest"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true" >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+        <receiver
+            android:name="com.ahuja.sons.receiver.SmsReceiver"
+            android:exported="true"
+            android:permission="android.permission.BROADCAST_SMS" >
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_map_api_key" />
+
+        <service
+            android:name="com.ahuja.sons.globals.WorkManagerApplication"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+            android:name="com.ahuja.sons.FirebaseMessageReceiver"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name="com.ahuja.sons.service.MyFirebaseMessagingService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name="com.ahuja.sons.notification.FirebaseMessageNotificationReceiver"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+    </application>
+
+</manifest>

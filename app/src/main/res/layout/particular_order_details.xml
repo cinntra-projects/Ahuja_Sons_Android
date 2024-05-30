@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+    <include layout="@layout/no_icon_toolbar"
+        android:id="@+id/newtoolbar"/>
+
+    <LinearLayout
+        android:id="@+id/selected_item"
+        android:layout_marginTop="@dimen/size_15"
+        android:layout_marginLeft="@dimen/size_24"
+        android:layout_marginRight="@dimen/size_24"
+        app:layout_constraintTop_toBottomOf="@id/newtoolbar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_40">
+
+
+        <TextView
+            android:text="Details"
+            android:id="@+id/details"
+            android:textSize="@dimen/text_size_16"
+            android:textAllCaps="false"
+            android:background="@drawable/rounded_grey_background"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+        <TextView
+            android:id="@+id/items"
+            android:text="Equipments"
+            android:textSize="@dimen/text_size_16"
+            android:textAllCaps="false"
+            android:background="@drawable/rounded_grey_background"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:visibility="visible"
+        android:id="@+id/detail_frame"
+        app:layout_constraintTop_toBottomOf="@id/selected_item"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/size_10"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/size_10"
+            android:layout_marginRight="@dimen/size_10"
+            android:layout_height="wrap_content">
+
+
+
+
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:text="Account Name"
+                    android:textColor="@color/grey"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_weight="1"
+                    android:id="@+id/account_name_val"
+                    android:text="Rupal Dhruv"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:text="Customer Name"
+                    android:layout_weight="1"
+                    android:textColor="@color/grey"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+                <TextView
+                    android:id="@+id/cardname_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:text="Customer code"
+                    android:textColor="@color/grey"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/text_size_14"/>
+
+                <TextView
+                    android:id="@+id/cardcode"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:text="Country"
+                    android:textColor="@color/grey"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+                <TextView
+                    android:id="@+id/country_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:text="India"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:text="Create date"
+                    android:textColor="@color/grey"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+                <TextView
+                    android:id="@+id/create_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:text="Account Owner"
+                    android:textColor="@color/grey"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+                <TextView
+                    android:id="@+id/date_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:text="Contact Owner"
+                    android:textColor="@color/grey"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+                <TextView
+                    android:id="@+id/contacname_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:visibility="visible"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/size_45"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Address"
+                    android:textColor="@color/grey"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/text_size_14"/>
+
+                <TextView
+                    android:id="@+id/address_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:maxLines="4"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+    </FrameLayout>
+
+
+    <FrameLayout
+        android:id="@+id/item_frame"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/selected_item"
+        android:layout_width="match_parent"
+        android:paddingBottom="@dimen/size_100"
+        android:layout_marginTop="@dimen/size_10"
+        android:layout_height="wrap_content">
+
+        <com.factor.bouncy.BouncyRecyclerView
+           android:layout_marginLeft="@dimen/size_10"
+            android:layout_marginRight="@dimen/size_10"
+            android:layout_marginBottom="@dimen/size_40"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/recyclerview"/>
+
+
+    </FrameLayout>
+
+    <include
+        android:id="@+id/loader"
+        layout="@layout/loading_view"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

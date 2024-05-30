@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <com.github.loadingview.LoadingView
+        android:id="@+id/loadingView"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:lv_duration="30"
+        app:lv_end_color="@color/color_end"
+        app:lv_external_radius="24dp"
+        app:lv_internal_radius="4dp"
+        app:lv_start_color="@color/color_start" />
+
+
+    <TextView
+        android:id="@+id/tvTitleDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/textViewBold"
+        android:text="@string/update_ticket_details_dialog_heading"
+        android:layout_marginTop="@dimen/size_8"
+        android:layout_marginStart="@dimen/size_8"
+        android:padding="@dimen/size_4"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <ImageButton
+        android:id="@+id/ibCross"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorMassaedPrimary"
+        android:src="@drawable/ic_cross"
+        app:layout_constraintBottom_toBottomOf="@id/tvTitleDialog"
+        app:layout_constraintTop_toTopOf="@id/tvTitleDialog"
+        android:layout_marginEnd="@dimen/size_8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="@color/white" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:id="@+id/dividerTitle"
+        android:layout_margin="@dimen/size_8"
+        android:background="@color/barchart_line"
+        app:layout_constraintTop_toBottomOf="@id/tvTitleDialog"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <LinearLayout
+        android:id="@+id/linearContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dividerTitle">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/status"
+                style="@style/textViewBold"
+                android:layout_marginTop="@dimen/size_8"
+                android:layout_marginStart="@dimen/size_8"
+                />
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_8"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="@dimen/size_8"
+
+            android:background="@drawable/rounded_box_background"
+            android:paddingRight="@dimen/size_10">
+
+            <Spinner
+                android:id="@+id/issue_category_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/text_45"
+                android:layout_toLeftOf="@id/img1"
+                android:background="@null"
+                android:dropDownWidth="wrap_content"
+                android:dropDownVerticalOffset="@dimen/text_45"
+                android:forceHasOverlappingRendering="false"
+                android:gravity="center_vertical|start"
+                android:paddingLeft="@dimen/size_5"
+                android:prompt="@string/spinner_hint"
+                android:spinnerMode="dropdown"
+                android:textSize="@dimen/text_size_14" />
+
+            <ImageView
+                android:id="@+id/img1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+
+        </RelativeLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/correct_issue_type"
+                style="@style/textViewBold"
+                android:layout_marginTop="@dimen/size_8"
+                android:layout_marginStart="@dimen/size_8"
+                />
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_8"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="@dimen/size_8"
+
+                android:background="@drawable/rounded_box_background"
+                android:paddingRight="@dimen/size_10">
+
+                <EditText
+                    android:id="@+id/etCorrectIssueType"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/text_45"
+                    android:background="@null"
+                    android:dropDownWidth="wrap_content"
+                    android:dropDownVerticalOffset="@dimen/text_45"
+                    android:forceHasOverlappingRendering="false"
+                    android:gravity="center_vertical|start"
+                    android:paddingLeft="@dimen/size_5"
+                    android:prompt="@string/spinner_hint"
+                    android:spinnerMode="dropdown"
+                    android:textSize="@dimen/text_size_14" />
+
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/schedule_visit_type"
+                style="@style/textViewBold"
+                android:layout_marginTop="@dimen/size_8"
+                android:layout_marginStart="@dimen/size_8"
+                />
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_8"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="@dimen/size_8"
+
+                android:background="@drawable/rounded_box_background"
+                android:paddingRight="@dimen/size_10">
+
+                <EditText
+                    android:id="@+id/etScheduleVisitDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/text_45"
+                    android:background="@null"
+                    android:layout_toLeftOf="@id/ivSchedueVisitDate"
+                    android:dropDownWidth="wrap_content"
+                    android:dropDownVerticalOffset="@dimen/text_45"
+                    android:editable="false"
+                    android:forceHasOverlappingRendering="false"
+                    android:gravity="center_vertical|start"
+                    android:paddingLeft="@dimen/size_5"
+                    android:prompt="@string/spinner_hint"
+                    android:spinnerMode="dropdown"
+                    android:textSize="@dimen/text_size_14" />
+                <ImageView
+                    android:id="@+id/ivSchedueVisitDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_baseline_calendar_month_24" />
+
+
+            </RelativeLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/corrective_action"
+                style="@style/textViewBold"
+                android:layout_marginTop="@dimen/size_8"
+                android:layout_marginStart="@dimen/size_8"
+                />
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_8"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="@dimen/size_8"
+
+                android:background="@drawable/rounded_box_background"
+                android:paddingRight="@dimen/size_10">
+
+                <EditText
+                    android:id="@+id/etCorrectiveActions"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/text_45"
+                    android:background="@null"
+                    android:dropDownWidth="wrap_content"
+                    android:dropDownVerticalOffset="@dimen/text_45"
+                    android:forceHasOverlappingRendering="false"
+                    android:gravity="center_vertical|start"
+                    android:paddingLeft="@dimen/size_5"
+                    android:prompt="@string/spinner_hint"
+                    android:spinnerMode="dropdown"
+                    android:textSize="@dimen/text_size_14" />
+
+
+            </RelativeLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/repair_request_needed"
+                style="@style/textViewBold"
+                android:layout_marginTop="@dimen/size_8"
+                android:layout_marginStart="@dimen/size_8"
+                />
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_8"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="@dimen/size_8"
+
+                android:background="@drawable/rounded_box_background"
+                android:paddingRight="@dimen/size_10">
+
+                <Spinner
+                    android:id="@+id/spinnerRepairRequestNeeded"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/text_45"
+                    android:layout_toLeftOf="@id/ivRepairRequestNeeded"
+                    android:background="@null"
+                    android:dropDownWidth="wrap_content"
+                    android:dropDownVerticalOffset="@dimen/text_45"
+                    android:forceHasOverlappingRendering="false"
+                    android:gravity="center_vertical|start"
+                    android:paddingLeft="@dimen/size_5"
+                    android:prompt="@string/spinner_hint"
+                    android:spinnerMode="dropdown"
+                    android:textSize="@dimen/text_size_14" />
+
+                <ImageView
+                    android:id="@+id/ivRepairRequestNeeded"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/material_used"
+                style="@style/textViewBold"
+                android:layout_marginTop="@dimen/size_8"
+                android:layout_marginStart="@dimen/size_8"
+                />
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_8"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="@dimen/size_8"
+
+                android:background="@drawable/rounded_box_background"
+                android:paddingRight="@dimen/size_10">
+
+                <Spinner
+                    android:id="@+id/spinnerMaterialUsed"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/text_45"
+                    android:layout_toLeftOf="@id/ivMaterialUsed"
+                    android:background="@null"
+                    android:dropDownWidth="wrap_content"
+                    android:dropDownVerticalOffset="@dimen/text_45"
+                    android:forceHasOverlappingRendering="false"
+                    android:gravity="center_vertical|start"
+                    android:paddingLeft="@dimen/size_5"
+                    android:prompt="@string/spinner_hint"
+                    android:spinnerMode="dropdown"
+                    android:textSize="@dimen/text_size_14" />
+
+                <ImageView
+                    android:id="@+id/ivMaterialUsed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+
+
+
+
+
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_16"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/save"
+
+        android:textColor="@color/white"
+        app:cornerRadius="@dimen/size_10"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearContent"
+
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnCancel"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dimen_16"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/cancel"
+        android:textColor="@color/colorMassaedPrimary"
+        android:textSize="@dimen/text_size_12"
+        app:cornerRadius="@dimen/size_10"
+        app:layout_constraintBottom_toBottomOf="@id/btnSave"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/btnSave"
+        app:strokeColor="@null" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

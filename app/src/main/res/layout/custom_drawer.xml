@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/tools"
+    android:id="@+id/main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/size_20"
+        android:layout_marginTop="@dimen/size_30"
+        android:layout_marginRight="@dimen/size_20"
+        android:orientation="vertical"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/appLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size_60"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dimen_32"
+            android:layout_marginBottom="@dimen/dimen_32"
+            android:layout_marginStart="@dimen/dimen_32"
+            android:layout_marginEnd="@dimen/dimen_32"
+            android:background="@drawable/wae_logo"
+            android:foregroundGravity="center"
+            android:paddingLeft="@dimen/size_10" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="@dimen/size_100"
+                android:layout_height="@dimen/size_70"
+
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/ic_launcher_massaed_icon_foreground"
+                android:foregroundGravity="center"
+                android:paddingLeft="@dimen/size_10" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/logo"
+                android:text="Massaed"
+                android:textAllCaps="true"
+                android:textColor="@color/colorMassaedPrimary"
+                android:textSize="@dimen/size_25"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:id="@+id/home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_blue_background"
+            android:backgroundTint="@color/colorPrimary"
+            android:gravity="center"
+            android:paddingLeft="5dp">
+
+
+            <ImageView
+                android:layout_width="@dimen/size_24"
+                android:layout_height="24dp"
+                android:background="@drawable/ic_home_icon"
+                android:backgroundTint="@color/white"
+                android:padding="@dimen/size_10" />
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_45"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/size_15"
+                android:text="Home"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_15" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/service"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingLeft="5dp">
+
+
+            <ImageView
+                android:layout_width="@dimen/size_24"
+                android:layout_height="24dp"
+                android:background="@drawable/ic_service_ico"
+                android:backgroundTint="@color/black"
+                android:padding="@dimen/size_10" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_45"
+                android:background="@color/white"
+                android:drawableRight="@drawable/ic_baseline_keyboard_arrow_down_24"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/size_15"
+                android:text="Services"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_15" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/service_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_35"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/size_10"
+            android:visibility="visible">
+
+
+            <TextView
+                android:id="@+id/preventive_maintence"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_45"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:text="Maintenance"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_15" />
+
+            <TextView
+                android:id="@+id/machine_installation"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_45"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:text="Installations"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_15" />
+
+            <TextView
+                android:id="@+id/customer_complaints"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_45"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:text="Complaints"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_15" />
+
+            <TextView
+                android:id="@+id/tvRepairMenu"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_45"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:text="Repair"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_15" />
+
+            <TextView
+                android:id="@+id/tvManTrapMenu"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_45"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:visibility="gone"
+                android:text="Man_Trap"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_15" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/employeeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingLeft="5dp">
+
+
+            <ImageView
+                android:layout_width="@dimen/size_24"
+                android:layout_height="24dp"
+                android:background="@drawable/ic_service_ico"
+                android:backgroundTint="@color/black"
+                android:padding="@dimen/size_10" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_45"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/size_15"
+                android:text="Employee"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_15" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/productLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingLeft="5dp">
+
+
+            <ImageView
+                android:layout_width="@dimen/size_24"
+                android:layout_height="24dp"
+                android:background="@drawable/product_1"
+                android:backgroundTint="@color/black"
+                android:padding="@dimen/size_10" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_45"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/size_15"
+                android:text="Products"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_15" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/serviceContractLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingLeft="5dp">
+
+
+            <ImageView
+                android:layout_width="@dimen/size_24"
+                android:layout_height="24dp"
+                android:background="@drawable/service_tools"
+                android:backgroundTint="@color/black"
+                android:padding="@dimen/size_10" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_45"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/size_15"
+                android:text="Service Contract"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_15" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/OrderLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingLeft="5dp">
+
+
+            <ImageView
+                android:layout_width="@dimen/size_24"
+                android:layout_height="24dp"
+                android:background="@drawable/service_tools"
+                android:backgroundTint="@color/black"
+                android:padding="@dimen/size_10" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_45"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/size_15"
+                android:text="Order"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_15" />
+        </LinearLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_45">
+
+
+            <LinearLayout
+                android:id="@+id/notification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <ImageView
+                    android:layout_width="@dimen/size_24"
+                    android:layout_height="24dp"
+                    android:background="@drawable/notification_icon"
+                    android:backgroundTint="@color/black"
+                    android:padding="@dimen/size_10" />
+
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/size_15"
+                    android:text="Notifications"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_15" />
+
+            </LinearLayout>
+
+
+            <ImageView
+                android:id="@+id/notification_background"
+                android:layout_width="@dimen/size_30"
+                android:layout_height="@dimen/size_30"
+                android:layout_marginRight="@dimen/size_15"
+                android:background="@drawable/rounded_grey_background"
+                android:backgroundTint="#FFDDDD"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/noirificationCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="@color/red_color"
+                app:layout_constraintBottom_toBottomOf="@id/notification_background"
+                app:layout_constraintLeft_toLeftOf="@id/notification_background"
+                app:layout_constraintRight_toRightOf="@id/notification_background"
+                app:layout_constraintTop_toTopOf="@id/notification_background" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <LinearLayout
+            android:id="@+id/accounts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingLeft="5dp">
+
+
+            <ImageView
+                android:layout_width="@dimen/size_24"
+                android:layout_height="24dp"
+                android:background="@drawable/customer_icon"
+                android:backgroundTint="@color/black"
+                android:padding="@dimen/size_10" />
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_45"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/size_15"
+                android:text="@string/customer"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_15" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearAnnouncment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:gravity="center"
+            android:paddingLeft="5dp">
+
+
+            <ImageView
+                android:layout_width="@dimen/size_24"
+                android:layout_height="24dp"
+                android:background="@drawable/ic_announcement_icon"
+                android:backgroundTint="@color/black"
+                android:padding="@dimen/size_10" />
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_45"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/size_15"
+                android:text="@string/announcement"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_15" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/contacts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingLeft="5dp">
+
+
+            <ImageView
+                android:layout_width="@dimen/size_24"
+                android:layout_height="24dp"
+                android:background="@drawable/ic_contacticon"
+                android:backgroundTint="@color/black"
+                android:padding="@dimen/size_10" />
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_45"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/size_15"
+                android:text="Contacts"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_15" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/setting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingLeft="5dp">
+
+
+            <ImageView
+                android:layout_width="@dimen/size_24"
+                android:layout_height="24dp"
+                android:background="@drawable/setting_ico"
+                android:backgroundTint="@color/black"
+                android:padding="@dimen/size_10" />
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_45"
+                android:gravity="center_vertical"
+
+                android:paddingLeft="@dimen/size_15"
+                android:text="Settings"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_15" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/day_night_switch"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_40"
+        android:layout_marginLeft="@dimen/size_40"
+        android:layout_marginRight="@dimen/size_30"
+        android:layout_marginBottom="@dimen/size_35"
+        android:background="@drawable/rounded_grey_background"
+        android:backgroundTint="@color/veryLightGrey"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+
+        <FrameLayout
+            android:id="@+id/lightview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_grey_background"
+            android:backgroundTint="@color/white">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawableLeft="@drawable/ic_light"
+                android:drawablePadding="@dimen/size_2"
+                android:gravity="center"
+                android:text="Light"
+                android:textSize="@dimen/text_size_12" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/darkview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_grey_background"
+            android:backgroundTint="@color/veryLightGrey">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawableLeft="@drawable/ic_dark"
+                android:drawablePadding="@dimen/size_2"
+                android:gravity="center"
+                android:text="Dark"
+                android:textSize="@dimen/text_size_12" />
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

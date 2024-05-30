@@ -1,0 +1,564 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/toolbarview"
+        layout="@layout/no_icon_toolbar"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/size_10"
+            android:layout_marginRight="@dimen/size_10"
+            android:layout_height="wrap_content">
+
+
+
+
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:text="Account Name"
+                    android:textColor="@color/grey"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:id="@+id/account_name"
+                    android:text="Rupal Dhruv"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:minHeight="@dimen/size_45"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/contact_person"
+                    android:layout_weight="1"
+                    android:textColor="@color/grey"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+                <TextView
+
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:id="@+id/contact_person_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:text="Assigned to"
+                    android:textColor="@color/grey"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+                <TextView
+                    android:id="@+id/assigned_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:text="Due date"
+                    android:textColor="@color/grey"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+                <TextView
+                    android:id="@+id/duedate_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:text="Start Date"
+                    android:textColor="@color/grey"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+                <TextView
+                    android:id="@+id/starttime_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:text="End Date"
+                    android:textColor="@color/grey"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+                <TextView
+                    android:id="@+id/endtime_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:text="@string/email"
+                    android:layout_weight="1"
+                    android:textColor="@color/grey"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+                <TextView
+                    android:id="@+id/email_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:text="@string/phone"
+                    android:textColor="@color/grey"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/text_size_14"/>
+
+                <TextView
+                    android:id="@+id/phone_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:textColor="@color/colorPrimary"
+
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/size_45"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Address"
+                    android:textColor="@color/grey"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+                <TextView
+                    android:id="@+id/address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:maxLines="3"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:text="Created By"
+                    android:textColor="@color/grey"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+                <TextView
+                    android:id="@+id/createdby"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:minHeight="@dimen/size_45"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Description"
+                    android:textColor="@color/grey"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+                <TextView
+
+                    android:maxLines="3"
+                    android:ellipsize="end"
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/size_10"
+            android:layout_marginRight="@dimen/size_10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:text="Product Name"
+                    android:textColor="@color/grey"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+                <TextView
+                    android:id="@+id/productname"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_weight="1"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:text="Product Category"
+                    android:textColor="@color/grey"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+                <TextView
+                    android:id="@+id/productcategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:text="Order No."
+                    android:textColor="@color/grey"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+                <TextView
+                    android:id="@+id/orderNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_weight="1"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:text="Warranty Expiring date"
+                    android:textColor="@color/grey"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+                <TextView
+                    android:id="@+id/warrantydate"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:text="AMC Due date"
+                    android:textColor="@color/grey"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+                <TextView
+                    android:id="@+id/amc_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:text="CMC Due date"
+                    android:textColor="@color/grey"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+                <TextView
+                    android:id="@+id/cmc_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:text="Extended Warranty date"
+                    android:textColor="@color/grey"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+                <TextView
+                    android:id="@+id/ext_warranty"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_14"/>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+</LinearLayout>

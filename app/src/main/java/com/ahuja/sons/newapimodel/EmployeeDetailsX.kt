@@ -1,0 +1,33 @@
+package com.ahuja.sons.newapimodel
+
+data class EmployeeDetailsX(
+    val Active: String,
+    val CountryCode: String,
+    val Email: String,
+    val EmployeeID: String,
+    val FCM: String,
+    val Mobile: String,
+    val SalesEmployeeCode: String,
+    val SalesEmployeeName: String,
+    val branch: String,
+    val companyID: String,
+    val dep: DepXXX,
+    val div: String,
+    val firstName: String,
+    val id: Int,
+    val lastLoginOn: String,
+    val lastName: String,
+    val level: Int,
+    val logedIn: String,
+    val middleName: String,
+    val password: String,
+    val passwordUpdatedOn: String,
+    val position: String,
+    val reportingTo: String,
+    val role: RoleXXXX,
+    val salesUnit: String,
+    val subdep: SubdepXXX,
+    val timestamp: String,
+    val userName: String,
+    val zone: String
+)

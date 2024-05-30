@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/history"
+
+        android:iconTint="@color/white"
+        app:showAsAction="ifRoom"
+        android:visible="true"
+        android:title="History"/>
+
+    <item
+        android:id="@+id/conversation"
+
+        android:iconTint="@color/white"
+        app:showAsAction="ifRoom"
+        android:visible="true"
+        android:title="Conversation"/>
+
+    <item
+        android:id="@+id/followup"
+
+        android:iconTint="@color/white"
+        app:showAsAction="ifRoom"
+        android:visible="true"
+        android:title="Follow up"/>
+</menu>

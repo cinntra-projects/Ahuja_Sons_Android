@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:focusable="true">
+
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedscrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:id="@+id/calendar_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <com.archit.calendardaterangepicker.customviews.DateRangeCalendarView
+
+                    android:id="@+id/calendar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    custom:disable_date_color="#ABABAB"
+                    custom:header_bg="@drawable/calendar_header"
+                    custom:range_color="@color/range_color"
+
+                    custom:selected_date_circle_color="@color/red"
+                    custom:title_color="@color/calendar_header_title"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/cancel"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size_40"
+                        android:layout_marginLeft="@dimen/size_15"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/cancel"
+                        android:textColor="@color/black" />
+
+
+                    <TextView
+                        android:id="@+id/done"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size_40"
+                        android:layout_marginLeft="@dimen/size_15"
+                        android:layout_marginRight="@dimen/size_30"
+                        android:layout_weight="1"
+                        android:background="@drawable/rounded_blue_background"
+                        android:backgroundTint="@color/colorPrimary"
+                        android:gravity="center"
+                        android:text="@string/done"
+                        android:textColor="@color/white" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:id="@+id/ticket_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_15"
+                    android:text="Requests"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_20"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/view_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="View all"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_18"
+                    android:visibility="gone" />
+
+
+            </RelativeLayout>
+
+
+            <include
+
+
+                android:id="@+id/viewpager_view"
+                layout="@layout/viewpager_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+    <!--
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/extended_fab"
+
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size_50"
+            android:gravity="center"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginBottom="@dimen/size_80"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:rotation="270"
+            android:textSize="@dimen/text_size_14"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+
+            android:textStyle="normal"
+            app:backgroundTint="@color/colorPrimary"
+            android:text="@string/extended_fab_label" />
+    -->
+
+
+    <FrameLayout
+        android:id="@+id/livechat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.ahuja.sons.custom.VerticalButton
+            android:layout_width="@dimen/size_30"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|right"
+            android:background="@color/colorPrimary"
+            android:gravity="bottom|center"
+            android:paddingTop="@dimen/size_5"
+            android:text="Live Chat"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:visibility="gone" />
+    </FrameLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
