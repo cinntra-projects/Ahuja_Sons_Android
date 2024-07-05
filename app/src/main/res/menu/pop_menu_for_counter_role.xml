@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- <item
+         android:id="@+id/watch"
+         android:icon="@drawable/ic_stopwatch"
+         app:showAsAction="ifRoom"
+         android:title="Add">
+     </item>-->
+    <item
+        android:id="@+id/menuCreateDependency"
+
+        android:title="Dependency"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/menuCreateErrand"
+        android:title="Errand"
+        app:showAsAction="ifRoom" />
+
+
+
+</menu>

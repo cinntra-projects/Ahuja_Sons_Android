@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.ahuja.sons" >
+    package="com.ahuja.sons">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -37,7 +37,41 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ServiceSupportPortal"
         android:usesCleartextTraffic="true"
-        tools:replace="android:icon" >
+        tools:replace="android:icon">
+        <activity
+            android:name=".ahujaSonsClasses.activity.CounterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ahujaSonsClasses.activity.SelectOrderForCreateDependencyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ahujaSonsClasses.activity.AddErrandActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ahujaSonsClasses.activity.OrderCoordinatorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ahujaSonsClasses.activity.DeliveryCoordinatorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ahujaSonsClasses.activity.SurgeryCoordinatorActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ahujaSonsClasses.activity.SurgeryPersonActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ahujaSonsClasses.activity.OrderScreenForDeliveryPersonActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ahujaSonsClasses.activity.InspectDeliveryOrderDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ahujaSonsClasses.activity.ParticularWorkQueueDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ahujaSonsClasses.activity.AhujaSonsMainActivity"
+            android:exported="false" />
         <activity
             android:name=".ahujaSonsClasses.activity.AddSalesOrderActivity"
             android:exported="false" />
@@ -162,7 +196,7 @@
             android:name="com.ahuja.sons.activity.LoginActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" >
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -254,9 +288,9 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.provider"
+            android:authorities="com.ahuja.sons.fileprovider"
             android:exported="false"
-            android:grantUriPermissions="true" >
+            android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
@@ -265,7 +299,7 @@
         <receiver
             android:name="com.ahuja.sons.receiver.SmsReceiver"
             android:exported="true"
-            android:permission="android.permission.BROADCAST_SMS" >
+            android:permission="android.permission.BROADCAST_SMS">
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
@@ -281,14 +315,14 @@
             android:permission="android.permission.BIND_JOB_SERVICE" />
         <service
             android:name="com.ahuja.sons.FirebaseMessageReceiver"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
         <service
             android:name="com.ahuja.sons.service.MyFirebaseMessagingService"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
@@ -296,7 +330,7 @@
         <service
             android:name="com.ahuja.sons.notification.FirebaseMessageNotificationReceiver"
             android:enabled="true"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />

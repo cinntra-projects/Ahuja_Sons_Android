@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/workQueueFragment"
+        android:icon="@drawable/ic_work_queue_bottom"
+        android:contentDescription=""
+        android:title="Work Queue"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/orderFragment"
+        android:icon="@drawable/ic_order_bottom"
+        android:contentDescription=""
+        android:title="Order"
+        app:showAsAction="ifRoom"/>
+ <item
+        android:id="@+id/moreFragment"
+        android:icon="@drawable/ic_kebab"
+        android:contentDescription=""
+        android:title="More"
+        app:showAsAction="ifRoom"/>
+
+   <!-- <item
+        android:id="@+id/tickets"
+        android:icon="@drawable/selected_ticket_icon"
+        android:contentDescription=""
+        android:title="Tickets"
+        android:visible="false"
+        app:showAsAction="ifRoom"/>
+
+
+    <item
+
+        android:contentDescription=""
+        android:title=""
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/customer"
+        android:icon="@drawable/selected_account"
+        android:contentDescription=""
+        android:title="Customers"
+        android:visible="false"
+        app:showAsAction="ifRoom"/>
+
+
+    <item
+        android:id="@+id/profile"
+        android:icon="@drawable/selected_profile_icon"
+        android:contentDescription=""
+        android:title="Profile"
+        android:visible="false"
+        app:showAsAction="ifRoom"/>-->
+
+
+</menu>

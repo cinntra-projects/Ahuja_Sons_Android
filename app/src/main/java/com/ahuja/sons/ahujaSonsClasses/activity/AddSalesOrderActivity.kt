@@ -30,6 +30,7 @@ class AddSalesOrderActivity : AppCompatActivity() {
             onBackPressed()
             finish()
         }
+        binding.toolbar.search.visibility=View.GONE
 
 
         val order = arrayOf("Hospital Name 1", "Hospital Name 2", "Hospital Name 3")

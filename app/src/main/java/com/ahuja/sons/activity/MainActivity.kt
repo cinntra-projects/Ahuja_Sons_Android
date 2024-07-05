@@ -147,6 +147,7 @@ class MainActivity : MainBaseActivity(), View.OnClickListener {
         callhomefragment(HomeFragment())
 
         clickeventlistener()
+
         binding.navigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.home -> {

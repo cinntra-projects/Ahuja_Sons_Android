@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainframelayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+       android:background="@color/colorPrimary"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_24">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Order"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_18" />
+
+            <LinearLayout
+                android:id="@+id/openThreeDotMenu"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="10dp"
+                android:gravity="end"
+                android:paddingEnd="10dp"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/threedots"
+                    android:backgroundTint="@color/white" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/linearToolbarDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <TextView
+            android:id="@+id/tvOrderStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginLeft="@dimen/size_15"
+            android:layout_marginTop="@dimen/size_5"
+            android:layout_marginEnd="5dp"
+            android:layout_toRightOf="@id/name_icon"
+            android:background="@color/blueLightShade"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingStart="15dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="15dp"
+            android:paddingBottom="5dp"
+            android:text="Cinntra Infotech"
+            android:textAlignment="textEnd"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_14"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_15"
+            android:layout_marginTop="@dimen/size_10"
+            android:layout_marginBottom="10dp">
+
+
+            <ImageView
+                android:id="@+id/name_icon"
+                android:layout_width="@dimen/size_35"
+                android:layout_height="@dimen/size_35"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/ic_group_18584" />
+
+            <LinearLayout
+                android:id="@+id/nameDetailLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/name_icon"
+                android:layout_weight="90"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/company_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_15"
+                    android:layout_marginTop="@dimen/size_5"
+                    android:layout_toRightOf="@id/name_icon"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="Cinntra Infotech"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_14"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tvOrderID"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/company_name"
+                        android:layout_marginLeft="@dimen/size_15"
+                        android:layout_marginTop="@dimen/size_5"
+                        android:layout_toRightOf="@+id/name_icon"
+                        android:layout_weight="50"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="Dr. Vijay Chauhan"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/text_size_12"
+                        android:textStyle="bold"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/company_name"
+                        android:layout_marginLeft="@dimen/size_15"
+                        android:layout_marginTop="@dimen/size_5"
+                        android:layout_toRightOf="@+id/name_icon"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="Order ID : 12345"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/text_size_12"
+                        android:textStyle="bold"
+                        android:visibility="visible" />
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/tvExpectedData"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvOrderID"
+                    android:layout_marginLeft="@dimen/size_15"
+                    android:layout_marginTop="@dimen/size_5"
+                    android:layout_marginRight="5dp"
+                    android:layout_toRightOf="@+id/name_icon"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="Order Information : Borem ipsum dolor sit hue , kdnm"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_12"
+                    android:visibility="visible" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_toRightOf="@id/nameDetailLayout"
+                android:layout_weight="10"
+                android:background="@drawable/ripple_effect"
+                android:clickable="true"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/headerDownArrow"
+                    android:layout_width="@dimen/text_size_14"
+                    android:layout_height="@dimen/text_size_14"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/down_arrow_icon"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/headerUpArrow"
+                    android:layout_width="@dimen/text_size_14"
+                    android:layout_height="@dimen/text_size_14"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/arrow_up_icon"
+                    android:visibility="visible" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_2"
+            android:layout_marginTop="@dimen/size_10"
+            android:background="@color/divider_color" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+
+                android:layout_marginLeft="@dimen/size_15"
+                android:layout_marginTop="@dimen/size_5"
+
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Status :"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/text_size_16"
+
+                android:visibility="visible" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="end"
+                android:layout_marginEnd="@dimen/dimen_8"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/company_name"
+                    android:layout_gravity="end"
+                    android:layout_marginLeft="@dimen/size_15"
+                    android:layout_marginTop="@dimen/size_5"
+                    android:layout_toRightOf="@+id/name_icon"
+                    android:layout_weight="50"
+                    android:drawableStart="@drawable/ic_check_green"
+                    android:drawablePadding="4dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="Surgery Coordination"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/text_size_12"
+                    android:textStyle="bold"
+                    android:visibility="visible" />
+
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/company_name"
+                    android:layout_marginLeft="@dimen/size_15"
+                    android:layout_marginTop="@dimen/size_5"
+                    android:layout_toRightOf="@+id/name_icon"
+                    android:layout_weight="50"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="Surgery Date &amp; Time :12/11/2024 12:0:00"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/text_size_12"
+
+                    android:visibility="visible" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/inspectTabLayouts"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:visibility="visible"
+app:layout_constraintBottom_toTopOf="@id/chipCardViewBtton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearToolbarDetails">
+
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingLeft="@dimen/size_10"
+            android:paddingRight="@dimen/size_10"
+            android:visibility="visible"
+            app:tabIndicatorColor="@color/colorPrimary"
+            app:tabIndicatorHeight="2dp"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/colorPrimary"
+            app:tabTextAppearance="@style/MyCustomTextAppearance" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpagerInspect"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+         />
+
+
+    </LinearLayout>
+
+
+
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/chipCardViewBtton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:elevation="20dp"
+        android:visibility="visible"
+        app:cardBackgroundColor="@color/white"
+        app:cardElevation="20dp"
+        app:cardPreventCornerOverlap="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+
+        <LinearLayout
+            android:id="@+id/counterBtnLayoutSurgery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/my_app_background_color"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:visibility="visible">
+
+            <com.google.android.material.chip.ChipGroup
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipStart"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:elevation="2dp"
+                    android:text="Start"
+                    android:textAlignment="center"
+                    android:textColor="@color/my_app_background_color"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:chipBackgroundColor="@color/colorPrimary"
+                    app:chipIconTint="@color/colorPrimary"
+                    app:chipStrokeColor="@color/colour_text_color"
+                    app:chipStrokeWidth="1dp"
+                    app:rippleColor="@color/colour_text_color" />
+            </com.google.android.material.chip.ChipGroup>
+
+            <com.google.android.material.chip.ChipGroup
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipReschedule"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:elevation="2dp"
+                    android:gravity="center_horizontal"
+                    android:text="Reschedule"
+                    android:textAlignment="center"
+                    android:textColor="@color/my_app_background_color"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:chipBackgroundColor="@color/colorPrimary"
+                    app:chipIconTint="@color/colorPrimary"
+                    app:chipStrokeColor="@color/colour_text_color"
+                    app:chipStrokeWidth="1dp"
+                    app:rippleColor="@color/colour_text_color" />
+            </com.google.android.material.chip.ChipGroup>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/deliveryBtnLayoutSurgery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/my_app_background_color"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:visibility="gone">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/startTripChipGroupSurgery"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:visibility="gone">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/startTripChipSurgery"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:elevation="2dp"
+                    android:text="Start Trip"
+                    android:textAlignment="center"
+                    android:textColor="@color/my_app_background_color"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:chipBackgroundColor="@color/colorPrimary"
+                    app:chipIconTint="@color/colorPrimary"
+                    app:chipStrokeColor="@color/colour_text_color"
+                    app:chipStrokeWidth="1dp"
+                    app:rippleColor="@color/my_app_background_color" />
+            </com.google.android.material.chip.ChipGroup>
+
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/endTripChipGroupSurgery"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:visibility="visible">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/endTripChipSurgery"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:elevation="2dp"
+                    android:text="End Trip"
+                    android:textAlignment="center"
+                    android:textColor="@color/my_app_background_color"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:chipBackgroundColor="@color/colorPrimary"
+                    app:chipIconTint="@color/colorPrimary"
+                    app:chipStrokeColor="@color/colour_text_color"
+                    app:chipStrokeWidth="1dp"
+                    app:rippleColor="@color/my_app_background_color" />
+            </com.google.android.material.chip.ChipGroup>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/surgeryPersonBtnLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/my_app_background_color"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:visibility="gone">
+
+            <com.google.android.material.chip.ChipGroup
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:visibility="visible">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/submitSurgeryChip"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:elevation="2dp"
+                    android:text="Submit"
+                    android:textAlignment="center"
+                    android:textColor="@color/my_app_background_color"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:chipBackgroundColor="@color/colorPrimary"
+                    app:chipIconTint="@color/colorPrimary"
+                    app:chipStrokeColor="@color/colour_text_color"
+                    app:chipStrokeWidth="1dp"
+                    app:rippleColor="@color/my_app_background_color" />
+            </com.google.android.material.chip.ChipGroup>
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <FrameLayout
+        android:id="@+id/loadingBackFrame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#3B505050"
+        android:clickable="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.github.loadingview.LoadingView
+            android:id="@+id/loadingView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

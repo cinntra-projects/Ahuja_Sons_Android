@@ -186,7 +186,7 @@
                                     android:layout_height="@dimen/size_45"
                                     android:layout_weight="1"
                                     android:gravity="center_vertical"
-                                    android:text="No. of CRS Required"
+                                    android:text="No. of CSR Required"
                                     android:textColor="@color/grey"
                                     android:textSize="@dimen/text_size_14" />
 

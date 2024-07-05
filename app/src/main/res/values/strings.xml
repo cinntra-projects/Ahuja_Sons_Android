@@ -308,6 +308,7 @@
     <string name="availability_in_no_s_mand">Installation Requirement Floorwise <font color='#FF0000'>*</font></string>
     <string name="area_mand">Area  <font color='#FF0000'>*</font></string>
     <string name="raw_mand" tools:ignore="ExtraTranslation">Raw (ppm) <font color='#FF0000'>*</font></string>
+    <string name="assign">Assign</string>
 
 
 </resources>

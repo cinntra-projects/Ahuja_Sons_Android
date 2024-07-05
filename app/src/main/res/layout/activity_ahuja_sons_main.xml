@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ahujaSonsClasses.activity.AhujaSonsMainActivity">
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_ahuja_sons"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toTopOf="@id/navigationView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/nav_host_main_ahuja" />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardAssignButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:elevation="20dp"
+        android:visibility="gone"
+        app:cardBackgroundColor="@color/white"
+        app:cardElevation="20dp"
+        app:cardPreventCornerOverlap="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:id="@+id/counterBtnLayoutSurgery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/my_app_background_color"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:visibility="visible">
+
+
+            <TextView
+                android:id="@+id/tvCancelRoute"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_weight="30"
+                android:elevation="2dp"
+                android:gravity="center"
+                android:text="Cancel"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:chipBackgroundColor="@color/white"
+                app:chipIconTint="@color/white"
+                app:chipStrokeColor="@color/white"
+
+                app:rippleColor="@color/colour_text_color" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:layout_weight="70">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipAssign"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:elevation="2dp"
+                    android:gravity="center_horizontal"
+                    android:text="Assign"
+                    android:textAlignment="center"
+                    android:textColor="@color/my_app_background_color"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:chipBackgroundColor="@color/colorPrimary"
+                    app:chipIconTint="@color/colorPrimary"
+                    app:chipStrokeColor="@color/colour_text_color"
+                    app:chipStrokeWidth="1dp"
+                    app:rippleColor="@color/colour_text_color" />
+            </com.google.android.material.chip.ChipGroup>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/deliveryBtnLayoutSurgery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/my_app_background_color"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:visibility="gone">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/startTripChipGroupSurgery"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:visibility="gone">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/startTripChipSurgery"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:elevation="2dp"
+                    android:text="Start Trip"
+                    android:textAlignment="center"
+                    android:textColor="@color/my_app_background_color"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:chipBackgroundColor="@color/colorPrimary"
+                    app:chipIconTint="@color/colorPrimary"
+                    app:chipStrokeColor="@color/colour_text_color"
+                    app:chipStrokeWidth="1dp"
+                    app:rippleColor="@color/my_app_background_color" />
+            </com.google.android.material.chip.ChipGroup>
+
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/endTripChipGroupSurgery"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:visibility="visible">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/endTripChipSurgery"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:elevation="2dp"
+                    android:text="End Trip"
+                    android:textAlignment="center"
+                    android:textColor="@color/my_app_background_color"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:chipBackgroundColor="@color/colorPrimary"
+                    app:chipIconTint="@color/colorPrimary"
+                    app:chipStrokeColor="@color/colour_text_color"
+                    app:chipStrokeWidth="1dp"
+                    app:rippleColor="@color/my_app_background_color" />
+            </com.google.android.material.chip.ChipGroup>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/surgeryPersonBtnLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/my_app_background_color"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:visibility="gone">
+
+            <com.google.android.material.chip.ChipGroup
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:visibility="visible">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/submitSurgeryChip"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:elevation="2dp"
+                    android:text="Submit"
+                    android:textAlignment="center"
+                    android:textColor="@color/my_app_background_color"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:chipBackgroundColor="@color/colorPrimary"
+                    app:chipIconTint="@color/colorPrimary"
+                    app:chipStrokeColor="@color/colour_text_color"
+                    app:chipStrokeWidth="1dp"
+                    app:rippleColor="@color/my_app_background_color" />
+            </com.google.android.material.chip.ChipGroup>
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigationView"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+
+
+        app:itemTextColor="@drawable/tab_color"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_menu_ahuja" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

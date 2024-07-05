@@ -11,6 +11,7 @@ import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ahuja.sons.ahujaSonsClasses.adapter.OrderListAdapter
+import com.ahuja.sons.ahujaSonsClasses.ahujaconstant.RoleClass
 import com.ahuja.sons.ahujaSonsClasses.model.AllOrderListResponseModel
 import com.ahuja.sons.ahujaSonsClasses.model.OrderRequestModel
 import com.ahuja.sons.apiservice.ApiClient
@@ -70,7 +71,7 @@ class NewTicketFragment : Fragment() {
             SalesPersonCode = Prefs.getString(Global.Employee_Code, ""),
             SearchText = "",
             field = field,
-            maxItem = 10,
+            maxItem = "10",
         )
 
         val call: Call<AllOrderListResponseModel> = ApiClient().service.callOrderListApi(requestModel)
@@ -85,7 +86,7 @@ class NewTicketFragment : Fragment() {
                         recallApi = response.body()!!.data.isNotEmpty()
                         AllitemsList.addAll(response.body()!!.data)
                         linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-                        adapter = OrderListAdapter(AllitemsList)
+                        adapter = OrderListAdapter(AllitemsList,RoleClass.ticket)
                         ticketbiding.productRecyclerView.layoutManager = linearLayoutManager
                         ticketbiding.productRecyclerView.adapter = adapter
                         adapter.notifyDataSetChanged()

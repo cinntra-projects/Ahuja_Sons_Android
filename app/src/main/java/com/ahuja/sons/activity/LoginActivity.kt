@@ -25,6 +25,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.pixplicity.easyprefs.library.Prefs
 import com.ahuja.sons.FirebaseMessageReceiver
 import com.ahuja.sons.R
+import com.ahuja.sons.ahujaSonsClasses.activity.AhujaSonsMainActivity
 import com.ahuja.sons.apihelper.Event
 import com.ahuja.sons.apiservice.ApiClient
 import com.ahuja.sons.apiservice.Apis
@@ -392,7 +393,7 @@ class LoginActivity : MainBaseActivity() {
     }
 
     private fun gotoHome() {
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, AhujaSonsMainActivity::class.java)
         startActivity(intent)
     }
 

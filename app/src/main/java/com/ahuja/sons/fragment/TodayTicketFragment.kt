@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ahuja.sons.activity.MainActivity
 import com.ahuja.sons.ahujaSonsClasses.adapter.OrderListAdapter
+import com.ahuja.sons.ahujaSonsClasses.ahujaconstant.RoleClass
 import com.ahuja.sons.ahujaSonsClasses.model.AllOrderListResponseModel
 import com.ahuja.sons.ahujaSonsClasses.model.OrderRequestModel
 import com.ahuja.sons.apiservice.ApiClient
@@ -34,7 +35,8 @@ class TodayTicketFragment(val getstartDate: Calendar) : Fragment() {
     var recallApi = true
 
     private lateinit var viewModel: MainViewModel
-//    var AllitemsList = ArrayList<TicketDataModel>()
+
+    //    var AllitemsList = ArrayList<TicketDataModel>()
     var AllitemsListNew = ArrayList<AllOrderListResponseModel.Data>()
 
     override fun onCreateView(
@@ -96,17 +98,27 @@ class TodayTicketFragment(val getstartDate: Calendar) : Fragment() {
         ticketbiding.loadingback.visibility = View.VISIBLE
         ticketbiding.loadingView.start()
 
-        var field = OrderRequestModel.Field(FromDate = Global.datetoSimpleString(getstartDate.time), ToDate = Global.datetoSimpleString(getstartDate.time), FinalStatus = "", CardCode = "", CardName = "",
-            ShipToCode = "", FromAmount = "", ToAmount = "", U_MR_NO = "")
+        var field = OrderRequestModel.Field(
+            FromDate = Global.datetoSimpleString(getstartDate.time),
+            ToDate = Global.datetoSimpleString(getstartDate.time),
+            FinalStatus = "",
+            CardCode = "",
+            CardName = "",
+            ShipToCode = "",
+            FromAmount = "",
+            ToAmount = "",
+            U_MR_NO = ""
+        )
         var requestModel = OrderRequestModel(
             PageNo = pageno,
             SalesPersonCode = Prefs.getString(Global.Employee_Code, ""),
             SearchText = "",
             field = field,
-            maxItem = 10,
+            maxItem = "10",
         )
 
-        val call: Call<AllOrderListResponseModel> = ApiClient().service.callOrderListApi(requestModel)
+        val call: Call<AllOrderListResponseModel> =
+            ApiClient().service.callOrderListApi(requestModel)
         call.enqueue(object : Callback<AllOrderListResponseModel> {
             override fun onResponse(
                 call: Call<AllOrderListResponseModel>,
@@ -146,8 +158,7 @@ class TodayTicketFragment(val getstartDate: Calendar) : Fragment() {
                     ticketbiding.loadingView.stop()
 
 
-                }
-                else if (response.body()!!.status == 201) {
+                } else if (response.body()!!.status == 201) {
                     ticketbiding.loadingback.visibility = View.GONE
                     ticketbiding.loadingView.stop()
                     Global.warningmessagetoast(requireContext(), response.body()!!.message)
@@ -173,7 +184,7 @@ class TodayTicketFragment(val getstartDate: Calendar) : Fragment() {
 
     private fun setAdapter() {
         linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        ticketNewAdapter = OrderListAdapter(AllitemsListNew)
+        ticketNewAdapter = OrderListAdapter(AllitemsListNew, RoleClass.ticket)
         ticketbiding.productRecyclerView.layoutManager = linearLayoutManager
         ticketbiding.productRecyclerView.adapter = ticketNewAdapter
         ticketNewAdapter.notifyDataSetChanged()

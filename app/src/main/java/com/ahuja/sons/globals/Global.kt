@@ -26,6 +26,7 @@ import com.ahuja.sons.model.DocumentLine
 import com.ahuja.sons.newapimodel.DataFromJsonCheckList
 import com.ahuja.sons.newapimodel.SpareItemListApiModel
 import com.ahuja.sons.receiver.DataEmployeeAllData
+import com.ozcanalasalvar.library.view.popup.TimePickerPopup
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import taimoor.sultani.sweetalert2.Sweetalert
@@ -108,41 +109,47 @@ object Global {
 
 
     /****TEST URL**/
-   /* const val BASE_URL = "http://103.234.187.197:8009/"
-    const val Image_URL = "http://103.234.187.197:8009"
+    /* const val BASE_URL = "http://103.234.187.197:8009/"
+     const val Image_URL = "http://103.234.187.197:8009"
 
 
-    const val REPORT_PDF_URL = "http://103.234.187.197:4210/assets/html/CompanyInvoice.html?id="//"http://103.234.187.197:4233/assets/html/report.html?id="
+     const val REPORT_PDF_URL = "http://103.234.187.197:4210/assets/html/CompanyInvoice.html?id="//"http://103.234.187.197:4233/assets/html/report.html?id="
 
-    const val SERVICING_PDF_URL = "http://103.234.187.197:4210/assets/html/ServicePrevent.html?id="
+     const val SERVICING_PDF_URL = "http://103.234.187.197:4210/assets/html/ServicePrevent.html?id="
 
-    const val SITE_SERVEY_PDF_URL = "http://103.234.187.197:4210/assets/html/SiteserveyReport.html?id="
+     const val SITE_SERVEY_PDF_URL = "http://103.234.187.197:4210/assets/html/SiteserveyReport.html?id="
 
-    //todo ticket type items pdf---
-    const val INSTALLATION_TYPE_PDF_URL = "http://103.234.187.197:4210/assets/html/CompanyInvoice.html?TicketId="
+     //todo ticket type items pdf---
+     const val INSTALLATION_TYPE_PDF_URL = "http://103.234.187.197:4210/assets/html/CompanyInvoice.html?TicketId="
 
-    const val SITE_SURVEY_TYPE_PDF_URL = "http://103.234.187.197:4210/assets/html/SiteserveyReport.html?TicketId="
+     const val SITE_SURVEY_TYPE_PDF_URL = "http://103.234.187.197:4210/assets/html/SiteserveyReport.html?TicketId="
 
-    const val MAINTAINANCE_TYPE_PDF_URL = "http://103.234.187.197:4210/assets/html/ServicePrevent.html?TicketId="*/
+     const val MAINTAINANCE_TYPE_PDF_URL = "http://103.234.187.197:4210/assets/html/ServicePrevent.html?TicketId="*/
 
 
     /***LIVE URL***/
     const val BASE_URL = "http://103.234.187.197:8107/"
     const val Image_URL = "http://103.234.187.197:8107"
 
-     //todo LIVE PDF URl---
-     const val REPORT_PDF_URL = "http://waesupport.bridgexd.com/assets/html/CompanyInvoice.html?id="//"http://103.234.187.197:4233/assets/html/report.html?id="
+    //todo LIVE PDF URl---
+    const val REPORT_PDF_URL =
+        "http://waesupport.bridgexd.com/assets/html/CompanyInvoice.html?id="//"http://103.234.187.197:4233/assets/html/report.html?id="
 
-     const val SERVICING_PDF_URL = "http://waesupport.bridgexd.com/assets/html/ServicePrevent.html?id="
+    const val SERVICING_PDF_URL =
+        "http://waesupport.bridgexd.com/assets/html/ServicePrevent.html?id="
 
-     const val SITE_SERVEY_PDF_URL = "http://waesupport.bridgexd.com/assets/html/SiteserveyReport.html?id="
+    const val SITE_SERVEY_PDF_URL =
+        "http://waesupport.bridgexd.com/assets/html/SiteserveyReport.html?id="
 
-     //todo ticket type items pdf---
-     const val INSTALLATION_TYPE_PDF_URL = "http://waesupport.bridgexd.com/assets/html/CompanyInvoice.html?TicketId="
+    //todo ticket type items pdf---
+    const val INSTALLATION_TYPE_PDF_URL =
+        "http://waesupport.bridgexd.com/assets/html/CompanyInvoice.html?TicketId="
 
-     const val MAINTAINANCE_TYPE_PDF_URL = "http://waesupport.bridgexd.com/assets/html/ServicePrevent.html?TicketId="
+    const val MAINTAINANCE_TYPE_PDF_URL =
+        "http://waesupport.bridgexd.com/assets/html/ServicePrevent.html?TicketId="
 
-     const val SITE_SURVEY_TYPE_PDF_URL = "http://waesupport.bridgexd.com/assets/html/SiteserveyReport.html?TicketId="
+    const val SITE_SURVEY_TYPE_PDF_URL =
+        "http://waesupport.bridgexd.com/assets/html/SiteserveyReport.html?TicketId="
 
 
     val cartList = ArrayList<DocumentLine?>()
@@ -233,7 +240,8 @@ object Global {
         "Dernsta laton-Packaoing"
     )
 
-    val caseOrginList = arrayOf("By Call", "By Mail", "By Client Request", "By Internal Mail Request")
+    val caseOrginList =
+        arrayOf("By Call", "By Mail", "By Client Request", "By Internal Mail Request")
 
     val zoneList_gl = arrayOf("North", "East", "West", "South")
 
@@ -251,13 +259,103 @@ object Global {
 
     val modelList_gl = arrayOf("RO", "UF", "UV", "Dispensor")
 
-    val productTypeList_gl = arrayOf("POU-Water Purifier", "Drinking Water Fountains", "RO Plant with Chiller", "Dispenser")
+    val productTypeList_gl = arrayOf(
+        "POU-Water Purifier",
+        "Drinking Water Fountains",
+        "RO Plant with Chiller",
+        "Dispenser"
+    )
 
 
-    val hourTimeList = arrayOf("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24")
+    val hourTimeList = arrayOf(
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24"
+    )
 
-    val minTimeList = arrayOf("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26",
-    "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60")
+    val minTimeList = arrayOf(
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30",
+        "31",
+        "32",
+        "33",
+        "34",
+        "35",
+        "36",
+        "37",
+        "38",
+        "39",
+        "40",
+        "41",
+        "42",
+        "43",
+        "44",
+        "45",
+        "46",
+        "47",
+        "48",
+        "49",
+        "50",
+        "51",
+        "52",
+        "53",
+        "54",
+        "55",
+        "56",
+        "57",
+        "58",
+        "59",
+        "60"
+    )
 
 
     open fun isvalidateemail(email_value: TextInputEditText): Boolean {
@@ -279,7 +377,7 @@ object Global {
     }
 
 
-     open fun convertListToJson(personList: List<BodySparePart.SparePart>): String {
+    open fun convertListToJson(personList: List<BodySparePart.SparePart>): String {
         return Json.encodeToString(personList)
     }
 
@@ -303,7 +401,8 @@ object Global {
         val mMonth = c.get(Calendar.MONTH)
         val mDay = c.get(Calendar.DAY_OF_MONTH)
 
-        val datePickerDialog = DatePickerDialog(context, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+        val datePickerDialog = DatePickerDialog(
+            context, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                 val selectedDate = "$year-${monthOfYear + 1}-$dayOfMonth"
                 val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.US)
                 try {
@@ -381,8 +480,7 @@ object Global {
     }
 
 
-
-    open fun countNotification(notification: Int):String{
+    open fun countNotification(notification: Int): String {
 
         /* val displayString = if (notification > 99) {
              "+$notification"
@@ -751,8 +849,12 @@ object Global {
         }
     }
 
+    var isDatePickerPopupOpen = false
 
     fun selectDate(context: Context, editdate: EditText) {
+     /*   if (isDatePickerPopupOpen) return
+
+        isDatePickerPopupOpen = true*/
 
         DatePickerPopup.Builder()
             .from(context)
@@ -761,7 +863,23 @@ object Global {
             .textSize(19)
             .listener { dp, date, day, month, year ->
                 editdate.setText(day.toString() + "-" + (month + 1).toString() + "-" + year.toString())
+             //   isDatePickerPopupOpen = false
 
+            }
+            .build().show()
+
+    }
+
+
+    fun selectTime(context: Context, editdate: EditText) {
+
+        TimePickerPopup.Builder()
+            .from(context)
+            .offset(3)
+
+            .textSize(19)
+            .listener { timePicker, hour, minute ->
+                editdate.setText(hour.toString() + ":" + minute.toString())
             }
             .build().show()
 
@@ -825,7 +943,10 @@ object Global {
         return index
     }
 
-    fun getItemSparePartyPos(countrylist: ArrayList<SpareItemListApiModel.DataXXX>, s: String): Int {
+    fun getItemSparePartyPos(
+        countrylist: ArrayList<SpareItemListApiModel.DataXXX>,
+        s: String
+    ): Int {
         var index = -1
         for (cd in countrylist) {
             if (cd.ItemDescription == s) {
@@ -846,7 +967,6 @@ object Global {
         }
         return index
     }
-
 
 
 }

@@ -35,6 +35,16 @@ class MainViewModel(
     val fanxApi: Apis
 ) : AndroidViewModel(app) {
 
+    //todo dataStatus with viewhost
+    private val _selectedStatus = MutableLiveData<String>()
+    val selectedStatus: LiveData<String> get() = _selectedStatus
+
+    fun setStatus(date: String) {
+        _selectedStatus.value = date
+    }
+
+
+
     private val _userStatus = MutableLiveData<Event<Resource<ResponseEmployeeAtLogin>>>()
     val userStatus: LiveData<Event<Resource<ResponseEmployeeAtLogin>>> = _userStatus
 

@@ -1,0 +1,9 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="15dp"
+    android:height="14dp"
+    android:viewportWidth="13"
+    android:viewportHeight="12">
+  <path
+      android:pathData="M9.066,7.433C6.723,7.144 4.724,5.526 3.847,3.334C3.458,2.377 3.313,1.338 3.425,0.311C3.43,0.258 3.42,0.204 3.396,0.156C3.373,0.109 3.336,0.069 3.29,0.041C3.245,0.013 3.192,-0.001 3.139,0C3.085,0.001 3.033,0.017 2.989,0.046C1.054,1.29 -0.18,3.528 0.021,6.042C0.271,9.16 2.821,11.719 5.939,11.977C9.127,12.241 11.88,10.2 12.72,7.34C12.786,7.113 12.565,6.903 12.347,6.993C11.31,7.423 10.179,7.574 9.066,7.433Z"
+      android:fillColor="@color/color_selector_radio_button"/>
+</vector>

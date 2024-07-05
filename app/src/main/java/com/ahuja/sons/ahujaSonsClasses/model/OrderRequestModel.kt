@@ -5,7 +5,7 @@ class OrderRequestModel(
     val SalesPersonCode: String,
     
     val PageNo: Int,
-    val maxItem: Int,
+    val maxItem: String,
     
     val SearchText: String,
     val field: Field,

@@ -163,7 +163,7 @@
                             android:layout_height="@dimen/text_size_14"
                             android:layout_centerVertical="true"
                             android:layout_margin="10dp"
-                            android:background="@drawable/down_arrow_icon"
+                            android:src="@drawable/down_arrow_icon"
                             android:visibility="gone" />
 
                         <ImageView
@@ -172,7 +172,7 @@
                             android:layout_height="@dimen/text_size_14"
                             android:layout_centerVertical="true"
                             android:layout_margin="10dp"
-                            android:background="@drawable/arrow_up_icon"
+                            android:src="@drawable/arrow_up_icon"
                             android:visibility="visible" />
 
 
@@ -208,6 +208,7 @@
                             android:paddingTop="10dp"
                             android:paddingBottom="10dp"
                             tools:itemCount="2"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                             tools:listitem="@layout/order_stage_lines" />
 
 
@@ -458,7 +459,7 @@
                                         android:layout_height="@dimen/size_45"
                                         android:layout_weight="1"
                                         android:gravity="center_vertical"
-                                        android:text="No. of CRS Required"
+                                        android:text="No. of CSR Required"
                                         android:textColor="@color/grey"
                                         android:textSize="@dimen/text_size_14" />
 

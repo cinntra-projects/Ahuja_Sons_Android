@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_edit_qt_frame1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/heading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_10"
+                    android:text="Orders"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_18" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true">
+
+                    <TextView
+                        android:id="@+id/tvSelect"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="@dimen/size_20"
+                        android:drawableTint="@color/white"
+                        android:fitsSystemWindows="true"
+                        android:text="Select"
+                        android:textColor="@color/white"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="@dimen/size_20"
+                        android:drawableTint="@color/white"
+                        android:src="@drawable/ic_filter"
+                        android:visibility="visible" />
+
+                    <ImageView
+
+                        android:id="@+id/search"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="@dimen/size_20"
+                        android:background="@drawable/search"
+                        android:backgroundTint="@color/white"
+                        android:fitsSystemWindows="true" />
+                </LinearLayout>
+
+
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/cardAssignButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.SearchView
+
+                    android:id="@+id/search_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_45"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/rounded_box_background"
+                    android:padding="4dp"
+                    android:visibility="gone"
+                    app:iconifiedByDefault="false"
+                    app:queryBackground="@android:color/transparent"
+                    app:queryHint="Search" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/greyish_backgroynd"
+                    android:gravity="right|center_vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/size_15"
+                        android:drawableLeft="@drawable/ic_grey_dot"
+                        android:drawablePadding="@dimen/size_4"
+                        android:drawableTint="@color/green"
+                        android:text="Accepted"
+                        android:textColor="@color/green"
+                        android:textSize="@dimen/size_10" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/size_15"
+                        android:drawableLeft="@drawable/ic_grey_dot"
+                        android:drawablePadding="@dimen/size_4"
+                        android:drawableTint="@color/red"
+                        android:text="Rejected"
+                        android:textColor="@color/red"
+                        android:textSize="@dimen/size_10" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/size_15"
+                        android:drawableLeft="@drawable/ic_grey_dot"
+                        android:drawablePadding="@dimen/size_4"
+                        android:drawableTint="@color/safron_barChart"
+                        android:text="Pending"
+                        android:textColor="@color/safron_barChart"
+                        android:textSize="@dimen/size_10" />
+
+
+                </LinearLayout>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white">
+
+                    <FrameLayout
+                        android:id="@+id/main_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+
+                        <com.simform.refresh.SSPullToRefreshLayout
+                            android:id="@+id/ssPullRefresh"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+
+                            <androidx.core.widget.NestedScrollView
+                                android:id="@+id/nestedSV"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:visibility="visible">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical">
+
+
+                                    <androidx.recyclerview.widget.RecyclerView
+                                        android:id="@+id/product_recycler_view"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:paddingLeft="@dimen/size_10"
+                                        android:paddingTop="@dimen/size_10"
+                                        android:paddingRight="@dimen/size_10"
+                                        android:paddingBottom="@dimen/size_55" />
+
+                                    <ProgressBar
+                                        android:id="@+id/idPBLoading"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:visibility="gone" />
+                                </LinearLayout>
+
+                            </androidx.core.widget.NestedScrollView>
+
+
+                        </com.simform.refresh.SSPullToRefreshLayout>
+
+                        <ImageView
+                            android:id="@+id/nodatafound"
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/nodatafound"
+                            android:visibility="gone" />
+
+
+                        <FrameLayout
+                            android:id="@+id/loadingback"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="#3B505050"
+                            android:clickable="true"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <com.github.loadingview.LoadingView
+                                android:id="@+id/loadingView"
+                                android:layout_width="72dp"
+                                android:layout_height="72dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="24dp"
+                                android:visibility="visible"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:lv_duration="30"
+                                app:lv_end_color="@color/color_end"
+                                app:lv_external_radius="24dp"
+                                app:lv_internal_radius="4dp"
+                                app:lv_start_color="@color/color_start" />
+
+                        </FrameLayout>
+
+                    </FrameLayout>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardAssignButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:elevation="20dp"
+            android:visibility="visible"
+            app:cardBackgroundColor="@color/white"
+            app:cardElevation="20dp"
+            app:cardPreventCornerOverlap="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <LinearLayout
+                android:id="@+id/counterBtnLayoutSurgery"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@color/my_app_background_color"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:visibility="visible">
+
+
+                <TextView
+                    android:id="@+id/tvCancelRoute"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="30"
+                    android:elevation="2dp"
+                    android:gravity="center"
+                    android:text="Cancel"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    app:chipBackgroundColor="@color/white"
+                    app:chipIconTint="@color/white"
+                    app:chipStrokeColor="@color/white"
+
+                    app:rippleColor="@color/colour_text_color" />
+
+                <com.google.android.material.chip.ChipGroup
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="70">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipAssign"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:elevation="2dp"
+                        android:gravity="center_horizontal"
+                        android:text="confirm"
+                        android:textAlignment="center"
+                        android:textColor="@color/my_app_background_color"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:chipBackgroundColor="@color/colorPrimary"
+                        app:chipIconTint="@color/colorPrimary"
+                        app:chipStrokeColor="@color/colour_text_color"
+                        app:chipStrokeWidth="1dp"
+                        app:rippleColor="@color/colour_text_color" />
+                </com.google.android.material.chip.ChipGroup>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/deliveryBtnLayoutSurgery"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@color/my_app_background_color"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:visibility="gone">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/startTripChipGroupSurgery"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:visibility="gone">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/startTripChipSurgery"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:elevation="2dp"
+                        android:text="Start Trip"
+                        android:textAlignment="center"
+                        android:textColor="@color/my_app_background_color"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:chipBackgroundColor="@color/colorPrimary"
+                        app:chipIconTint="@color/colorPrimary"
+                        app:chipStrokeColor="@color/colour_text_color"
+                        app:chipStrokeWidth="1dp"
+                        app:rippleColor="@color/my_app_background_color" />
+                </com.google.android.material.chip.ChipGroup>
+
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/endTripChipGroupSurgery"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:visibility="visible">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/endTripChipSurgery"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:elevation="2dp"
+                        android:text="End Trip"
+                        android:textAlignment="center"
+                        android:textColor="@color/my_app_background_color"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:chipBackgroundColor="@color/colorPrimary"
+                        app:chipIconTint="@color/colorPrimary"
+                        app:chipStrokeColor="@color/colour_text_color"
+                        app:chipStrokeWidth="1dp"
+                        app:rippleColor="@color/my_app_background_color" />
+                </com.google.android.material.chip.ChipGroup>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/surgeryPersonBtnLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@color/my_app_background_color"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:visibility="gone">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:visibility="visible">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/submitSurgeryChip"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:elevation="2dp"
+                        android:text="Submit"
+                        android:textAlignment="center"
+                        android:textColor="@color/my_app_background_color"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:chipBackgroundColor="@color/colorPrimary"
+                        app:chipIconTint="@color/colorPrimary"
+                        app:chipStrokeColor="@color/colour_text_color"
+                        app:chipStrokeWidth="1dp"
+                        app:rippleColor="@color/my_app_background_color" />
+                </com.google.android.material.chip.ChipGroup>
+
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
