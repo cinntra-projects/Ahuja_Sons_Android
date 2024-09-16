@@ -44,8 +44,7 @@ class AllAtachmentAdapter(val AllitemsList: ArrayList<DataItem>) :
 
 
         holder.itemView.setOnClickListener {
-            val extension: String =
-                AllitemsList[position].File.substring(AllitemsList[position].File.lastIndexOf("."))
+            val extension: String = AllitemsList[position].File.substring(AllitemsList[position].File.lastIndexOf("."))
             if (extension == "jpg" || extension == "jpeg" || extension == "png" || extension == "HEIC") {
                 val i = Intent(context, OpenPdfView::class.java)
                 i.putExtra("PDFLink", AllitemsList[position].File)

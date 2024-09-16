@@ -356,17 +356,11 @@ class LoginActivity : MainBaseActivity() {
                     // LoginHierarchy2ndLevel("manager");
                     gotoHome()
                     Prefs.putString(Global.Employee_Name, response.body()!!.data.SalesEmployeeName)
-                    Prefs.putString(
-                        Global.Employee_maILid,
-                        response.body()!!.data.Email
-                    )
+                    Prefs.putString(Global.Employee_maILid, response.body()!!.data.Email)
                     Prefs.putString(Global.Employee_Code, response.body()!!.data.SalesEmployeeCode)
                     Prefs.putString(Global._ReportingTO, response.body()!!.data.reportingTo)
                     Prefs.putString(Global.Employee_role, response.body()!!.data.role.Name)
-                    Prefs.putString(
-                        Global.Employee_SalesEmpCode,
-                        response.body()!!.data.id.toString()
-                    )
+                    Prefs.putString(Global.Employee_SalesEmpCode, response.body()!!.data.id.toString())
                     if (binding.rememberme.isChecked) {
                         Prefs.putString(Global.LogInUserName, response.body()!!.data.userName)
                         Prefs.putString(Global.LogInPassword, response.body()!!.data.password)

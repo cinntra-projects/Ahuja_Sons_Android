@@ -39,6 +39,27 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
         <activity
+            android:name=".ahujaSonsClasses.activity.OperationManagerDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ahujaSonsClasses.activity.BillingCoordinatorDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ahujaSonsClasses.activity.AllOrdersCoordinatorDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ahujaSonsClasses.activity.UpdateErrandsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ahujaSonsClasses.activity.UpdateSaleOrderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ahujaSonsClasses.activity.ItemDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ahujaSonsClasses.activity.SalesPersonRoleDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".ahujaSonsClasses.activity.CounterActivity"
             android:exported="false" />
         <activity
@@ -49,7 +70,8 @@
             android:exported="false" />
         <activity
             android:name=".ahujaSonsClasses.activity.OrderCoordinatorActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/MaterialComponent" />
         <activity
             android:name=".ahujaSonsClasses.activity.DeliveryCoordinatorActivity"
             android:exported="false" />
@@ -65,7 +87,8 @@
             android:exported="false" />
         <activity
             android:name=".ahujaSonsClasses.activity.InspectDeliveryOrderDetailActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/MaterialComponent" />
         <activity
             android:name=".ahujaSonsClasses.activity.ParticularWorkQueueDetailActivity"
             android:exported="false" />
@@ -77,7 +100,8 @@
             android:exported="false" />
         <activity
             android:name=".ahujaSonsClasses.activity.ParticularOrderDetailActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/MaterialComponent" />
         <activity
             android:name="com.ahuja.sons.activity.AddAttachmentActivity"
             android:exported="false"

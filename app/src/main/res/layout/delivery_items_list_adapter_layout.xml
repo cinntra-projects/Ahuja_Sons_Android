@@ -27,7 +27,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/name"
+                android:id="@+id/tvItemDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -37,6 +37,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tvItemCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -51,15 +52,17 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tvUOM"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="50"
                     android:paddingBottom="5dp"
-                    android:text="Order Quantity : 9"
+                    android:text="UOM : PC"
                     android:textColor="@color/light_black"
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/tvQTy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Delivered Quantity : 6"

@@ -1,5 +1,10 @@
 package com.ahuja.sons.service.repository
 
+import com.ahuja.sons.ahujaSonsClasses.model.DoctorNameListModel
+import com.ahuja.sons.ahujaSonsClasses.model.orderModel.AllOrderListModel
+import com.ahuja.sons.ahujaSonsClasses.model.orderModel.OrderOneResponseModel
+import com.ahuja.sons.ahujaSonsClasses.model.workQueue.AllItemsForOrderModel
+import com.ahuja.sons.ahujaSonsClasses.model.workQueue.AllWorkQueueResponseModel
 import com.google.gson.JsonObject
 import com.ahuja.sons.apibody.BodyForIssueSubCategory
 import com.ahuja.sons.apihelper.Resource
@@ -54,7 +59,6 @@ interface MainRepos {
     suspend fun getAnnouncementList(): Resource<ResponseAnnouncement>
 
     /***Chanchal***/
-    suspend fun getBPList(): Resource<AccountBPResponse>
 
     suspend fun getAllBPList(): Resource<AccountBPResponse>
 
@@ -177,5 +181,17 @@ interface MainRepos {
 
     /**** AHUJA Sons***/
     suspend fun getOrderOneDetail(data: JsonObject): Resource<OrderOneResponseModel>
+
+    suspend fun getBPList(): Resource<AccountBPResponse>
+
+    suspend fun getDoctorNameList(): Resource<DoctorNameListModel>
+    suspend fun createdOrderRequest(data: MultipartBody): Resource<OrderOneResponseModel>
+    suspend fun callWorkQueueDetailApi(data: JsonObject): Resource<AllWorkQueueResponseModel>
+    suspend fun callDeliveryDetailApi(data: JsonObject): Resource<AllWorkQueueResponseModel>
+    suspend fun callOrderRequestOneApi(data: JsonObject): Resource<OrderOneResponseModel>
+    suspend fun completeOrderApi(data: JsonObject): Resource<AllWorkQueueResponseModel>
+    suspend fun submitInspectionProof(data: MultipartBody): Resource<AllWorkQueueResponseModel>
+    suspend fun orderInspectionComplete(data: JsonObject): Resource<AllWorkQueueResponseModel>
+
 
 }

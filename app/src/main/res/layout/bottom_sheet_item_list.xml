@@ -14,15 +14,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/dimen_8"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/btnConfirm"
-        >
-
-
-
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <RelativeLayout
             android:id="@+id/headingRel"
@@ -94,11 +89,9 @@
                 android:id="@+id/tvOrderName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-
                 android:fontFamily="@font/helvetica_regular"
                 android:gravity="start"
-                android:text="Order ID: 2134"
+                android:text="CK Birla Healthcare Limited"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -119,11 +112,10 @@
 
 
             <TextView
-
+                android:id="@+id/tvOrderInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-
                 android:drawablePadding="4dp"
                 android:fontFamily="@font/helvetica_regular"
                 android:gravity="start"
@@ -148,23 +140,68 @@
                 />
 
 
-
         </LinearLayout>
+
+
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvItemList"
             android:layout_width="match_parent"
             android:layout_height="400dp"
-            android:id="@+id/rvItemList"
             android:layout_marginBottom="@dimen/dimen_8"
-            app:layout_constraintStart_toStartOf="parent"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/linearOrderheading"
-           app:layout_constraintBottom_toBottomOf="parent"
             tools:listitem="@layout/item_of_delivery_coordinator_order_item" />
 
 
+        <ImageView
+            android:id="@+id/noDataFound"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/nodatafound"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearOrderheading" />
 
+        <FrameLayout
+            android:id="@+id/loadingback"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.github.loadingview.LoadingView
+                android:id="@+id/loadingView"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lv_duration="30"
+                app:lv_end_color="@color/color_end"
+                app:lv_external_radius="24dp"
+                app:lv_internal_radius="4dp"
+                app:lv_start_color="@color/color_start" />
+
+        </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <Button
         android:id="@+id/btnConfirm"
@@ -172,13 +209,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:background="@drawable/round"
-
-
         android:text="Confirm"
         android:textAllCaps="false"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

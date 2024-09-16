@@ -14,18 +14,30 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.content.FileProvider
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ahuja.sons.BuildConfig
 import com.ahuja.sons.ahujaSonsClasses.adapter.UploadImageListAdapter
-import com.ahuja.sons.ahujaSonsClasses.fragments.order.UploadProofImagesFragment
+import com.ahuja.sons.apiservice.ApiClient
+import com.ahuja.sons.apiservice.Apis
 import com.ahuja.sons.databinding.ActivityOrderScreenForDeliveryPersonBinding
+import com.ahuja.sons.service.repository.DefaultMainRepositories
+import com.ahuja.sons.service.repository.MainRepos
+import com.ahuja.sons.viewmodel.MainViewModel
+import com.ahuja.sons.viewmodel.MainViewModelProvider
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
     lateinit var binding: ActivityOrderScreenForDeliveryPersonBinding
     var isTripStarted = false
+    lateinit var viewModel: MainViewModel
 
     private val PICK_IMAGES_REQUEST_CODE = 1111
     private val REQUEST_CODE_PERMISSIONS = 10
@@ -41,16 +53,25 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
         private const val REQUEST_IMAGE_CAPTURE = 1
     }
 
+    private fun setUpViewModel() {
+        val dispatchers: CoroutineDispatcher = Dispatchers.Main
+        val mainRepos = DefaultMainRepositories() as MainRepos
+        val fanxApi: Apis = ApiClient().service
+        val viewModelProviderfactory = MainViewModelProvider(application, mainRepos, dispatchers, fanxApi)
+        viewModel = ViewModelProvider(this, viewModelProviderfactory)[MainViewModel::class.java]
 
+    }
+
+    var orderID = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOrderScreenForDeliveryPersonBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        setUpViewModel()
+        orderID = intent.getIntExtra("id",0)
+
         binding.btnTrip.visibility = View.VISIBLE
-
-
-
-
 
         binding.btnENdTrip.setOnClickListener {
             binding.apply {
@@ -73,7 +94,6 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
         binding.btnTrip.setOnClickListener {
             binding.apply {
                 linearTripDetails.visibility = View.VISIBLE
-                deliveryLayout.visibility = View.VISIBLE
                 btnENdTrip.visibility = View.VISIBLE
                 tvCountText.visibility = View.VISIBLE
                 tvClickStartText.visibility = View.INVISIBLE
@@ -84,8 +104,6 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
 
 
         }
-
-
 
 
         binding.ivAddNewImage.setOnClickListener {
@@ -142,12 +160,12 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
             binding.clickNewImageLayout.visibility = View.GONE
             val linearLayoutManager =
                 LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-            val adapter = UploadImageListAdapter(this, mArrayUriList, arrayOf())
+            val adapter = UploadImageListAdapter(this, mArrayUriList, arrayOf(), ArrayList())
             binding.proofImageRecyclerView.layoutManager = linearLayoutManager
             binding.proofImageRecyclerView.adapter = adapter
             adapter.notifyDataSetChanged()
 
-            adapter.setOnItemClickListener { list, position ->
+            adapter.setOnItemClickListener { list, position , pdfList->
 
                 if (position >= 0 && position < mArrayUriList.size) {
                     mArrayUriList.removeAt(position)
@@ -208,20 +226,18 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
                 val photoFile: File? = try {
                     createImageFile()
                 } catch (ex: IOException) {
-                    Toast.makeText(
-                        this,
-                        "Error occurred while creating the file",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(this, "Error occurred while creating the file", Toast.LENGTH_SHORT).show()
                     null
                 }
                 photoFile?.also {
-                    val photoURI: Uri = Uri.fromFile(it)
+                    val photoURI: Uri = FileProvider.getUriForFile(this, "${BuildConfig.APPLICATION_ID}.fileprovider", it)
+//                    val photoURI: Uri = Uri.fromFile(it) //todo ==> using Uri.fromFile to create the URI for the photo file, which leads to a FileUriExposedException on Android 7.0 and above
                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-                    startActivityForResult(
-                        takePictureIntent,
-                        REQUEST_IMAGE_CAPTURE
-                    )
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+
+                   /* val photoURI: Uri = Uri.fromFile(it)
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)*/
                 }
             }
         }

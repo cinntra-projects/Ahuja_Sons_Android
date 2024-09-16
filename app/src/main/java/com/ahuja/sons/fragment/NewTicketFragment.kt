@@ -73,7 +73,7 @@ class NewTicketFragment : Fragment() {
             field = field,
             maxItem = "10",
         )
-
+/*
         val call: Call<AllOrderListResponseModel> = ApiClient().service.callOrderListApi(requestModel)
         call.enqueue(object : Callback<AllOrderListResponseModel> {
             override fun onResponse(
@@ -116,7 +116,7 @@ class NewTicketFragment : Fragment() {
                 ticketbiding.ssPullRefresh.setRefreshing(false)
 
             }
-        })
+        })*/
     }
 
 

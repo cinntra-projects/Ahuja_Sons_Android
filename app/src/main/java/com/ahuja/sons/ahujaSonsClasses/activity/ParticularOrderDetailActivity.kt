@@ -17,24 +17,22 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.ahuja.sons.R
 import com.ahuja.sons.adapter.ViewPagerAdapter
 import com.ahuja.sons.ahujaSonsClasses.Interface.OrderStageItemClick
-import com.ahuja.sons.ahujaSonsClasses.adapter.AddSurgeryPersonAdapter
-import com.ahuja.sons.ahujaSonsClasses.adapter.OrderStageLineAdapter
-import com.ahuja.sons.ahujaSonsClasses.adapter.UploadImageListAdapter
-import com.ahuja.sons.ahujaSonsClasses.fragments.order.DeliveryItemsFragment
-import com.ahuja.sons.ahujaSonsClasses.fragments.order.PendingItemsFragment
+import com.ahuja.sons.ahujaSonsClasses.adapter.*
 import com.ahuja.sons.ahujaSonsClasses.fragments.order.SurgeryPersonDetailsFragment
 import com.ahuja.sons.ahujaSonsClasses.fragments.order.UploadProofImagesFragment
+import com.ahuja.sons.ahujaSonsClasses.model.AllDependencyAndErrandsListModel
+import com.ahuja.sons.ahujaSonsClasses.model.AllErrandsListModel
+import com.ahuja.sons.ahujaSonsClasses.model.DeliveryItemListModel
 import com.ahuja.sons.ahujaSonsClasses.model.SurgeryPersonModelData
+import com.ahuja.sons.ahujaSonsClasses.model.orderModel.OrderOneResponseModel
 import com.ahuja.sons.apiservice.ApiClient
 import com.ahuja.sons.apiservice.Apis
 import com.ahuja.sons.custom.FileUtil
 import com.ahuja.sons.databinding.ActivityParticularOrderDetailBinding
 import com.ahuja.sons.globals.Global
-import com.ahuja.sons.newapimodel.OrderOneResponseModel
 import com.ahuja.sons.service.repository.DefaultMainRepositories
 import com.ahuja.sons.service.repository.MainRepos
 import com.ahuja.sons.viewmodel.MainViewModel
@@ -44,6 +42,9 @@ import com.amulyakhare.textdrawable.util.ColorGenerator
 import com.google.gson.JsonObject
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
@@ -54,6 +55,9 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
     lateinit var binding : ActivityParticularOrderDetailBinding
     lateinit var viewModel: MainViewModel
     var id = ""
+    var dependencyOrderAdapter = DependencyOrderAdapter()
+    var earrandsOrderAdapter = EarrandsOrderAdapter()
+    var deliveryDetailAdapter = DeliveryDetailsItemAdapter()
 
     private val PICK_IMAGES_REQUEST_CODE = 1
     private  val REQUEST_CODE_PERMISSIONS = 10
@@ -75,12 +79,13 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
         val dispatchers: CoroutineDispatcher = Dispatchers.Main
         val mainRepos = DefaultMainRepositories() as MainRepos
         val fanxApi: Apis = ApiClient().service
-        val viewModelProviderfactory =
-            MainViewModelProvider(application, mainRepos, dispatchers, fanxApi)
+        val viewModelProviderfactory = MainViewModelProvider(application, mainRepos, dispatchers, fanxApi)
         viewModel = ViewModelProvider(this, viewModelProviderfactory)[MainViewModel::class.java]
 
     }
 
+    var orderID = ""
+    var FLAG = ""
 
     lateinit var pagerAdapter : ViewPagerAdapter
 
@@ -90,16 +95,18 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
         binding = ActivityParticularOrderDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setUpViewModel()
-        id = intent.getStringExtra("id").toString()
-        Log.e(TAG, "onCreate: $id")
 
-        val toolbar: Toolbar = binding.toolbar
-
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
         pagerAdapter = ViewPagerAdapter(supportFragmentManager)
 
+        orderID = intent.getStringExtra("id").toString()
+        FLAG = intent.getStringExtra("flag")!!
+        Log.e(TAG, "onCreate: $orderID")
+
         //todo inspection tabs
-        pagerAdapter.add(DeliveryItemsFragment(), "Delivery Items")
-        pagerAdapter.add(PendingItemsFragment(), "Pending Items")
+//        pagerAdapter.add(DeliveryItemsFragment(), "Delivery Items")
+//        pagerAdapter.add(PendingItemsFragment(), "Pending Items")
         pagerAdapter.add(UploadProofImagesFragment(), "Proof")
 
         binding.viewpagerInspect.adapter = pagerAdapter
@@ -107,31 +114,35 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
         binding.tabLayout.setupWithViewPager(binding.viewpagerInspect)
 
 
-        setSupportActionBar(toolbar)
+        // Enable the up button (back arrow) in the toolbar
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        if (Global.checkForInternet(this@ParticularOrderDetailActivity)) {
-            binding.loadingBackFrame.visibility = View.VISIBLE
-            binding.loadingView.start()
-            var jsonObject = JsonObject()
-            jsonObject.addProperty("id", id)
-            viewModel.getOrderOneDetail(jsonObject)
-            bindOneObserver()
+        // Handle the back arrow click
+        toolbar.setNavigationOnClickListener {
+            onBackPressed() // or use finish() to close the activity
         }
+
 
 
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         supportActionBar!!.setDisplayUseLogoEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        //todo stage order lines
-        var dataList = arrayListOf<String>("Sales Order Request", "Order","Counter" , "Inspect Deliver", "Delivery Coordinator", "Delivery",
-        "Surgery Coordinator", "Surgery Person")
 
-        val recyclerView: RecyclerView = findViewById(R.id.rvOrderStageStatus)
-        var linearLayoutManager : LinearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        recyclerView.layoutManager = linearLayoutManager
-        val adapter = OrderStageLineAdapter(dataList, this)
-        recyclerView.adapter = adapter
+        binding.loadingBackFrame.visibility = View.GONE
+        binding.loadingView.stop()
+
+
+        if (Global.checkForInternet(this@ParticularOrderDetailActivity)) {
+            binding.loadingBackFrame.visibility = View.VISIBLE
+            binding.loadingView.start()
+            var jsonObject = JsonObject()
+            jsonObject.addProperty("id", orderID)
+            viewModel.callOrderRequestOneApi(jsonObject)
+            bindOneObserver()
+
+        }
+
 
 
         /*var statusList = arrayListOf<String>("Inspected", "Part Inspected", "Inspected – Missing items")
@@ -151,12 +162,6 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
             }
 
         }*/
-
-
-        //todo order drop down's---
-      /*  val order = arrayOf("Order 1", "Order 2", "Order 3")
-        val orderInfoAdapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, order)
-        binding.acOrderInfo.setAdapter(orderInfoAdapter)*/
 
 
         initView()
@@ -261,20 +266,23 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
         //todo header arrow-
         binding.headerUpArrow.setOnClickListener {
             binding.tvOrderID.visibility = View.GONE
-            binding.tvExpectedData.visibility = View.GONE
+            binding.tvOrderInfo.visibility = View.GONE
+            binding.tvDoctorName.visibility = View.GONE
             binding.headerUpArrow.visibility = View.GONE
             binding.headerDownArrow.visibility = View.VISIBLE
         }
 
         binding.headerDownArrow.setOnClickListener {
             binding.tvOrderID.visibility = View.VISIBLE
-            binding.tvExpectedData.visibility = View.VISIBLE
+            binding.tvOrderInfo.visibility = View.VISIBLE
+            binding.tvDoctorName.visibility = View.VISIBLE
             binding.headerDownArrow.visibility = View.GONE
             binding.headerUpArrow.visibility = View.VISIBLE
         }
 
-        //todo order arrow-
 
+
+        //todo order details arrow--
         binding.orderUpArrow.setOnClickListener {
             binding.orderDetailsLayout.visibility = View.GONE
             binding.orderUpArrow.visibility = View.GONE
@@ -287,38 +295,71 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
             binding.orderUpArrow.visibility = View.VISIBLE
         }
 
-        //todo dependency arrow-
+        binding.apply {
+            errandsUpArrow.setOnClickListener {
+                if (rvEarrands.visibility == View.VISIBLE) {
+                    rvEarrands.visibility = View.GONE
+                    errandsUpArrow.setImageResource(R.drawable.arrow_up_icon)
 
-        binding.dependencyUpArrow.setOnClickListener {
-            binding.dependencyLayout.visibility = View.GONE
-            binding.dependency1Layout.visibility = View.GONE
-            binding.view1.visibility = View.GONE
-            binding.dependencyUpArrow.visibility = View.GONE
-            binding.dependencyDownArrow.visibility = View.VISIBLE
+                } else {
+                    rvEarrands.visibility = View.VISIBLE
+                    errandsUpArrow.setImageResource(R.drawable.down_arrow_icon)
+                }
+            }
+
+
+            dependencyUpArrow.setOnClickListener {
+                if (rvDependency.visibility == View.VISIBLE) {
+                    rvDependency.visibility = View.GONE
+                    dependencyUpArrow.setImageResource(R.drawable.arrow_up_icon)
+
+                } else {
+                    rvDependency.visibility = View.VISIBLE
+                    dependencyUpArrow.setImageResource(R.drawable.down_arrow_icon)
+                }
+            }
+
+
+            binding.deliveryUpArrow.setOnClickListener {
+                binding.rvDeliveryDetail.visibility = View.GONE
+                binding.deliveryUpArrow.visibility = View.GONE
+                binding.deliveryDownArrow.visibility = View.VISIBLE
+
+            }
+
+            binding.deliveryDownArrow.setOnClickListener {
+                binding.rvDeliveryDetail.visibility = View.VISIBLE
+                binding.deliveryDownArrow.visibility = View.GONE
+                binding.deliveryUpArrow.visibility = View.VISIBLE
+            }
+
         }
 
-        binding.dependencyDownArrow.setOnClickListener {
-            binding.dependencyLayout.visibility = View.VISIBLE
-            binding.dependency1Layout.visibility = View.VISIBLE
-            binding.view1.visibility = View.VISIBLE
-            binding.dependencyDownArrow.visibility = View.GONE
-            binding.dependencyUpArrow.visibility = View.VISIBLE
+/*
+        binding.dispatchUpArrow.setOnClickListener {
+            binding.dispatchDetailsLayout.visibility = View.GONE
+            binding.dispatchUpArrow.visibility = View.GONE
+            binding.dispatchDownArrow.visibility = View.VISIBLE
         }
 
-        //todo errands arrow-
-
-        binding.errandsUpArrow.setOnClickListener {
-            binding.errandsLayout.visibility = View.GONE
-            binding.errandsUpArrow.visibility = View.GONE
-            binding.errandsDownArrow.visibility = View.VISIBLE
+        binding.dispatchDownArrow.setOnClickListener {
+            binding.dispatchDetailsLayout.visibility = View.VISIBLE
+            binding.dispatchDownArrow.visibility = View.GONE
+            binding.dispatchUpArrow.visibility = View.VISIBLE
         }
 
-        binding.errandsDownArrow.setOnClickListener {
-            binding.errandsLayout.visibility = View.VISIBLE
-            binding.errandsDownArrow.visibility = View.GONE
-            binding.errandsUpArrow.visibility = View.VISIBLE
+
+        binding.surgeryUpArrow.setOnClickListener {
+            binding.surgeryDetailsLayout.visibility = View.GONE
+            binding.surgeryUpArrow.visibility = View.GONE
+            binding.surgeryDownArrow.visibility = View.VISIBLE
         }
 
+        binding.surgeryDownArrow.setOnClickListener {
+            binding.surgeryDetailsLayout.visibility = View.VISIBLE
+            binding.surgeryDownArrow.visibility = View.GONE
+            binding.surgeryUpArrow.visibility = View.VISIBLE
+        }*/
         //todo startTrip arrow-
 
         binding.tripStartUpArrow.setOnClickListener {
@@ -409,7 +450,12 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
             binding.srugeryPersonLinearLayout.visibility = View.GONE
             if (Global.mArrayUriList.size > 0){
                 val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-                val adapter = UploadImageListAdapter(this, Global.mArrayUriList, arrayOf())
+                val adapter = UploadImageListAdapter(
+                    this,
+                    Global.mArrayUriList,
+                    arrayOf(),
+                    ArrayList()
+                )
                 binding.proofImageRecyclerView.layoutManager = linearLayoutManager
                 binding.proofImageRecyclerView.adapter = adapter
             }
@@ -436,8 +482,8 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
             var pagerAdapter = ViewPagerAdapter(supportFragmentManager)
 
             pagerAdapter.add(SurgeryPersonDetailsFragment(), "Details")
-            pagerAdapter.add(DeliveryItemsFragment(), "Delivery Items")
-            pagerAdapter.add(PendingItemsFragment(), "Pending Items")
+//            pagerAdapter.add(DeliveryItemsFragment(), "Delivery Items")
+//            pagerAdapter.add(PendingItemsFragment(), "Pending Items")
 
             binding.viewpagerSurgeryPerson.adapter = pagerAdapter
 
@@ -501,11 +547,11 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
             binding.recyclerViewMoreImageLayout.visibility = View.VISIBLE
             binding.clickNewImageLayout.visibility = View.GONE
             val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-            val adapter = UploadImageListAdapter(this, Global.mArrayUriList, arrayOf())
+            val adapter = UploadImageListAdapter(this, Global.mArrayUriList, arrayOf(), ArrayList())
             binding.proofImageRecyclerView.layoutManager = linearLayoutManager
             binding.proofImageRecyclerView.adapter = adapter
 
-            adapter.setOnItemClickListener { list, position ->
+            adapter.setOnItemClickListener { list, position,pdfList ->
 
                 if (binding.endTripChipGroup.visibility == View.VISIBLE){
                     if (position >= 0 && position < Global.mArrayUriList.size) {
@@ -586,7 +632,7 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
 
 
 
-
+    var globalDataWorkQueueList = OrderOneResponseModel.Data()
     //todo bind default data--
     private fun bindOneObserver() {
         viewModel.orderOneDetail.observe(this,
@@ -605,10 +651,26 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
                         if (it.status == 200) {
                             binding.loadingBackFrame.visibility = View.GONE
                             binding.loadingView.stop()
-                            if (it.data.isNotEmpty() && it.data != null) {
-                                setDefaultData(it.data[0])
-                            }
 
+                            if (it.data.size > 0) {
+                                var modelData = it.data[0]
+
+                                globalDataWorkQueueList = it.data[0]
+
+                                //todo calling dependency and errand list
+
+                                callDependencyAllList()
+
+                                callErrandsAllList()
+
+                                callDeliveryDetailItemList()
+
+                                //todo set deafult data---
+                                setDefaultData(modelData)
+
+
+
+                            }
                         } else {
                             binding.loadingBackFrame.visibility = View.GONE
                             binding.loadingView.stop()
@@ -627,11 +689,11 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
 
 
     //todo set deafult data
-    private fun setDefaultData(modelData: OrderOneResponseModel.DataXXX) {
+    private fun setDefaultData(modelData: OrderOneResponseModel.Data){
 
         val generator: ColorGenerator = ColorGenerator.MATERIAL
         val color1: Int = generator.randomColor
-        if (modelData!!.CardName?.isNotEmpty()!!) {
+        if (modelData.CardName.isNotEmpty()!!) {
             val drawable: TextDrawable = TextDrawable.builder()
                 .beginConfig()
                 .withBorder(4) /* thickness in px */
@@ -644,41 +706,279 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
         }
 
 
-        binding.tvOrderID.text = "Dr. Vijay Chauhan"
-        //todo set contact details--
-
-        binding.tvOrderStatus.text = "Status : Order Request"
-
-
-        binding.tvExpectedData.text = "Order Information : Borem ipsum dolor sit hue , kdnm"
+        binding.companyName.setText(modelData.CardName)
+        binding.tvOrderID.setText("Order ID : "+modelData.id)
+        binding.tvDoctorName.setText(modelData.Doctor[0].DoctorFirstName + " "+modelData.Doctor[0].DoctorLastName)
+        binding.tvOrderInfo.setText("Order Information :  "+ modelData.OrderInformation)
+        binding.tvOrderStatus.setText("Status  :  "+ modelData.Status)
 
 
-        if (modelData.CardName.isNotEmpty()) {
-            binding.companyName.text = modelData.CardName
-        } else {
-            binding.companyName.text = "NA"
+        if (modelData.SapOrderId.isNotEmpty()) {
+            binding.apply {
+                SapOrderIdEdt.setText(modelData.SapOrderId)
+                SapOrderIdEdt.isClickable = false
+                SapOrderIdEdt.isFocusable = false
+                SapOrderIdEdt.isFocusableInTouchMode = false
+              
+                itemViewDetailCardView.visibility = View.VISIBLE
+                itemDetailView.setOnClickListener {
+                    var intent = Intent(this@ParticularOrderDetailActivity, ItemDetailActivity::class.java)
+                    intent.putExtra("SapOrderId", modelData.SapOrderId)
+                    startActivity(intent)
+                }
+
+            }
+
+        }else{
+            binding.apply {
+                SapOrderIdEdt.isClickable = false
+                SapOrderIdEdt.isFocusable = false
+                SapOrderIdEdt.isFocusableInTouchMode = false
+                itemViewDetailCardView.visibility = View.GONE
+
+            }
+
         }
 
-        if (modelData.TaxDate.isNotEmpty()) {
-            binding.tvPostingDate.text = Global.convert_yyyy_mm_dd_to_dd_mm_yyyy(modelData.TaxDate)
-        } else {
-            binding.tvPostingDate.text = "NA"
+
+        //todo bind order detail--
+
+        if (modelData.id.toString().isNotEmpty()){
+            binding.tvOMSID.setText(modelData.id.toString())
+        }else{
+            binding.tvOMSID.setText("NA")
         }
-        if (modelData.DocDueDate.isNotEmpty()) {
-//            binding.tvValidDate.text = Global.convert_yyyy_mm_dd_to_dd_mm_yyyy(modelData.DocDueDate)
-            binding.tvValidDate.text = "12:00 PM"
-        } else {
-            binding.tvValidDate.text = "NA"
+        if (modelData.Employee.isNotEmpty()){
+            binding.tvSalesPerson.setText(modelData.Employee[0].SalesEmployeeName)
+        }else{
+            binding.tvSalesPerson.setText("NA")
+        }
+        if (modelData.SurgeryName.isNotEmpty()){
+            binding.tvPreparedBy.setText(modelData.SurgeryName)
+        }else{
+            binding.tvPreparedBy.setText("NA")
+        }
+        if (modelData.SurgeryDate.isNotEmpty()){
+            binding.tvInspectedBy.setText(Global.convert_yyyy_mm_dd_to_dd_mm_yyyy(modelData.SurgeryDate))
+        }else{
+            binding.tvInspectedBy.setText("NA")
         }
 
-        if (modelData.U_MR_NO.isNotEmpty()) {
-            binding.tvMrNo.text = modelData.U_MR_NO
-        } else {
-            binding.tvMrNo.text = "NA"
+        if (modelData.Remarks.isNotEmpty()){
+            binding.tvRemarks.setText(modelData.Remarks)
+        }else{
+            binding.tvRemarks.setText("NA")
         }
 
-        binding.tvRemarks.text = "NA"
 
+
+    }
+
+
+
+
+    var dependencyListModels = ArrayList<AllDependencyAndErrandsListModel.Data>()
+
+    private fun callDependencyAllList() {
+        var jsonObject = JsonObject()
+        jsonObject.addProperty("order_request_id", globalDataWorkQueueList.id)
+
+        binding.loadingView.start()
+        binding.loadingBackFrame.visibility = View.VISIBLE
+        val call: Call<AllDependencyAndErrandsListModel> = ApiClient().service.getDependencyList(jsonObject)
+        call.enqueue(object : Callback<AllDependencyAndErrandsListModel?> {
+            override fun onResponse(
+                call: Call<AllDependencyAndErrandsListModel?>,
+                response: Response<AllDependencyAndErrandsListModel?>
+            ) {
+                if (response.body()!!.status == 200) {
+                    binding.loadingView.stop()
+                    binding.loadingBackFrame.visibility = View.GONE
+                    Log.e("data", response.body()!!.data.toString())
+
+                    if (response.body()!!.data.size > 0){
+
+                        binding.tvDependency.setText("Dependency  " + "( "+response.body()!!.data.size.toString()+" )")
+                        binding.dependencyCardViewLayout.visibility = View.VISIBLE
+                        binding.tvDependencyNoDataFound.visibility = View.GONE
+                        binding.rvDependency.visibility = View.VISIBLE
+
+                        dependencyListModels.clear()
+                        dependencyListModels.addAll(response.body()!!.data)
+
+                        dependencyOrderAdapter.submitList(dependencyListModels)
+
+                        setupDependencyRecyclerview()
+
+                    }
+                    else{
+                        binding.dependencyCardViewLayout.visibility = View.GONE
+                        setupDependencyRecyclerview()
+
+                        binding.tvDependencyNoDataFound.visibility = View.VISIBLE
+                        binding.rvDependency.visibility = View.GONE
+
+                    }
+
+                } else {
+
+                    binding.tvDependencyNoDataFound.visibility = View.VISIBLE
+                    binding.rvDependency.visibility = View.GONE
+
+                    binding.loadingView.stop()
+                    binding.loadingBackFrame.visibility = View.GONE
+                    Global.warningmessagetoast(this@ParticularOrderDetailActivity, response.message().toString());
+
+                }
+            }
+
+            override fun onFailure(call: Call<AllDependencyAndErrandsListModel?>, t: Throwable) {
+                binding.loadingView.stop()
+                binding.loadingBackFrame.visibility = View.GONE
+                Toast.makeText(this@ParticularOrderDetailActivity, t.message, Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+
+    var errandsListModels = ArrayList<AllErrandsListModel.Data>()
+
+    private fun callErrandsAllList() {
+        var jsonObject = JsonObject()
+        jsonObject.addProperty("order_request_id", globalDataWorkQueueList.id)
+
+        binding.loadingView.start()
+        binding.loadingBackFrame.visibility = View.VISIBLE
+        val call: Call<AllErrandsListModel> = ApiClient().service.getErrandsList(jsonObject)
+        call.enqueue(object : Callback<AllErrandsListModel?> {
+            override fun onResponse(
+                call: Call<AllErrandsListModel?>,
+                response: Response<AllErrandsListModel?>
+            ) {
+                if (response.body()!!.status == 200) {
+                    binding.loadingView.stop()
+                    binding.loadingBackFrame.visibility = View.GONE
+                    Log.e("data", response.body()!!.data.toString())
+                    if (response.body()!!.data.size > 0){
+                        binding.tvErrands.setText("Errands  " + "( "+response.body()!!.data.size.toString()+" )")
+                        binding.errandsCardViewLayout.visibility = View.VISIBLE
+                        binding.tvErrandsNoDataFound.visibility = View.GONE
+                        binding.rvEarrands.visibility = View.VISIBLE
+
+                        errandsListModels.clear()
+                        errandsListModels.addAll(response.body()!!.data)
+
+                        earrandsOrderAdapter.submitList(errandsListModels)
+
+                        setupEarrandRecyclerview()
+
+
+                    }else{
+
+                        setupDependencyRecyclerview()
+                        binding.errandsCardViewLayout.visibility = View.GONE
+                        binding.tvErrandsNoDataFound.visibility = View.VISIBLE
+                        binding.rvEarrands.visibility = View.GONE
+
+                    }
+
+                } else {
+                    binding.tvErrandsNoDataFound.visibility = View.VISIBLE
+                    binding.rvEarrands.visibility = View.GONE
+
+                    binding.loadingView.stop()
+                    binding.loadingBackFrame.visibility = View.GONE
+                    Global.warningmessagetoast(this@ParticularOrderDetailActivity, response.body()!!.errors.toString());
+
+                }
+            }
+
+            override fun onFailure(call: Call<AllErrandsListModel?>, t: Throwable) {
+                binding.loadingView.stop()
+                binding.loadingBackFrame.visibility = View.GONE
+                Toast.makeText(this@ParticularOrderDetailActivity, t.message, Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+
+    var deliveryItemList_gl = ArrayList<DeliveryItemListModel.Data>()
+
+    private fun callDeliveryDetailItemList() {
+        var jsonObject = JsonObject()
+        jsonObject.addProperty("order_request_id", globalDataWorkQueueList.id)
+
+        binding.loadingView.start()
+        binding.loadingBackFrame.visibility = View.VISIBLE
+        val call: Call<DeliveryItemListModel> = ApiClient().service.getOrderDeliveryItems(jsonObject)
+        call.enqueue(object : Callback<DeliveryItemListModel?> {
+            override fun onResponse(
+                call: Call<DeliveryItemListModel?>,
+                response: Response<DeliveryItemListModel?>
+            ) {
+                if (response.body()!!.status == 200) {
+                    binding.loadingView.stop()
+                    binding.loadingBackFrame.visibility = View.GONE
+                    Log.e("data", response.body()!!.data.toString())
+                    if (response.body()!!.data.size > 0){
+                        binding.tvDeliveryDetail.setText("Delivery Details  " + "( "+response.body()!!.data.size.toString()+" )")
+                        binding.deliveryDetailLayout.visibility = View.VISIBLE
+                        binding.tvDeliveryDetailNoDataFound.visibility = View.GONE
+                        binding.rvDeliveryDetail.visibility = View.VISIBLE
+
+                        deliveryItemList_gl.clear()
+                        deliveryItemList_gl.addAll(response.body()!!.data)
+
+                        deliveryDetailAdapter.submitList(deliveryItemList_gl)
+
+                        setupDeliveryDetailRecyclerview()
+
+
+                    }else{
+                        setupDeliveryDetailRecyclerview()
+                        binding.deliveryDetailLayout.visibility = View.GONE
+                        binding.tvDeliveryDetailNoDataFound.visibility = View.VISIBLE
+                        binding.rvDeliveryDetail.visibility = View.GONE
+
+                    }
+
+                } else {
+                    binding.deliveryDetailLayout.visibility = View.GONE
+
+                    binding.loadingView.stop()
+                    binding.loadingBackFrame.visibility = View.GONE
+//                    Global.warningmessagetoast(this@OrderCoordinatorActivity, response.body()!!.errors.toString());
+
+                }
+            }
+
+            override fun onFailure(call: Call<DeliveryItemListModel?>, t: Throwable) {
+                binding.loadingView.stop()
+                binding.loadingBackFrame.visibility = View.GONE
+                Toast.makeText(this@ParticularOrderDetailActivity, t.message, Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+
+    private fun setupDependencyRecyclerview() = binding.rvDependency.apply {
+        adapter = dependencyOrderAdapter
+        layoutManager = LinearLayoutManager(this@ParticularOrderDetailActivity)
+        dependencyOrderAdapter.notifyDataSetChanged()
+    }
+
+
+    private fun setupEarrandRecyclerview() = binding.rvEarrands.apply {
+        adapter = earrandsOrderAdapter
+        layoutManager = LinearLayoutManager(this@ParticularOrderDetailActivity)
+        earrandsOrderAdapter.notifyDataSetChanged()
+    }
+
+
+    private fun setupDeliveryDetailRecyclerview() = binding.rvDeliveryDetail.apply {
+        adapter = deliveryDetailAdapter
+        layoutManager = LinearLayoutManager(this@ParticularOrderDetailActivity)
+        deliveryDetailAdapter.notifyDataSetChanged()
     }
 
 

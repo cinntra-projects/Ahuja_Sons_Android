@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Ahuja App</string>
-    <string name="app_version">Version :- 1.1.1 20240501</string>
+    <string name="app_version">Version :- 1.0.5 20240904</string>
     <!--    <string name="app_name">Indo</string>-->
     <string name="menu_home">Home</string>
     <string name="search_product">"Search "</string>
@@ -22,8 +22,7 @@
       Contributors and 500+ Campus Ambassadors in various colleges across the nation.
       Our success stories include a lot of students who benefitted in their placements
       and landed jobs at tech giants. Our vision is to build a gigantic network of
-      geeks and we are only a fraction of it yet.
-  </string>
+      geeks and we are only a fraction of it yet.</string>
     <string name="extended_fab_label">Live Chat</string>
     <string name="exitmsz">Press again to exit</string>
     <string name="department">Department <font color='#FF0000'>*</font></string>
@@ -309,6 +308,18 @@
     <string name="area_mand">Area  <font color='#FF0000'>*</font></string>
     <string name="raw_mand" tools:ignore="ExtraTranslation">Raw (ppm) <font color='#FF0000'>*</font></string>
     <string name="assign">Assign</string>
+    <string name="enter_sap_sales_order_id">Enter SAP Sales Order ID </string>
+    <string name="order_id_mand">Order Id  <font color='#FF0000'>*</font></string>
+    <string name="pickup_location_mand">Pickup Location <font color='#FF0000'>*</font></string>
+    <string name="drop_location_mand">Drop Location <font color='#FF0000'>*</font></string>
+    <string name="nature_of_errand_mand">Nature of Errand <font color='#FF0000'>*</font></string>
+    <string name="contact_person_mand">Contact Person <font color='#FF0000'>*</font></string>
+    <string name="order_information_mand">Order Information <font color='#FF0000'>*</font></string>
+    <string name="hospital_name_mand">Hospital Name <font color='#FF0000'>*</font></string>
+    <string name="doctor_name_mand">Doctor Name <font color='#FF0000'>*</font></string>
+    <string name="surgery_name_mand">Surgery Name <font color='#FF0000'>*</font></string>
+    <string name="surgery_date_mand">Surgery Date <font color='#FF0000'>*</font></string>
+    <string name="surgery_time_mand">Surgery Time <font color='#FF0000'>*</font></string>
 
 
 </resources>

@@ -9,11 +9,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ahuja.sons.R
 import com.ahuja.sons.databinding.CameraImageListAdapterBinding
 
-class UploadImageListAdapter (private val context: Context?, private val list: ArrayList<*>, private val stringList: Array<String>) : RecyclerView.Adapter<UploadImageListAdapter.ViewHolder>() {
+class UploadImageListAdapter(
+    private val context: Context?,
+    private val list: ArrayList<*>,
+    private val stringList: Array<String>,
+    private val pdfurilist: java.util.ArrayList<String>
+) : RecyclerView.Adapter<UploadImageListAdapter.ViewHolder>() {
 
-    private var onItemClickListener: ((Any, Int) -> Unit)? = null
+    private var onItemClickListener: ((Any, Int,Any) -> Unit)? = null
 
-    fun setOnItemClickListener(listener: (Any, Int) -> Unit) {
+    fun setOnItemClickListener(listener: (Any, Int, Any) -> Unit) {
         onItemClickListener = listener
     }
 
@@ -39,7 +44,7 @@ class UploadImageListAdapter (private val context: Context?, private val list: A
                     binding.ivCancelPhoto.setOnClickListener {
 
                         onItemClickListener?.let { click ->
-                            click(list[position], position)
+                            click(list[position], position, pdfurilist[position])
                         }
 
                        /* if (position >= 0 && position < list.size) {

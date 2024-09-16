@@ -9,8 +9,13 @@
          android:title="Add">
      </item>-->
     <item
-        android:id="@+id/menuCreateDependency"
+        android:id="@+id/createOrderItem"
+        android:title="Create Order"
+        app:showAsAction="ifRoom"
+        android:visible="false"/>
 
+    <item
+        android:id="@+id/menuCreateDependency"
         android:title="Dependency"
         app:showAsAction="ifRoom" />
 

@@ -117,7 +117,7 @@ class TodayTicketFragment(val getstartDate: Calendar) : Fragment() {
             maxItem = "10",
         )
 
-        val call: Call<AllOrderListResponseModel> =
+      /*  val call: Call<AllOrderListResponseModel> =
             ApiClient().service.callOrderListApi(requestModel)
         call.enqueue(object : Callback<AllOrderListResponseModel> {
             override fun onResponse(
@@ -178,13 +178,13 @@ class TodayTicketFragment(val getstartDate: Calendar) : Fragment() {
                 ticketbiding.ssPullRefresh.setRefreshing(false)
 
             }
-        })
+        })*/
     }
 
 
     private fun setAdapter() {
         linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        ticketNewAdapter = OrderListAdapter(AllitemsListNew, RoleClass.ticket)
+//        ticketNewAdapter = OrderListAdapter(AllitemsListNew, RoleClass.ticket)
         ticketbiding.productRecyclerView.layoutManager = linearLayoutManager
         ticketbiding.productRecyclerView.adapter = ticketNewAdapter
         ticketNewAdapter.notifyDataSetChanged()

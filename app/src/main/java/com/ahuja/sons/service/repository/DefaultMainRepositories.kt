@@ -357,12 +357,6 @@ class DefaultMainRepositories : MainRepos {
 
     /****Chanchal***/
 
-    override suspend fun getBPList() = withContext(Dispatchers.IO) {
-        safeCall {
-            val response = ApiClient().service.getBPList()
-            Resource.Success(response.body()!!)
-        }
-    }
 
     override suspend fun getAllBPList() = withContext(Dispatchers.IO) {
         safeCall {
@@ -827,5 +821,75 @@ class DefaultMainRepositories : MainRepos {
             }
         }
 
+
+
+    override suspend fun getBPList() = withContext(Dispatchers.IO) {
+        safeCall {
+            val response = ApiClient().service.getBPList()
+            Resource.Success(response.body()!!)
+        }
+    }
+
+
+
+    override suspend fun getDoctorNameList() = withContext(Dispatchers.IO) {
+        safeCall {
+            val response = ApiClient().service.getDoctorNameList()
+            Resource.Success(response.body()!!)
+        }
+    }
+
+    override suspend fun createdOrderRequest(data: MultipartBody) = withContext(Dispatchers.IO) {
+        safeCall {
+            val response = ApiClient().service.createdOrderRequest(data)
+            Resource.Success(response.body()!!)
+        }
+    }
+
+    override suspend fun callWorkQueueDetailApi(jsonObject: JsonObject) = withContext(Dispatchers.IO) {
+        safeCall {
+            val response = ApiClient().service.callWorkQueueDetailApi(jsonObject)
+            Resource.Success(response.body()!!)
+        }
+    }
+
+    override suspend fun callDeliveryDetailApi(jsonObject: JsonObject) = withContext(Dispatchers.IO) {
+        safeCall {
+            val response = ApiClient().service.callDeliveryDetailApi(jsonObject)
+            Resource.Success(response.body()!!)
+        }
+    }
+
+    override suspend fun callOrderRequestOneApi(jsonObject: JsonObject) = withContext(Dispatchers.IO) {
+        safeCall {
+            val response = ApiClient().service.callOrderRequestOneApi(jsonObject)
+            Resource.Success(response.body()!!)
+        }
+    }
+
+
+    override suspend fun completeOrderApi(jsonObject: JsonObject) = withContext(Dispatchers.IO) {
+        safeCall {
+            val response = ApiClient().service.completeOrderApi(jsonObject)
+            Resource.Success(response.body()!!)
+        }
+    }
+
+
+    override suspend fun submitInspectionProof(requestBody: MultipartBody) =
+        withContext(Dispatchers.IO) {
+            safeCall {
+                val response = ApiClient().service.submitInspectionProof(requestBody)
+                Resource.Success(response.body()!!)
+            }
+        }
+
+    override suspend fun orderInspectionComplete(requestBody: JsonObject) =
+        withContext(Dispatchers.IO) {
+            safeCall {
+                val response = ApiClient().service.orderInspectionComplete(requestBody)
+                Resource.Success(response.body()!!)
+            }
+        }
 
 }

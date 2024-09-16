@@ -11,5 +11,7 @@ class ParticularWorkQueueDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding= ActivityParticularWorkQueueDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
     }
+
 }

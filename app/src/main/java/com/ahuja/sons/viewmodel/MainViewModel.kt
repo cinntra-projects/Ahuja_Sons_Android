@@ -11,6 +11,10 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.ahuja.sons.ahujaSonsClasses.model.DoctorNameListModel
+import com.ahuja.sons.ahujaSonsClasses.model.orderModel.AllOrderListModel
+import com.ahuja.sons.ahujaSonsClasses.model.orderModel.OrderOneResponseModel
+import com.ahuja.sons.ahujaSonsClasses.model.workQueue.AllWorkQueueResponseModel
 import com.google.gson.JsonObject
 import com.ahuja.sons.apibody.BodyForIssueSubCategory
 import com.ahuja.sons.apihelper.Event
@@ -157,8 +161,6 @@ class MainViewModel(
     val updateManRescue: LiveData<Event<Resource<ResponseAddTicket>>> = _updateManRescue
 
     /****CHANCHAL**/
-    private val _businessPartnerList = MutableLiveData<Event<Resource<AccountBPResponse>>>()
-    val businessPartnerList: LiveData<Event<Resource<AccountBPResponse>>> = _businessPartnerList
 
     private val _equipmentList = MutableLiveData<Event<Resource<AccountItemResponse>>>()
     val equipmentList: LiveData<Event<Resource<AccountItemResponse>>> = _equipmentList
@@ -277,8 +279,19 @@ class MainViewModel(
     private val _employeeOneDetail = MutableLiveData<Event<Resource<EmployeeOneModel>>>()
     val employeeOneDetail: LiveData<Event<Resource<EmployeeOneModel>>> = _employeeOneDetail
 
+
+    /****AHUJA SONS **/
     private val _orderOneDetail = MutableLiveData<Event<Resource<OrderOneResponseModel>>>()
     val orderOneDetail: LiveData<Event<Resource<OrderOneResponseModel>>> = _orderOneDetail
+
+    private val _businessPartnerList = MutableLiveData<Event<Resource<AccountBPResponse>>>()
+    val businessPartnerList: LiveData<Event<Resource<AccountBPResponse>>> = _businessPartnerList
+
+    private val _doctorNameList = MutableLiveData<Event<Resource<DoctorNameListModel>>>()
+    val doctorNameList: LiveData<Event<Resource<DoctorNameListModel>>> = _doctorNameList
+
+    private val _workQueueOne = MutableLiveData<Event<Resource<AllWorkQueueResponseModel>>>()
+    val workQueueOne: LiveData<Event<Resource<AllWorkQueueResponseModel>>> = _workQueueOne
 
 
     fun getLoginUser(data: HashMap<String, String>) {
@@ -639,14 +652,7 @@ class MainViewModel(
 
     /****CHANCHAL****/
 
-    fun getBPList() {
-        Log.e(TAG, "getBPList: ")
-        _businessPartnerList.postValue(Event(Resource.Loading()))
-        viewModelScope.launch(Dispatchers.Main) {
-            val result = repos.getBPList()
-            _businessPartnerList.postValue(Event(result))
-        }
-    }
+
 
     fun getAllBPList() {
         Log.e(TAG, "getBPList: ")
@@ -1133,6 +1139,91 @@ class MainViewModel(
             _orderOneDetail.postValue(Event(result))
         }
     }
+
+    fun getBPList() {
+        Log.e(TAG, "getBPList: ")
+        _businessPartnerList.postValue(Event(Resource.Loading()))
+        viewModelScope.launch(Dispatchers.Main) {
+            val result = repos.getBPList()
+            _businessPartnerList.postValue(Event(result))
+        }
+    }
+
+    fun getDoctorNameList() {
+        Log.e(TAG, "getBPList: ")
+        _doctorNameList.postValue(Event(Resource.Loading()))
+        viewModelScope.launch(Dispatchers.Main) {
+            val result = repos.getDoctorNameList()
+            _doctorNameList.postValue(Event(result))
+        }
+    }
+
+    fun createdOrderRequest(data: MultipartBody) {
+        Log.e(TAG, "getBPList: ")
+        _orderOneDetail.postValue(Event(Resource.Loading()))
+        viewModelScope.launch(Dispatchers.Main) {
+            val result = repos.createdOrderRequest(data)
+            _orderOneDetail.postValue(Event(result))
+        }
+    }
+
+    fun callWorkQueueDetailApi(data: JsonObject) {
+        Log.e(TAG, "workQueueDetail: ")
+        _workQueueOne.postValue(Event(Resource.Loading()))
+        viewModelScope.launch(Dispatchers.Main) {
+            val result = repos.callWorkQueueDetailApi(data)
+            _workQueueOne.postValue(Event(result))
+        }
+    }
+
+    fun callDeliveryDetailApi(data: JsonObject) {
+        Log.e(TAG, "DeliveryDetailApi: ")
+        _workQueueOne.postValue(Event(Resource.Loading()))
+        viewModelScope.launch(Dispatchers.Main) {
+            val result = repos.callDeliveryDetailApi(data)
+            _workQueueOne.postValue(Event(result))
+        }
+    }
+
+
+    fun callOrderRequestOneApi(data: JsonObject) {
+        Log.e(TAG, "workQueueDetail: ")
+        _orderOneDetail.postValue(Event(Resource.Loading()))
+        viewModelScope.launch(Dispatchers.Main) {
+            val result = repos.callOrderRequestOneApi(data)
+            _orderOneDetail.postValue(Event(result))
+        }
+    }
+
+
+    fun completeOrderApi(data: JsonObject) {
+        Log.e(TAG, "completeOrderApi: ")
+        _workQueueOne.postValue(Event(Resource.Loading()))
+        viewModelScope.launch(Dispatchers.Main) {
+            val result = repos.completeOrderApi(data)
+            _workQueueOne.postValue(Event(result))
+        }
+    }
+
+
+    fun submitInspectionProof(data: MultipartBody) {
+        Log.e(TAG, "submitInspectionProof: ")
+        _workQueueOne.postValue(Event(Resource.Loading()))
+        viewModelScope.launch(Dispatchers.Main) {
+            val result = repos.submitInspectionProof(data)
+            _workQueueOne.postValue(Event(result))
+        }
+    }
+
+    fun orderInspectionComplete(data: JsonObject) {
+        Log.e(TAG, "submitInspectionProof: ")
+        _workQueueOne.postValue(Event(Resource.Loading()))
+        viewModelScope.launch(Dispatchers.Main) {
+            val result = repos.orderInspectionComplete(data)
+            _workQueueOne.postValue(Event(result))
+        }
+    }
+
 
 
 }

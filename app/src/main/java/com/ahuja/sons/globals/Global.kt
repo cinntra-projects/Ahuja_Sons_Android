@@ -19,7 +19,9 @@ import com.google.android.material.textfield.TextInputEditText
 import com.ozcanalasalvar.library.view.datePicker.DatePicker
 import com.ozcanalasalvar.library.view.popup.DatePickerPopup
 import com.ahuja.sons.R
+import com.ahuja.sons.ahujaSonsClasses.model.DoctorNameListModel
 import com.ahuja.sons.apibody.BodySparePart
+import com.ahuja.sons.model.AccountBpData
 import com.ahuja.sons.model.BPLID
 import com.ahuja.sons.model.ComplainDetailResponseModel
 import com.ahuja.sons.model.DocumentLine
@@ -132,24 +134,18 @@ object Global {
     const val Image_URL = "http://103.234.187.197:8107"
 
     //todo LIVE PDF URl---
-    const val REPORT_PDF_URL =
-        "http://waesupport.bridgexd.com/assets/html/CompanyInvoice.html?id="//"http://103.234.187.197:4233/assets/html/report.html?id="
+    const val REPORT_PDF_URL = "http://waesupport.bridgexd.com/assets/html/CompanyInvoice.html?id="//"http://103.234.187.197:4233/assets/html/report.html?id="
 
-    const val SERVICING_PDF_URL =
-        "http://waesupport.bridgexd.com/assets/html/ServicePrevent.html?id="
+    const val SERVICING_PDF_URL = "http://waesupport.bridgexd.com/assets/html/ServicePrevent.html?id="
 
-    const val SITE_SERVEY_PDF_URL =
-        "http://waesupport.bridgexd.com/assets/html/SiteserveyReport.html?id="
+    const val SITE_SERVEY_PDF_URL = "http://waesupport.bridgexd.com/assets/html/SiteserveyReport.html?id="
 
     //todo ticket type items pdf---
-    const val INSTALLATION_TYPE_PDF_URL =
-        "http://waesupport.bridgexd.com/assets/html/CompanyInvoice.html?TicketId="
+    const val INSTALLATION_TYPE_PDF_URL = "http://waesupport.bridgexd.com/assets/html/CompanyInvoice.html?TicketId="
 
-    const val MAINTAINANCE_TYPE_PDF_URL =
-        "http://waesupport.bridgexd.com/assets/html/ServicePrevent.html?TicketId="
+    const val MAINTAINANCE_TYPE_PDF_URL = "http://waesupport.bridgexd.com/assets/html/ServicePrevent.html?TicketId="
 
-    const val SITE_SURVEY_TYPE_PDF_URL =
-        "http://waesupport.bridgexd.com/assets/html/SiteserveyReport.html?TicketId="
+    const val SITE_SURVEY_TYPE_PDF_URL = "http://waesupport.bridgexd.com/assets/html/SiteserveyReport.html?TicketId="
 
 
     val cartList = ArrayList<DocumentLine?>()
@@ -358,6 +354,15 @@ object Global {
     )
 
 
+    open fun isValidVehicleNumber(vehicleNumber: String): Boolean {
+        // Regex pattern for an Indian vehicle number like "MH12AB1234"
+        val regex = "^[A-Z]{2}[0-9]{2}[A-Z]{2}[0-9]{4}$".toRegex()
+
+        // Returns true if the vehicleNumber matches the pattern
+        return vehicleNumber.matches(regex)
+    }
+
+
     open fun isvalidateemail(email_value: TextInputEditText): Boolean {
         val checkEmail = email_value.text.toString()
         val hasSpecialEmail = Patterns.EMAIL_ADDRESS.matcher(checkEmail).matches()
@@ -403,24 +408,50 @@ object Global {
 
         val datePickerDialog = DatePickerDialog(
             context, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                val selectedDate = "$year-${monthOfYear + 1}-$dayOfMonth"
-                val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+               /* val selectedDate = "$year-${monthOfYear + 1}-$dayOfMonth"
+                val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.US)*/
+                val selectedDate = "$dayOfMonth-${monthOfYear + 1}-$year"
+                val dateFormatter = SimpleDateFormat("dd-MM-yyyy", Locale.US)
                 try {
                     val strDate = dateFormatter.parse(selectedDate)
                     textView.setText(dateFormatter.format(strDate))
                 } catch (e: ParseException) {
                     e.printStackTrace()
                 }
-            },
-            mYear,
-            mMonth,
-            mDay
+            }, mYear, mMonth, mDay
         )
 
         datePickerDialog.datePicker // setMinDate(System.currentTimeMillis() - 1000)
         datePickerDialog.setMessage(textView.hint.toString())
         datePickerDialog.show()
+
     }
+
+
+    open fun disableFutureDates(context: Context, editText: EditText) {
+        val c = Calendar.getInstance()
+        val mYear = c.get(Calendar.YEAR)
+        val mMonth = c.get(Calendar.MONTH)
+        val mDay = c.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerDialog = DatePickerDialog(context,
+            DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+                val s = "$dayOfMonth-${monthOfYear + 1}-$year"
+                val dateFormatter = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+                try {
+                    val strDate = dateFormatter.parse(s)
+                    editText.setText(dateFormatter.format(strDate))
+                } catch (e: ParseException) {
+                    e.printStackTrace()
+                }
+            }, mYear, mMonth, mDay
+        )
+
+        datePickerDialog.datePicker.maxDate = System.currentTimeMillis() - 1000
+        datePickerDialog.setMessage(editText.hint.toString())
+        datePickerDialog.show()
+    }
+
 
 
     open fun convert_dd_MM_yyyy_into_yyyy_MM_dd(inputDate: String): String {
@@ -479,6 +510,25 @@ object Global {
 
     }
 
+
+    fun getHospitalPos(list: ArrayList<AccountBpData>, code: String): Int {
+        for (cd in list) {
+            if (cd.CardName.equals(code, ignoreCase = true)) {
+                return list.indexOf(cd)
+            }
+        }
+        return -1
+    }
+
+
+    fun getDoctorPos(list: ArrayList<DoctorNameListModel.Data>, code: String): Int {
+        for (cd in list) {
+            if (cd.DoctorName.equals(code, ignoreCase = true)) {
+                return list.indexOf(cd)
+            }
+        }
+        return -1
+    }
 
     open fun countNotification(notification: Int): String {
 
@@ -902,6 +952,10 @@ object Global {
 
     fun getTCurrentTime(): String {
         return SimpleDateFormat("hh:mm a", Locale.getDefault()).format(Date())
+    }
+
+    fun getTCurrentTime_hh_mm_ss_a(): String {
+        return SimpleDateFormat("hh:mm:ss a", Locale.getDefault()).format(Date())
     }
 
     fun getfullformatCurrentTime(): String {

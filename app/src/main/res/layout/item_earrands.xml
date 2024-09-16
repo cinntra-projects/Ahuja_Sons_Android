@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -16,31 +17,55 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/edit"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_gravity="end"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="12dp"
-            android:text="Edit"
-            android:textSize="14sp"
-            android:textColor="@color/colorPrimary"
-            android:visibility="visible" />
+            android:orientation="horizontal"
+            android:paddingStart="4dp"
+            android:paddingTop="@dimen/size_8"
+            android:paddingEnd="4dp"
+            android:gravity="end"
+            android:paddingBottom="@dimen/size_8"
+            android:visibility="visible">
 
+
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/status_bg"
+                android:gravity="center"
+                android:text="Status"
+                android:padding="10dp"
+                android:layout_marginRight="20dp"
+                android:textColor="#0074FC"
+                android:textSize="14sp" />
+
+
+            <TextView
+                android:id="@+id/edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Edit"
+                android:padding="10dp"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp"
+                android:visibility="visible" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="4dp"
-            android:paddingEnd="4dp"
-            android:paddingTop="@dimen/size_8"
-            android:paddingBottom="@dimen/size_8"
             android:layout_marginLeft="@dimen/size_10"
             android:layout_marginRight="@dimen/size_10"
             android:orientation="horizontal"
+            android:paddingStart="4dp"
+            android:paddingTop="@dimen/size_8"
+            android:paddingEnd="4dp"
+            android:paddingBottom="@dimen/size_8"
             android:visibility="visible">
 
             <TextView
@@ -67,13 +92,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="4dp"
-            android:paddingEnd="4dp"
-            android:paddingTop="@dimen/size_8"
-            android:paddingBottom="@dimen/size_8"
             android:layout_marginLeft="@dimen/size_10"
             android:layout_marginRight="@dimen/size_10"
             android:orientation="horizontal"
+            android:paddingStart="4dp"
+            android:paddingTop="@dimen/size_8"
+            android:paddingEnd="4dp"
+            android:paddingBottom="@dimen/size_8"
             android:visibility="visible">
 
             <TextView
@@ -100,13 +125,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="4dp"
-            android:paddingEnd="4dp"
-            android:paddingTop="@dimen/size_8"
-            android:paddingBottom="@dimen/size_8"
             android:layout_marginLeft="@dimen/size_10"
             android:layout_marginRight="@dimen/size_10"
             android:orientation="horizontal"
+            android:paddingStart="4dp"
+            android:paddingTop="@dimen/size_8"
+            android:paddingEnd="4dp"
+            android:paddingBottom="@dimen/size_8"
             android:visibility="visible">
 
             <TextView
@@ -133,13 +158,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="4dp"
-            android:paddingEnd="4dp"
-            android:paddingTop="@dimen/size_8"
-            android:paddingBottom="@dimen/size_8"
             android:layout_marginLeft="@dimen/size_10"
             android:layout_marginRight="@dimen/size_10"
             android:orientation="horizontal"
+            android:paddingStart="4dp"
+            android:paddingTop="@dimen/size_8"
+            android:paddingEnd="4dp"
+            android:paddingBottom="@dimen/size_8"
             android:visibility="visible">
 
             <TextView

@@ -61,6 +61,8 @@ data class AllOrderListResponseModel(
         val U_LEADNM: String="",
         val U_MR_NO: String="",
         val U_OPPID: String="",
+        val SapOrderId: String="",
+        val SurgeryDate: String="",
         val U_OPPRNM: String="",
         val U_ORDRID: String="",
         val U_ORDRNM: String="",

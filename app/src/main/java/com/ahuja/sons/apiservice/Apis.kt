@@ -1,7 +1,12 @@
 package com.ahuja.sons.apiservice
 
-import com.ahuja.sons.ahujaSonsClasses.model.AllOrderListResponseModel
-import com.ahuja.sons.ahujaSonsClasses.model.OrderRequestModel
+import com.ahuja.sons.ahujaSonsClasses.model.*
+import com.ahuja.sons.ahujaSonsClasses.model.image_get_model.UploadedPictureModel
+import com.ahuja.sons.ahujaSonsClasses.model.orderModel.*
+import com.ahuja.sons.ahujaSonsClasses.model.workQueue.AllItemsForOrderModel
+import com.ahuja.sons.ahujaSonsClasses.model.workQueue.AllWorkQueueResponseModel
+import com.ahuja.sons.ahujaSonsClasses.model.workQueue.DeliveryDetailItemListModel
+import com.ahuja.sons.ahujaSonsClasses.model.workQueue.WorkQueueRequestModel
 import com.google.gson.JsonObject
 import com.ahuja.sons.apibody.BodyForIssueSubCategory
 import com.ahuja.sons.model.*
@@ -136,10 +141,6 @@ interface Apis {
 
     @POST("order/all_bybp")
     suspend fun getProductName(@Body data: HashMap<String, String>): Response<ResponseAddTicket>
-
-
-    @GET("businesspartner/all")
-    suspend fun getBPList(): Response<AccountBPResponse>
 
 
     @GET("order/bp_list_byorder")
@@ -466,11 +467,111 @@ interface Apis {
 
     /***** AHUJA SONS API'S *****/
 
-    @POST("order/all_filter_page")
-    fun callOrderListApi(@Body tickethistory: OrderRequestModel): Call<AllOrderListResponseModel>
+    @POST("order_request/all_filter_page")
+    fun callOrderListApi(@Body data: AllOrderRequestModel): Call<AllOrderListModel>
 
     @POST("order/one")
     suspend fun getOrderOneDetail(@Body data: JsonObject): Response<OrderOneResponseModel>
+
+    @POST("work_queue/all_filter_page")
+    fun callAllWorkQueueApi(@Body data: WorkQueueRequestModel): Call<AllWorkQueueResponseModel>
+
+
+    @GET("businesspartner/all")
+    suspend fun getBPList(): Response<AccountBPResponse>
+    @GET("doctor_master/all")
+    suspend fun getDoctorNameList(): Response<DoctorNameListModel>
+
+    @POST("order_request/create")
+    suspend fun createdOrderRequest(@Body data: MultipartBody): Response<OrderOneResponseModel>
+
+    @POST("order_request/create")
+    fun createdOrderRequestMVC(@Body data: MultipartBody): Call<OrderOneResponseModel>
+
+    @POST("order_request/update")
+    fun updateOrderRequestMVC(@Body data: MultipartBody): Call<OrderOneResponseModel>
+
+    @POST("work_queue/workQueue_details")
+    suspend fun callWorkQueueDetailApi(@Body data: JsonObject): Response<AllWorkQueueResponseModel>
+
+    @POST("delivery/delivery_details")
+    suspend fun callDeliveryDetailApi(@Body data: JsonObject): Response<AllWorkQueueResponseModel>
+
+    @POST("order_request/one")
+    suspend fun callOrderRequestOneApi(@Body data: JsonObject): Response<OrderOneResponseModel>
+
+    @POST("work_queue/workQueue_details")
+    fun callWorkQueueDetailApiMVC(@Body data: JsonObject): Call<AllWorkQueueResponseModel>
+
+    @POST("delivery/all_items_with_status")
+    fun callAllOrderItemList(@Body data: JsonObject): Call<AllItemsForOrderModel>
+
+    @POST("delivery/items_by_delivery")
+    fun callDeliveryItem(@Body data: JsonObject): Call<DeliveryDetailItemListModel>
+
+
+    @POST("order_request/get_order_dependency")
+    fun getDependencyList(@Body data: JsonObject): Call<AllDependencyAndErrandsListModel>
+
+    @POST("order_request/get_order_errands")
+    fun getErrandsList(@Body data: JsonObject): Call<AllErrandsListModel>
+
+    @POST("order_request/link_sap_order")
+    fun getSAPLinkOrderApi(@Body data: JsonObject): Call<AllDependencyAndErrandsListModel>
+
+    @POST("order_request/unlink_sap_order")
+    fun getSAPUnLinkOrderApi(@Body data: JsonObject): Call<AllDependencyAndErrandsListModel>
+
+
+    @POST("order_request/get_order_items")
+    fun getAllItemListApi(@Body data: JsonObject): Call<AllItemListResponseModel>
+
+    @POST("order_request/create_dependency")
+    fun createDependency(@Body data: CreateDependencyRequestModel): Call<AllItemListResponseModel>
+
+    @POST("order_request/create_errands")
+    fun createErrands(@Body jsonObject: JsonObject): Call<AllItemListResponseModel>
+
+    @POST("order_request/update_errands")
+    fun updateErrands(@Body jsonObject: JsonObject): Call<AllItemListResponseModel>
+
+    @GET("master_apis/nature_errands_all")
+    fun getNatureErrands(): Call<NatureErrandsResponseModel>
+
+    @POST("order_request/ord_coordinator_task_complete")
+    suspend fun completeOrderApi(@Body jsonObject: JsonObject): Response<AllWorkQueueResponseModel>
+
+    @POST("order_request/order_prepration")
+    fun OrderPreparedForCounter(@Body jsonObject: JsonObject): Call<AllWorkQueueResponseModel>
+
+    @POST("order_request/submit_inspection_proof")
+    suspend fun submitInspectionProof(@Body data: MultipartBody ): Response<AllWorkQueueResponseModel>
+
+    @POST("order_request/submit_inspection_proof")
+    fun submitInspectionProofMVC(@Body data: MultipartBody ): Call<AllWorkQueueResponseModel>
+
+    @POST("order_request/order_inspection")
+    suspend fun orderInspectionComplete(@Body data: JsonObject ): Response<AllWorkQueueResponseModel>
+
+    @POST("order_request/get_inspection_proof")
+    fun getInspectionImages(@Body data: JsonObject ): Call<UploadedPictureModel>
+
+    @POST("delivery/delivery_assigned")
+    fun createAssign(@Body data: JsonObject): Call<AllWorkQueueResponseModel>
+
+    @POST("delivery/delivery_assigned_update")
+    fun updateAssign(@Body data: JsonObject): Call<AllWorkQueueResponseModel>
+
+
+    @POST("delivery/get_order_delivery")
+    fun getOrderDeliveryItems(@Body data: JsonObject): Call<DeliveryItemListModel>
+
+    @GET("employee/get_all_delivery_employee")
+    fun getDeliveryPerson(): Call<DeliveryPersonEmployeeModel>
+
+    @POST("delivery/delivery_route")
+    fun getRouteList(@Body jsonObject: JsonObject): Call<RouteListModel>
+
 
 
 }

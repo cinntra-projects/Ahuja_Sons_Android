@@ -27,8 +27,8 @@ class ApiClient {
       //  .addNetworkInterceptor(provideCacheInterceptor()!!)
         //.cache(provideCache())
         .connectTimeout(1, TimeUnit.MINUTES)
-        .readTimeout(30, TimeUnit.SECONDS)
-        .writeTimeout(15, TimeUnit.SECONDS)
+        .readTimeout(60, TimeUnit.SECONDS)
+        .writeTimeout(60, TimeUnit.SECONDS)
         .build()
 
 

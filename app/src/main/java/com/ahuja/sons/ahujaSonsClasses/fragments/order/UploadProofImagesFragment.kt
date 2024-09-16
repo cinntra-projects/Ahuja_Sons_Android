@@ -7,7 +7,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
@@ -15,14 +14,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.ahuja.sons.BuildConfig
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ahuja.sons.BuildConfig
 import com.ahuja.sons.ahujaSonsClasses.adapter.UploadImageListAdapter
 import com.ahuja.sons.databinding.FragmentUploadProofImagesBinding
 import java.io.File
@@ -31,6 +29,7 @@ import java.io.IOException
 import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class UploadProofImagesFragment : Fragment() {
@@ -47,8 +46,7 @@ class UploadProofImagesFragment : Fragment() {
 
 
     private fun checkAndRequestPermissions(): Boolean {
-        val cameraPermission =
-            ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.CAMERA)
+        val cameraPermission = ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.CAMERA)
         val writePermission = ContextCompat.checkSelfPermission(
             requireActivity(),
             Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -185,25 +183,16 @@ class UploadProofImagesFragment : Fragment() {
                 val photoFile: File? = try {
                     createImageFile()
                 } catch (ex: IOException) {
-                    Toast.makeText(
-                        requireActivity(),
-                        "Error occurred while creating the file",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(requireActivity(), "Error occurred while creating the file", Toast.LENGTH_SHORT).show()
                     null
                 }
                 photoFile?.also {
                     // The Android version is Nougat (7.0) or higher
                     // Perform actions for Android 7.0 or higher
-                    val photoURI: Uri = FileProvider.getUriForFile(
-                        requireActivity(),
-                        "${BuildConfig.APPLICATION_ID}.fileprovider",
-                        it
-                    )
+                    val photoURI: Uri = FileProvider.getUriForFile(requireActivity(), "${BuildConfig.APPLICATION_ID}.fileprovider", it)
 //                    val photoURI: Uri = Uri.fromFile(it) //todo getting error on Android Version 7 above
                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
                     startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
-
 
                 }
             }
@@ -304,12 +293,12 @@ class UploadProofImagesFragment : Fragment() {
             binding.clickNewImageLayout.visibility = View.GONE
             val linearLayoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            val adapter = UploadImageListAdapter(context, mArrayUriList, arrayOf())
+            val adapter = UploadImageListAdapter(context, mArrayUriList, arrayOf(), ArrayList())
             binding.proofImageRecyclerView.layoutManager = linearLayoutManager
             binding.proofImageRecyclerView.adapter = adapter
             adapter.notifyDataSetChanged()
 
-            adapter.setOnItemClickListener { list, position ->
+            adapter.setOnItemClickListener { list, position, pdfLisr ->
 
                 if (position >= 0 && position < mArrayUriList.size) {
                     mArrayUriList.removeAt(position)

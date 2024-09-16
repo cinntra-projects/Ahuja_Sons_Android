@@ -7,12 +7,12 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
 import com.google.gson.JsonObject
 import com.ahuja.sons.R
+import com.ahuja.sons.ahujaSonsClasses.model.orderModel.OrderOneResponseModel
 import com.ahuja.sons.apiservice.ApiClient
 import com.ahuja.sons.apiservice.Apis
 import com.ahuja.sons.custom.FileUtil
 import com.ahuja.sons.databinding.ActivityOrderDetailBinding
 import com.ahuja.sons.globals.Global
-import com.ahuja.sons.newapimodel.OrderOneResponseModel
 import com.ahuja.sons.service.repository.DefaultMainRepositories
 import com.ahuja.sons.service.repository.MainRepos
 import com.ahuja.sons.viewmodel.MainViewModel
@@ -95,7 +95,7 @@ class OrderDetailActivity : AppCompatActivity() {
 
 
     //todo set deafult data
-    private fun setDefaultData(modelData: OrderOneResponseModel.DataXXX) {
+    private fun setDefaultData(modelData: OrderOneResponseModel.Data) {
 
         //todo set contact details--
         if (modelData.CardName.isNotEmpty()) {
@@ -103,7 +103,7 @@ class OrderDetailActivity : AppCompatActivity() {
         } else {
             binding.tvCustomerName.text = "NA"
         }
-        if (modelData.ContactPersonCode.isNotEmpty()) {
+       /* if (modelData.ContactPersonCode.isNotEmpty()) {
             binding.tvContactPerson.text = modelData.ContactPersonCode[0].FirstName
         } else {
             binding.tvContactPerson.text = "NA"
@@ -270,7 +270,7 @@ class OrderDetailActivity : AppCompatActivity() {
         } else {
             binding.tvShippingAddress.text = "NA"
         }
-
+*/
 
 
     }

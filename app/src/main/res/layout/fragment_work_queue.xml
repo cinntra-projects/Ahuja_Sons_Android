@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,9 +14,7 @@
         android:background="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -34,25 +33,21 @@
                 android:paddingEnd="4dp"
                 android:paddingBottom="2dp"
                 android:text="Work Queue"
-
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/searchView"
+                app:layout_constraintEnd_toStartOf="@+id/searchBtn"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
             <ImageButton
-                android:id="@+id/searchView"
+                android:id="@+id/searchBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:backgroundTint="@color/colorPrimary"
                 android:src="@drawable/ic_search"
                 app:layout_constraintBottom_toBottomOf="parent"
-
-
                 app:layout_constraintEnd_toStartOf="@+id/ivCollapseCart"
                 app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/white" />
@@ -80,9 +75,9 @@
                 android:paddingEnd="4dp"
                 android:paddingBottom="4dp"
                 android:text="Create Route"
-                android:visibility="gone"
                 android:textColor="@color/colorPrimary"
                 android:textSize="12sp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -158,26 +153,118 @@
 
     </com.facebook.shimmer.ShimmerFrameLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvWorkQue"
+    <FrameLayout
+        android:id="@+id/main_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        tools:listitem="@layout/item_work_queue" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
+
+        <com.simform.refresh.SSPullToRefreshLayout
+            android:id="@+id/ssPullRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/nestedSV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.SearchView
+                        android:id="@+id/search_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size_45"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/rounded_box_background"
+                        android:padding="4dp"
+                        android:visibility="gone"
+                        app:iconifiedByDefault="false"
+                        app:queryBackground="@android:color/transparent"
+                        app:queryHint="Search Tickets" />
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvWorkQue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/toolbar"
+                        tools:listitem="@layout/item_work_queue" />
+
+
+                </LinearLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+
+        </com.simform.refresh.SSPullToRefreshLayout>
+
+        <ImageView
+            android:id="@+id/nodatafound"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:background="@drawable/nodatafound"
+            android:visibility="gone" />
+
+
+        <FrameLayout
+            android:id="@+id/loadingback"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#3B505050"
+            android:clickable="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.github.loadingview.LoadingView
+                android:id="@+id/loadingView"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="24dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lv_duration="30"
+                app:lv_end_color="@color/color_end"
+                app:lv_external_radius="24dp"
+                app:lv_internal_radius="4dp"
+                app:lv_start_color="@color/color_start" />
+
+        </FrameLayout>
+
+
+    </FrameLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabWorkQueue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dimen_24"
-        android:visibility="gone"
         android:backgroundTint="@color/colorPrimary"
         android:src="@drawable/ic_baseline_add_24"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:tint="@color/white" />
@@ -190,7 +277,7 @@
         android:background="@color/white"
         android:paddingLeft="@dimen/size_10"
         android:paddingRight="@dimen/size_10"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="@+id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
@@ -204,8 +291,8 @@
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:visibility="gone"
         android:background="@color/white"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

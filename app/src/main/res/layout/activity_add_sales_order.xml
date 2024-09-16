@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -15,9 +16,42 @@
         app:layout_constraintTop_toTopOf="parent">
 
 
-        <include
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            layout="@layout/add_icon_toolbar" />
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_baseline_arrow_back_24">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:id="@+id/heading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Heading"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_18" />
+
+
+                <ImageView
+                    android:id="@+id/search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/size_15"
+                    android:background="@drawable/ic_baseline_done_24"
+                    android:backgroundTint="@color/white"
+                    android:visibility="invisible" />
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
 
 
         <ScrollView
@@ -57,7 +91,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Order Info"
+                        android:text="@string/order_information_mand"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 
@@ -80,110 +114,215 @@
 
                 </LinearLayout>
 
-
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/size_10"
-                    android:orientation="vertical"
-                    android:visibility="visible">
+                    android:layout_height="wrap_content">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Hospital Name"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                    <LinearLayout
+                        android:id="@+id/hospitalNameLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:hint="Select">
+                        android:layout_marginTop="@dimen/size_10"
+                        android:orientation="vertical"
+                        android:visibility="visible">
 
-                        <AutoCompleteTextView
-                            android:id="@+id/acHospitalName"
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/hospital_name_mand"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="start"
-                            android:textColor="@color/black" />
+                            android:layout_marginTop="10dp"
+                            android:hint="Select">
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                            <AutoCompleteTextView
+                                android:id="@+id/acHospitalName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:textSize="12sp"
+                                android:textColor="@color/black" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
 
 
-                </LinearLayout>
+                    </LinearLayout>
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/size_10"
-                    android:orientation="vertical"
-                    android:visibility="visible">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Doctor Name"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                    <LinearLayout
+                        android:id="@+id/hospitalRecyclerViewLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:hint="Select">
+                        android:layout_below="@+id/hospitalNameLayout"
+                        android:visibility="visible">
 
-                        <AutoCompleteTextView
-                            android:id="@+id/acDoctorName"
+
+                        <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="start"
-                            android:textColor="@color/black" />
+                            android:background="@color/white">
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rvHospitalList"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/white"
+                                android:orientation="horizontal" />
 
 
-                </LinearLayout>
+                        </RelativeLayout>
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/size_10"
-                    android:orientation="vertical"
-                    android:visibility="visible">
+                    </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Surgery Date"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    <LinearLayout
+                        android:id="@+id/doctorNameLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:hint="dd/mm/yyyy"
-                        app:endIconDrawable="@drawable/ic_baseline_calendar_month_24"
-                        app:endIconMode="custom"
-                        app:endIconTint="@color/colorPrimary">
+                        android:layout_marginTop="@dimen/size_10"
+                        android:layout_below="@+id/hospitalNameLayout"
+                        android:orientation="vertical"
+                        android:visibility="visible">
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edtDate"
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/doctor_name_mand"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="start"
-                            android:textColor="@color/black" />
+                            android:layout_marginTop="10dp"
+                            android:hint="Select">
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                            <AutoCompleteTextView
+                                android:id="@+id/acDoctorName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:textSize="12sp"
+                                android:textColor="@color/black" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
 
 
-                </LinearLayout>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/doctorRecyclerViewLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/doctorNameLayout"
+                        android:visibility="visible">
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rvDoctorListName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/white"
+                                android:orientation="horizontal" />
+
+
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/surgeryNameLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:layout_below="@+id/doctorNameLayout"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/surgery_name_mand"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:hint="Select">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/edtSurgeryName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:textColor="@color/black" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:layout_below="@+id/surgeryNameLayout"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/surgery_date_mand"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:hint="dd/mm/yyyy"
+                            app:endIconDrawable="@drawable/ic_baseline_calendar_month_24"
+                            app:endIconMode="custom"
+                            app:endIconTint="@color/colorPrimary">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/edtDate"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:editable="false"
+                                android:textColor="@color/black" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+
+
 
 
                 <LinearLayout
@@ -196,7 +335,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Surgery Time"
+                        android:text="@string/surgery_time_mand"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 
@@ -238,14 +377,14 @@
                         android:textSize="14sp" />
 
                     <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:hint="1">
+                        android:hint="No. of CRS">
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edtCRSNum"
+                        <AutoCompleteTextView
+                            android:id="@+id/acCRSNo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="start"
@@ -365,6 +504,7 @@
         android:layout_height="match_parent"
         android:background="#3B505050"
         android:clickable="true"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -387,6 +527,8 @@
             app:lv_external_radius="24dp"
             app:lv_internal_radius="4dp"
             app:lv_start_color="@color/color_start" />
+
+
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

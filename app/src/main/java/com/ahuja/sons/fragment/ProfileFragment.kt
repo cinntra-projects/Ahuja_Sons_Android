@@ -20,6 +20,7 @@ import com.ahuja.sons.databinding.ProfilePageBinding
 import com.ahuja.sons.globals.Global
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.ahuja.sons.activity.MainActivity
+import com.ahuja.sons.ahujaSonsClasses.activity.AhujaSonsMainActivity
 import com.ahuja.sons.apihelper.Event
 import com.ahuja.sons.viewmodel.MainViewModel
 import com.pixplicity.easyprefs.library.Prefs
@@ -36,13 +37,13 @@ class ProfileFragment : Fragment() {
 
 
     private lateinit var ticketFragment: ProfilePageBinding
-    override fun onAttach(context: Context) {
+    /*override fun onAttach(context: Context) {
         super.onAttach(context)
         (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
         (activity as AppCompatActivity?)!!.findViewById<CollapsingToolbarLayout>(R.id.collapsetoolbar).visibility =
             View.GONE
 
-    }
+    }*/
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,7 +51,7 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         ticketFragment = ProfilePageBinding.inflate(layoutInflater)
-        viewModel = (activity as MainActivity).viewModel
+        viewModel = (activity as AhujaSonsMainActivity).viewModel
         ticketFragment.companyName.text = Prefs.getString(Global.Employee_Name, "")
         ticketFragment.mail.text = "Sales Emp. Code: ${Prefs.getString(Global.Employee_Code, "")}"
         ticketFragment.role.text = " ${Prefs.getString(Global.Employee_role, "")}"
@@ -65,8 +66,7 @@ class ProfileFragment : Fragment() {
         val generator: ColorGenerator = ColorGenerator.MATERIAL
         val color1: Int = generator.randomColor
         builder = AlertDialog.Builder(requireContext())
-       builder!!.setView(R.layout.dialog_progress)
-            .setCancelable(false)
+       builder!!.setView(R.layout.dialog_progress).setCancelable(false)
 
 
       alertDialog = builder!!.create()

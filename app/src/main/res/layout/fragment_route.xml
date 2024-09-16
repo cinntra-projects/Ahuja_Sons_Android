@@ -11,10 +11,32 @@
         android:id="@+id/rvRoute"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/item_route_delivery_coordinator"/>
+
+
+
+    <FrameLayout
+        android:id="@+id/loadingBackFrame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#3B505050"
+        android:clickable="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.github.loadingview.LoadingView
+            android:id="@+id/loadingView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

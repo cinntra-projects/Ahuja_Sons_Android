@@ -205,8 +205,6 @@
         android:id="@+id/navigationView"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-
-
         app:itemTextColor="@drawable/tab_color"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"

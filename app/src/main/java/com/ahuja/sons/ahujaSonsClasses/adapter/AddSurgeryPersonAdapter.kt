@@ -93,8 +93,7 @@ class AddSurgeryPersonAdapter(
         return attachList.size
     }
 
-    class ViewHolder(val binding: AddSurgeryPersonLayoutBinding) :
-        RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(val binding: AddSurgeryPersonLayoutBinding) : RecyclerView.ViewHolder(binding.root)
 
 
     fun addItem(item: SurgeryPersonModelData) {

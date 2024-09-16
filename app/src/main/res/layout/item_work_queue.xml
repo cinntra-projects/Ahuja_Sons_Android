@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="8dp"
-   app:cardCornerRadius="@dimen/dimen_12"
-    android:background="@drawable/rounded_border">
+    android:background="@drawable/rounded_border"
+    app:cardCornerRadius="@dimen/dimen_12">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutWorkQueue"
@@ -27,7 +29,9 @@
                 android:id="@+id/tvOrderId"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="4dp"
                 android:layout_weight="50"
                 android:fontFamily="@font/helvetica_regular"
                 android:gravity="start"
@@ -36,14 +40,16 @@
                 android:paddingEnd="4dp"
                 android:paddingBottom="2dp"
                 android:text="Order ID: 2134"
-                android:textColor="@color/grey"
+                android:textColor="@color/black"
                 android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tvSurgeryDateTime"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="4dp"
                 android:layout_weight="50"
                 android:fontFamily="@font/helvetica_regular"
                 android:gravity="end"
@@ -57,6 +63,7 @@
 
 
         </LinearLayout>
+
 
         <ImageView
             android:id="@+id/profile_pic"
@@ -87,9 +94,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="5dp"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/profile_pic"
             app:layout_constraintTop_toTopOf="@id/profile_pic">
@@ -98,13 +104,11 @@
                 android:id="@+id/tvOrderName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-
                 android:fontFamily="@font/helvetica_regular"
                 android:gravity="start"
                 android:text="Order ID: 2134"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -118,7 +122,7 @@
                 android:gravity="start"
                 android:text="Dr. Vijay Chauhan"
                 android:textColor="@color/grey"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -131,28 +135,23 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:fontFamily="@font/helvetica_regular"
                     android:gravity="start"
-
                     android:text="Status: "
                     android:textColor="@color/grey"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tvStatusOrder"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:fontFamily="@font/helvetica_regular"
                     android:gravity="start"
-
-                    android:text="close"
+                    android:text="open"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
 
             </LinearLayout>
@@ -162,33 +161,29 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:orientation="horizontal"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
-
                     android:fontFamily="@font/helvetica_regular"
                     android:gravity="start"
                     android:text="OMS ID: "
                     android:textColor="@color/grey"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tvOmsIdOrder"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:fontFamily="@font/helvetica_regular"
                     android:gravity="start"
-
                     android:text="1242"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
 
             </LinearLayout>
@@ -200,12 +195,92 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/blue_light"
                 android:text="Order Type"
-                android:visibility="gone"
                 android:textColor="@color/black"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:visibility="gone" />
 
 
         </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/deliveriesLayoutView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="visible"
+            app:layout_constraintTop_toBottomOf="@+id/linearDetails">
+
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_2"
+                android:layout_marginTop="@dimen/size_10"
+                android:background="@color/divider_color" />
+
+            <LinearLayout
+                android:id="@+id/deliveryIDLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:gravity="center_vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view1">
+
+                <TextView
+                    android:id="@+id/tvDelivery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/helvetica_regular"
+                    android:gravity="start"
+                    android:text="Delivery Id"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="80"
+                    android:gravity="end"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingEnd="20dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/deliveryIDDownArrow"
+                        android:layout_width="@dimen/text_size_14"
+                        android:layout_height="@dimen/text_size_14"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/down_arrow_icon"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/deliveryIDUpArrow"
+                        android:layout_width="@dimen/text_size_14"
+                        android:layout_height="@dimen/text_size_14"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/arrow_up_icon"
+                        android:visibility="visible" />
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/deliveryIdRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/inspection_delivery_id_layout"
+                tools:itemCount="2"
+                app:layout_constraintTop_toBottomOf="@+id/deliveryIDLayout"
+                android:layout_marginTop="8dp"/>
+
+
+        </LinearLayout>
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

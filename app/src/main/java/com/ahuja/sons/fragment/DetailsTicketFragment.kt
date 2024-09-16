@@ -156,8 +156,7 @@ class DetailsTicketFragment(val ticketID: TicketData) : Fragment() {
             if (openpdffrom == "URI") {
 
                 val pdfuristring = FileUtil.getPath(requireContext(), pdfUri)
-                val file =
-                    File(Environment.getExternalStorageDirectory().absolutePath + "/" + pdfuristring)
+                val file = File(Environment.getExternalStorageDirectory().absolutePath + "/" + pdfuristring)
                 val target = Intent(Intent.ACTION_VIEW)
                 target.setDataAndType(Uri.fromFile(file), "application/pdf")
                 target.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
@@ -550,11 +549,6 @@ class DetailsTicketFragment(val ticketID: TicketData) : Fragment() {
         )!!
 
 
-        /*
-     * Get the column indexes of the data in the Cursor,
-     *     * move to the first row in the Cursor, get the data,
-     *     * and display it.
-     * */
         val nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
         val sizeIndex = returnCursor.getColumnIndex(OpenableColumns.SIZE)
         returnCursor.moveToFirst()
@@ -605,11 +599,7 @@ class DetailsTicketFragment(val ticketID: TicketData) : Fragment() {
                 builder.addFormDataPart("File", file.name, RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file))
             }
         } else {
-            builder.addFormDataPart(
-                "File",
-                "",
-                RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "")
-            )
+            builder.addFormDataPart("File", "", RequestBody.create("multipart/form-data".toMediaTypeOrNull(), ""))
         }
 
         val requestBody = builder.build()

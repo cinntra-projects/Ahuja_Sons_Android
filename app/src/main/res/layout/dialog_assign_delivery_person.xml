@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -23,6 +24,7 @@
             android:layout_margin="8dp"
             android:gravity="center"
             android:text="@string/assign"
+            android:textSize="14sp"
             app:drawableEndCompat="@drawable/ic_cross"
             app:drawableTint="@color/black" />
 
@@ -31,18 +33,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_marginBottom="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/dividerTitle">
 
             <TextView
-
                 style="@style/textViewBold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/size_8"
                 android:padding="@dimen/size_4"
-                android:text="Delivry Person"
+                android:text="Delivery Person 1"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -51,34 +54,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/size_8"
-                android:layout_marginTop="@dimen/size_10"
-                android:layout_marginEnd="@dimen/size_8"
+                android:layout_marginEnd="@dimen/size_8">
 
-                android:background="@drawable/rounded_box_background"
-                android:paddingRight="@dimen/size_10">
-
-                <Spinner
-                    android:id="@+id/spinnerDeliveryPerson"
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/text_45"
-                    android:layout_toLeftOf="@id/img1"
-                    android:background="@null"
-                    android:dropDownWidth="wrap_content"
-                    android:dropDownVerticalOffset="@dimen/text_45"
-                    android:entries="@array/languagelist"
-                    android:forceHasOverlappingRendering="false"
-                    android:gravity="center_vertical|start"
-                    android:paddingLeft="@dimen/size_5"
-                    android:spinnerMode="dropdown"
-                    android:textSize="@dimen/text_size_14" />
-
-                <ImageView
-                    android:id="@+id/img1"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+                    android:hint="Select">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/acDeliveryPersonOne"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:textColor="@color/black" />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
             </RelativeLayout>
 
@@ -89,7 +80,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/size_8"
                 android:padding="@dimen/size_4"
-                android:text="Delivry Person"
+                android:text="Delivery Person 2"
+                android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -98,34 +90,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/size_8"
-                android:layout_marginTop="@dimen/size_10"
-                android:layout_marginEnd="@dimen/size_8"
+                android:layout_marginEnd="@dimen/size_8">
 
-                android:background="@drawable/rounded_box_background"
-                android:paddingRight="@dimen/size_10">
-
-                <Spinner
-                    android:id="@+id/spinnerDeliveryPerson2"
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/text_45"
-                    android:layout_toLeftOf="@id/img2"
-                    android:background="@null"
-                    android:dropDownWidth="wrap_content"
-                    android:dropDownVerticalOffset="@dimen/text_45"
-                    android:entries="@array/languagelist"
-                    android:forceHasOverlappingRendering="false"
-                    android:gravity="center_vertical|start"
-                    android:paddingLeft="@dimen/size_5"
-                    android:spinnerMode="dropdown"
-                    android:textSize="@dimen/text_size_14" />
-
-                <ImageView
-                    android:id="@+id/img2"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+                    android:hint="Select">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/acDeliveryPersonTwo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:textColor="@color/black" />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
             </RelativeLayout>
 
@@ -137,7 +117,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/size_8"
                 android:padding="@dimen/size_4"
-                android:text="Delivry Person"
+                android:text="Delivery Person 3"
+                android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -146,34 +127,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/size_8"
-                android:layout_marginTop="@dimen/size_10"
-                android:layout_marginEnd="@dimen/size_8"
+                android:layout_marginEnd="@dimen/size_8">
 
-                android:background="@drawable/rounded_box_background"
-                android:paddingRight="@dimen/size_10">
-
-                <Spinner
-                    android:id="@+id/spinnerDeliveryperson3"
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/text_45"
-                    android:layout_toLeftOf="@id/img3"
-                    android:background="@null"
-                    android:dropDownWidth="wrap_content"
-                    android:dropDownVerticalOffset="@dimen/text_45"
-                    android:entries="@array/languagelist"
-                    android:forceHasOverlappingRendering="false"
-                    android:gravity="center_vertical|start"
-                    android:paddingLeft="@dimen/size_5"
-                    android:spinnerMode="dropdown"
-                    android:textSize="@dimen/text_size_14" />
-
-                <ImageView
-                    android:id="@+id/img3"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+                    android:hint="Select">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/acDeliveryPersonThree"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:textColor="@color/black" />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
             </RelativeLayout>
 
@@ -186,6 +155,7 @@
                 android:layout_marginStart="@dimen/size_8"
                 android:padding="@dimen/size_4"
                 android:text="Vehicle No."
+                android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -194,34 +164,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/size_8"
-                android:layout_marginTop="@dimen/size_10"
-                android:layout_marginEnd="@dimen/size_8"
+                android:layout_marginEnd="@dimen/size_8">
 
-                android:background="@drawable/rounded_box_background"
-                android:paddingRight="@dimen/size_10">
-
-                <Spinner
-                    android:id="@+id/spinnerVehicleNum"
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/text_45"
-                    android:layout_toLeftOf="@id/imgVehicle"
-                    android:background="@null"
-                    android:dropDownWidth="wrap_content"
-                    android:dropDownVerticalOffset="@dimen/text_45"
-                    android:entries="@array/languagelist"
-                    android:forceHasOverlappingRendering="false"
-                    android:gravity="center_vertical|start"
-                    android:paddingLeft="@dimen/size_5"
-                    android:spinnerMode="dropdown"
-                    android:textSize="@dimen/text_size_14" />
-
-                <ImageView
-                    android:id="@+id/imgVehicle"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+                    android:hint="Enter Vehicle No.">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtVehicleNo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:textColor="@color/black" />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
             </RelativeLayout>
 
@@ -255,7 +213,6 @@
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 app:cornerRadius="16dp"
-
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/linearContent"
@@ -267,6 +224,38 @@
 
 
     </LinearLayout>
+
+
+    <FrameLayout
+        android:id="@+id/loadingback"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#3B505050"
+        android:clickable="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.github.loadingview.LoadingView
+            android:id="@+id/loadingView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            app:lv_duration="30"
+            app:lv_end_color="@color/color_end"
+            app:lv_external_radius="24dp"
+            app:lv_internal_radius="4dp"
+            app:lv_start_color="@color/color_start" />
+    </FrameLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

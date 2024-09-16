@@ -17,49 +17,51 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ahuja.sons.R
 import com.ahuja.sons.activity.ChatActivity
+import com.ahuja.sons.ahujaSonsClasses.activity.DeliveryCoordinatorActivity
 import com.ahuja.sons.ahujaSonsClasses.activity.ParticularOrderDetailActivity
+import com.ahuja.sons.ahujaSonsClasses.activity.SalesPersonRoleDetailActivity
 import com.ahuja.sons.ahujaSonsClasses.ahujaconstant.GlobalClasses
 import com.ahuja.sons.ahujaSonsClasses.ahujaconstant.RoleClass
+import com.ahuja.sons.ahujaSonsClasses.demo.ChildAdapter
 import com.ahuja.sons.ahujaSonsClasses.model.AllOrderListResponseModel
 import com.ahuja.sons.ahujaSonsClasses.model.local.LocalRouteData
 import com.ahuja.sons.ahujaSonsClasses.model.local.LocalSelectedOrder
+import com.ahuja.sons.ahujaSonsClasses.model.orderModel.AllOrderListModel
+import com.ahuja.sons.ahujaSonsClasses.model.workQueue.AllWorkQueueResponseModel
 import com.ahuja.sons.databinding.ItemWorkQueueBinding
+import com.ahuja.sons.databinding.RouteInnerItemsLayoutBinding
 import com.ahuja.sons.globals.Global
 import com.amulyakhare.textdrawable.TextDrawable
 import com.amulyakhare.textdrawable.util.ColorGenerator
 import com.lid.lib.LabelTextView
+import com.pixplicity.easyprefs.library.Prefs
 import java.util.*
 
-class OrderListForDeliveryCoordinatorAdapter(
-    var AllitemsList: ArrayList<AllOrderListResponseModel.Data>,
-    var where: String, var isMultiOrderCardSelectEnabled: Boolean,
-    var checkBox: CheckBox
-) :
+class OrderListForDeliveryCoordinatorAdapter(var AllitemsList: ArrayList<AllWorkQueueResponseModel.Data>,
+    var where: String, var isMultiOrderCardSelectEnabled: Boolean, var checkBox: CheckBox) :
     RecyclerView.Adapter<OrderListForDeliveryCoordinatorAdapter.Category_Holder>() {
 
     private lateinit var context: Context
-    var tempList = ArrayList<AllOrderListResponseModel.Data>()
+    var tempList = ArrayList<AllWorkQueueResponseModel.Data>()
 
     var isAllSelectedMethodisWorking = false
-    private var onItemClickListener: ((AllOrderListResponseModel.Data, Int) -> Unit)? = null
+    private var onItemClickListener: ((AllWorkQueueResponseModel.Data, Int) -> Unit)? = null
 
-    fun setOnItemClickListener(listener: (AllOrderListResponseModel.Data, Int) -> Unit) {
+    fun setOnItemClickListener(listener: (AllWorkQueueResponseModel.Data, Int) -> Unit) {
         onItemClickListener = listener
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Category_Holder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_work_queue, parent, false)
-        val binding =
-            ItemWorkQueueBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_work_queue, parent, false)
+        val binding = RouteInnerItemsLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         tempList.clear()
         tempList.addAll(AllitemsList)
         context = parent.context
         return Category_Holder(binding)
-
 
     }
 
@@ -75,95 +77,26 @@ class OrderListForDeliveryCoordinatorAdapter(
 
         val model = AllitemsList[position]
 
-
-
-       /* checkBox.setOnCheckedChangeListener { compoundButton, b ->
-            if (b) {
-                holder.binding.checkBoxOrder.isChecked = true
-                isMultiOrderCardSelectEnabled = true
-                isAllSelectedMethodisWorking = true
-                GlobalClasses.cartListForOrderRequest.clear()
-                for (currentDocLine in AllitemsList) {
-                    var localSelectedOrder = LocalSelectedOrder()
-                    localSelectedOrder.apply {
-                        orderId = currentDocLine.id
-                        orderName = currentDocLine.CardName
-                    }
-
-                    *//*   GlobalClasses.cartListForOrderRequest.add(
-                           localSelectedOrder
-                       )*//*
-
-                    GlobalClasses.cartListForOrderRequest[currentDocLine.id] = localSelectedOrder
-                    val newColorStateList =
-                        ColorStateList.valueOf(context.resources.getColor(R.color.blue_light))
-                    holder.binding.constraintLayoutWorkQueue.backgroundTintList = newColorStateList
-                }
-            } else {
-                isMultiOrderCardSelectEnabled = false
-                isAllSelectedMethodisWorking = true
-                holder.binding.checkBoxOrder.isChecked = false
-                GlobalClasses.cartListForOrderRequest.clear()
-                val newColorStateList =
-                    ColorStateList.valueOf(context.resources.getColor(R.color.white))
-                holder.binding.constraintLayoutWorkQueue.backgroundTintList = newColorStateList
-            }
-
-            notifyDataSetChanged()
-
-            Log.e("SIZESELECTALL>>>>", "onBindViewHolder: ${GlobalClasses.cartListForOrderRequest.size}" )
-
-        }*/
-
-
         holder.bind(model, context)
-        holder.binding.chipOrderType.visibility = View.VISIBLE
 
+        // todo Initialize child RecyclerView
+      /*  val childAdapter = DeliveryCoordinatorIDsAdapter(model.childItemList)
+        holder.binding.deliveryIdRecyclerView.adapter = childAdapter
+        holder.binding.deliveryIdRecyclerView.layoutManager = LinearLayoutManager(holder.itemView.context)
+*/
 
-        /*    holder.binding.checkBoxOrder.setOnCheckedChangeListener { compoundButton, b ->
-                if (b) {
+        //todo dropdown arrows for delivery id's--
+        holder.binding.deliveryIDUpArrow.setOnClickListener {
+            holder.binding.deliveryIdRecyclerView.visibility = View.GONE
+            holder.binding.deliveryIDUpArrow.visibility = View.GONE
+            holder.binding.deliveryIDDownArrow.visibility = View.VISIBLE
+        }
 
-                } else {
-
-                }
-            }*/
-
-        /*holder.binding.checkBoxOrder.setOnCheckedChangeListener { compoundButton, b ->
-            if (b) {
-                holder.binding.checkBoxOrder.isChecked = true
-                var localSelectedOrder = LocalSelectedOrder()
-                localSelectedOrder.apply {
-                    orderId = model.DocNum
-                    orderName = model.CardName
-                }
-                GlobalClasses.cartListForOrderRequest.add(
-                    localSelectedOrder
-                )
-
-
-            } else {
-                var pos = -1
-                holder.binding.checkBoxOrder.isChecked = false
-                GlobalClasses.cartListForOrderRequest.forEachIndexed { index, documentLine ->
-                    if (model.DocNum == documentLine.orderId) {
-                        pos = index
-                        GlobalClasses.cartListForOrderRequest.removeAt(pos)
-                    }
-
-                }
-            }
-
-            notifyDataSetChanged()
-            Log.e("SELECTED ORDER>>>>>", "bind: ${GlobalClasses.cartListForOrderRequest.size}")
-
-            for (item in GlobalClasses.cartListForOrderRequest) {
-                Log.e(
-                    "SELECTED ORDER>>>>>",
-                    "bind: ${item.toString()}"
-                )
-            }
-
-        }*/
+        holder.binding.deliveryIDDownArrow.setOnClickListener {
+            holder.binding.deliveryIdRecyclerView.visibility = View.VISIBLE
+            holder.binding.deliveryIDDownArrow.visibility = View.GONE
+            holder.binding.deliveryIDUpArrow.visibility = View.VISIBLE
+        }
 
         if (isMultiOrderCardSelectEnabled) {
             holder.binding.profilePic.visibility = View.INVISIBLE
@@ -175,78 +108,25 @@ class OrderListForDeliveryCoordinatorAdapter(
 
         }
 
-
-
-
-
-
-
-
-        holder.binding.tvOrderId.text = "Order ID: " + model.DocNum.toString()
-
-
-        if (!model.CardName.isEmpty()) {
-            holder.binding.tvOrderName.text = "" + model.CardName
-        } else {
-            holder.binding.tvOrderName.text = "" + "NA"
-        }
-
-        holder.binding.tvSurgeryDateTime.text = Global.formatDateFromDateString(model.DocDate)
-
-
-
-
-
-        when (model.DocumentStatus) { //TicketStatus
-            "bost_Open" -> {
-                holder.binding.tvStatusOrder.text = "Status : Open"
-
+        with(AllitemsList[position]){
+            holder.binding.tvOrderId.text = "Order ID : "+OrderRequest?.id
+            holder.binding.tvOrderName.text = OrderRequest?.CardName
+            if (OrderRequest!!.Doctor.isNotEmpty()){
+                holder.binding.tvOrderDoctorName.text = OrderRequest!!.Doctor[0].DoctorFirstName + " "+OrderRequest!!.Doctor[0].DoctorLastName
             }
-            "bost_Close" -> {
-                holder.binding.tvStatusOrder.text = "Status : Close"
-
-
-            }
-
+            holder.binding.tvSurgeryDateTime.text = "Surgery Date:${Global.convert_yyyy_mm_dd_to_dd_mm_yyyy(OrderRequest?.SurgeryDate)}\n Surgery Time: ${OrderRequest?.SurgeryTime}"
+            holder.binding.tvStatusOrder.text = OrderRequest?.Status
         }
 
-
-        /*    when (model.Priority) {
-                "High" -> {
-                    holder.priority.labelBackgroundColor = context.getColor(R.color.red)
-                }
-                "Medium" -> {
-                    holder.priority.labelBackgroundColor = context.getColor(R.color.orange)
-
-                }
-                "Low" -> {
-                    holder.priority.labelBackgroundColor = context.getColor(R.color.yellow)
-
-                }
-            }*/
-
-        val generator: ColorGenerator = ColorGenerator.MATERIAL
-        val color1: Int = generator.randomColor
-
-
-        if (model.CardName.isNotEmpty()) {
-            val drawable: TextDrawable = TextDrawable.builder()
-                .beginConfig()
-                .withBorder(4) /* thickness in px */
-                .endConfig()
-                .buildRound(
-                    model.CardName[0].toString()
-                        .uppercase(Locale.getDefault()), color1
-                )
-            holder.binding.profilePic.setImageDrawable(drawable)
-        } else {
-            holder.binding.profilePic.background =
-                ContextCompat.getDrawable(context, R.drawable.ic_group_18576)
-        }
 
 
         holder.itemView.setOnClickListener {
-            if (where.equals(RoleClass.deliveryPerson, ignoreCase = true)) {
+            /*if (where.equals(RoleClass.deliveryPerson, ignoreCase = true)) {
+                val intent = Intent(context, ParticularOrderDetailActivity::class.java)
+                intent.putExtra("id", model.id.toString())
+
+                context.startActivity(intent)
+
                 onItemClickListener?.let { click ->
                     click(model, position)
                 }
@@ -255,6 +135,25 @@ class OrderListForDeliveryCoordinatorAdapter(
                 intent.putExtra("id", model.id.toString())
 
                 context.startActivity(intent)
+            }*/
+
+
+            val generator: ColorGenerator = ColorGenerator.MATERIAL
+            val color1: Int = generator.randomColor
+
+            if (model.CardName.isNotEmpty()) {
+                val drawable: TextDrawable = TextDrawable.builder()
+                    .beginConfig()
+                    .withBorder(4) /* thickness in px */
+                    .endConfig()
+                    .buildRound(
+                        model.CardName[0].toString()
+                            .uppercase(Locale.getDefault()), color1
+                    )
+                holder.binding.profilePic.setImageDrawable(drawable)
+            } else {
+                holder.binding.profilePic.background =
+                    ContextCompat.getDrawable(context, R.drawable.ic_group_18576)
             }
 
 
@@ -315,17 +214,37 @@ class OrderListForDeliveryCoordinatorAdapter(
     }
 
 
-    inner class Category_Holder(var binding: ItemWorkQueueBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    inner class Category_Holder(var binding: RouteInnerItemsLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
 
 
-        fun bind(currentDocLine: AllOrderListResponseModel.Data, context: Context) {
+        fun bind(currentDocLine: AllWorkQueueResponseModel.Data, context: Context) {
+
+            Log.d("ParentAdapter", "Binding child adapter with ${currentDocLine.DeliveryNote.size} items")
+
+            val innerAdapter = DeliveryCoordinatorIDsAdapter(currentDocLine.InspectedDeliverys, isMultiOrderCardSelectEnabled)
+            binding.deliveryIdRecyclerView.layoutManager = LinearLayoutManager(itemView.context, LinearLayoutManager.VERTICAL, false)
+            binding.deliveryIdRecyclerView.adapter = innerAdapter
+
+            innerAdapter.notifyDataSetChanged()
+
+
+            itemView.setOnClickListener {
+
+                if (Prefs.getString(Global.Employee_role, "").equals("Delivery Coordinator")) {
+                    val intent = Intent(itemView.context, DeliveryCoordinatorActivity::class.java)
+                    intent.putExtra("id", AllitemsList[position].id)
+                    context.startActivity(intent)
+                }
+
+
+            }
+
+
             if (isAllSelectedMethodisWorking) {
 
             } else {
 
             }
-
 
             if (GlobalClasses.cartListForOrderRequest.isNotEmpty()) {
 
@@ -341,25 +260,6 @@ class OrderListForDeliveryCoordinatorAdapter(
                     }
                 }
 
-
-                /*   if (setupLocalArrayList(currentDocLine)) {
-                       binding.checkBoxOrder.visibility = View.VISIBLE
-                       binding.profilePic.visibility = View.INVISIBLE
-                       try {
-                           for (currentInItem in GlobalClasses.cartListForOrderRequest) {
-                               binding.checkBoxOrder.isChecked =
-                                   currentInItem.orderId == currentDocLine.DocNum
-                           }
-                       } catch (e: Exception) {
-                       }
-
-
-                   } else {
-                       binding.checkBoxOrder.visibility = View.INVISIBLE
-                       binding.profilePic.visibility = View.VISIBLE
-                   }*/
-
-
             }
 
 
@@ -368,20 +268,24 @@ class OrderListForDeliveryCoordinatorAdapter(
                     isAllSelectedMethodisWorking = false
                     var localSelectedOrder = LocalSelectedOrder()
                     localSelectedOrder.apply {
-                        orderId = currentDocLine.id
+                        orderId = currentDocLine.id//id
                         orderName = currentDocLine.CardName
                     }
 
-                    /*   GlobalClasses.cartListForOrderRequest.add(
-                           localSelectedOrder
-                       )*/
+                    GlobalClasses.cartListForOrderRequest[currentDocLine.id] = localSelectedOrder
 
-                    GlobalClasses.cartListForOrderRequest[currentDocLine.id] =
-                        localSelectedOrder
-
-                    val newColorStateList =
-                        ColorStateList.valueOf(context.resources.getColor(R.color.blue_light))
+                    val newColorStateList = ColorStateList.valueOf(context.resources.getColor(R.color.blue_light))
                     binding.constraintLayoutWorkQueue.backgroundTintList = newColorStateList
+
+                    //todo trial
+                    val itemsToAdd = currentDocLine.InspectedDeliverys.filterNot { GlobalClasses.deliveryIDsList.contains(it) }
+
+                    if (itemsToAdd.isNotEmpty()) {
+                        GlobalClasses.deliveryIDsList.addAll(itemsToAdd)
+                        Log.e("childItemCheck==>", "onBindViewHolder: Added new items")
+                    } else {
+                        Log.e("childItemCheck==>", "onBindViewHolder: Already exists")
+                    }
 
 
                 } else {
@@ -393,28 +297,29 @@ class OrderListForDeliveryCoordinatorAdapter(
 
                     GlobalClasses.cartListForOrderRequest.remove(currentDocLine.id)
 
-                    /* GlobalClasses.cartListForOrderRequest.forEachIndexed { index, documentLine ->
-                         if (currentDocLine.DocNum == documentLine.orderId) {
-                             pos = index
-                             GlobalClasses.cartListForOrderRequest.removeAt(pos)
-                         }
-
-                     }*/
+                    //todo trial
+                    GlobalClasses.deliveryIDsList.removeAll(currentDocLine.InspectedDeliverys)
 
                 }
 
 
-                Log.e(
-                    "SELECTED ORDER>>>>>",
-                    "bind: ${GlobalClasses.cartListForOrderRequest.size}"
-                )
+                Log.e("SELECTED ORDER>>>>>", "bind: ${GlobalClasses.cartListForOrderRequest.size}")
 
                 for (item in GlobalClasses.cartListForOrderRequest) {
-                    Log.e(
-                        "SELECTED ORDER>>>>>",
-                        "bind: ${item.toString()}"
-                    )
+                    Log.e("SELECTED ORDER>>>>>", "bind: ${item.toString()}")
                 }
+
+
+                //todo trial--
+                currentDocLine.InspectedDeliverys.forEach { it.isSelected = b }
+                innerAdapter.notifyDataSetChanged()
+
+                Log.e("SELECTED ORDER>>>>>", "bindParent : ${GlobalClasses.deliveryIDsList.size}")
+
+                for (item in GlobalClasses.deliveryIDsList) {
+                    Log.e("SELECTED ORDER12>>>>>", "bindParent: ${item.toString()}")
+                }
+
 
             }
 
@@ -424,18 +329,5 @@ class OrderListForDeliveryCoordinatorAdapter(
 
     }
 
-    /* private fun setupLocalArrayList(
-         currentItem: AllOrderListResponseModel.Data,
 
-         ): Boolean {
-
-
-         return GlobalClasses.cartListForOrderRequest.any { item ->
-             item.orderId.equals(currentItem.DocNum, ignoreCase = true)
-
-
-         }
-
-
-     }*/
-}
+    }

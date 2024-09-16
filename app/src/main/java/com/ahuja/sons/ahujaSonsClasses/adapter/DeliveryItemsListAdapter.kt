@@ -4,13 +4,15 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.ahuja.sons.ahujaSonsClasses.model.workQueue.AllItemsForOrderModel
+import com.ahuja.sons.ahujaSonsClasses.model.workQueue.AllWorkQueueResponseModel
 import com.ahuja.sons.databinding.DeliveryItemsListAdapterLayoutBinding
 
-class DeliveryItemsListAdapter(val AllitemsList: ArrayList<String>): RecyclerView.Adapter<DeliveryItemsListAdapter.Category_Holder>() {
+class DeliveryItemsListAdapter(val AllitemsList: ArrayList<AllItemsForOrderModel.DeliveryItem>): RecyclerView.Adapter<DeliveryItemsListAdapter.Category_Holder>() {
 
     private lateinit var context: Context
 
-    var tempList : ArrayList<String> = ArrayList()
+    var tempList : ArrayList<AllItemsForOrderModel.DeliveryItem> = ArrayList()
     init {
         this.tempList.addAll(AllitemsList)
     }
@@ -25,8 +27,10 @@ class DeliveryItemsListAdapter(val AllitemsList: ArrayList<String>): RecyclerVie
     override fun onBindViewHolder(holder: Category_Holder, position: Int) {
         val obj = AllitemsList[position]
         holder.binding.apply {
-
-            holder.binding.name.text = obj
+            tvItemDescription.setText(obj.ItemDescription)
+            tvQTy.setText("Qty : "+obj.Quantity)
+            tvUOM.setText("UOM : "+obj.UomNo)
+            tvItemCode.setText("Item Code : "+obj.ItemCode)
 
         }
 
@@ -34,14 +38,12 @@ class DeliveryItemsListAdapter(val AllitemsList: ArrayList<String>): RecyclerVie
 
         }
 
-
-
     }
 
 
 
     override fun getItemCount(): Int {
-        return 5
+        return AllitemsList.size
     }
 
     inner class Category_Holder(var binding: DeliveryItemsListAdapterLayoutBinding) : RecyclerView.ViewHolder(binding.root)

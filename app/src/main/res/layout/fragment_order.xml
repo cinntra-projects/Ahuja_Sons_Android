@@ -61,19 +61,21 @@
                         android:layout_marginRight="@dimen/size_20"
                         android:drawableTint="@color/white"
                         android:src="@drawable/ic_filter"
-                        android:visibility="visible" />
+                        android:visibility="gone" />
 
                     <ImageView
-
-                        android:id="@+id/search"
+                        android:id="@+id/searchBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="@dimen/size_20"
+                        android:visibility="visible"
                         android:background="@drawable/search"
                         android:backgroundTint="@color/white"
                         android:fitsSystemWindows="true" />
+
+
                 </LinearLayout>
 
 
@@ -91,7 +93,6 @@
                 android:orientation="vertical">
 
                 <androidx.appcompat.widget.SearchView
-
                     android:id="@+id/search_view"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/size_45"
@@ -180,7 +181,7 @@
                     android:id="@+id/chipGroup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     app:checkedChip="@id/allChip"
                     app:singleSelection="true">
 
@@ -274,6 +275,8 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:visibility="gone" />
+
+
                                 </LinearLayout>
 
                             </androidx.core.widget.NestedScrollView>
@@ -296,6 +299,7 @@
                             android:layout_height="match_parent"
                             android:background="#3B505050"
                             android:clickable="true"
+                            android:visibility="gone"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -321,6 +325,7 @@
 
                         </FrameLayout>
 
+
                     </FrameLayout>
 
 
@@ -330,14 +335,14 @@
 
 
             <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                android:id="@+id/add_customer"
+                android:id="@+id/addSaleOrder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|bottom"
                 android:layout_marginEnd="@dimen/size_20"
                 android:layout_marginBottom="@dimen/size_80"
                 android:clickable="true"
-                android:text="Add Tickets"
+                android:text="Add Order"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:visibility="gone"

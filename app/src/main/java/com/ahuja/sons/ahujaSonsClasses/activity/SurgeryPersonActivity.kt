@@ -22,13 +22,10 @@ class SurgeryPersonActivity : AppCompatActivity() {
         binding = ActivitySurgeryPersonBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-
-
         pagerAdapter = ViewPagerAdapter(supportFragmentManager)
         pagerAdapter.add(DetailSurgeryPersonFragment(), "Details")
-        pagerAdapter.add(DeliveryItemsFragment(), "Delivery")
-        pagerAdapter.add(PendingItemsFragment(), "Pending")
+//        pagerAdapter.add(DeliveryItemsFragment(), "Delivery")
+//        pagerAdapter.add(PendingItemsFragment(), "Pending")
         binding.viewpagerInspect.adapter = pagerAdapter
         binding.tabLayout.setupWithViewPager(binding.viewpagerInspect)
 
@@ -56,10 +53,10 @@ class SurgeryPersonActivity : AppCompatActivity() {
     }
 
 
+    //todo reschedule dialog bottom sheet----
     private fun showRescheduleDialogBottomSheetDialog() {
         val bottomSheetDialog = BottomSheetDialog(this, R.style.BottomSheetDialogTheme)
-        val bindingBottomSheet: BottomSheetSelectDateTimeBinding =
-            BottomSheetSelectDateTimeBinding.inflate(layoutInflater)
+        val bindingBottomSheet: BottomSheetSelectDateTimeBinding = BottomSheetSelectDateTimeBinding.inflate(layoutInflater)
         bottomSheetDialog.setContentView(bindingBottomSheet.getRoot())
 
         bottomSheetDialog.show()
@@ -85,4 +82,7 @@ class SurgeryPersonActivity : AppCompatActivity() {
 
 
     }
+
+
+
 }
