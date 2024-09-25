@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ahuja.sons.R
 import com.ahuja.sons.ahujaSonsClasses.adapter.RouteItemListAdapter
 import com.ahuja.sons.ahujaSonsClasses.adapter.autoCompleteAdapter.DeliveryPersonAdapter
-import com.ahuja.sons.ahujaSonsClasses.ahujaconstant.GlobalClasses
 import com.ahuja.sons.ahujaSonsClasses.model.DeliveryPersonEmployeeModel
 import com.ahuja.sons.ahujaSonsClasses.model.RouteListModel
 import com.ahuja.sons.ahujaSonsClasses.model.local.LocalRouteData
@@ -93,19 +92,9 @@ class RouteFragment : Fragment() {
             )
         )
 
-        routeItemListAdapter.submitList(sampleData)
-
-
 
         binding.rvRoute.apply {
-            adapter = routeItemListAdapter
-            layoutManager = LinearLayoutManager(requireActivity())
 
-            routeItemListAdapter.setOnItemClickListener { data, i ->
-
-                openDeliveryPersonDialog(requireActivity())
-
-            }
             routeItemListAdapter.notifyDataSetChanged()
         }
 
@@ -130,10 +119,32 @@ class RouteFragment : Fragment() {
                     Log.e("data", response.body()!!.data.toString())
 //                    Global.successmessagetoast(requireContext(), "Assign SuccessFully")
 
+                    var data = response.body()!!.data
+
+                    routeItemListAdapter.submitList(data)
+                    binding.rvRoute.adapter = routeItemListAdapter
+
+                    routeItemListAdapter.setOnItemClickListener { data, i ->
+                        openDeliveryPersonDialog(requireActivity(), data)
+
+                    }
+                    routeItemListAdapter.notifyDataSetChanged()
+
+                    try {
+                            binding.rvRoute.layoutManager = LinearLayoutManager(requireActivity())
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+
                 } else {
+
                     binding.loadingBackFrame.visibility = View.GONE
                     binding.loadingView.stop()
-                    Global.warningmessagetoast(requireContext(), response.body()!!.message);
+                    try {
+                        Global.warningmessagetoast(requireContext(), response.body()!!.message);
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
 
                 }
             }
@@ -153,7 +164,7 @@ class RouteFragment : Fragment() {
 
     lateinit var dialogBinding: DialogAssignDeliveryPersonBinding
 
-    private fun openDeliveryPersonDialog(context: Context) {
+    private fun openDeliveryPersonDialog(context: Context, data: RouteListModel.Data) {
 
         val dialog = Dialog(context, R.style.Theme_Dialog)
 
@@ -170,6 +181,20 @@ class RouteFragment : Fragment() {
 
         callDeliveryPersonApi(dialogBinding.acDeliveryPersonOne, dialogBinding.acDeliveryPersonTwo, dialogBinding.acDeliveryPersonThree)
 
+
+        dialogBinding.acDeliveryPersonOne.setText(data.DeliveryPerson1)
+        dialogBinding.acDeliveryPersonTwo.setText(data.DeliveryPerson2)
+        dialogBinding.acDeliveryPersonThree.setText(data.DeliveryPerson3)
+        dialogBinding.edtVehicleNo.setText(data.VechicleNo)
+
+        deliveryPersonOne = data.DeliveryPerson1_detail
+        deliveryPersonTwo = data.DeliveryPerson2_detail
+        deliveryPersonThree = data.DeliveryPerson3_detail
+        VechicleNo = data.VechicleNo
+
+
+        dialogBinding.btnSave.setText("Update Assign")
+
         dialogBinding.btnCancel.setOnClickListener {
             dialog.cancel()
         }
@@ -180,22 +205,28 @@ class RouteFragment : Fragment() {
             dialogBinding.loadingView.start()
 
             val idArrayList = ArrayList<Int>()
-            for (order in GlobalClasses.deliveryIDsList) {
+
+            for (order in data.OrderID) {
                 idArrayList.add(order.id.toInt())
             }
 
+            // Convert list of integers to a JsonArray
+            val jsonArray = com.google.gson.JsonArray()
+            idArrayList.forEach { id ->
+                jsonArray.add(id)
+            }
+
+
             val commaSeparatedIds = idArrayList.joinToString(separator = ",")
-
-            val idStringList = commaSeparatedIds.split(",") as ArrayList
-
-            val idArray = idStringList.map { it.toInt() } as ArrayList
 
             val vehicleNumber = dialogBinding.edtVehicleNo.text.toString()
 
-            if (Global.isValidVehicleNumber(vehicleNumber)) {
-                createAssignApi(dialog, dialogBinding.loadingback, dialogBinding.loadingView, idArray, vehicleNumber)
+            if (Global.validateVehicleNumber(vehicleNumber)) {
 
-            } else {
+                updateAssignApi(dialog, dialogBinding.loadingback, dialogBinding.loadingView, jsonArray, vehicleNumber, data.id)
+
+            }
+            else {
                 Global.warningmessagetoast(requireContext(), "Invalid Vehicle Number")
             }
 
@@ -214,21 +245,19 @@ class RouteFragment : Fragment() {
 
 
     //todo caling Create Assign api here---
-    private fun createAssignApi(dialog: Dialog, loadingback: FrameLayout, loadingView: LoadingView, idArray: ArrayList<Int>, vehicleNumber: String) {
+    private fun updateAssignApi(dialog: Dialog, loadingback: FrameLayout, loadingView: LoadingView, commaSeparatedIds: JsonArray, vehicleNumber: String, id: Int, ) {
         loadingback.visibility = View.VISIBLE
         loadingView.start()
 
-        val jsonArray = JsonArray()
-        idArray.forEach { id ->
-            jsonArray.add(id)
-        }
-
+        VechicleNo = vehicleNumber
         var jsonObject1 = JsonObject()
-        jsonObject1.addProperty("DeliveryNote", jsonArray.toString())
+
+        jsonObject1.addProperty("id", id)
+        jsonObject1.add("DeliveryNote", commaSeparatedIds)
         jsonObject1.addProperty("DeliveryPerson1", deliveryPersonOne)
         jsonObject1.addProperty("DeliveryPerson2", deliveryPersonTwo)
         jsonObject1.addProperty("DeliveryPerson3", deliveryPersonThree)
-        jsonObject1.addProperty("VechicleNo", vehicleNumber)
+        jsonObject1.addProperty("VechicleNo", VechicleNo)
         jsonObject1.addProperty("CreatedBy", Prefs.getString(Global.Employee_Code, ""))
 
         val call: Call<AllWorkQueueResponseModel> = ApiClient().service.updateAssign(jsonObject1)
@@ -243,6 +272,7 @@ class RouteFragment : Fragment() {
 
                     var listData = response.body()!!.data
 
+                    getRouteListApi()
                     dialog.dismiss()
 
                 } else {
@@ -268,6 +298,7 @@ class RouteFragment : Fragment() {
     var deliveryPersonOne = ""
     var deliveryPersonTwo = ""
     var deliveryPersonThree = ""
+    var VechicleNo = ""
 
     //todo calling delivery person api here---
 

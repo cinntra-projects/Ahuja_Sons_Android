@@ -20,6 +20,7 @@ import com.ozcanalasalvar.library.view.datePicker.DatePicker
 import com.ozcanalasalvar.library.view.popup.DatePickerPopup
 import com.ahuja.sons.R
 import com.ahuja.sons.ahujaSonsClasses.model.DoctorNameListModel
+import com.ahuja.sons.ahujaSonsClasses.model.SurgeryPersonModelData
 import com.ahuja.sons.apibody.BodySparePart
 import com.ahuja.sons.model.AccountBpData
 import com.ahuja.sons.model.BPLID
@@ -36,6 +37,9 @@ import www.sanju.motiontoast.MotionToast
 import www.sanju.motiontoast.MotionToastStyle
 import java.text.ParseException
 import java.text.SimpleDateFormat
+import java.time.Duration
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -56,6 +60,7 @@ object Global {
     val Employee_Code: String = "_Employee_Code"
     val servcieID: String = "_servcieID"
     val Employee_role: String = "_Employee_role"
+    val Employee_role_ID: String = "_Employee_role_ID"
     val FirstName: String = "_FirstName"
     val _ReportingTO: String = "_ReportingTO"
 
@@ -83,6 +88,8 @@ object Global {
     var TicketAuthentication = false
     var TicketStartDate = ""
     var TicketEndDate = ""
+
+    const val SurgeryPersonService = "_SurgeryPersonService"
 
     const val FINAL_SITE_SURVEY_SUBTYPE = "Final Site Survey"
     const val DRAWING_APPROVAL_SUBTYPE = "Drawing Approval"
@@ -363,6 +370,17 @@ object Global {
     }
 
 
+    open fun validateVehicleNumber(vehicleNumber: String): Boolean {
+        // Regex to allow only alphabets and numbers (alphanumeric characters)
+        val regex = "^[A-Za-z0-9]{1,12}$".toRegex()
+
+        return if (vehicleNumber.matches(regex)) {
+            true // Valid vehicle number
+        } else {
+            false // Invalid vehicle number
+        }
+    }
+
     open fun isvalidateemail(email_value: TextInputEditText): Boolean {
         val checkEmail = email_value.text.toString()
         val hasSpecialEmail = Patterns.EMAIL_ADDRESS.matcher(checkEmail).matches()
@@ -448,6 +466,31 @@ object Global {
         )
 
         datePickerDialog.datePicker.maxDate = System.currentTimeMillis() - 1000
+        datePickerDialog.setMessage(editText.hint.toString())
+        datePickerDialog.show()
+    }
+
+
+    open fun disablePastDates(context: Context, editText: EditText) {
+        val c = Calendar.getInstance()
+        val mYear = c.get(Calendar.YEAR)
+        val mMonth = c.get(Calendar.MONTH)
+        val mDay = c.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerDialog = DatePickerDialog(context,
+            DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+                val s = "$dayOfMonth-${monthOfYear + 1}-$year"
+                val dateFormatter = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+                try {
+                    val strDate = dateFormatter.parse(s)
+                    editText.setText(dateFormatter.format(strDate))
+                } catch (e: ParseException) {
+                    e.printStackTrace()
+                }
+            }, mYear, mMonth, mDay
+        )
+
+        datePickerDialog.datePicker.minDate = System.currentTimeMillis() - 1000
         datePickerDialog.setMessage(editText.hint.toString())
         datePickerDialog.show()
     }
@@ -962,11 +1005,58 @@ object Global {
         return SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date())
     }
 
+
+    fun getNamesCommaSeparated(people: List<SurgeryPersonModelData>): List<String> {
+        return people.map { it.SurgeryPersonsName } // Extract the 'str' property from each object
+    }
+
     open fun getCurrentDateTimeFormatted(): String {
         val pattern = "dd-MM-yyyy 'T' hh:mm:ss a"
         val dateFormat = SimpleDateFormat(pattern, Locale.getDefault())
         val currentDateAndTime = Date()
         return dateFormat.format(currentDateAndTime)
+    }
+
+
+    open fun convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(inputDateTime : String): String {
+        // Define the input and output date time patterns
+        val inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+        val outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")
+
+        // Parse the input string to LocalDateTime
+        val dateTime = LocalDateTime.parse(inputDateTime, inputFormatter)
+
+        // Format the date to the desired output pattern
+        val formattedDateTime = dateTime.format(outputFormatter)
+
+        return formattedDateTime
+    }
+
+
+    open fun durationGet(startTimeString : String, endTimeString : String) : String {
+        /*// Input date-time strings
+        val startTimeString = "2024-09-22 17:20:07"
+        val endTimeString = "2024-09-22 17:58:23"
+*/
+        // Define the format of the date-time strings
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+
+        // Parse the date-time strings into LocalDateTime objects
+        val startTime = LocalDateTime.parse(startTimeString, formatter)
+        val endTime = LocalDateTime.parse(endTimeString, formatter)
+
+        // Calculate the duration between the two LocalDateTime objects
+        val duration = Duration.between(startTime, endTime)
+
+        // Extract hours, minutes, and seconds from the duration
+        val hours = duration.toHours()
+        val minutes = duration.toMinutes() % 60
+        val seconds = duration.seconds % 60
+
+        var durationResult = "$hours : $minutes : $seconds"
+        // Print the result
+        println("Duration: $hours hours, $minutes minutes, $seconds seconds")
+        return durationResult
     }
 
 

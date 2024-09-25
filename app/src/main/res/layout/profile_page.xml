@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/white"
     android:clickable="true"
-    android:focusable="true"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:focusable="true">
 
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:paddingBottom="@dimen/size_45"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="wrap_content">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:background="@color/colorPrimary"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize">
+            app:layout_constraintTop_toTopOf="parent">
 
 
             <RelativeLayout
@@ -33,30 +33,30 @@
                 android:layout_height="wrap_content">
 
 
-
                 <TextView
                     android:id="@+id/heading"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Profile"
                     android:layout_marginLeft="@dimen/size_10"
-                    android:textSize="@dimen/text_size_18"
-                    android:textColor="@color/white"/>
+                    android:text="Profile"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_18" />
 
 
                 <ImageView
-                    android:visibility="visible"
                     android:id="@+id/delete"
-                    android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/size_15"
                     android:background="@drawable/ic_logout"
-                    android:backgroundTint="@color/white"/>
+                    android:backgroundTint="@color/white"
+                    android:visibility="visible" />
             </RelativeLayout>
 
         </androidx.appcompat.widget.Toolbar>
+
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -64,15 +64,15 @@
 
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/size_15"
-                    android:layout_marginTop="@dimen/size_10"
-                    android:layout_height="wrap_content">
+                    android:layout_marginTop="@dimen/size_10">
 
 
                     <ImageView
@@ -140,20 +140,19 @@
                 </RelativeLayout>
 
                 <LinearLayout
-                    android:layout_marginTop="@dimen/size_10"
                     android:layout_width="match_parent"
-                    android:background="@color/veryLightGrey"
-                    android:layout_height="@dimen/size_45">
+                    android:layout_height="@dimen/size_45"
+                    android:layout_marginTop="@dimen/size_10"
+                    android:background="@color/veryLightGrey">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/size_15"
                         android:text="Themes"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_14"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/size_15"/>
-
+                        android:textSize="@dimen/text_size_14" />
 
 
                 </LinearLayout>
@@ -162,164 +161,159 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/size_10"
+                    android:layout_marginTop="@dimen/size_15"
                     android:layout_marginRight="@dimen/size_10"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="@dimen/size_15">
+                    android:orientation="horizontal">
 
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:text="Language"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_14"
-                        android:layout_gravity="center_vertical"/>
+                        android:textSize="@dimen/text_size_14" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="English"
-                        android:textColor="@color/colorPrimary"
+                        android:layout_gravity="end"
                         android:drawableRight="@drawable/ic_baseline_keyboard_arrow_down_24"
                         android:drawableTint="@color/colorPrimary"
-                        android:textSize="@dimen/text_size_14"
                         android:gravity="right"
-                        android:layout_gravity="end"/>
-
-
+                        android:text="English"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/text_size_14" />
 
 
                 </LinearLayout>
 
 
-
                 <View
-                    android:layout_marginTop="@dimen/size_15"
                     android:layout_width="match_parent"
-                    android:background="@color/lightGrey"
-                    android:layout_height="@dimen/size_1"/>
+                    android:layout_height="@dimen/size_1"
+                    android:layout_marginTop="@dimen/size_15"
+                    android:background="@color/lightGrey" />
 
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/mode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_size_18"
-                    android:visibility="gone"
-                    android:text="Offline mode"
-                    android:buttonTint="@color/colorPrimary"
+                    android:layout_gravity="left"
                     android:layout_marginLeft="@dimen/size_10"
                     android:layout_marginRight="@dimen/size_10"
+                    android:buttonTint="@color/colorPrimary"
+                    android:text="Offline mode"
                     android:textColor="@color/black"
-                    android:layout_gravity="left"
-                    android:id="@+id/mode"/>
+                    android:textSize="@dimen/text_size_18"
+                    android:visibility="gone" />
 
                 <LinearLayout
-                    android:layout_marginTop="@dimen/size_10"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_45">
+                    android:layout_height="@dimen/size_45"
+                    android:layout_marginTop="@dimen/size_10">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/size_15"
                         android:text="About"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_14"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/size_15"/>
-
+                        android:textSize="@dimen/text_size_14" />
 
 
                 </LinearLayout>
 
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_marginLeft="@dimen/size_15"
-                android:layout_marginRight="@dimen/size_10"
-                android:layout_marginTop="@dimen/size_15"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-
-
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40"
-                    android:gravity="center_vertical"
-                    android:drawablePadding="@dimen/size_8"
-                    android:drawableStart="@drawable/ic_version_icon"
-                    android:drawableTint="@color/lightGrey"
-                    android:textColor="@color/black"
-                    android:text="@string/app_version"/>
-
-                <TextView
-                    android:id="@+id/feedback"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40"
-                    android:gravity="center_vertical"
-                    android:layout_marginTop="@dimen/size_10"
-                    android:drawableStart="@drawable/ic_baseline_message_24"
-                    android:drawablePadding="@dimen/size_8"
-                    android:drawableTint="@color/lightGrey"
-                    android:text="Feedback"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/rateus"
-                    android:drawablePadding="@dimen/size_8"
-                    android:layout_marginTop="@dimen/size_10"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40"
-                    android:gravity="center_vertical"
-                    android:drawableStart="@drawable/ic_flat_color_icons_rating"
-                    android:textColor="@color/black"
-                    android:text="Rate us"/>
-
-
-            </LinearLayout>
-                <View
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_15"
                     android:layout_marginTop="@dimen/size_15"
+                    android:layout_marginRight="@dimen/size_10"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size_40"
+                        android:drawableStart="@drawable/ic_version_icon"
+                        android:drawablePadding="@dimen/size_8"
+                        android:drawableTint="@color/lightGrey"
+                        android:gravity="center_vertical"
+                        android:text="@string/app_version"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/feedback"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size_40"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:drawableStart="@drawable/ic_baseline_message_24"
+                        android:drawablePadding="@dimen/size_8"
+                        android:drawableTint="@color/lightGrey"
+                        android:gravity="center_vertical"
+                        android:text="Feedback"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/rateus"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size_40"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:drawableStart="@drawable/ic_flat_color_icons_rating"
+                        android:drawablePadding="@dimen/size_8"
+                        android:gravity="center_vertical"
+                        android:text="Rate us"
+                        android:textColor="@color/black" />
+
+
+                </LinearLayout>
+
+                <View
                     android:layout_width="match_parent"
-                    android:background="@color/lightGrey"
-                    android:layout_height="@dimen/size_1"/>
+                    android:layout_height="@dimen/size_1"
+                    android:layout_marginTop="@dimen/size_15"
+                    android:background="@color/lightGrey" />
 
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/size_40"
-                        android:text="Others"
-                        android:gravity="center_vertical"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_14"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/size_15"/>
+                        android:layout_marginLeft="@dimen/size_15"
+                        android:gravity="center_vertical"
+                        android:text="Others"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14" />
 
 
                     <TextView
                         android:id="@+id/clearcache"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/size_40"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/size_15"
+                        android:gravity="center_vertical"
                         android:text="Clear cache"
                         android:textColor="@color/red"
-                        android:textSize="@dimen/text_size_14"
-                        android:gravity="center_vertical"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/size_15"/>
+                        android:textSize="@dimen/text_size_14" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/size_40"
-                        android:text="Reset App"
-                        android:gravity="center_vertical"
-                        android:textColor="@color/red"
-                        android:textSize="@dimen/text_size_14"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/size_15"/>
-
+                        android:layout_marginLeft="@dimen/size_15"
+                        android:gravity="center_vertical"
+                        android:text="Reset App"
+                        android:textColor="@color/red"
+                        android:textSize="@dimen/text_size_14" />
 
 
                 </LinearLayout>

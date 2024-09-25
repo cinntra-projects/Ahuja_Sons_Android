@@ -24,6 +24,7 @@ import com.ahuja.sons.ahujaSonsClasses.activity.OrderCoordinatorActivity
 import com.ahuja.sons.ahujaSonsClasses.activity.ParticularOrderDetailActivity
 import com.ahuja.sons.ahujaSonsClasses.ahujaconstant.RoleClass
 import com.ahuja.sons.ahujaSonsClasses.model.AllOrderListResponseModel
+import com.ahuja.sons.ahujaSonsClasses.model.RouteListModel
 import com.ahuja.sons.ahujaSonsClasses.model.local.LocalRouteData
 import com.ahuja.sons.ahujaSonsClasses.model.orderModel.AllOrderListModel
 import com.ahuja.sons.databinding.ItemWorkQueueBinding
@@ -37,8 +38,8 @@ import java.util.*
 class OrderListAdapter(var AllitemsList: ArrayList<AllOrderListModel.Data>, var where: String) : RecyclerView.Adapter<OrderListAdapter.Category_Holder>() {
 
     private lateinit var context: Context
-    var tempList = ArrayList<AllOrderListModel.Data>()
 
+    var tempList = ArrayList<AllOrderListModel.Data>()
 
     private var onItemClickListener: ((AllOrderListModel.Data, Int) -> Unit)? = null
 
@@ -54,7 +55,6 @@ class OrderListAdapter(var AllitemsList: ArrayList<AllOrderListModel.Data>, var 
         context = parent.context
         return Category_Holder(binding)
 
-
     }
 
 
@@ -69,17 +69,16 @@ class OrderListAdapter(var AllitemsList: ArrayList<AllOrderListModel.Data>, var 
             holder.binding.chipOrderType.visibility = View.GONE
         }*///todo comment Order Type visibility
 
-
         with(AllitemsList[position]){
 
-           /* val innerAdapter = InspectionDeliveryIDAdapter(item)
+         /*   val innerAdapter = InspectionDeliveryIDAdapter(item)
             holder.binding.deliveryIdRecyclerView.layoutManager = LinearLayoutManager(itemView.context, LinearLayoutManager.VERTICAL, false)
             holder.binding.deliveryIdRecyclerView.adapter = innerAdapter
-
             innerAdapter.notifyDataSetChanged()*/
 
-            holder.binding.tvOrderId.text = "Order ID: " + id
+            holder.binding.deliveriesLayoutView.visibility = View.GONE
 
+            holder.binding.tvOrderId.text = "Order ID: " + id
 
             if (!CardName.isEmpty()) {
                 holder.binding.tvOrderName.text = "" + CardName
@@ -89,12 +88,12 @@ class OrderListAdapter(var AllitemsList: ArrayList<AllOrderListModel.Data>, var 
 
             if (!SurgeryDate.isNullOrEmpty()){
                 holder.binding.tvSurgeryDateTime.text = "Surgery Date:${Global.convert_yyyy_mm_dd_to_dd_mm_yyyy(SurgeryDate)}\n Surgery Time: ${SurgeryTime}"
-
             }
 
             if (Doctor.isNotEmpty()){
                 holder.binding.tvOrderDoctorName.text = Doctor[0].DoctorFirstName + " "+Doctor[0].DoctorLastName
             }
+
             holder.binding.tvStatusOrder.text = Status
 
 
@@ -104,31 +103,8 @@ class OrderListAdapter(var AllitemsList: ArrayList<AllOrderListModel.Data>, var 
         val generator: ColorGenerator = ColorGenerator.MATERIAL
         val color1: Int = generator.randomColor
 
-        if (model.CardName.isNotEmpty()) {
-            val drawable: TextDrawable = TextDrawable.builder()
-                .beginConfig()
-                .withBorder(4) /* thickness in px */
-                .endConfig()
-                .buildRound(
-                    model.CardName[0].toString()
-                        .uppercase(Locale.getDefault()), color1
-                )
-            holder.binding.profilePic.setImageDrawable(drawable)
-        } else {
-            holder.binding.profilePic.background =
-                ContextCompat.getDrawable(context, R.drawable.ic_group_18576)
-        }
-
 
         holder.itemView.setOnClickListener {
-          /*  if (where.equals(RoleClass.deliveryPerson, ignoreCase = true)) {
-                onItemClickListener?.let { click ->
-                    click(model, position)
-                }
-            } else {
-
-            }*/
-
             if (Prefs.getString(Global.Employee_role, "").equals("Order Coordinator")){
                 val intent = Intent(holder.itemView.context, AllOrdersCoordinatorDetailActivity::class.java)
                 intent.putExtra("id",  model.id.toString())

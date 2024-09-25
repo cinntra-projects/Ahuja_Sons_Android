@@ -328,6 +328,12 @@ class WorkQueueFragment : Fragment() , OnDialogClickListener{
             binding.fabWorkQueue.visibility = View.GONE
         }
 
+        if(Prefs.getString(Global.Employee_role, "").equals("Operation Manger")) {
+            binding.ivCollapseCart.visibility = View.GONE
+        }else{
+            binding.ivCollapseCart.visibility = View.VISIBLE
+        }
+
         pagerAdapter = ViewPagerAdapter(childFragmentManager)
         pagerAdapter.add(OrderForDeliveryCoordinatorFragment(binding.tvCreateRoute, binding.ivCollapseCart,binding.searchBtn), "Order")
         pagerAdapter.add(RouteFragment(), "Route")

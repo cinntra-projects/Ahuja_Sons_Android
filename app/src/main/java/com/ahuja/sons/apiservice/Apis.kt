@@ -14,6 +14,7 @@ import com.ahuja.sons.model.BPLID
 import com.ahuja.sons.model.DocumentLine
 import com.ahuja.sons.newapimodel.*
 import com.ahuja.sons.receiver.ResponseEmployeeAllList
+import com.google.gson.JsonArray
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Response
@@ -219,7 +220,6 @@ interface Apis {
     @POST("employee/all_filter")
     suspend fun getSalesEmplyeeList(@Body employeeValue: NewLoginData): Response<SalesEmployeeResponse>
 
-
     @GET("employee/all")
     suspend fun getSalesEmployeeAllList(): Response<SalesEmployeeResponse>
 
@@ -228,7 +228,6 @@ interface Apis {
 
     @GET("employee/subdepartment")
     suspend fun getEmployeeSubDepList(): Response<EmployeeSubDepResponseModel>
-
 
     @GET("delivery/bp_contact_list")
     suspend fun getallcontact(): Response<ContactResponse>
@@ -522,10 +521,11 @@ interface Apis {
     @POST("order_request/unlink_sap_order")
     fun getSAPUnLinkOrderApi(@Body data: JsonObject): Call<AllDependencyAndErrandsListModel>
 
-
     @POST("order_request/get_order_items")
     fun getAllItemListApi(@Body data: JsonObject): Call<AllItemListResponseModel>
 
+
+    //todo counter Api's
     @POST("order_request/create_dependency")
     fun createDependency(@Body data: CreateDependencyRequestModel): Call<AllItemListResponseModel>
 
@@ -544,6 +544,8 @@ interface Apis {
     @POST("order_request/order_prepration")
     fun OrderPreparedForCounter(@Body jsonObject: JsonObject): Call<AllWorkQueueResponseModel>
 
+
+    //todo inspection api's
     @POST("order_request/submit_inspection_proof")
     suspend fun submitInspectionProof(@Body data: MultipartBody ): Response<AllWorkQueueResponseModel>
 
@@ -556,12 +558,13 @@ interface Apis {
     @POST("order_request/get_inspection_proof")
     fun getInspectionImages(@Body data: JsonObject ): Call<UploadedPictureModel>
 
+    //todo delivery coordinator api's--
+
     @POST("delivery/delivery_assigned")
     fun createAssign(@Body data: JsonObject): Call<AllWorkQueueResponseModel>
 
     @POST("delivery/delivery_assigned_update")
     fun updateAssign(@Body data: JsonObject): Call<AllWorkQueueResponseModel>
-
 
     @POST("delivery/get_order_delivery")
     fun getOrderDeliveryItems(@Body data: JsonObject): Call<DeliveryItemListModel>
@@ -569,9 +572,80 @@ interface Apis {
     @GET("employee/get_all_delivery_employee")
     fun getDeliveryPerson(): Call<DeliveryPersonEmployeeModel>
 
+
     @POST("delivery/delivery_route")
     fun getRouteList(@Body jsonObject: JsonObject): Call<RouteListModel>
 
+    //todo delivery person api's--
+    @POST("delivery/start_delivery_deposit")
+    fun startTripForDeliveryPerson(@Body jsonObject: JsonObject): Call<RouteListModel>
+
+    @POST("delivery/finish_delivery_deposit")
+    fun finishTripForDeliveryPerson(@Body jsonObject: JsonObject): Call<RouteListModel>
+
+    @POST("delivery/upload_delivery_deposit_proof")
+    fun uploadDeliveryPersonProof(@Body data: MultipartBody): Call<AllWorkQueueResponseModel>
+
+    @POST("delivery/get_delivery_deposit_proof")
+    fun getDeliveryDispatchProofImage(@Body data: JsonObject ): Call<UploadedPictureModel>
+
+    @POST("delivery/order_trip_detail")
+    fun getTripDetailsApi(@Body data: JsonObject ): Call<TripDetailModel>
+
+    @POST("delivery/deposit_order")
+    suspend fun getDeliveryPersonComplete(@Body data: JsonObject ): Response<AllWorkQueueResponseModel>
+
+    //todo surgery coordinator api's
+
+    @GET("employee/get_all_surgey_person")
+    fun getSurgeryPerson(): Call<DeliveryPersonEmployeeModel>
+    @POST("order_request/assigned_surgery_person")
+    fun assignedSurgeryPerson(@Body data: JsonArray ): Call<AllWorkQueueResponseModel>
+
+    @POST("order_request/update_surgery_person")
+    fun updateAssignedSurgeryPerson(@Body data: JsonArray): Call<AllWorkQueueResponseModel>
+
+    @POST("order_request/get_surgery_person")
+    fun getAssignDetail(@Body data: JsonObject): Call<SurgeryPersonNameListModel>
+
+    @POST("order_request/assigned_surgery_person_submit")
+    fun submitSurgeryCoordinator(@Body data: JsonObject): Call<AllWorkQueueResponseModel>
+
+    //todo surgery person api--
+    @POST("order_request/start_surgery")
+    fun startSurgery(@Body data: JsonObject ): Call<RouteListModel>
+
+    @POST("order_request/finish_surgery")
+    fun finishSurgery(@Body data: JsonObject ): Call<RouteListModel>
+
+    @POST("order_request/get_surgery_person")
+    fun getSurgeryPersonDetail(@Body data: JsonObject): Call<SurgeryPersonNameListModel>
+
+    @POST("order_request/upload_surgery_proof")
+    fun uploadSurgeryProof(@Body data: MultipartBody): Call<AllWorkQueueResponseModel>
+
+    @POST("order_request/get_surgery_proof")
+    fun getSurgeryProof(@Body data: JsonObject ): Call<UploadedPictureModel>
+
+    @POST("order_request/reschuedule_surgey")
+    fun rescheduleSurgeryApi(@Body data: JsonObject ): Call<AllWorkQueueResponseModel>
+
+    @POST("order_request/surgey_submit")
+    fun surgeryPersonSubmitApi(@Body data: JsonObject ): Call<AllWorkQueueResponseModel>
+
+    //todo billing proof api
+    @POST("order_request/upload_billing_proof")
+    fun uploadBillingProof(@Body data: MultipartBody ): Call<RouteListModel>
+
+    @POST("order_request/get_billing_proof")
+    fun getBillingProof(@Body data: JsonObject ): Call<UploadedPictureModel>
+    @POST("order_request/billing_submit")
+    fun submitBilling(@Body data: JsonObject ): Call<AllWorkQueueResponseModel>
+
+
+    //todo operational manager api
+    @POST("order_request/allow_incomplete_return")
+    fun allowIncompleteReturn(@Body data: JsonObject ): Call<AllWorkQueueResponseModel>
 
 
 }

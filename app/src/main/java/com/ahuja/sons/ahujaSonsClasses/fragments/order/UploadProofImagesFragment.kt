@@ -293,7 +293,7 @@ class UploadProofImagesFragment : Fragment() {
             binding.clickNewImageLayout.visibility = View.GONE
             val linearLayoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            val adapter = UploadImageListAdapter(context, mArrayUriList, arrayOf(), ArrayList())
+            val adapter = UploadImageListAdapter(context, mArrayUriList, arrayOf(), ArrayList(),"UploadProof")
             binding.proofImageRecyclerView.layoutManager = linearLayoutManager
             binding.proofImageRecyclerView.adapter = adapter
             adapter.notifyDataSetChanged()

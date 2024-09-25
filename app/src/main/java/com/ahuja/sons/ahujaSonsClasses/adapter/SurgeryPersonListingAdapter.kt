@@ -5,14 +5,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ahuja.sons.ahujaSonsClasses.model.SurgeryPersonModelData
-import com.ahuja.sons.databinding.AddSurgeryPersonLayoutBinding
 import com.ahuja.sons.databinding.ItemSurgeryCoordinatorPersonListBinding
 import com.ahuja.sons.newapimodel.SpareItemListApiModel
 
-class SurgeryPersonListingAdapter(
-    private val context: Context,
-    private val attachList: MutableList<SurgeryPersonModelData>
-) : RecyclerView.Adapter<SurgeryPersonListingAdapter.ViewHolder>() { // private val customerList_gl: ArrayList<SpareItemListApiModel.DataXXX>
+class SurgeryPersonListingAdapter(private val context: Context, private val attachList: MutableList<SurgeryPersonModelData>) : RecyclerView.Adapter<SurgeryPersonListingAdapter.ViewHolder>() { // private val customerList_gl: ArrayList<SpareItemListApiModel.DataXXX>
 
     var flag = 0
     var customerFilterName = ""
@@ -55,7 +51,7 @@ class SurgeryPersonListingAdapter(
         holder.binding.apply {
           //  tvSurgeryPersonCount.text = "${position + 2}"
             //     acItemName.setText(item.SparePartName)
-            tvDoctor.setText(item.str)
+            tvDoctor.setText(item.SurgeryPersonsName)
 
            tvSurgeryPersonCounter.setText("Surgery Person ${position+3}")
 

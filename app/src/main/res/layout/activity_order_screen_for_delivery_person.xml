@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainframelayout1"
@@ -131,7 +130,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/tvOrderID"
+                        android:id="@+id/tvDoctorName"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/company_name"
@@ -148,6 +147,7 @@
                         android:visibility="visible" />
 
                     <TextView
+                        android:id="@+id/tvOrderID"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/company_name"
@@ -164,23 +164,19 @@
 
                 </LinearLayout>
 
-
                 <TextView
-                    android:id="@+id/tvExpectedData"
+                    android:id="@+id/tvOrderInfo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tvOrderID"
                     android:layout_marginLeft="@dimen/size_15"
                     android:layout_marginTop="@dimen/size_5"
-                    android:layout_marginRight="5dp"
                     android:layout_toRightOf="@+id/name_icon"
                     android:ellipsize="end"
-                    android:maxLines="1"
-                    android:text="Order Information : Borem ipsum dolor sit hue , kdnm"
+                    android:text="Order Information : Borem jdnjsnkj bjvbsdjkvbsdjipsum dolor sit hue , kdnm"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_12"
                     android:visibility="visible" />
-
 
             </LinearLayout>
 
@@ -254,7 +250,7 @@
                 android:orientation="vertical">
 
                 <TextView
-
+                    android:id="@+id/tvSTatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/company_name"
@@ -267,7 +263,7 @@
                     android:drawablePadding="4dp"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text="Information Received"
+                    android:text="SalesOrderRequested"
                     android:textColor="@color/gray"
                     android:textSize="@dimen/text_size_12"
                     android:textStyle="bold"
@@ -275,7 +271,7 @@
 
 
                 <TextView
-
+                    android:id="@+id/tvSurgeryDateAndTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/company_name"
@@ -288,8 +284,8 @@
                     android:text="Surgery Date &amp; Time :12/11/2024 12:0:00"
                     android:textColor="@color/grey"
                     android:textSize="@dimen/text_size_12"
-
                     android:visibility="visible" />
+
             </LinearLayout>
 
         </RelativeLayout>
@@ -301,7 +297,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="55dp"
+        android:layout_marginBottom="60dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toTopOf="@+id/btnTrip"
         app:layout_constraintEnd_toEndOf="parent"
@@ -498,7 +494,7 @@
                             android:layout_marginRight="@dimen/size_10"
                             android:gravity="center_vertical"
                             android:orientation="horizontal"
-                            android:visibility="gone">
+                            android:visibility="visible">
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -531,7 +527,7 @@
                             android:layout_marginRight="@dimen/size_10"
                             android:gravity="center_vertical"
                             android:orientation="horizontal"
-                            android:visibility="gone">
+                            android:visibility="visible">
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -626,6 +622,73 @@
             </androidx.cardview.widget.CardView>
 
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/itemViewDetailCardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_10"
+                android:visibility="gone"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/size_8"
+                app:cardElevation="@dimen/size_4"
+                app:cardMaxElevation="@dimen/size_4"
+                app:cardPreventCornerOverlap="true"
+                app:layout_constraintTop_toBottomOf="@+id/orderDetailLayoutCardView">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:visibility="visible">
+
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/size_45"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="40"
+                            android:background="@drawable/heading_bg_shape"
+                            android:gravity="center_vertical"
+                            android:text="Item Details  "
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_14" />
+
+
+                        <LinearLayout
+                            android:id="@+id/itemDetailView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="80"
+                            android:gravity="end"
+                            android:orientation="vertical"
+                            android:paddingEnd="10dp">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_margin="10dp"
+                                android:background="@drawable/ic_baseline_keyboard_arrow_right_24"
+                                android:visibility="visible" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
             <TextView
                 android:id="@+id/tvClickStartText"
                 android:layout_width="match_parent"
@@ -641,7 +704,7 @@
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/orderDetailLayoutCardView" />
+                app:layout_constraintTop_toBottomOf="@+id/itemViewDetailCardView" />
 
 
             <TextView
@@ -659,9 +722,9 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_14"
                 android:textStyle="bold"
-                android:visibility="invisible"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvClickStartText"/>
+                app:layout_constraintTop_toBottomOf="@+id/tvClickStartText" />
 
 
             <androidx.cardview.widget.CardView
@@ -674,8 +737,8 @@
                 app:cardCornerRadius="@dimen/size_8"
                 app:cardElevation="@dimen/size_4"
                 app:cardMaxElevation="@dimen/size_4"
-                app:layout_constraintTop_toBottomOf="@+id/tvCountText"
-                app:cardPreventCornerOverlap="true">
+                app:cardPreventCornerOverlap="true"
+                app:layout_constraintTop_toBottomOf="@+id/tvCountText">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -769,109 +832,114 @@
                 android:id="@+id/dispatchedDetailLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="50dp"
+                android:layout_marginBottom="90dp"
                 android:background="@color/white"
                 android:orientation="vertical"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/deliveryDetailLayout">
 
-
                 <LinearLayout
+                    android:id="@+id/linearTripDetails"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="visible">
 
                     <LinearLayout
-                        android:id="@+id/linearTripDetails"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:visibility="visible">
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:background="@drawable/rounded_border"
+                        android:orientation="vertical">
+
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="8dp"
-                            android:background="@drawable/rounded_border"
-                            android:orientation="vertical">
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:visibility="visible">
 
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/size_45"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="5dp"
+                                android:background="@drawable/heading_bg_shape"
                                 android:gravity="center_vertical"
-                                android:orientation="horizontal"
-                                android:visibility="visible">
+                                android:text="Dispatch Detail  "
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/text_size_14" />
 
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="@dimen/size_45"
-                                    android:layout_marginTop="8dp"
-                                    android:layout_marginBottom="5dp"
-                                    android:background="@drawable/heading_bg_shape"
-                                    android:gravity="center_vertical"
-                                    android:text="Dispatch Detail  "
-                                    android:textColor="@color/white"
-                                    android:textSize="@dimen/text_size_14" />
-
-
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="40"
-                                    android:gravity="end"
-                                    android:orientation="vertical"
-                                    android:paddingEnd="10dp">
-
-                                    <ImageView
-                                        android:id="@+id/dispatchDownArrow"
-                                        android:layout_width="@dimen/text_size_14"
-                                        android:layout_height="@dimen/text_size_14"
-                                        android:layout_centerVertical="true"
-                                        android:layout_margin="10dp"
-                                        android:background="@drawable/down_arrow_icon"
-                                        android:visibility="gone" />
-
-                                    <ImageView
-                                        android:id="@+id/dispatchUpArrow"
-                                        android:layout_width="@dimen/text_size_14"
-                                        android:layout_height="@dimen/text_size_14"
-                                        android:layout_centerVertical="true"
-                                        android:layout_margin="10dp"
-                                        android:background="@drawable/arrow_up_icon"
-                                        android:visibility="visible" />
-
-
-                                </LinearLayout>
-
-                            </LinearLayout>
 
                             <LinearLayout
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="40"
                                 android:gravity="end"
-                                android:layout_marginLeft="@dimen/size_10"
-                                android:layout_marginRight="@dimen/size_10"
-                                android:orientation="horizontal">
+                                android:orientation="vertical"
+                                android:paddingEnd="10dp">
 
-                                <TextView
-                                    android:id="@+id/tvTripStatus"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:padding="8dp"
-                                    android:background="@drawable/round"
-                                    android:backgroundTint="@color/blue_light"
-                                    android:gravity="center_vertical"
-                                    android:text="Status : Started"
-                                    android:textColor="@color/black"
-                                    android:textSize="@dimen/text_size_14" />
+                                <ImageView
+                                    android:id="@+id/dispatchDownArrow"
+                                    android:layout_width="@dimen/text_size_14"
+                                    android:layout_height="@dimen/text_size_14"
+                                    android:layout_centerVertical="true"
+                                    android:layout_margin="10dp"
+                                    android:background="@drawable/down_arrow_icon"
+                                    android:visibility="gone" />
+
+                                <ImageView
+                                    android:id="@+id/dispatchUpArrow"
+                                    android:layout_width="@dimen/text_size_14"
+                                    android:layout_height="@dimen/text_size_14"
+                                    android:layout_centerVertical="true"
+                                    android:layout_margin="10dp"
+                                    android:background="@drawable/arrow_up_icon"
+                                    android:visibility="visible" />
+
 
                             </LinearLayout>
 
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/statusLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/size_10"
+                            android:layout_marginRight="@dimen/size_10"
+                            android:layout_marginBottom="10dp"
+                            android:gravity="end"
+                            android:orientation="horizontal"
+                            android:visibility="visible">
+
+                            <TextView
+                                android:id="@+id/tvTripStatus"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:background="@drawable/round"
+                                android:backgroundTint="@color/blue_light"
+                                android:gravity="center_vertical"
+                                android:padding="8dp"
+                                android:text="Status : Started"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/dispatchDetail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="visible">
 
                             <LinearLayout
                                 android:id="@+id/dispatchTripDetail"
@@ -889,7 +957,7 @@
 
                                     <TextView
                                         android:layout_width="match_parent"
-                                        android:layout_height="@dimen/size_45"
+                                        android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:gravity="center_vertical"
                                         android:text="Start Location"
@@ -900,7 +968,7 @@
                                     <TextView
                                         android:id="@+id/tvStartLocation"
                                         android:layout_width="match_parent"
-                                        android:layout_height="@dimen/size_45"
+                                        android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:gravity="center_vertical"
                                         android:textColor="@color/black"
@@ -944,37 +1012,10 @@
                                     android:id="@+id/linearTripEndDetails"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:orientation="vertical">
+                                    android:orientation="vertical"
+                                    android:visibility="gone">
 
 
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="@dimen/size_10"
-                                        android:layout_marginRight="@dimen/size_10"
-                                        android:orientation="horizontal">
-
-                                        <TextView
-                                            android:layout_width="match_parent"
-                                            android:layout_height="@dimen/size_45"
-                                            android:layout_weight="1"
-                                            android:gravity="center_vertical"
-                                            android:text="End Location"
-                                            android:textColor="@color/grey"
-                                            android:textSize="@dimen/text_size_14" />
-
-
-                                        <TextView
-                                            android:id="@+id/tvEndLocation"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="@dimen/size_45"
-                                            android:layout_weight="1"
-                                            android:gravity="center_vertical"
-                                            android:textColor="@color/black"
-                                            android:textSize="@dimen/text_size_14" />
-
-
-                                    </LinearLayout>
 
 
                                     <LinearLayout
@@ -1028,8 +1069,8 @@
 
                                         <LinearLayout
                                             android:layout_width="0dp"
-                                            android:layout_weight="1"
                                             android:layout_height="wrap_content"
+                                            android:layout_weight="1"
                                             android:orientation="horizontal">
 
 
@@ -1038,10 +1079,10 @@
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 android:layout_gravity="center"
-                                                android:padding="8dp"
                                                 android:background="@drawable/round"
                                                 android:backgroundTint="@color/blue_light"
                                                 android:gravity="center_vertical"
+                                                android:padding="8dp"
                                                 android:text="12:04:00"
                                                 android:textColor="@color/black"
                                                 android:textSize="@dimen/text_size_14" />
@@ -1051,16 +1092,14 @@
                                     </LinearLayout>
 
 
-
                                 </LinearLayout>
 
 
                             </LinearLayout>
 
 
-
                             <LinearLayout
-                                android:id="@+id/dispatchDetail"
+                                android:id="@+id/dispatchDetailAfterEndTrip"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical"
@@ -1195,6 +1234,36 @@
 
                                     <TextView
                                         android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:text="Start Location"
+                                        android:textColor="@color/grey"
+                                        android:textSize="@dimen/text_size_14" />
+
+
+                                    <TextView
+                                        android:id="@+id/tvStartLocation12"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/text_size_14" />
+
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/size_10"
+                                    android:layout_marginRight="@dimen/size_10"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
                                         android:layout_height="@dimen/size_45"
                                         android:layout_weight="1"
                                         android:gravity="center_vertical"
@@ -1207,6 +1276,36 @@
                                         android:id="@+id/tvStartTime"
                                         android:layout_width="match_parent"
                                         android:layout_height="@dimen/size_45"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/text_size_14" />
+
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/size_10"
+                                    android:layout_marginRight="@dimen/size_10"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:text="End Location"
+                                        android:textColor="@color/grey"
+                                        android:textSize="@dimen/text_size_14" />
+
+
+                                    <TextView
+                                        android:id="@+id/tvEndLocation"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:gravity="center_vertical"
                                         android:textColor="@color/black"
@@ -1263,8 +1362,8 @@
                                         android:gravity="center_vertical"
                                         android:text="Delivery Proof"
                                         android:textColor="@color/black"
-                                        android:textStyle="bold"
-                                        android:textSize="@dimen/text_size_14" />
+                                        android:textSize="@dimen/text_size_14"
+                                        android:textStyle="bold" />
 
 
                                     <HorizontalScrollView
@@ -1502,7 +1601,21 @@
         android:layout_margin="@dimen/dimen_8"
         android:background="@drawable/round"
         android:text="End Trip"
-        android:visibility="invisible"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        />
+
+    <Button
+        android:id="@+id/btnUploadProof"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_8"
+        android:background="@drawable/round"
+        android:text="Upload Proof"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -171,20 +171,32 @@ class CounterActivity : AppCompatActivity() {
         val call: Call<AllWorkQueueResponseModel> = ApiClient().service.OrderPreparedForCounter(jsonObject)
         call.enqueue(object : Callback<AllWorkQueueResponseModel?> {
             override fun onResponse(call: Call<AllWorkQueueResponseModel?>, response: Response<AllWorkQueueResponseModel?>) {
-                if (response.body()!!.status == 200) {
-                    binding.loadingView.stop()
-                    binding.loadingBackFrame.visibility = View.GONE
+                try {
 
-                    Global.successmessagetoast(this@CounterActivity, response.body()!!.message)
-                    onBackPressed()
-                    finish()
+                    if (response.body()!!.status == 200) {
+                        binding.loadingView.stop()
+                        binding.loadingBackFrame.visibility = View.GONE
+
+                        Global.successmessagetoast(this@CounterActivity, response.body()!!.message)
+                        onBackPressed()
+                        finish()
+
+                    }
+
+                    else if (response.body()!!.status == 400){
+                        binding.loadingView.stop()
+                        binding.loadingBackFrame.visibility = View.GONE
+                        Global.warningmessagetoast(this@CounterActivity, response.body()!!.message);
+                    }
+                    else {
+                        binding.loadingView.stop()
+                        binding.loadingBackFrame.visibility = View.GONE
+                        Global.warningmessagetoast(this@CounterActivity, response.body()!!.errors);
+                    }
 
                 }
-
-                else {
-                    binding.loadingView.stop()
-                    binding.loadingBackFrame.visibility = View.GONE
-                    Global.warningmessagetoast(this@CounterActivity, response.body()!!.errors);
+                catch (e : Exception){
+                    e.printStackTrace()
                 }
 
             }

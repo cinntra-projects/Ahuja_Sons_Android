@@ -32,6 +32,7 @@ import com.ahuja.sons.databinding.ActivityAhujaSonsMainBinding
 import com.ahuja.sons.databinding.DialogAssignDeliveryPersonBinding
 import com.ahuja.sons.globals.Global
 import com.ahuja.sons.globals.Global.isValidVehicleNumber
+import com.ahuja.sons.globals.Global.validateVehicleNumber
 import com.ahuja.sons.service.repository.DefaultMainRepositories
 import com.ahuja.sons.service.repository.MainRepos
 import com.ahuja.sons.viewmodel.MainViewModel
@@ -88,9 +89,9 @@ class AhujaSonsMainActivity : AppCompatActivity() {
 
         val conditionString = "hide_dashboard"
 
-       /* if (Prefs.getString(Global.Employee_role, "").equals("Sales Person")) {
-            hideMenuItem(binding.navigationView, R.id.workQueueFragment)
-        }*///todo hide bottom nav item as per to role
+        if (Prefs.getString(Global.Employee_role, "").equals("Delivery Person") || Prefs.getString(Global.Employee_role, "").equals("Surgery Person")) {//            || Prefs.getString(Global.Employee_role, "").equals("Sales Person")
+            hideMenuItem(binding.navigationView, R.id.orderFragment)
+        }//todo hide bottom nav item as per to role
 
 
     }
@@ -108,6 +109,7 @@ class AhujaSonsMainActivity : AppCompatActivity() {
     }
 
 
+    //todo open delivery dialog----
     lateinit var dialogBinding: DialogAssignDeliveryPersonBinding
 
     private fun openDeliveryPersonDialog(context: Context) {
@@ -138,8 +140,15 @@ class AhujaSonsMainActivity : AppCompatActivity() {
             for (order in GlobalClasses.deliveryIDsList) {
                 idArrayList.add(order.id.toInt())
             }
-
             val commaSeparatedIds = idArrayList.joinToString(separator = ",")
+
+
+            val orderIDList = ArrayList<String>()
+            for (order in GlobalClasses.cartListForOrderRequest) {
+                orderIDList.add(order.value.orderId)
+            }
+
+            val orderCommaSeparatedIds = orderIDList.joinToString(separator = ",")
 
          /*   val idStringList = commaSeparatedIds.split(",") as ArrayList
 
@@ -147,8 +156,9 @@ class AhujaSonsMainActivity : AppCompatActivity() {
 
             val vehicleNumber = dialogBinding.edtVehicleNo.text.toString()
 
-            if (!vehicleNumber.equals("") && isValidVehicleNumber(vehicleNumber)) {
-                createAssignApi(dialog, dialogBinding.loadingback, dialogBinding.loadingView, commaSeparatedIds, vehicleNumber)
+            if (!vehicleNumber.equals("") && validateVehicleNumber(vehicleNumber)) {
+
+                createAssignApi(dialog, dialogBinding.loadingback, dialogBinding.loadingView, commaSeparatedIds, vehicleNumber, orderCommaSeparatedIds)
 
             } else {
                 Global.warningmessagetoast(this@AhujaSonsMainActivity, "Invalid Vehicle Number or Empty")
@@ -156,7 +166,6 @@ class AhujaSonsMainActivity : AppCompatActivity() {
 
 
         }
-
 
         dialogBinding.tvTitle.setOnClickListener {
             dialog.cancel()
@@ -168,7 +177,8 @@ class AhujaSonsMainActivity : AppCompatActivity() {
 
 
     //todo calling Create Assign api here---
-    private fun createAssignApi(dialog: Dialog, loadingback: FrameLayout, loadingView: LoadingView, idArray: String, vehicleNumber: String) {
+    private fun createAssignApi(dialog: Dialog, loadingback: FrameLayout, loadingView: LoadingView, idArray: String, vehicleNumber: String, orderCommaSeparatedIds : String) {
+
         loadingback.visibility = View.VISIBLE
         loadingView.start()
 
@@ -183,12 +193,14 @@ class AhujaSonsMainActivity : AppCompatActivity() {
         jsonObject1.addProperty("DeliveryPerson2", deliveryPersonTwo)
         jsonObject1.addProperty("DeliveryPerson3", deliveryPersonThree)
         jsonObject1.addProperty("VechicleNo", vehicleNumber)
+        jsonObject1.addProperty("OrderID", orderCommaSeparatedIds)
         jsonObject1.addProperty("CreatedBy", Prefs.getString(Global.Employee_Code, ""))
 
         val call: Call<AllWorkQueueResponseModel> = ApiClient().service.createAssign(jsonObject1)
         call.enqueue(object : Callback<AllWorkQueueResponseModel?> {
             override fun onResponse(call: Call<AllWorkQueueResponseModel?>, response: Response<AllWorkQueueResponseModel?>) {
                 if (response.body()!!.status == 200) {
+
                     loadingback.visibility = View.GONE
                     loadingView.stop()
 

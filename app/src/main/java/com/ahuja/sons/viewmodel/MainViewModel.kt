@@ -1224,6 +1224,15 @@ class MainViewModel(
         }
     }
 
+    fun getDeliveryPersonComplete(data: JsonObject) {
+        Log.e(TAG, "submitInspectionProof: ")
+        _workQueueOne.postValue(Event(Resource.Loading()))
+        viewModelScope.launch(Dispatchers.Main) {
+            val result = repos.getDeliveryPersonComplete(data)
+            _workQueueOne.postValue(Event(result))
+        }
+    }
+
 
 
 }

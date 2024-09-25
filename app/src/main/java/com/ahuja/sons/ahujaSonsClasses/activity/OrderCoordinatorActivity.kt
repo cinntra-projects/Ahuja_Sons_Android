@@ -97,7 +97,6 @@ class OrderCoordinatorActivity : AppCompatActivity() {
             onBackPressed() // or use finish() to close the activity
         }
 
-
         binding.loadingBackFrame.visibility = View.GONE
         binding.loadingView.stop()
 
@@ -137,6 +136,7 @@ class OrderCoordinatorActivity : AppCompatActivity() {
             chipCreateearner.setOnClickListener {
 
                 Intent(this@OrderCoordinatorActivity, AddErrandActivity::class.java).also {
+                    it.putExtra("orderID", globalDataWorkQueueList.OrderRequest!!.id.toString())
                     startActivity(it)
                 }
 

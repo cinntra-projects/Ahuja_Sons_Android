@@ -100,6 +100,37 @@ class WorkQueueAdapter(var AllitemsList: ArrayList<AllWorkQueueResponseModel.Dat
                     context.startActivity(intent)
                 }
 
+                else if (Prefs.getString(Global.Employee_role, "").equals("Delivery Person")){
+                    val intent = Intent(holder.itemView.context, OrderScreenForDeliveryPersonActivity::class.java)
+                    intent.putExtra("id", AllitemsList[position].id)
+                    context.startActivity(intent)
+                }
+
+                else if (Prefs.getString(Global.Employee_role, "").equals("Surgery Coordinator")){
+                    val intent = Intent(holder.itemView.context, SurgeryCoordinatorActivity::class.java)
+                    intent.putExtra("id", AllitemsList[position].id)
+                    intent.putExtra("OrderRequestID", AllitemsList[position].OrderRequest?.id.toString())
+                    context.startActivity(intent)
+                }
+
+                else if (Prefs.getString(Global.Employee_role, "").equals("Surgery Person")){
+                    val intent = Intent(holder.itemView.context, SurgeryPersonActivity::class.java)
+                    intent.putExtra("id", AllitemsList[position].id)
+                    context.startActivity(intent)
+                }
+
+                else if (Prefs.getString(Global.Employee_role, "").equals("Billing Coordinator")){
+                    val intent = Intent(holder.itemView.context, BillingCoordinatorDetailActivity::class.java)
+                    intent.putExtra("id", AllitemsList[position].id)
+                    context.startActivity(intent)
+                }
+
+                else if (Prefs.getString(Global.Employee_role, "").equals("Operation Manager")){
+                    val intent = Intent(holder.itemView.context, OperationManagerDetailActivity::class.java)
+                    intent.putExtra("id", AllitemsList[position].id)
+                    context.startActivity(intent)
+                }
+
 
                 /*else if (Prefs.getString(Global.Employee_role, "").equals("Inspection")){
 

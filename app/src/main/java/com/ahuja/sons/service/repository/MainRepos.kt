@@ -192,6 +192,7 @@ interface MainRepos {
     suspend fun completeOrderApi(data: JsonObject): Resource<AllWorkQueueResponseModel>
     suspend fun submitInspectionProof(data: MultipartBody): Resource<AllWorkQueueResponseModel>
     suspend fun orderInspectionComplete(data: JsonObject): Resource<AllWorkQueueResponseModel>
+    suspend fun getDeliveryPersonComplete(data: JsonObject): Resource<AllWorkQueueResponseModel>
 
 
 }

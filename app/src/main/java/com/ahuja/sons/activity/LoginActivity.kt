@@ -418,6 +418,7 @@ class LoginActivity : MainBaseActivity() {
                     Prefs.putString(Global.Employee_maILid, it.data.Email)
                     Prefs.putString(Global.Employee_Code, it.data.SalesEmployeeCode.toString())
                     Prefs.putString(Global.Employee_role, it.data.role.Name)
+                    Prefs.putString(Global.Employee_role_ID, it.data.role.id.toString())
                     Prefs.putString(Global.Employee_SalesEmpCode, it.data.id.toString())
                     Prefs.putString(Global.LogInUserName, it.data.userName)
                     Prefs.putString(Global.LogInPassword, it.data.password)
@@ -431,6 +432,8 @@ class LoginActivity : MainBaseActivity() {
                         Prefs.putString(Global.RememberMe, "CheckIn")
                     }
 
+
+                    finish()
 
                 } else {
                     Global.errormessagetoast(this, it.message)

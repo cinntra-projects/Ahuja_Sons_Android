@@ -1,5 +1,7 @@
 package com.ahuja.sons.ahujaSonsClasses.activity
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -137,6 +139,18 @@ class AddErrandActivity : AppCompatActivity() {
         }
 
     }
+
+
+
+/*
+    override fun onBackPressed() {
+        val intent = Intent()
+        // Send the tag back to the previous activity
+        intent.putExtra("TAG", "AddErrands") // Put the tag in the intent
+        setResult(Activity.RESULT_OK, intent) // Set the result with OK status
+        finish() // Finish this activity
+    }
+*/
 
     fun validation(edtPickUplocation : String, edtDroplocation : String, acNatureErrand : String, acContactPerson : String) : Boolean{
         if (edtPickUplocation.isEmpty()) {

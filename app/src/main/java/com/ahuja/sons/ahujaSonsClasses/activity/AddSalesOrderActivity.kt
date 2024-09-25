@@ -139,7 +139,7 @@ class AddSalesOrderActivity : AppCompatActivity() {
 
         binding.edtDate.setOnClickListener {
 //            Global.selectDate(this, binding.edtDate)
-            Global.enableAllCalenderDateSelect(this, binding.edtDate)
+            Global.disablePastDates(this, binding.edtDate)
         }
 
 
@@ -167,8 +167,7 @@ class AddSalesOrderActivity : AppCompatActivity() {
 
 
         binding.submitChip.setOnClickListener {
-            if (validation(binding.edtOrderInfo.text.toString().trim(), binding.acHospitalName.text.toString().trim(), binding.acDoctorName.text.toString().trim(),
-                binding.edtSurgeryName.text.toString().trim(), binding.edtDate.text.toString().trim(), binding.edtTime.text.toString().trim())){
+            if (validation(binding.edtOrderInfo.text.toString().trim(), binding.acHospitalName.text.toString().trim(), binding.acDoctorName.text.toString().trim(), binding.edtDate.text.toString().trim(), binding.edtTime.text.toString().trim())){
 
                 binding.loadingback.visibility = View.VISIBLE
                 binding.loadingView.start()
@@ -182,7 +181,7 @@ class AddSalesOrderActivity : AppCompatActivity() {
                 builder.addFormDataPart("CardName", HospitalName)
                 builder.addFormDataPart("CardCode", HospitalCode)
                 builder.addFormDataPart("Doctor", DoctorCode)
-                builder.addFormDataPart("SurgeryName", binding.edtSurgeryName.text.toString())
+                builder.addFormDataPart("SurgeryName", "")//binding.edtSurgeryName.text.toString()
                 builder.addFormDataPart("SurgeryDate", Global.convert_dd_MM_yyyy_into_yyyy_MM_dd(binding.edtDate.text.toString()))
                 builder.addFormDataPart("SurgeryTime",  binding.edtTime.text.toString())
                 builder.addFormDataPart("NoOfCSRRequired", binding.acCRSNo.text.toString())
@@ -273,7 +272,7 @@ class AddSalesOrderActivity : AppCompatActivity() {
                     var itemsList = filterList(response.data)
                     AllitemsList.addAll(itemsList)
 
-                    val itemNames = itemsList.map { it.CardName }
+                    var itemNames = itemsList.map { it.CardName }
                     val cardCodeName = itemsList.map { it.CardCode }
 
                     val adapter = ArrayAdapter(this, com.ahuja.sons.R.layout.drop_down_item_textview, itemNames)
@@ -288,6 +287,8 @@ class AddSalesOrderActivity : AppCompatActivity() {
                             val pos = Global.getHospitalPos(AllitemsList, hospitalName)
                             HospitalCode = AllitemsList[pos].CardCode
 
+//                            itemNames = itemsList.map { it.CardName }
+
                             if (hospitalName.isEmpty()) {
                                 binding.hospitalRecyclerViewLayout.visibility = View.GONE
                                 binding.rvHospitalList.visibility = View.GONE
@@ -299,7 +300,7 @@ class AddSalesOrderActivity : AppCompatActivity() {
 
                             if (hospitalName.isNotEmpty()) {
                                 adapter.notifyDataSetChanged()
-                                binding.acHospitalName.setText(hospitalName)
+                                binding.acHospitalName.setText(hospitalName, false)
                                 binding.acHospitalName.setSelection(hospitalName.length)
 
                             } else {
@@ -307,6 +308,7 @@ class AddSalesOrderActivity : AppCompatActivity() {
                                 HospitalCode = ""
                                 binding.acHospitalName.setText("")
                             }
+
                         } catch (e: Exception) {
                             Log.e("catch", "onItemClick: ${e.message}")
                             e.printStackTrace()
@@ -437,7 +439,7 @@ class AddSalesOrderActivity : AppCompatActivity() {
     }
 
 
-    fun validation(edtOrderInfo : String, acHospitalName : String, acDoctorName : String, edtSurgeryName : String, edtDate: String, edtTime: String) : Boolean{
+    fun validation(edtOrderInfo : String, acHospitalName : String, acDoctorName : String,  edtDate: String, edtTime: String) : Boolean{
         if (edtOrderInfo.isEmpty()) {
             binding.edtOrderInfo.requestFocus()
             binding.edtOrderInfo.setError("Order Info is Required")
@@ -456,11 +458,11 @@ class AddSalesOrderActivity : AppCompatActivity() {
             return false
         }
 
-        else if (edtSurgeryName.isEmpty()) {
+    /*    else if (edtSurgeryName.isEmpty()) {
             binding.edtSurgeryName.requestFocus()
             binding.edtSurgeryName.setError("Surgery Name is Required")
             return false
-        }
+        }*/
 
         else if (edtDate.isEmpty()) {
             binding.edtDate.requestFocus()

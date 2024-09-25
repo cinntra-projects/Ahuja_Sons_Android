@@ -10,13 +10,11 @@
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission
-        android:name="android.permission.BROADCAST_SMS"
-        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.BROADCAST_SMS" tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
-    <uses-permission
-        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
@@ -40,7 +38,8 @@
         tools:replace="android:icon">
         <activity
             android:name=".ahujaSonsClasses.activity.OperationManagerDetailActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/MaterialComponent"  />
         <activity
             android:name=".ahujaSonsClasses.activity.BillingCoordinatorDetailActivity"
             android:exported="false" />
@@ -78,7 +77,8 @@
         <activity
             android:name=".ahujaSonsClasses.activity.SurgeryCoordinatorActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/MaterialComponent"  />
         <activity
             android:name=".ahujaSonsClasses.activity.SurgeryPersonActivity"
             android:exported="false" />
@@ -337,6 +337,7 @@
             android:name="com.ahuja.sons.globals.WorkManagerApplication"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
+
         <service
             android:name="com.ahuja.sons.FirebaseMessageReceiver"
             android:exported="false">
@@ -344,6 +345,7 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
         <service
             android:name="com.ahuja.sons.service.MyFirebaseMessagingService"
             android:exported="false">
@@ -351,6 +353,7 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
         <service
             android:name="com.ahuja.sons.notification.FirebaseMessageNotificationReceiver"
             android:enabled="true"

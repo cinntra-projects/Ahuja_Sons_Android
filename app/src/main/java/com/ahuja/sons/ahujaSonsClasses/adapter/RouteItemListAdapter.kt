@@ -11,20 +11,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ahuja.sons.R
-import com.ahuja.sons.ahujaSonsClasses.activity.*
 import com.ahuja.sons.ahujaSonsClasses.ahujaconstant.RoleClass
-import com.ahuja.sons.ahujaSonsClasses.model.local.LocalRouteData
-import com.ahuja.sons.ahujaSonsClasses.model.orderModel.AllOrderListModel
+import com.ahuja.sons.ahujaSonsClasses.model.RouteListModel
 import com.ahuja.sons.databinding.ItemRouteDeliveryCoordinatorBinding
-import java.util.ArrayList
 
 
-class RouteItemListAdapter : ListAdapter<LocalRouteData, RouteItemListAdapter.OrderViewHolder>(OrderDiffCallback()) {
-    lateinit var orderAdapter: OrderListAdapter
+class RouteItemListAdapter : ListAdapter<RouteListModel.Data, RouteItemListAdapter.OrderViewHolder>(OrderDiffCallback()) {
+    lateinit var orderAdapter: RouteOrderListAdapter
 
-    private var onItemClickListener: ((AllOrderListModel.Data, Int) -> Unit)? = null
+    private var onItemClickListener: ((RouteListModel.Data, Int) -> Unit)? = null
 
-    fun setOnItemClickListener(listener: (AllOrderListModel.Data, Int) -> Unit) {
+    fun setOnItemClickListener(listener: (RouteListModel.Data, Int) -> Unit) {
         onItemClickListener = listener
     }
 
@@ -44,17 +41,18 @@ class RouteItemListAdapter : ListAdapter<LocalRouteData, RouteItemListAdapter.Or
 
     }
 
-    inner class OrderViewHolder(private val binding: ItemRouteDeliveryCoordinatorBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(order: LocalRouteData) {
+    inner class OrderViewHolder(private val binding: ItemRouteDeliveryCoordinatorBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(order: RouteListModel.Data) {
 
             binding.ivMore.setOnClickListener {
-                showPopupMenu(binding.ivMore, itemView.context)
+                showPopupMenu(binding.ivMore, itemView.context, order, adapterPosition)
             }
 
-            binding.tvDeliveryPerson.text = order.orderName
+            binding.tvDeliveryPerson.text = "Delivery Person : "+order.DeliveryPerson1
+            binding.tvVehicleNumber.text = "Vehicle : "+order.VechicleNo
 
-            orderAdapter = OrderListAdapter(order.orderList as ArrayList<AllOrderListModel.Data>,RoleClass.deliveryPerson)
+            orderAdapter = RouteOrderListAdapter(order.OrderID ,RoleClass.deliveryPerson, order.DeliveryID)
+
             binding.rvOrderInRoute.apply {
                 layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
                 adapter = orderAdapter
@@ -77,7 +75,7 @@ class RouteItemListAdapter : ListAdapter<LocalRouteData, RouteItemListAdapter.Or
     }
 
 
-    private fun showPopupMenu(anchorView: View, context: Context, ) {
+    private fun showPopupMenu(anchorView: View, context: Context, order: RouteListModel.Data, adapterPosition: Int, ) {
         val popupMenu = PopupMenu(context, anchorView)
         popupMenu.menuInflater.inflate(R.menu.edit_assign, popupMenu.menu)
 
@@ -85,7 +83,7 @@ class RouteItemListAdapter : ListAdapter<LocalRouteData, RouteItemListAdapter.Or
             when (item.itemId) {
                 R.id.edit -> {
                     onItemClickListener?.let { click ->
-//                        click(order, adapterPosition)
+                        click(order, adapterPosition)
                     }
                     true
                 }
@@ -100,17 +98,17 @@ class RouteItemListAdapter : ListAdapter<LocalRouteData, RouteItemListAdapter.Or
 
 
 
-    class OrderDiffCallback : DiffUtil.ItemCallback<LocalRouteData>() {
+    class OrderDiffCallback : DiffUtil.ItemCallback<RouteListModel.Data>() {
         override fun areItemsTheSame(
-            oldItem: LocalRouteData,
-            newItem: LocalRouteData
+            oldItem: RouteListModel.Data,
+            newItem: RouteListModel.Data
         ): Boolean {
             return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(
-            oldItem: LocalRouteData,
-            newItem: LocalRouteData
+            oldItem: RouteListModel.Data,
+            newItem: RouteListModel.Data
         ): Boolean {
             return oldItem == newItem
         }

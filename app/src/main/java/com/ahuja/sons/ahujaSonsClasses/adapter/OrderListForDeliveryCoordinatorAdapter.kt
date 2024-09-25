@@ -120,47 +120,6 @@ class OrderListForDeliveryCoordinatorAdapter(var AllitemsList: ArrayList<AllWork
 
 
 
-        holder.itemView.setOnClickListener {
-            /*if (where.equals(RoleClass.deliveryPerson, ignoreCase = true)) {
-                val intent = Intent(context, ParticularOrderDetailActivity::class.java)
-                intent.putExtra("id", model.id.toString())
-
-                context.startActivity(intent)
-
-                onItemClickListener?.let { click ->
-                    click(model, position)
-                }
-            } else {
-                val intent = Intent(context, ParticularOrderDetailActivity::class.java)
-                intent.putExtra("id", model.id.toString())
-
-                context.startActivity(intent)
-            }*/
-
-
-            val generator: ColorGenerator = ColorGenerator.MATERIAL
-            val color1: Int = generator.randomColor
-
-            if (model.CardName.isNotEmpty()) {
-                val drawable: TextDrawable = TextDrawable.builder()
-                    .beginConfig()
-                    .withBorder(4) /* thickness in px */
-                    .endConfig()
-                    .buildRound(
-                        model.CardName[0].toString()
-                            .uppercase(Locale.getDefault()), color1
-                    )
-                holder.binding.profilePic.setImageDrawable(drawable)
-            } else {
-                holder.binding.profilePic.background =
-                    ContextCompat.getDrawable(context, R.drawable.ic_group_18576)
-            }
-
-
-        }
-
-
-
         holder.binding.profilePic.setOnClickListener {
 
             if (AllitemsList.size > 0) {
@@ -173,6 +132,25 @@ class OrderListForDeliveryCoordinatorAdapter(var AllitemsList: ArrayList<AllWork
             }
 
 
+        }
+
+
+        val generator: ColorGenerator = ColorGenerator.MATERIAL
+        val color1: Int = generator.randomColor
+
+        if (model.CardName.isNotEmpty()) {
+            val drawable: TextDrawable = TextDrawable.builder()
+                .beginConfig()
+                .withBorder(4) /* thickness in px */
+                .endConfig()
+                .buildRound(
+                    model.CardName[0].toString()
+                        .uppercase(Locale.getDefault()), color1
+                )
+            holder.binding.profilePic.setImageDrawable(drawable)
+        } else {
+            holder.binding.profilePic.background =
+                ContextCompat.getDrawable(context, R.drawable.ic_group_18576)
         }
 
 
@@ -232,7 +210,7 @@ class OrderListForDeliveryCoordinatorAdapter(var AllitemsList: ArrayList<AllWork
 
                 if (Prefs.getString(Global.Employee_role, "").equals("Delivery Coordinator")) {
                     val intent = Intent(itemView.context, DeliveryCoordinatorActivity::class.java)
-                    intent.putExtra("id", AllitemsList[position].id)
+                    intent.putExtra("id", AllitemsList[adapterPosition].id)
                     context.startActivity(intent)
                 }
 
@@ -287,8 +265,8 @@ class OrderListForDeliveryCoordinatorAdapter(var AllitemsList: ArrayList<AllWork
                         Log.e("childItemCheck==>", "onBindViewHolder: Already exists")
                     }
 
-
-                } else {
+                }
+                else {
                     isAllSelectedMethodisWorking = false
                     var pos = -1
 

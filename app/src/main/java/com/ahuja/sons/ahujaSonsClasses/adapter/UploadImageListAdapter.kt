@@ -11,15 +11,22 @@ import com.ahuja.sons.databinding.CameraImageListAdapterBinding
 
 class UploadImageListAdapter(
     private val context: Context?,
-    private val list: ArrayList<*>,
+    private val list: ArrayList<Uri>,
     private val stringList: Array<String>,
-    private val pdfurilist: java.util.ArrayList<String>
+    private val pdfurilist: java.util.ArrayList<String>,
+    private val flag : String
 ) : RecyclerView.Adapter<UploadImageListAdapter.ViewHolder>() {
 
     private var onItemClickListener: ((Any, Int,Any) -> Unit)? = null
 
     fun setOnItemClickListener(listener: (Any, Int, Any) -> Unit) {
         onItemClickListener = listener
+    }
+
+    private var onItemDeliveryClick: ((ArrayList<Uri>, Int) -> Unit)? = null
+
+    fun setOnItemDeliveryClick(listener: (ArrayList<Uri>, Int) -> Unit) {
+        onItemDeliveryClick = listener
     }
 
 
@@ -43,15 +50,23 @@ class UploadImageListAdapter(
                     }
                     binding.ivCancelPhoto.setOnClickListener {
 
-                        onItemClickListener?.let { click ->
-                            click(list[position], position, pdfurilist[position])
+                        if (flag.equals("DeliveryPerson") || flag.equals("SurgeryPerson")){
+                            onItemDeliveryClick?.let { click ->
+                                click(list, position)
+                            }
+                        }else{
+                            onItemClickListener?.let { click ->
+                                click(list[position], position, pdfurilist[position])
+                            }
                         }
+
 
                        /* if (position >= 0 && position < list.size) {
                             list.removeAt(position)
                             notifyItemRemoved(position)
                             notifyDataSetChanged()
                         }*/
+
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()

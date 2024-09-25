@@ -34,10 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dimen_8"
-
-
                 android:drawablePadding="4dp"
-
                 android:fontFamily="@font/helvetica_regular"
                 android:gravity="start"
                 android:text="Delivery Person:"
@@ -48,10 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dimen_8"
-
-
                 android:drawablePadding="4dp"
-
                 android:fontFamily="@font/helvetica_regular"
                 android:gravity="start"
                 android:text="Vehicle:"
@@ -69,6 +63,7 @@
             android:layout_width="0dp"
             android:layout_height="32dp"
             android:layout_weight="10"
+            android:visibility="visible"
             android:src="@drawable/ic_kebab" />
 
         <ImageView

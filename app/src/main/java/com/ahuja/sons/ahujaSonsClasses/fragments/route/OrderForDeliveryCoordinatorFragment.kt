@@ -83,7 +83,7 @@ class OrderForDeliveryCoordinatorFragment(var tvCreateRoute: TextView, var ivCol
 
         deliveryIDAdapter = DeliveryCoordinatorIDsAdapter(ArrayList(), isMultiOrderCardSelectEnabled)
 
-        binding.chipGroup.visibility = View.VISIBLE
+        binding.chipGroup.visibility = View.GONE//todo hide filter
         tvCreateRoute.visibility = View.VISIBLE
         ivCollapseCart.visibility = View.VISIBLE
 

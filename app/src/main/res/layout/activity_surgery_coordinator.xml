@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainframelayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/veryLightGrey">
 
 
     <com.google.android.material.appbar.AppBarLayout
@@ -94,7 +95,7 @@
                             android:layout_height="wrap_content">
 
                             <TextView
-                                android:id="@+id/tvOrderID"
+                                android:id="@+id/tvDoctorName"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@id/company_name"
@@ -111,6 +112,7 @@
                                 android:visibility="visible" />
 
                             <TextView
+                                android:id="@+id/tvOrderID"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@id/company_name"
@@ -129,17 +131,15 @@
 
 
                         <TextView
-                            android:id="@+id/tvExpectedData"
+                            android:id="@+id/tvOrderInfo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/tvOrderID"
                             android:layout_marginLeft="@dimen/size_15"
                             android:layout_marginTop="@dimen/size_5"
-                            android:layout_marginRight="5dp"
                             android:layout_toRightOf="@+id/name_icon"
                             android:ellipsize="end"
-                            android:maxLines="1"
-                            android:text="Order Information : Borem ipsum dolor sit hue , kdnm"
+                            android:text="Order Information : Borem jdnjsnkj bjvbsdjkvbsdjipsum dolor sit hue , kdnm"
                             android:textColor="@color/black"
                             android:textSize="@dimen/text_size_12"
                             android:visibility="visible" />
@@ -179,7 +179,6 @@
                     </LinearLayout>
 
                 </LinearLayout>
-
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/size_2"
@@ -191,7 +190,6 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
 
@@ -206,7 +204,7 @@
                         android:textColor="@color/grey"
                         android:textSize="@dimen/text_size_16"
 
-                        android:visibility="visible" />
+                        android:visibility="gone" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -217,7 +215,7 @@
                         android:orientation="vertical">
 
                         <TextView
-
+                            android:id="@+id/tvSTatus"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/company_name"
@@ -230,7 +228,7 @@
                             android:drawablePadding="4dp"
                             android:ellipsize="end"
                             android:maxLines="1"
-                            android:text="Delivered"
+                            android:text="SalesOrderRequested"
                             android:textColor="@color/gray"
                             android:textSize="@dimen/text_size_12"
                             android:textStyle="bold"
@@ -238,7 +236,7 @@
 
 
                         <TextView
-
+                            android:id="@+id/tvSurgeryDateAndTime"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/company_name"
@@ -251,14 +249,16 @@
                             android:text="Surgery Date &amp; Time :12/11/2024 12:0:00"
                             android:textColor="@color/grey"
                             android:textSize="@dimen/text_size_12"
-
                             android:visibility="visible" />
+
+
                     </LinearLayout>
 
                 </RelativeLayout>
 
 
             </LinearLayout>
+
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -318,136 +318,840 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        android:layout_marginBottom="@dimen/size_80"
+        android:layout_marginBottom="70dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appbar">
 
 
-
         <LinearLayout
-            android:id="@+id/surgeryCoordinatorLinearLayout"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@color/white"
-            android:orientation="vertical"
-            android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@+id/btnSubmit"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/linearHeader">
-
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="70dp"
+            android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/fillOutFormForSurgeryPersonLinearLayout"
+                android:id="@+id/inspectTabLayouts"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tab_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:paddingLeft="@dimen/size_10"
+                    android:paddingRight="@dimen/size_10"
+                    android:visibility="visible"
+                    app:tabIndicatorColor="@color/colorPrimary"
+                    app:tabIndicatorHeight="2dp"
+                    app:tabMode="fixed"
+                    app:tabSelectedTextColor="@color/colorPrimary"
+                    app:tabTextAppearance="@style/MyCustomTextAppearance" />
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/viewpagerInspect"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
+            </LinearLayout>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/orderDetailLayoutCardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="visible">
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_45"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:paddingStart="10dp"
-                    android:text="Add Surgery Person"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_14"
-                    android:textStyle="bold"
-                    android:visibility="visible" />
-
+                android:layout_margin="@dimen/size_10"
+                android:visibility="visible"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/size_8"
+                app:cardElevation="@dimen/size_4"
+                app:cardMaxElevation="@dimen/size_4"
+                app:cardPreventCornerOverlap="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:padding="10dp"
-                    android:visibility="visible">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
 
                     <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:visibility="visible">
+
+
+                        <TextView
+                            android:id="@+id/tv_employee_name"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/size_45"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="40"
+                            android:background="@drawable/heading_bg_shape"
+                            android:gravity="center_vertical"
+                            android:text="Order Details  "
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_14" />
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="80"
+                            android:gravity="end"
+                            android:orientation="vertical"
+                            android:paddingEnd="10dp">
+
+                            <ImageView
+                                android:id="@+id/orderDownArrow"
+                                android:layout_width="@dimen/text_size_14"
+                                android:layout_height="@dimen/text_size_14"
+                                android:layout_centerVertical="true"
+                                android:layout_margin="10dp"
+                                android:background="@drawable/down_arrow_icon"
+                                android:visibility="gone" />
+
+                            <ImageView
+                                android:id="@+id/orderUpArrow"
+                                android:layout_width="@dimen/text_size_14"
+                                android:layout_height="@dimen/text_size_14"
+                                android:layout_centerVertical="true"
+                                android:layout_margin="10dp"
+                                android:background="@drawable/arrow_up_icon"
+                                android:visibility="visible" />
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/orderDetailsLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:visibility="visible">
 
+
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/size_10"
+                            android:layout_marginRight="@dimen/size_10"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/size_45"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="OMS ID"
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/text_size_14" />
 
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:id="@+id/tvOMSID"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="70"
-                                android:text="Surgery Person 1"
-                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text=""
                                 android:textColor="@color/black"
-                                android:textSize="14sp" />
+                                android:textSize="@dimen/text_size_14" />
 
-                            <com.google.android.material.button.MaterialButton
-                                android:id="@+id/addSurgeryPerson"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-
-                                android:text="Add"
-                                app:cornerRadius="30dp" />
 
                         </LinearLayout>
 
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:hint="Select">
+                            android:layout_marginLeft="@dimen/size_10"
+                            android:layout_marginRight="@dimen/size_10"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
 
-                            <AutoCompleteTextView
-                                android:id="@+id/acSurgeryPerson1"
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/size_45"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Remarks"
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                            <TextView
+                                android:id="@+id/tvRemarks"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:editable="false"
-                                android:gravity="start"
-                                android:textColor="@color/black" />
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
 
-                        </com.google.android.material.textfield.TextInputLayout>
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/size_10"
+                            android:gravity="center_vertical"
+                            android:layout_marginRight="@dimen/size_10"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/size_45"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Sales Person"
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                            <TextView
+                                android:id="@+id/tvSalesPerson"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/preparedByLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/size_10"
+                            android:layout_marginRight="@dimen/size_10"
+                            android:gravity="center_vertical"
+                            android:visibility="gone"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/size_45"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Prepared By"
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                            <TextView
+                                android:id="@+id/tvPreparedBy"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/inspectedByLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/size_10"
+                            android:layout_marginRight="@dimen/size_10"
+                            android:visibility="gone"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/text_45"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Inspected By"
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                            <TextView
+                                android:id="@+id/tvInspectedBy"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/inspectionViewLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="@dimen/dimen_8"
+                            android:orientation="vertical"
+                            android:visibility="gone">
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/size_45"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Inspection Proof"
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                            <HorizontalScrollView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/size_10"
+                                android:layout_marginTop="@dimen/size_10">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:layout_marginBottom="10dp"
+                                    android:orientation="horizontal">
+
+
+                                    <androidx.recyclerview.widget.RecyclerView
+                                        android:id="@+id/proofImageRecyclerView"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="8dp"
+                                        android:orientation="horizontal"
+                                        tools:itemCount="2"
+                                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                        tools:listitem="@layout/camera_image_list_adapter" />
+
+
+                                    <ImageView
+                                        android:id="@+id/tvAddMoreImages"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="10dp"
+                                        android:layout_marginEnd="10dp"
+                                        android:visibility="gone"
+                                        android:src="@drawable/add_new_image" />
+
+                                </LinearLayout>
+
+
+                            </HorizontalScrollView>
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/itemViewDetailCardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_10"
+                android:visibility="visible"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/size_8"
+                app:cardElevation="@dimen/size_4"
+                app:cardMaxElevation="@dimen/size_4"
+                app:cardPreventCornerOverlap="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:visibility="visible">
 
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
-                            android:text="Surgery Person 2"
-                            android:textColor="@color/black"
-                            android:textSize="14sp" />
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/size_45"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="40"
+                            android:background="@drawable/heading_bg_shape"
+                            android:gravity="center_vertical"
+                            android:text="Item Details  "
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_14" />
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+
+                        <LinearLayout
+                            android:id="@+id/itemDetailView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="80"
+                            android:gravity="end"
+                            android:orientation="vertical"
+                            android:paddingEnd="10dp">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_margin="10dp"
+                                android:background="@drawable/ic_baseline_keyboard_arrow_right_24"
+                                android:visibility="visible" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+            <LinearLayout
+                android:id="@+id/dispatchedDetailLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/deliveryDetailLayout">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/linearTripDetails"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:hint="Select">
+                            android:layout_margin="8dp"
+                            android:background="@drawable/rounded_border"
+                            android:orientation="vertical">
 
-                            <AutoCompleteTextView
-                                android:id="@+id/acSurgeryPerson2"
+
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:editable="false"
-                                android:gravity="start"
-                                android:textColor="@color/black" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:visibility="visible">
 
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rvSurgeryPersons"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            tools:itemCount="2"
-                            tools:listitem="@layout/add_surgery_person_layout" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="@dimen/size_45"
+                                    android:layout_marginTop="8dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:background="@drawable/heading_bg_shape"
+                                    android:gravity="center_vertical"
+                                    android:text="Dispatch Detail  "
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/text_size_14" />
+
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="40"
+                                    android:gravity="end"
+                                    android:orientation="vertical"
+                                    android:paddingEnd="10dp">
+
+                                    <ImageView
+                                        android:id="@+id/dispatchDownArrow"
+                                        android:layout_width="@dimen/text_size_14"
+                                        android:layout_height="@dimen/text_size_14"
+                                        android:layout_centerVertical="true"
+                                        android:layout_margin="10dp"
+                                        android:background="@drawable/down_arrow_icon"
+                                        android:visibility="gone" />
+
+                                    <ImageView
+                                        android:id="@+id/dispatchUpArrow"
+                                        android:layout_width="@dimen/text_size_14"
+                                        android:layout_height="@dimen/text_size_14"
+                                        android:layout_centerVertical="true"
+                                        android:layout_margin="10dp"
+                                        android:background="@drawable/arrow_up_icon"
+                                        android:visibility="visible" />
+
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/statusLayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="end"
+                                android:layout_marginLeft="@dimen/size_10"
+                                android:layout_marginRight="@dimen/size_10"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/tvTripStatus"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:padding="8dp"
+                                    android:background="@drawable/round"
+                                    android:backgroundTint="@color/blue_light"
+                                    android:gravity="center_vertical"
+                                    android:text="Status : Started"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/text_size_14" />
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:id="@+id/dispatchTripDetail"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:visibility="visible">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/size_10"
+                                    android:layout_marginRight="@dimen/size_10"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/size_45"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:text="Delivery Person 1"
+                                        android:textColor="@color/grey"
+                                        android:textSize="@dimen/text_size_14" />
+
+
+                                    <TextView
+                                        android:id="@+id/tvDeliveryPersonOne"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/size_45"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/text_size_14" />
+
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/size_10"
+                                    android:layout_marginRight="@dimen/size_10"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/size_45"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:text="Delivery Person 2"
+                                        android:textColor="@color/grey"
+                                        android:textSize="@dimen/text_size_14" />
+
+
+                                    <TextView
+                                        android:id="@+id/tvDeliveryPersonTwo"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/size_45"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/text_size_14" />
+
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/size_10"
+                                    android:layout_marginRight="@dimen/size_10"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/size_45"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:text="Delivery Person 3"
+                                        android:textColor="@color/grey"
+                                        android:textSize="@dimen/text_size_14" />
+
+
+                                    <TextView
+                                        android:id="@+id/tvDeliveryPersonThree"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/size_45"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/text_size_14" />
+
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/size_10"
+                                    android:layout_marginRight="@dimen/size_10"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/size_45"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:text="Vehicle No."
+                                        android:textColor="@color/grey"
+                                        android:textSize="@dimen/text_size_14" />
+
+
+                                    <TextView
+                                        android:id="@+id/tvVehicleNum"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/size_45"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/text_size_14" />
+
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/size_10"
+                                    android:layout_marginRight="@dimen/size_10"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:text="Start Location"
+                                        android:textColor="@color/grey"
+                                        android:textSize="@dimen/text_size_14" />
+
+
+                                    <TextView
+                                        android:id="@+id/tvStartLocation"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/text_size_14" />
+
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/size_10"
+                                    android:layout_marginRight="@dimen/size_10"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/size_45"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:text="Start Time"
+                                        android:textColor="@color/grey"
+                                        android:textSize="@dimen/text_size_14" />
+
+
+                                    <TextView
+                                        android:id="@+id/tvStartTripTime"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/size_45"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/text_size_14" />
+
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/size_10"
+                                    android:layout_marginRight="@dimen/size_10"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/size_45"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:text="End Location"
+                                        android:textColor="@color/grey"
+                                        android:textSize="@dimen/text_size_14" />
+
+
+                                    <TextView
+                                        android:id="@+id/tvDispatchEndLocation"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/size_45"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/text_size_14" />
+
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/size_10"
+                                    android:layout_marginRight="@dimen/size_10"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/size_45"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:text="End Time"
+                                        android:textColor="@color/grey"
+                                        android:textSize="@dimen/text_size_14" />
+
+
+                                    <TextView
+                                        android:id="@+id/tvEndTripTime"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/size_45"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/text_size_14" />
+
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:id="@+id/deliveryProofViewLayout"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginEnd="@dimen/dimen_8"
+                                    android:orientation="vertical"
+                                    android:visibility="gone">
+
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/size_45"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:text="Delivery Proof"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/text_size_14"
+                                        android:textStyle="bold" />
+
+
+                                    <HorizontalScrollView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/size_10"
+                                        android:layout_marginTop="@dimen/size_10">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginBottom="10dp"
+                                            android:gravity="center_vertical"
+                                            android:orientation="horizontal">
+
+
+                                            <androidx.recyclerview.widget.RecyclerView
+                                                android:id="@+id/rvDeliveryImage"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginBottom="8dp"
+                                                android:orientation="horizontal"
+                                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                                tools:itemCount="2"
+                                                tools:listitem="@layout/camera_image_list_adapter" />
+
+
+                                        </LinearLayout>
+
+
+                                    </HorizontalScrollView>
+
+
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
+
+
+                        </LinearLayout>
 
 
                     </LinearLayout>
@@ -459,174 +1163,412 @@
             </LinearLayout>
 
 
-            <LinearLayout
-                android:id="@+id/surgeryDetailLinearLayout"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/pickupDetailCardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
+                android:layout_margin="@dimen/size_10"
+                android:visibility="gone"
+                android:layout_marginBottom="50dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/size_8"
+                app:cardElevation="@dimen/size_4"
+                app:cardMaxElevation="@dimen/size_4"
+                app:cardPreventCornerOverlap="true">
 
-                <androidx.cardview.widget.CardView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/size_10"
-                    android:visibility="visible"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="@dimen/size_8"
-                    app:cardElevation="@dimen/size_4"
-                    app:cardMaxElevation="@dimen/size_4"
-                    app:cardPreventCornerOverlap="true">
+                    android:orientation="vertical">
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:visibility="visible">
+
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/size_45"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="40"
+                            android:background="@drawable/heading_bg_shape"
+                            android:gravity="center_vertical"
+                            android:text="Pickup Details  "
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_14" />
 
 
                         <LinearLayout
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal"
-                            android:visibility="visible">
+                            android:layout_weight="80"
+                            android:gravity="end"
+                            android:orientation="vertical"
+                            android:paddingEnd="10dp">
 
+                            <ImageView
+                                android:id="@+id/pickupDownArrow"
+                                android:layout_width="@dimen/text_size_14"
+                                android:layout_height="@dimen/text_size_14"
+                                android:layout_centerVertical="true"
+                                android:layout_margin="10dp"
+                                android:background="@drawable/down_arrow_icon"
+                                android:visibility="gone" />
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="@dimen/size_45"
-                                android:layout_marginTop="5dp"
-                                android:layout_marginBottom="5dp"
-                                android:layout_weight="40"
-                                android:background="@drawable/heading_bg_shape"
-                                android:gravity="center_vertical"
-                                android:text="Surgery Person  "
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/text_size_14" />
+                            <ImageView
+                                android:id="@+id/pickupUpArrow"
+                                android:layout_width="@dimen/text_size_14"
+                                android:layout_height="@dimen/text_size_14"
+                                android:layout_centerVertical="true"
+                                android:layout_margin="10dp"
+                                android:background="@drawable/arrow_up_icon"
+                                android:visibility="visible" />
 
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="80"
-                                android:gravity="end"
-                                android:orientation="vertical"
-                                android:paddingEnd="10dp">
-
-                                <TextView
-                                    android:id="@+id/tvEdit"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="5dp"
-                                    android:layout_marginBottom="5dp"
-                                    android:layout_weight="40"
-                                    android:layout_marginEnd="8dp"
-                                    android:gravity="center_vertical"
-                                    android:text="Edit"
-                                    android:textColor="@color/colorPrimary"
-                                    android:textSize="@dimen/text_size_14" />
-
-                                <ImageView
-                                    android:id="@+id/surgeryPDownArrow"
-                                    android:layout_width="@dimen/text_size_14"
-                                    android:layout_height="@dimen/text_size_14"
-                                    android:layout_centerVertical="true"
-                                    android:layout_margin="10dp"
-                                    android:background="@drawable/down_arrow_icon"
-                                    android:visibility="gone" />
-
-                                <ImageView
-                                    android:id="@+id/surgeryPUpArrow"
-                                    android:layout_width="@dimen/text_size_14"
-                                    android:layout_height="@dimen/text_size_14"
-                                    android:layout_centerVertical="true"
-                                    android:layout_margin="10dp"
-                                    android:background="@drawable/arrow_up_icon"
-                                    android:visibility="gone" />
-
-
-                            </LinearLayout>
 
                         </LinearLayout>
 
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/pickUpDetailsLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
                         <LinearLayout
-                            android:id="@+id/surgeryPDetailsLayout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/size_10"
+                            android:layout_marginRight="@dimen/size_10"
+                            android:gravity="end"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tvPickUpStatus"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:background="@drawable/round"
+                                android:backgroundTint="@color/blue_light"
+                                android:gravity="center_vertical"
+                                android:padding="8dp"
+                                android:text="Status : Started"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/size_10"
+                            android:layout_marginRight="@dimen/size_10"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/size_45"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Delivery Person 1"
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                            <TextView
+                                android:id="@+id/tvPickUpDeliveryPersonOne"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text=""
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/size_10"
+                            android:layout_marginRight="@dimen/size_10"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/size_45"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Delivery Person 2"
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                            <TextView
+                                android:id="@+id/tvPickUpDeliveryPersonTwo"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text=""
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/size_10"
+                            android:layout_marginRight="@dimen/size_10"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/size_45"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Delivery Person 3"
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                            <TextView
+                                android:id="@+id/tvPickUpDeliveryPersonThree"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text=""
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/size_10"
+                            android:layout_marginRight="@dimen/size_10"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/size_45"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Vehicle No."
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                            <TextView
+                                android:id="@+id/tvVehicleNo"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text=""
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/size_10"
+                            android:layout_marginRight="@dimen/size_10"
+                            android:visibility="gone"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Start Location"
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                            <TextView
+                                android:id="@+id/tvStartLocation12"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/size_10"
+                            android:layout_marginRight="@dimen/size_10"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/size_45"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Start Time"
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                            <TextView
+                                android:id="@+id/tvStartTime"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text=""
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/size_10"
+                            android:layout_marginRight="@dimen/size_10"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/size_45"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="End Time"
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                            <TextView
+                                android:id="@+id/tvEndTime"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text=""
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/size_10"
+                            android:layout_marginRight="@dimen/size_10"
+                            android:visibility="gone"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="End Location"
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                            <TextView
+                                android:id="@+id/tvEndLocation"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/deliveryViewLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="@dimen/dimen_8"
                             android:orientation="vertical"
-                            android:visibility="visible">
-                            <LinearLayout
+                            android:visibility="gone">
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/size_45"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Delivery Proof"
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/text_size_14"
+                                android:textStyle="bold" />
+
+
+                            <HorizontalScrollView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:layout_margin="@dimen/size_4"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent">
+                                android:layout_marginStart="@dimen/size_10"
+                                android:layout_marginTop="@dimen/size_10">
 
-                                <TextView
-                                    android:id="@+id/tvSurgeryPersonCounter1"
+                                <LinearLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="@dimen/size_45"
-                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="10dp"
                                     android:gravity="center_vertical"
-                                    android:text="Surgery Person 1"
-                                    android:textColor="@color/grey"
-                                    android:textSize="@dimen/text_size_14" />
+                                    android:orientation="horizontal">
 
 
-                                <TextView
-                                    android:id="@+id/tvSurgeryPerson1"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="@dimen/size_45"
-                                    android:layout_weight="1"
-                                    android:gravity="center_vertical"
-                                    android:text="Dr. Yatendra Mishra"
-                                    android:textColor="@color/black"
-                                    android:textSize="@dimen/text_size_14" />
+                                    <androidx.recyclerview.widget.RecyclerView
+                                        android:id="@+id/deliveryProofRecyclerView"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="8dp"
+                                        android:orientation="horizontal"
+                                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                        tools:itemCount="2"
+                                        tools:listitem="@layout/camera_image_list_adapter" />
+
+                                </LinearLayout>
 
 
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:layout_margin="@dimen/size_4"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent">
-
-                                <TextView
-                                    android:id="@+id/tvSurgeryPersonCounter2"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="@dimen/size_45"
-                                    android:layout_weight="1"
-                                    android:gravity="center_vertical"
-                                    android:text="Surgery Person 2"
-                                    android:textColor="@color/grey"
-                                    android:textSize="@dimen/text_size_14" />
-
-
-                                <TextView
-                                    android:id="@+id/tvSurgeryPerson2"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="@dimen/size_45"
-                                    android:layout_weight="1"
-                                    android:gravity="center_vertical"
-                                    android:text="Dr. Yatendra Mishra"
-                                    android:textColor="@color/black"
-                                    android:textSize="@dimen/text_size_14" />
-
-
-                            </LinearLayout>
-                            <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/rvSurgeryPersonsList"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                tools:itemCount="2"
-                                tools:listitem="@layout/item_surgery_coordinator_person_list" />
-
+                            </HorizontalScrollView>
 
 
                         </LinearLayout>
@@ -634,10 +1576,319 @@
 
                     </LinearLayout>
 
-                </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
 
 
-            </LinearLayout>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/surgeryDetailCardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_10"
+                android:visibility="gone"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/size_8"
+                app:cardElevation="@dimen/size_4"
+                app:cardMaxElevation="@dimen/size_4"
+                app:cardPreventCornerOverlap="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:visibility="visible">
+
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/size_45"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="40"
+                            android:background="@drawable/heading_bg_shape"
+                            android:gravity="center_vertical"
+                            android:text="Surgery Details  "
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_14" />
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="80"
+                            android:gravity="end"
+                            android:orientation="vertical"
+                            android:paddingEnd="10dp">
+
+                            <ImageView
+                                android:id="@+id/surgeryDownArrow"
+                                android:layout_width="@dimen/text_size_14"
+                                android:layout_height="@dimen/text_size_14"
+                                android:layout_centerVertical="true"
+                                android:layout_margin="10dp"
+                                android:background="@drawable/down_arrow_icon"
+                                android:visibility="gone" />
+
+                            <ImageView
+                                android:id="@+id/surgeryUpArrow"
+                                android:layout_width="@dimen/text_size_14"
+                                android:layout_height="@dimen/text_size_14"
+                                android:layout_centerVertical="true"
+                                android:layout_margin="10dp"
+                                android:background="@drawable/arrow_up_icon"
+                                android:visibility="visible" />
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/surgeryDetailsLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:layout_marginLeft="@dimen/size_10"
+                            android:layout_marginRight="@dimen/size_10"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tvSurgeryStatus"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:padding="8dp"
+                                android:background="@drawable/round"
+                                android:backgroundTint="@color/blue_light"
+                                android:gravity="center_vertical"
+                                android:text="Status : Started"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                            <TextView
+                                android:id="@+id/tvEditSurgery"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:padding="8dp"
+                                android:gravity="center_vertical"
+                                android:text="Edit"
+                                android:visibility="visible"
+                                android:layout_marginStart="15dp"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="@dimen/text_size_14" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/size_10"
+                            android:layout_marginRight="@dimen/size_10">
+
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rvSurgeryPersonListName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                tools:itemCount="2"
+                                tools:listitem="@layout/surgery_person_name_layout"/>
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/size_10"
+                            android:visibility="gone"
+                            android:layout_marginRight="@dimen/size_10"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/size_45"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Vehicle No."
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                            <TextView
+                                android:id="@+id/tvSurgeryVehicleNo"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text=""
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/size_10"
+                            android:layout_marginRight="@dimen/size_10"
+                            android:gravity="center_vertical"
+                            android:visibility="gone"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/size_45"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Start Time"
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                            <TextView
+                                android:id="@+id/tvSurgeryStartTime"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text=""
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/size_10"
+                            android:layout_marginRight="@dimen/size_10"
+                            android:gravity="center_vertical"
+                            android:visibility="gone"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/size_45"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="End Time"
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                            <TextView
+                                android:id="@+id/tvSurgeryEndTime"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text=""
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/size_10"
+                            android:layout_marginRight="@dimen/size_10"
+                            android:gravity="center_vertical"
+                            android:visibility="gone"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/size_45"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Duration"
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                            <TextView
+                                android:id="@+id/tvSurgeryDuration"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text=""
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/size_10"
+                            android:layout_marginRight="@dimen/size_10"
+                            android:gravity="center_vertical"
+                            android:visibility="gone"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/size_45"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="No. of CRS Required"
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                            <TextView
+                                android:id="@+id/tvCRSNo"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text=""
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
 
         </LinearLayout>
 
@@ -645,20 +1896,106 @@
     </androidx.core.widget.NestedScrollView>
 
 
-    <Button
-        android:id="@+id/btnSubmit"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/chipCardViewBtton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_margin="@dimen/dimen_8"
-        android:background="@drawable/round"
-        android:text="Submit"
+        android:elevation="20dp"
         android:visibility="visible"
+        app:cardBackgroundColor="@color/white"
+        app:cardElevation="20dp"
+        app:cardPreventCornerOverlap="true">
+
+        <LinearLayout
+            android:id="@+id/counterBtnLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/my_app_background_color"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:visibility="visible">
+
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/addSurgeryChipGroup"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:visibility="visible"
+                android:layout_weight="1">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/addSurgerPersonBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:elevation="2dp"
+                    android:text="Add Surgery Person"
+                    android:textAlignment="center"
+                    android:textColor="@color/my_app_background_color"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:chipBackgroundColor="@color/colorPrimary"
+                    app:chipIconTint="@color/colorPrimary"
+                    app:chipStrokeColor="@color/colour_text_color"
+                    app:chipStrokeWidth="1dp"
+                    app:rippleColor="@color/colour_text_color" />
+            </com.google.android.material.chip.ChipGroup>
+
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/submitChipGroup"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:visibility="gone"
+                android:layout_weight="1">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/submitBtnChip"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:elevation="2dp"
+                    android:text="Submit"
+                    android:textAlignment="center"
+                    android:textColor="@color/my_app_background_color"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:chipBackgroundColor="@color/colorPrimary"
+                    app:chipIconTint="@color/colorPrimary"
+                    app:chipStrokeColor="@color/colour_text_color"
+                    app:chipStrokeWidth="1dp"
+                    app:rippleColor="@color/colour_text_color" />
+            </com.google.android.material.chip.ChipGroup>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <FrameLayout
+        android:id="@+id/loadingBackFrame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#3B505050"
+        android:clickable="true"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        />
+        <com.github.loadingview.LoadingView
+            android:id="@+id/loadingView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

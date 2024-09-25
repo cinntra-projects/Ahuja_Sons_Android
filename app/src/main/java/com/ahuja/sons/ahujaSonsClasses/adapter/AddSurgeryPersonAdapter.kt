@@ -56,7 +56,7 @@ class AddSurgeryPersonAdapter(
         holder.binding.apply {
             //  tvSurgeryPersonCount.text = "${position + 2}"
             //     acItemName.setText(item.SparePartName)
-            edtSurgeryPerson.setText(item.str)
+            edtSurgeryPerson.setText(item.SurgeryPersonsName)
 
             ivCross.setOnClickListener {
                 onItemMinusClickListener?.let { click ->
@@ -71,7 +71,7 @@ class AddSurgeryPersonAdapter(
                 }
 
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                    item.str = p0.toString()
+                    item.SurgeryPersonsName = p0.toString()
                 }
 
                 override fun afterTextChanged(p0: Editable?) {
@@ -106,6 +106,7 @@ class AddSurgeryPersonAdapter(
     fun removeItem(position: Int) {
         attachList.removeAt(position)
         notifyItemRemoved(position)
+        notifyDataSetChanged()
     }
 
     fun getAttachList(): List<SurgeryPersonModelData> {

@@ -252,7 +252,7 @@
                         android:layout_marginTop="@dimen/size_10"
                         android:layout_below="@+id/doctorNameLayout"
                         android:orientation="vertical"
-                        android:visibility="visible">
+                        android:visibility="gone">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -282,6 +282,7 @@
 
 
                     <LinearLayout
+                        android:id="@+id/surgeryDateLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/size_10"
@@ -319,47 +320,47 @@
 
                     </LinearLayout>
 
-                </RelativeLayout>
 
-
-
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/size_10"
-                    android:orientation="vertical"
-                    android:visibility="visible">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/surgery_time_mand"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:hint="--:--"
-                        app:endIconDrawable="@drawable/time"
-                        app:endIconMode="custom"
-                        app:endIconTint="@color/colorPrimary">
+                        android:layout_marginTop="@dimen/size_10"
+                        android:orientation="vertical"
+                        android:layout_below="@+id/surgeryDateLayout"
+                        android:visibility="visible">
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edtTime"
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/surgery_time_mand"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="start"
-                            android:textColor="@color/black" />
+                            android:layout_marginTop="10dp"
+                            android:hint="--:--"
+                            app:endIconDrawable="@drawable/time"
+                            app:endIconMode="custom"
+                            app:endIconTint="@color/colorPrimary">
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/edtTime"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:editable="false"
+                                android:clickable="false"
+                                android:textColor="@color/black" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
 
 
-                </LinearLayout>
+                    </LinearLayout>
+
+                </RelativeLayout>
 
 
                 <LinearLayout
@@ -527,7 +528,6 @@
             app:lv_external_radius="24dp"
             app:lv_internal_radius="4dp"
             app:lv_start_color="@color/color_start" />
-
 
     </FrameLayout>
 

@@ -21,6 +21,7 @@ import com.ahuja.sons.ahujaSonsClasses.adapter.PreviousImageViewAdapter
 import com.ahuja.sons.ahujaSonsClasses.model.AllDependencyAndErrandsListModel
 import com.ahuja.sons.ahujaSonsClasses.model.AllErrandsListModel
 import com.ahuja.sons.ahujaSonsClasses.model.DeliveryItemListModel
+import com.ahuja.sons.ahujaSonsClasses.model.TripDetailModel
 import com.ahuja.sons.ahujaSonsClasses.model.image_get_model.UploadedPictureModel
 import com.ahuja.sons.ahujaSonsClasses.model.workQueue.AllWorkQueueResponseModel
 import com.ahuja.sons.apihelper.Event
@@ -97,8 +98,8 @@ class DeliveryCoordinatorActivity : AppCompatActivity() {
 
 
         var jsonObject = JsonObject()
-        jsonObject.addProperty("delivery_id", orderID)
-        viewModel.callDeliveryDetailApi(jsonObject)
+        jsonObject.addProperty("id", orderID)
+        viewModel.callWorkQueueDetailApi(jsonObject)
         bindWorkQueueDetail()
 
         hideAndShowViews()
@@ -184,18 +185,22 @@ class DeliveryCoordinatorActivity : AppCompatActivity() {
 
         }
 
-        /*
         binding.dispatchUpArrow.setOnClickListener {
-            binding.dispatchDetailsLayout.visibility = View.GONE
+            binding.tvTripStatus.visibility = View.GONE
+            binding.dispatchTripDetail.visibility = View.GONE
             binding.dispatchUpArrow.visibility = View.GONE
             binding.dispatchDownArrow.visibility = View.VISIBLE
         }
 
         binding.dispatchDownArrow.setOnClickListener {
-            binding.dispatchDetailsLayout.visibility = View.VISIBLE
+            binding.tvTripStatus.visibility = View.VISIBLE
+            binding.dispatchTripDetail.visibility = View.VISIBLE
             binding.dispatchDownArrow.visibility = View.GONE
             binding.dispatchUpArrow.visibility = View.VISIBLE
         }
+
+
+        /*
 
 
         binding.surgeryUpArrow.setOnClickListener {
@@ -250,6 +255,8 @@ class DeliveryCoordinatorActivity : AppCompatActivity() {
 
                         callDeliveryDetailItemList()
 
+                        callTripDetailsApi("")
+
                         //todo set deafult data---
                         setDefaultData(modelData)
 
@@ -264,6 +271,7 @@ class DeliveryCoordinatorActivity : AppCompatActivity() {
 
         ))
     }
+
 
 
     //todo set deafult data here---
@@ -350,6 +358,81 @@ class DeliveryCoordinatorActivity : AppCompatActivity() {
 
     }
 
+
+
+
+    //todo call trip detail--
+    private fun callTripDetailsApi(flag: String) {
+        var jsonObject1 = JsonObject()
+        jsonObject1.addProperty("OrderID", globalDataWorkQueueList.OrderRequest!!.id)
+
+        val call: Call<TripDetailModel> = ApiClient().service.getTripDetailsApi(jsonObject1)
+        call.enqueue(object : Callback<TripDetailModel?> {
+            override fun onResponse(call: Call<TripDetailModel?>, response: Response<TripDetailModel?>) {
+                if (response.body()!!.status == 200) {
+
+                    Log.e("data", response.body()!!.data.toString())
+
+                    var listData = response.body()!!.data
+
+                    if (listData.size > 0){
+
+                        var data = listData[0]
+                        binding.dispatchedDetailLayout.visibility = View.VISIBLE
+
+                        if (data.StartAt.isNotEmpty()){
+
+                            binding.apply {
+                                tvStartLocation.setText(data.StartLocation)
+                                tvStartTripTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data.StartAt))
+
+
+                                if (data.EndAt.isNotEmpty()){
+                                    if (data.Deliveryassigned.isNotEmpty()){
+                                        tvDeliveryPersonOne.setText(data.Deliveryassigned[0].DeliveryPerson1)
+                                        tvDeliveryPersonTwo.setText(data.Deliveryassigned[0].DeliveryPerson2)
+                                        tvDeliveryPersonThree.setText(data.Deliveryassigned[0].DeliveryPerson3)
+                                        tvVehicleNo.setText(data.Deliveryassigned[0].VechicleNo)
+
+                                    }
+
+                                    tvStartLocation12.setText(data.StartLocation)
+                                    tvStartTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data.StartAt))
+                                    tvDispatchEndLocation.setText(data.EndLocation)
+                                    tvEndTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data.EndAt))
+
+                                }else{
+                                    tvStartTime.setText("NA")
+                                    tvStartLocation12.setText("NA")
+                                    tvDispatchEndLocation.setText("NA")
+                                    tvEndTime.setText("NA")
+
+                                }
+
+
+                            }
+                        }
+                    }else{
+                        binding.dispatchedDetailLayout.visibility = View.GONE
+                    }
+
+                } else {
+
+                    Global.warningmessagetoast(this@DeliveryCoordinatorActivity, response.body()!!.message);
+
+                }
+            }
+
+            override fun onFailure(call: Call<TripDetailModel?>, t: Throwable) {
+
+                Log.e(TAG, "onFailure: "+t.message )
+                Toast.makeText(this@DeliveryCoordinatorActivity, t.message, Toast.LENGTH_SHORT).show()
+
+            }
+
+        })
+
+    }
 
     private fun bindGetInspectionImages() {
         var jsonObject1 = JsonObject()

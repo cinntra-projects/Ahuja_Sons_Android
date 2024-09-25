@@ -892,4 +892,12 @@ class DefaultMainRepositories : MainRepos {
             }
         }
 
+    override suspend fun getDeliveryPersonComplete(requestBody: JsonObject) =
+        withContext(Dispatchers.IO) {
+            safeCall {
+                val response = ApiClient().service.getDeliveryPersonComplete(requestBody)
+                Resource.Success(response.body()!!)
+            }
+        }
+
 }

@@ -75,6 +75,8 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
 
     var orderID = 0
 
+    var DeliveryStatus = ""
+
     lateinit var fileDialog: File
     lateinit var picturePath: String
     var random: Random = Random()
@@ -95,6 +97,7 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
     }
 
     var status = ""
+    var inspectionDeliveryPos = 0
 
 
     private fun setUpViewModel() {
@@ -135,6 +138,8 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
         }
 
         orderID = intent.getIntExtra("id",0)
+        inspectionDeliveryPos = intent.getIntExtra("inspectionDeliveryPos",0)
+        DeliveryStatus = intent.getStringExtra("DeliveryStatus").toString()
 
         binding.loadingBackFrame.visibility = View.GONE
         binding.loadingView.stop()
@@ -177,9 +182,7 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
 
                         globalDataWorkQueueList = response.data[0]
 
-
                         bindGetInspectionImages()
-
 
                         //todo calling dependency and errand list
 
@@ -207,6 +210,15 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
 
     //todo set deafult data here---
     private fun setDefaultData(modelData: AllWorkQueueResponseModel.Data) {
+
+        if (DeliveryStatus == "Inspected"){
+            binding.uploadProofChipGroup.visibility = View.GONE
+            binding.submitChipGroup.visibility = View.VISIBLE
+
+        }else{
+            binding.uploadProofChipGroup.visibility = View.VISIBLE
+            binding.submitChipGroup.visibility = View.GONE
+        }
 
         val generator: ColorGenerator = ColorGenerator.MATERIAL
         val color1: Int = generator.randomColor
@@ -339,10 +351,8 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
 
                     binding.loadingView.stop()
                     binding.loadingBackFrame.visibility = View.GONE
-                    Global.warningmessagetoast(
-                        this@InspectDeliveryOrderDetailActivity,
-                        response.message().toString()
-                    );
+                    Log.e(TAG, "onResponse: "+response.message().toString() )
+//                    Global.warningmessagetoast(this@InspectDeliveryOrderDetailActivity, response.message().toString());
 
                 }
             }
@@ -407,10 +417,8 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
 
                     binding.loadingView.stop()
                     binding.loadingBackFrame.visibility = View.GONE
-                    Global.warningmessagetoast(
-                        this@InspectDeliveryOrderDetailActivity,
-                        response.body()!!.errors.toString()
-                    );
+                    Log.e(TAG, "onResponse: "+response.body()!!.errors )
+//                    Global.warningmessagetoast(this@InspectDeliveryOrderDetailActivity, response.body()!!.errors.toString());
 
                 }
             }
@@ -426,9 +434,6 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
             }
         })
     }
-
-
-
 
 
     var deliveryItemList_gl = ArrayList<DeliveryItemListModel.Data>()
@@ -533,7 +538,6 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
         binding.uploadProofChip.setOnClickListener {
 
             showItemListDialogBottomSheetDialog()
-
 
         }
 
@@ -738,11 +742,7 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
 
 
     //todo upload proof api here--
-    private fun callUploadProofApi(
-        bottomSheetDialog: BottomSheetDialog,
-        loadingback: FrameLayout,
-        loadingView: LoadingView
-    ) {
+    private fun callUploadProofApi(bottomSheetDialog: BottomSheetDialog, loadingback: FrameLayout, loadingView: LoadingView) {
         loadingback.visibility = View.VISIBLE
         loadingView.start()
 
@@ -789,15 +789,13 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
 
         Log.e("payload", jsonObject.toString())
 
-
-
         val call: Call<AllWorkQueueResponseModel> = ApiClient().service.submitInspectionProofMVC(requestBody)
         call.enqueue(object : Callback<AllWorkQueueResponseModel?> {
             override fun onResponse(call: Call<AllWorkQueueResponseModel?>, response: Response<AllWorkQueueResponseModel?>) {
                 if (response.body()!!.status == 200) {
 
-                    loadingback.visibility = View.VISIBLE
-                    loadingView.start()
+                    loadingback.visibility = View.GONE
+                    loadingView.stop()
 
                     Log.e("data", response.body()!!.data.toString())
                     Global.successmessagetoast(this@InspectDeliveryOrderDetailActivity, "Picture Uploaded Success")
@@ -812,16 +810,16 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
                     bindWorkQueueDetail()
 
                 } else {
-                    loadingback.visibility = View.VISIBLE
-                    loadingView.start()
+                    loadingback.visibility = View.GONE
+                    loadingView.stop()
                     Global.warningmessagetoast(this@InspectDeliveryOrderDetailActivity, response.body()!!.message);
 
                 }
             }
 
             override fun onFailure(call: Call<AllWorkQueueResponseModel?>, t: Throwable) {
-                loadingback.visibility = View.VISIBLE
-                loadingView.start()
+                loadingback.visibility = View.GONE
+                loadingView.stop()
                 Log.e(TAG, "onFailure: "+t.message )
                 Toast.makeText(this@InspectDeliveryOrderDetailActivity, t.message, Toast.LENGTH_SHORT).show()
             }
@@ -904,8 +902,16 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
         if (mArrayUriList.size > 0) {
 
             binding.inspectionViewLayout.visibility = View.VISIBLE
-            binding.uploadProofChipGroup.visibility = View.GONE
-            binding.submitChipGroup.visibility = View.VISIBLE
+
+            if (DeliveryStatus == "Inspected" && globalDataWorkQueueList.DeliveryStatus == "Inspected"){
+                binding.uploadProofChipGroup.visibility = View.GONE
+                binding.submitChipGroup.visibility = View.VISIBLE
+
+            }else{
+                binding.uploadProofChipGroup.visibility = View.VISIBLE
+                binding.submitChipGroup.visibility = View.GONE
+            }
+
 
             val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
             val adapter = PreviousImageViewAdapter(this, mArrayUriList, arrayOf(), pdfurilist)
@@ -915,8 +921,7 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
 
         } else {
             binding.inspectionViewLayout.visibility = View.GONE
-            binding.uploadProofChipGroup.visibility = View.VISIBLE
-            binding.submitChipGroup.visibility = View.GONE
+
         }
 
 
@@ -935,7 +940,7 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
             clickNewImageLayout.visibility = View.GONE
             statusLayout.visibility = View.VISIBLE
             val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-            val adapter = UploadImageListAdapter(this, mArrayUriList, arrayOf(), pdfurilistDialog)
+            val adapter = UploadImageListAdapter(this, mArrayUriList, arrayOf(), pdfurilistDialog,"DeliveryPerson")
             proofImageRecyclerView.layoutManager = linearLayoutManager
             proofImageRecyclerView.adapter = adapter
             adapter.notifyDataSetChanged()
