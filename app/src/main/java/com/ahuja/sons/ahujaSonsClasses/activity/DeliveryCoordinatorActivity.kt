@@ -339,13 +339,13 @@ class DeliveryCoordinatorActivity : AppCompatActivity() {
         }else{
             binding.tvSalesPerson.setText("NA")
         }
-        if (modelData.OrderRequest!!.SurgeryName.isNotEmpty()){
-            binding.tvPreparedBy.setText(modelData.OrderRequest!!.SurgeryName)
+        if (!modelData.OrderRequest!!.PreparedBy.isNullOrEmpty()){
+            binding.tvPreparedBy.setText(modelData.OrderRequest!!.PreparedBy)
         }else{
             binding.tvPreparedBy.setText("NA")
         }
-        if (modelData.OrderRequest!!.SurgeryDate.isNotEmpty()){
-            binding.tvInspectedBy.setText(modelData.OrderRequest!!.SurgeryDate)
+        if (!modelData.OrderRequest!!.InspectedBy.isNullOrEmpty()){
+            binding.tvInspectedBy.setText(modelData.OrderRequest!!.InspectedBy)
         }else{
             binding.tvInspectedBy.setText("NA")
         }
@@ -534,10 +534,8 @@ class DeliveryCoordinatorActivity : AppCompatActivity() {
 
                     binding.loadingView.stop()
                     binding.loadingBackFrame.visibility = View.GONE
-                    Global.warningmessagetoast(
-                        this@DeliveryCoordinatorActivity,
-                        response.message().toString()
-                    );
+                    Log.e(TAG, "onResponse: "+response.message() )
+//                    Global.warningmessagetoast(this@DeliveryCoordinatorActivity, response.message().toString());
 
                 }
             }
@@ -602,10 +600,8 @@ class DeliveryCoordinatorActivity : AppCompatActivity() {
 
                     binding.loadingView.stop()
                     binding.loadingBackFrame.visibility = View.GONE
-                    Global.warningmessagetoast(
-                        this@DeliveryCoordinatorActivity,
-                        response.body()!!.errors.toString()
-                    );
+                    Log.e(TAG, "onResponse: "+response.message() )
+//                    Global.warningmessagetoast(this@DeliveryCoordinatorActivity, response.body()!!.errors.toString());
 
                 }
             }

@@ -224,9 +224,9 @@ class OrderListForDeliveryCoordinatorAdapter(var AllitemsList: ArrayList<AllWork
 
             }
 
-            if (GlobalClasses.cartListForOrderRequest.isNotEmpty()) {
+            if (GlobalClasses.cartListForDeliveryCoordinatorCheck.isNotEmpty()) {
 
-                for ((k, v) in GlobalClasses.cartListForOrderRequest) {
+                for ((k, v) in GlobalClasses.cartListForDeliveryCoordinatorCheck) {
                     if (k.equals(currentDocLine.id)) {
                         binding.checkBoxOrder.visibility = View.VISIBLE
                         binding.profilePic.visibility = View.INVISIBLE
@@ -246,11 +246,11 @@ class OrderListForDeliveryCoordinatorAdapter(var AllitemsList: ArrayList<AllWork
                     isAllSelectedMethodisWorking = false
                     var localSelectedOrder = LocalSelectedOrder()
                     localSelectedOrder.apply {
-                        orderId = currentDocLine.id//id
+                        orderId = currentDocLine.OrderRequest!!.id.toString()//id
                         orderName = currentDocLine.CardName
                     }
 
-                    GlobalClasses.cartListForOrderRequest[currentDocLine.id] = localSelectedOrder
+                    GlobalClasses.cartListForDeliveryCoordinatorCheck[currentDocLine.OrderRequest!!.id.toString()] = localSelectedOrder
 
                     val newColorStateList = ColorStateList.valueOf(context.resources.getColor(R.color.blue_light))
                     binding.constraintLayoutWorkQueue.backgroundTintList = newColorStateList
@@ -273,7 +273,7 @@ class OrderListForDeliveryCoordinatorAdapter(var AllitemsList: ArrayList<AllWork
                     val newColorStateList = ColorStateList.valueOf(Color.WHITE)
                     binding.constraintLayoutWorkQueue.backgroundTintList = newColorStateList
 
-                    GlobalClasses.cartListForOrderRequest.remove(currentDocLine.id)
+                    GlobalClasses.cartListForDeliveryCoordinatorCheck.remove(currentDocLine.OrderRequest!!.id.toString())
 
                     //todo trial
                     GlobalClasses.deliveryIDsList.removeAll(currentDocLine.InspectedDeliverys)
@@ -281,9 +281,9 @@ class OrderListForDeliveryCoordinatorAdapter(var AllitemsList: ArrayList<AllWork
                 }
 
 
-                Log.e("SELECTED ORDER>>>>>", "bind: ${GlobalClasses.cartListForOrderRequest.size}")
+                Log.e("SELECTED ORDER>>>>>", "bind: ${GlobalClasses.cartListForDeliveryCoordinatorCheck.size}")
 
-                for (item in GlobalClasses.cartListForOrderRequest) {
+                for (item in GlobalClasses.cartListForDeliveryCoordinatorCheck) {
                     Log.e("SELECTED ORDER>>>>>", "bind: ${item.toString()}")
                 }
 

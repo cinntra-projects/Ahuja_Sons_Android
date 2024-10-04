@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/allowIncompleteReturn"
+        android:title="Allow Incomplete Return"
+        app:showAsAction="ifRoom"
+        android:visible="true"/>
+
+    <item
+        android:id="@+id/allowIncompleteDispatch"
+        android:title="Allow Incomplete Dispatch"
+        app:showAsAction="ifRoom"
+        android:visible="true"/>
+
+    <item
+        android:id="@+id/cancelOrder"
+        android:title="Cancel Order"
+        app:showAsAction="ifRoom"
+        android:visible="true"/>
+
+
+</menu>

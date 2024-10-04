@@ -15,6 +15,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.os.Looper
 import android.provider.MediaStore
+import android.provider.Settings
 import android.util.Log
 import android.view.View
 import android.widget.*
@@ -29,6 +30,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ahuja.sons.BuildConfig
 import com.ahuja.sons.R
 import com.ahuja.sons.adapter.ViewPagerAdapter
+import com.ahuja.sons.ahujaSonsClasses.Interface.LocationPermissionHelper
 import com.ahuja.sons.ahujaSonsClasses.adapter.PreviousImageViewAdapter
 import com.ahuja.sons.ahujaSonsClasses.adapter.SurgeryNameListAdapter
 import com.ahuja.sons.ahujaSonsClasses.adapter.UploadImageListAdapter
@@ -151,16 +153,32 @@ class SurgeryPersonActivity : AppCompatActivity() {
 
 
         binding.endTripChipSurgery.setOnClickListener {
-
-            givePermission("EndTrip")
+//            givePermission("EndTrip")
+            if (!LocationPermissionHelper.hasLocationPermission(this)) {
+                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                intent.data = Uri.parse("package:$packageName")
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            }
+            else {
+                getMyCurrentLocation("EndTrip")
+            }
 
         }
 
 
 
         binding.chipStart.setOnClickListener {
-
-            givePermission("StartTrip")
+            if (!LocationPermissionHelper.hasLocationPermission(this)) {
+                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                intent.data = Uri.parse("package:$packageName")
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            }
+            else {
+                getMyCurrentLocation("StartTrip")
+            }
+//            givePermission("StartTrip")
         }
 
 
@@ -446,13 +464,13 @@ class SurgeryPersonActivity : AppCompatActivity() {
         }else{
             binding.tvSalesPerson.setText("NA")
         }
-        if (modelData.OrderRequest!!.SurgeryName.isNotEmpty()){
-            binding.tvPreparedBy.setText(modelData.OrderRequest!!.SurgeryName)
+        if (!modelData.OrderRequest!!.PreparedBy.isNullOrEmpty()){
+            binding.tvPreparedBy.setText(modelData.OrderRequest!!.PreparedBy)
         }else{
             binding.tvPreparedBy.setText("NA")
         }
-        if (modelData.OrderRequest!!.SurgeryDate.isNotEmpty()){
-            binding.tvInspectedBy.setText(modelData.OrderRequest!!.SurgeryDate)
+        if (!modelData.OrderRequest!!.InspectedBy.isNullOrEmpty()){
+            binding.tvInspectedBy.setText(modelData.OrderRequest!!.InspectedBy)
         }else{
             binding.tvInspectedBy.setText("NA")
         }
@@ -484,7 +502,7 @@ class SurgeryPersonActivity : AppCompatActivity() {
 
                 } else {
 
-                    Global.warningmessagetoast(this@SurgeryPersonActivity, response.body()!!.message);
+                    Global.warningmessagetoast(this@SurgeryPersonActivity, response.body()!!.errors);
 
                 }
             }
@@ -863,6 +881,8 @@ class SurgeryPersonActivity : AppCompatActivity() {
 
                     Log.e("data", response.body()!!.data.toString())
 
+//                    showItemListDialogBottomSheetDialog()
+
                     callSurgeryPersonDetailApi("StartSurgery")
 
                 } else {
@@ -915,7 +935,6 @@ class SurgeryPersonActivity : AppCompatActivity() {
 
 
                     }
-                    showItemListDialogBottomSheetDialog()
 
                     callSurgeryPersonDetailApi("EndSurgery")
 
@@ -970,14 +989,53 @@ class SurgeryPersonActivity : AppCompatActivity() {
 
                                 counterBtnLayoutSurgery.visibility = View.GONE
                                 surgeryPersonSubmitBtnLayout.visibility = View.GONE
-                                uploadChipGroupSurgery.visibility = View.GONE
                                 endBtnLayoutSurgery.visibility = View.VISIBLE
-                                endTripChipGroupSurgery.visibility = View.VISIBLE
+                                uploadChipGroupSurgery.visibility = View.VISIBLE
+                                endTripChipGroupSurgery.visibility = View.GONE
                                 startBtnClickTextView.visibility = View.VISIBLE
 
 //                                tvSurgeryStartTimer.setText(Global.getTodayDate() +" at " + Global.getfullformatCurrentTime())
                                 tvSurgeryStartTimer.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data[0].StartAt))
                             }
+
+                            else if (data[0].isSurgeryStarted == true && data[0].isSurgeryEnd == false && data[0].isSurgeryProofUp == true){
+                                surgeryDetailCardView.visibility = View.VISIBLE
+                                surgeryAllDetailsLayout.visibility = View.VISIBLE
+                                surgeryTimeDetails.visibility = View.VISIBLE
+                                startBtnClickTextView.visibility = View.GONE
+
+                                tvSurgeryStatus.setText("Status : Started")
+                                counterBtnLayoutSurgery.visibility = View.GONE
+                                surgeryPersonSubmitBtnLayout.visibility = View.GONE
+                                endBtnLayoutSurgery.visibility = View.VISIBLE
+                                uploadChipGroupSurgery.visibility = View.GONE
+                                endTripChipGroupSurgery.visibility = View.VISIBLE
+
+
+                                if (data[0].StartAt.isNotEmpty()){
+                                    tvSurgeryStartTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data[0].StartAt))
+                                }else{
+                                    tvSurgeryStartTime.setText("NA")
+                                }
+
+                                if (data[0].EndAt.isNotEmpty()){
+                                    tvSurgeryEndTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data[0].EndAt))
+                                }else{
+                                    endSurgeryTimeLayout.visibility = View.GONE
+                                    tvSurgeryEndTime.setText("NA")
+
+                                }
+                                if (data[0].StartAt.isNotEmpty() && data[0].EndAt.isNotEmpty()){
+                                    tvSurgeryDuration.setText(Global.durationGet(data[0].StartAt, data[0].EndAt))
+                                }
+                                else{
+                                    surgeryDurationLayout.visibility = View.GONE
+                                    tvSurgeryDuration.setText("00:00:00")
+                                }
+                                tvCRSNo.setText(data[0].NoOfCSRRequired)
+                            }
+
+
                             else if (data[0].isSurgeryStarted == true && data[0].isSurgeryEnd == true && data[0].isSurgeryProofUp == false){
                                 surgeryDetailCardView.visibility = View.VISIBLE
                                 surgeryAllDetailsLayout.visibility = View.VISIBLE
@@ -1002,9 +1060,15 @@ class SurgeryPersonActivity : AppCompatActivity() {
                                 }else{
                                     tvSurgeryEndTime.setText("NA")
                                 }
-                                tvSurgeryDuration.setText(Global.durationGet(data[0].StartAt, data[0].EndAt))
+                                if (data[0].StartAt.isNotEmpty() && data[0].EndAt.isNotEmpty()){
+                                    tvSurgeryDuration.setText(Global.durationGet(data[0].StartAt, data[0].EndAt))
+                                }
+                                else{
+                                    tvSurgeryDuration.setText("00:00:00")
+                                }
                                 tvCRSNo.setText(data[0].NoOfCSRRequired)
                             }
+
 
                             else if (data[0].isSurgeryStarted == true && data[0].isSurgeryEnd == true && data[0].isSurgeryProofUp == true){
                                 surgeryDetailCardView.visibility = View.VISIBLE
@@ -1018,14 +1082,32 @@ class SurgeryPersonActivity : AppCompatActivity() {
                                 surgeryPersonSubmitBtnLayout.visibility = View.VISIBLE
                                 uploadChipGroupSurgery.visibility = View.GONE
                                 endBtnLayoutSurgery.visibility = View.GONE
+                                endSurgeryTimeLayout.visibility = View.VISIBLE
 
-                                tvSurgeryVehicleNo.setText("NA")
-                                tvSurgeryStartTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data[0].StartAt))
-                                tvSurgeryEndTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data[0].EndAt))
-                                tvSurgeryDuration.setText(Global.durationGet(data[0].StartAt, data[0].EndAt))
+
+                                if (data[0].StartAt.isNotEmpty()){
+                                    tvSurgeryStartTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data[0].StartAt))
+                                }else{
+                                    tvSurgeryStartTime.setText("NA")
+                                }
+
+                                if (data[0].EndAt.isNotEmpty()){
+                                    tvSurgeryEndTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data[0].EndAt))
+                                }else{
+                                    tvSurgeryEndTime.setText("NA")
+
+                                }
+                                if (data[0].StartAt.isNotEmpty() && data[0].EndAt.isNotEmpty()){
+                                    tvSurgeryDuration.setText(Global.durationGet(data[0].StartAt, data[0].EndAt))
+                                }
+                                else{
+                                    tvSurgeryDuration.setText("00:00:00")
+                                }
+
                                 tvCRSNo.setText(data[0].NoOfCSRRequired)
 
                             }
+
                             else if (data[0].isSurgeryStarted == false && data[0].isSurgeryEnd == false && data[0].isSurgeryProofUp == false){
                                 surgeryDetailCardView.visibility = View.GONE
                                 surgeryAllDetailsLayout.visibility = View.GONE
@@ -1057,11 +1139,13 @@ class SurgeryPersonActivity : AppCompatActivity() {
                         innerAdapter.notifyDataSetChanged()
 
                     }
-                } else {
+                }
+
+                else {
                     binding.loadingBackFrame.visibility = View.GONE
                     binding.loadingView.stop()
 
-                    Global.warningmessagetoast(this@SurgeryPersonActivity, response.body()!!.message);
+                    Global.warningmessagetoast(this@SurgeryPersonActivity, response.body()!!.errors);
 
                 }
             }
@@ -1081,7 +1165,7 @@ class SurgeryPersonActivity : AppCompatActivity() {
         binding.loadingBackFrame.visibility = View.VISIBLE
         binding.loadingView.start()
         var jsonObject1 = JsonObject()
-        jsonObject1.addProperty(" ", globalDataWorkQueueList.OrderRequest!!.id)
+        jsonObject1.addProperty("OrderID", globalDataWorkQueueList.OrderRequest!!.id)
 
         val call: Call<TripDetailModel> = ApiClient().service.getTripDetailsApi(jsonObject1)
         call.enqueue(object : Callback<TripDetailModel?> {
@@ -1181,10 +1265,16 @@ class SurgeryPersonActivity : AppCompatActivity() {
         statusLayout = bottomSheetDialog.findViewById<LinearLayout>(R.id.statusLayout)!!
         var tv_employee_name = bottomSheetDialog.findViewById<TextView>(R.id.tv_employee_name)!!
 
-        tv_employee_name.setText("Upload Proof")
 
         bindingBottomSheet.acStatus.visibility = View.GONE
 
+        bindingBottomSheet.ivCloseDialog.visibility = View.VISIBLE
+
+        bindingBottomSheet.ivRvCloseDialog.setOnClickListener {
+            mArrayUriList.clear()
+            pdfurilist.clear()
+            bottomSheetDialog.dismiss()
+        }
 
         bindingBottomSheet.ivCloseDialog.setOnClickListener {
             bottomSheetDialog.dismiss()

@@ -24,7 +24,7 @@ class PendingItemsListAdapter (val AllitemsList: ArrayList<AllItemsForOrderModel
     }
 
     override fun onBindViewHolder(holder: Category_Holder, position: Int) {
-        val obj = AllitemsList[position]
+        val obj = AllitemsList[holder.adapterPosition]
         holder.binding.apply {
             tvItemDescription.setText(obj.ItemDescription)
             tvQTy.setText("Qty : "+obj.Quantity)
@@ -32,21 +32,14 @@ class PendingItemsListAdapter (val AllitemsList: ArrayList<AllItemsForOrderModel
 
         }
 
-        holder.itemView.setOnClickListener {
-
-        }
-
-
     }
-
 
 
     override fun getItemCount(): Int {
-        return 3
+        return AllitemsList.size
     }
 
     inner class Category_Holder(var binding: PendingItemsListAdapterLayoutBinding) : RecyclerView.ViewHolder(binding.root)
-
 
 
 }

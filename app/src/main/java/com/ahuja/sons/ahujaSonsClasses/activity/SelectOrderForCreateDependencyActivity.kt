@@ -167,7 +167,9 @@ class SelectOrderForCreateDependencyActivity : AppCompatActivity() {
         //todo confirm chip call--
 
         binding.chipAssign.setOnClickListener {
+
             val idArrayList = ArrayList<Int>()
+
             for (order in GlobalClasses.cartListForOrderRequest.values) {
                 idArrayList.add(order.id.toInt())
             }
@@ -179,7 +181,9 @@ class SelectOrderForCreateDependencyActivity : AppCompatActivity() {
             val idArray = idStringList.map { it.toInt() }
 
             if (GlobalClasses.cartListForOrderRequest.isNotEmpty()) {
+
                 callCreateDependencyApi(idArray)
+
             }else{
 
                 Global.warningmessagetoast(this,"Please Select One")
@@ -201,10 +205,8 @@ class SelectOrderForCreateDependencyActivity : AppCompatActivity() {
 
         val call: Call<AllItemListResponseModel> = ApiClient().service.createDependency(data)
         call.enqueue(object : Callback<AllItemListResponseModel> {
-            override fun onResponse(
-                call: Call<AllItemListResponseModel>,
-                response: Response<AllItemListResponseModel>
-            ) {
+            override fun onResponse(call: Call<AllItemListResponseModel>, response: Response<AllItemListResponseModel>) {
+
                 if (response.body()?.status == 200) {
 
                     onBackPressed()
@@ -226,6 +228,7 @@ class SelectOrderForCreateDependencyActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<AllItemListResponseModel>, t: Throwable) {
+
                 binding.loadingback.visibility = View.GONE
                 binding.loadingView.stop()
 

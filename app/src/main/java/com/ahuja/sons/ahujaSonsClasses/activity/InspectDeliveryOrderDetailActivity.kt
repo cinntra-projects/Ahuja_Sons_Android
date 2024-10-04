@@ -38,6 +38,7 @@ import com.ahuja.sons.apiservice.Apis
 import com.ahuja.sons.databinding.ActivityInspectDeliveryOrderDetailBinding
 import com.ahuja.sons.databinding.UploadInspectionImageProofLayoutBottomSheetBinding
 import com.ahuja.sons.globals.Global
+import com.ahuja.sons.model.DeliveryID
 import com.ahuja.sons.service.repository.DefaultMainRepositories
 import com.ahuja.sons.service.repository.MainRepos
 import com.ahuja.sons.viewmodel.MainViewModel
@@ -73,7 +74,7 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
 
     lateinit var viewModel: MainViewModel
 
-    var orderID = 0
+    var deliveryID = 0
 
     var DeliveryStatus = ""
 
@@ -137,7 +138,7 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
             onBackPressed() // or use finish() to close the activity
         }
 
-        orderID = intent.getIntExtra("id",0)
+        deliveryID = intent.getIntExtra("deliveryID",0)
         inspectionDeliveryPos = intent.getIntExtra("inspectionDeliveryPos",0)
         DeliveryStatus = intent.getStringExtra("DeliveryStatus").toString()
 
@@ -146,9 +147,9 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
 
 
         var jsonObject = JsonObject()
-        jsonObject.addProperty("delivery_id", orderID)
+        jsonObject.addProperty("delivery_id", deliveryID)
         viewModel.callDeliveryDetailApi(jsonObject)
-        bindWorkQueueDetail()
+        bindWorkQueueDetail("DeliveryDetail")
 
         hideAndShowViews()
 
@@ -161,7 +162,7 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
     var globalDataWorkQueueList = AllWorkQueueResponseModel.Data()
 
     //todo work queue detail api --
-    private fun bindWorkQueueDetail() {
+    private fun bindWorkQueueDetail(flag: String) {
         viewModel.workQueueOne.observe(this, Event.EventObserver(
             onError = {
                 binding.loadingBackFrame.visibility = View.GONE
@@ -182,7 +183,7 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
 
                         globalDataWorkQueueList = response.data[0]
 
-                        bindGetInspectionImages()
+                        bindGetInspectionImages(flag)
 
                         //todo calling dependency and errand list
 
@@ -211,7 +212,7 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
     //todo set deafult data here---
     private fun setDefaultData(modelData: AllWorkQueueResponseModel.Data) {
 
-        if (DeliveryStatus == "Inspected"){
+    /*    if (DeliveryStatus == "Inspected"){
             binding.uploadProofChipGroup.visibility = View.GONE
             binding.submitChipGroup.visibility = View.VISIBLE
 
@@ -219,7 +220,7 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
             binding.uploadProofChipGroup.visibility = View.VISIBLE
             binding.submitChipGroup.visibility = View.GONE
         }
-
+*/
         val generator: ColorGenerator = ColorGenerator.MATERIAL
         val color1: Int = generator.randomColor
         if (modelData.OrderRequest!!.CardName.isNotEmpty()!!) {
@@ -254,7 +255,7 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
                 itemDetailView.setOnClickListener {
                     var intent = Intent(this@InspectDeliveryOrderDetailActivity, ItemDetailActivity::class.java)
                     intent.putExtra("SapOrderId", modelData.OrderRequest!!.SapOrderId)
-                    intent.putExtra("deliveryID", orderID)
+                    intent.putExtra("deliveryID", deliveryID)
                     intent.putExtra("flag", "Inspection")
                     startActivity(intent)
                 }
@@ -282,17 +283,17 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
         }else{
             binding.tvSalesPerson.setText("NA")
         }
-        if (modelData.OrderRequest!!.SurgeryName.isNotEmpty()){
-            binding.tvPreparedBy.setText(modelData.OrderRequest!!.SurgeryName)
+
+        if (!modelData.OrderRequest!!.PreparedBy.isNullOrEmpty()){
+            binding.tvPreparedBy.setText(modelData.OrderRequest!!.PreparedBy)
         }else{
             binding.tvPreparedBy.setText("NA")
         }
-        if (modelData.OrderRequest!!.SurgeryDate.isNotEmpty()){
-            binding.tvInspectedBy.setText(modelData.OrderRequest!!.SurgeryDate)
+        if (!modelData.OrderRequest!!.InspectedBy.isNullOrEmpty()){
+            binding.tvInspectedBy.setText(modelData.OrderRequest!!.InspectedBy)
         }else{
             binding.tvInspectedBy.setText("NA")
         }
-
         if (modelData.OrderRequest!!.Remarks.isNotEmpty()){
             binding.tvRemarks.setText(modelData.OrderRequest!!.Remarks)
         }else{
@@ -545,13 +546,57 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
 
             binding.loadingView.start()
             binding.loadingBackFrame.visibility = View.VISIBLE
-            var jsonObject = JsonObject()
+           /* var jsonObject = JsonObject()
             jsonObject.addProperty("OrderRequestID", globalDataWorkQueueList.OrderRequest!!.id)
             viewModel.orderInspectionComplete(jsonObject)
-            bindObserverOrderPrepared()
+            bindObserverOrderPrepared()*/
+
+            callSubmitInspectionAPi()
+
         }
 
 
+    }
+
+
+    private fun callSubmitInspectionAPi() {
+        var jsonObject1 = JsonObject()
+        jsonObject1.addProperty("OrderRequestID", globalDataWorkQueueList.OrderRequest!!.id)
+        jsonObject1.addProperty("DeliveryId", deliveryID)
+        jsonObject1.addProperty("CreatedBy", Prefs.getString(Global.Employee_Code,""))
+
+        val call: Call<AllWorkQueueResponseModel> = ApiClient().service.callInspectionCompleteApi(jsonObject1)
+        call.enqueue(object : Callback<AllWorkQueueResponseModel?> {
+            override fun onResponse(call: Call<AllWorkQueueResponseModel?>, response: Response<AllWorkQueueResponseModel?>) {
+                binding.loadingBackFrame.visibility = View.GONE
+                binding.loadingView.stop()
+                try {
+                    if (response.body()!!.status == 200) {
+
+                        Global.successmessagetoast(this@InspectDeliveryOrderDetailActivity, response.body()!!.message)
+                        onBackPressed()
+                        finish()
+
+                    }else if (response.body()!!.status == 400) {
+                        Global.errormessagetoast(this@InspectDeliveryOrderDetailActivity, response.body()!!.message)
+                    }else if (response.body()!!.status == 201) {
+                        Global.errormessagetoast(this@InspectDeliveryOrderDetailActivity, response.body()!!.errors)
+                    }else{
+                        Global.errormessagetoast(this@InspectDeliveryOrderDetailActivity, response.body()!!.errors)
+                    }
+                }catch (e:java.lang.Exception){
+                    e.printStackTrace()
+                }
+
+            }
+
+            override fun onFailure(call: Call<AllWorkQueueResponseModel?>, t: Throwable) {
+                binding.loadingBackFrame.visibility = View.GONE
+                binding.loadingView.stop()
+                Log.e(TAG, "onFailure: "+t.message )
+                Toast.makeText(this@InspectDeliveryOrderDetailActivity, t.message, Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
 
@@ -574,6 +619,10 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
                     Global.successmessagetoast(this, response.message)
                     onBackPressed()
                     finish()
+                }else if (response.status == 201) {
+                    Global.errormessagetoast(this, response.errors)
+                }else{
+                    Global.errormessagetoast(this, response.errors)
                 }
 
             }
@@ -695,6 +744,9 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
         val bindingBottomSheet: UploadInspectionImageProofLayoutBottomSheetBinding = UploadInspectionImageProofLayoutBottomSheetBinding.inflate(layoutInflater)
         bottomSheetDialog.setContentView(bindingBottomSheet.getRoot())
 
+        bottomSheetDialog.setCancelable(false) // Prevents the dialog from being canceled
+        bottomSheetDialog.setCanceledOnTouchOutside(false)
+
         bottomSheetDialog.show()
 
         recyclerViewMoreImageLayout = bottomSheetDialog.findViewById<LinearLayout>(R.id.recyclerViewMoreImageLayout)!!
@@ -706,6 +758,9 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
         var adapter = ArrayAdapter<String>(this, R.layout.drop_down_item_textview, statusList)
         bindingBottomSheet.acStatus.setAdapter(adapter)
 
+
+        bindingBottomSheet.ivCloseDialog.visibility = View.VISIBLE
+
         bindingBottomSheet.acStatus.setOnItemClickListener { adapterView, view, i, l ->
             bindingBottomSheet.acStatus.setText(statusList[i])
 
@@ -713,6 +768,12 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
         }
 
         bindingBottomSheet.ivCloseDialog.setOnClickListener {
+            bottomSheetDialog.dismiss()
+        }
+
+        bindingBottomSheet.ivRvCloseDialog.setOnClickListener {
+            mArrayUriListDialog.clear()
+            pdfurilistDialog.clear()
             bottomSheetDialog.dismiss()
         }
 
@@ -735,7 +796,12 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
 
 
         bindingBottomSheet.btnConfirm.setOnClickListener {
-            callUploadProofApi(bottomSheetDialog, bindingBottomSheet.loadingback, bindingBottomSheet.loadingView)
+            if (pdfurilistDialog.size > 0){
+                callUploadProofApi(bottomSheetDialog, bindingBottomSheet.loadingback, bindingBottomSheet.loadingView)
+            }
+            else{
+                Global.warningmessagetoast(this@InspectDeliveryOrderDetailActivity, "Please Click Photo")
+            }
         }
 
     }
@@ -753,7 +819,7 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
         builder.addFormDataPart("OrderRequestID", globalDataWorkQueueList.OrderRequest!!.id.toString())
         builder.addFormDataPart("WorkQueue", "")//globalDataWorkQueueList.id //todo send blank right now but not blank always
         builder.addFormDataPart("InspectionStatus", status)
-        builder.addFormDataPart("DeliveryId", orderID.toString())
+        builder.addFormDataPart("DeliveryId", deliveryID.toString())
         builder.addFormDataPart("Remark", "")
 
         if (pdfurilistDialog.size > 0) {
@@ -773,7 +839,7 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
         jsonObject.put("OrderRequestID",  globalDataWorkQueueList.OrderRequest!!.id.toString())
         jsonObject.put("WorkQueue", "")//globalDataWorkQueueList.id
         jsonObject.put("InspectionStatus", status)
-        jsonObject.put("DeliveryId",  orderID.toString())
+        jsonObject.put("DeliveryId",  deliveryID.toString())
         jsonObject.put("Remark", "Urgent")
 
         val filesArray = JSONArray()
@@ -805,9 +871,11 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
                     binding.submitChipGroup.visibility = View.VISIBLE
 
                     var jsonObject = JsonObject()
-                    jsonObject.addProperty("id", orderID)
-                    viewModel.callWorkQueueDetailApi(jsonObject)
-                    bindWorkQueueDetail()
+                    /*jsonObject.addProperty("id", orderID)
+                    viewModel.callWorkQueueDetailApi(jsonObject)*/
+                    jsonObject.addProperty("delivery_id", deliveryID)
+                    viewModel.callDeliveryDetailApi(jsonObject)
+                    bindWorkQueueDetail("WorkQueueDetail")
 
                 } else {
                     loadingback.visibility = View.GONE
@@ -865,7 +933,7 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
     }
 
 
-    private fun bindGetInspectionImages() {
+    private fun bindGetInspectionImages(flag: String) {
         var jsonObject1 = JsonObject()
         jsonObject1.addProperty("order_request_id", globalDataWorkQueueList.OrderRequest!!.id)
 
@@ -877,7 +945,7 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
                     Log.e("data", response.body()!!.data.toString())
 
                     var listData = response.body()!!.data
-                    bindGETCameraImagesAdapter(listData)
+                    bindGETCameraImagesAdapter(listData, flag)
 
                 } else {
 
@@ -897,27 +965,35 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
 
 
     //todo bind image data----
-    private fun bindGETCameraImagesAdapter(mArrayUriList: ArrayList<UploadedPictureModel.Data>) {
+    private fun bindGETCameraImagesAdapter(mArrayUriList: ArrayList<UploadedPictureModel.Data>, flag: String) {
 
         if (mArrayUriList.size > 0) {
 
             binding.inspectionViewLayout.visibility = View.VISIBLE
 
-            if (DeliveryStatus == "Inspected" && globalDataWorkQueueList.DeliveryStatus == "Inspected"){
+            if (globalDataWorkQueueList.isInspectionProofUpload == true){//DeliveryStatus == "Inspected"
+                Log.e(TAG, "bindGETCameraImagesAdapter: Order Inspected", )
                 binding.uploadProofChipGroup.visibility = View.GONE
                 binding.submitChipGroup.visibility = View.VISIBLE
 
-            }else{
+            }
+            else if (globalDataWorkQueueList.isInspectionProofUpload == false){//DeliveryStatus == "Prepared"
+
+                Log.e(TAG, "bindGETCameraImagesAdapter: Order Prepared", )
                 binding.uploadProofChipGroup.visibility = View.VISIBLE
                 binding.submitChipGroup.visibility = View.GONE
-            }
 
+            }/*else{
+                binding.uploadProofChipGroup.visibility = View.VISIBLE
+                binding.submitChipGroup.visibility = View.GONE
+            }*/
 
             val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
             val adapter = PreviousImageViewAdapter(this, mArrayUriList, arrayOf(), pdfurilist)
             binding.proofImageRecyclerView.layoutManager = linearLayoutManager
             binding.proofImageRecyclerView.adapter = adapter
             adapter.notifyDataSetChanged()
+
 
         } else {
             binding.inspectionViewLayout.visibility = View.GONE
@@ -940,21 +1016,21 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
             clickNewImageLayout.visibility = View.GONE
             statusLayout.visibility = View.VISIBLE
             val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-            val adapter = UploadImageListAdapter(this, mArrayUriList, arrayOf(), pdfurilistDialog,"DeliveryPerson")
+            val adapter = UploadImageListAdapter(this, mArrayUriList, arrayOf(), pdfurilistDialog,"Inspection")
             proofImageRecyclerView.layoutManager = linearLayoutManager
             proofImageRecyclerView.adapter = adapter
             adapter.notifyDataSetChanged()
 
             adapter.setOnItemClickListener { list, position ,  stringList->
 
-                if (position >= 0 && position < mArrayUriList.size) {
-                    mArrayUriList.removeAt(position)
+                if (position >= 0 && position < mArrayUriListDialog.size) {
+                    mArrayUriListDialog.removeAt(position)
                     pdfurilistDialog.removeAt(position)
                     adapter.notifyItemRemoved(position)
                     adapter.notifyDataSetChanged()
 
                 }
-                if (mArrayUriList.size > 0) {
+                if (mArrayUriListDialog.size > 0) {
                     recyclerViewMoreImageLayout.visibility = View.VISIBLE
                     clickNewImageLayout.visibility = View.GONE
 
@@ -1057,6 +1133,23 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
         return image
     }
 
+
+ /*    private fun allPermissionsGranted(): Boolean {
+      return ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+              && ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+  }
+
+  override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+      super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+      if (requestCode == REQUEST_CODE_PERMISSIONS) {
+          if (allPermissionsGranted()) {
+              dispatchTakePictureIntent()
+          } else {
+              Toast.makeText(this, "denied permissions case", Toast.LENGTH_SHORT).show()
+              // Show an error message or handle denied permissions case
+          }
+      }
+  }*/
 
     private fun checkAndRequestPermissions(): Boolean {
         val camera = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)

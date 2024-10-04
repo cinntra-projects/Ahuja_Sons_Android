@@ -120,7 +120,7 @@
                     android:layout_toRightOf="@id/name_icon"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text="Cinntra Infotech"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_14"
                     android:textStyle="bold" />
@@ -140,7 +140,7 @@
                         android:layout_weight="50"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:text="Dr. Vijay Chauhan"
+                        android:text=""
                         android:textColor="@color/gray"
                         android:textSize="@dimen/text_size_12"
                         android:textStyle="bold"
@@ -156,7 +156,7 @@
                         android:layout_toRightOf="@+id/name_icon"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:text="Order ID : 12345"
+                        android:text="Order ID : "
                         android:textColor="@color/gray"
                         android:textSize="@dimen/text_size_12"
                         android:textStyle="bold"
@@ -173,7 +173,7 @@
                     android:layout_marginTop="@dimen/size_5"
                     android:layout_toRightOf="@+id/name_icon"
                     android:ellipsize="end"
-                    android:text="Order Information : Borem jdnjsnkj bjvbsdjkvbsdjipsum dolor sit hue , kdnm"
+                    android:text="Order Information : "
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_12"
                     android:visibility="visible" />
@@ -263,7 +263,7 @@
                     android:drawablePadding="4dp"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text="SalesOrderRequested"
+                    android:text=""
                     android:textColor="@color/gray"
                     android:textSize="@dimen/text_size_12"
                     android:textStyle="bold"
@@ -281,7 +281,7 @@
                     android:layout_weight="50"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text="Surgery Date &amp; Time :12/11/2024 12:0:00"
+                    android:text="Surgery Date &amp; Time : "
                     android:textColor="@color/grey"
                     android:textSize="@dimen/text_size_12"
                     android:visibility="visible" />
@@ -1016,8 +1016,6 @@
                                     android:visibility="gone">
 
 
-
-
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
@@ -1286,63 +1284,73 @@
 
 
                                 <LinearLayout
+                                    android:id="@+id/EndTripFieldslayout"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="visible"
                                     android:layout_marginLeft="@dimen/size_10"
-                                    android:layout_marginRight="@dimen/size_10"
-                                    android:orientation="horizontal">
+                                    android:layout_marginRight="@dimen/size_10">
 
-                                    <TextView
+
+                                    <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        android:gravity="center_vertical"
-                                        android:text="End Location"
-                                        android:textColor="@color/grey"
-                                        android:textSize="@dimen/text_size_14" />
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:gravity="center_vertical"
+                                            android:text="End Location"
+                                            android:textColor="@color/grey"
+                                            android:textSize="@dimen/text_size_14" />
 
 
-                                    <TextView
-                                        android:id="@+id/tvEndLocation"
+                                        <TextView
+                                            android:id="@+id/tvEndLocation"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:gravity="center_vertical"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/text_size_14" />
+
+
+                                    </LinearLayout>
+
+
+                                    <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        android:gravity="center_vertical"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/text_size_14" />
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="@dimen/size_45"
+                                            android:layout_weight="1"
+                                            android:gravity="center_vertical"
+                                            android:text="End Time"
+                                            android:textColor="@color/grey"
+                                            android:textSize="@dimen/text_size_14" />
+
+
+                                        <TextView
+                                            android:id="@+id/tvEndTime"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="@dimen/size_45"
+                                            android:layout_weight="1"
+                                            android:gravity="center_vertical"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/text_size_14" />
+
+
+                                    </LinearLayout>
 
 
                                 </LinearLayout>
 
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/size_10"
-                                    android:layout_marginRight="@dimen/size_10"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="@dimen/size_45"
-                                        android:layout_weight="1"
-                                        android:gravity="center_vertical"
-                                        android:text="End Time"
-                                        android:textColor="@color/grey"
-                                        android:textSize="@dimen/text_size_14" />
-
-
-                                    <TextView
-                                        android:id="@+id/tvEndTime"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="@dimen/size_45"
-                                        android:layout_weight="1"
-                                        android:gravity="center_vertical"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/text_size_14" />
-
-
-                                </LinearLayout>
 
 
                                 <LinearLayout

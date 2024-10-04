@@ -1,0 +1,53 @@
+package com.ahuja.sons.ahujaSonsClasses.model
+
+data class DeliveryItemListModel(
+    val `data`: ArrayList<Data> = arrayListOf(),
+    val message: String = "",
+    val status: Int = 0
+) {
+    data class Data(
+        val BuyBack: String = "",
+        val CancelStatus: String = "",
+        val CardCode: String = "",
+        val CardName: String = "",
+        val Comments: String = "",
+        val ContactPersonCode: String = "",
+        val CreateDate: String = "",
+        val CreateTime: String = "",
+        val CreationDate: String = "",
+        val DeliveryStatus: String = "",
+        val DiscountPercent: String = "",
+        val DocCurrency: String = "",
+        val DocDate: String = "",
+        val DocDueDate: String = "",
+        val DocEntry: String = "",
+        val DocNum: String = "",
+        val DocTotal: Double = 0.0,
+        val DocumentStatus: String = "",
+        val OrderID: String = "",
+        val PayToCode: String = "",
+        val Printed: String = "",
+        val SalesPersonCode: String = "",
+        val ShipToCode: String = "",
+        val ShippingAndHandling: String = "",
+        val ShippingAndHandlingTax: String = "",
+        val TaxDate: String = "",
+        val TransporterID: String = "",
+        val TransporterName: String = "",
+        val U_COURIERNAME: String = "",
+        val U_DISPDATE: String = "",
+        val U_DOCDT: String = "",
+        val U_DOCKETNO: String = "",
+        val U_MATDISPDT: String = "",
+        val U_MR_NO: String = "",
+        val U_RCPTDATE: String = "",
+        val U_TMODE: String = "",
+        val U_VNO: String = "",
+        val U_VTYPE: String = "",
+        val U_VehicleNo: String = "",
+        val UpdateDate: String = "",
+        val UpdateTime: String = "",
+        val VatSum: String = "",
+        val id: Int = 7
+    )
+}

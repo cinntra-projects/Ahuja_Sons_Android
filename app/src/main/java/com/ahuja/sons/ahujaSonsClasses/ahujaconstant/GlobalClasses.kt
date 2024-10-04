@@ -8,6 +8,9 @@ import com.ahuja.sons.ahujaSonsClasses.model.workQueue.AllWorkQueueResponseModel
 object GlobalClasses {
 
     val cartListForOrderRequest = hashMapOf<String,LocalSelectedOrder>()
+
+    val cartListForDeliveryCoordinatorCheck = hashMapOf<String,LocalSelectedOrder>()
+
     val deliveryIDsList = ArrayList<AllWorkQueueResponseModel.InspectedDelivery>()
 
     val demoForOrderRequest: MutableList<ParentItemModel.ChildItem> = mutableListOf()

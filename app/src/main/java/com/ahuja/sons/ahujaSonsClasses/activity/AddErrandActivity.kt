@@ -41,7 +41,7 @@ class AddErrandActivity : AppCompatActivity() {
 
         var listContactP = arrayListOf<String>("Rahul", "Deepanshu", "Arif")
         var adapter = ArrayAdapter<String>(this@AddErrandActivity, R.layout.drop_down_item_textview, listContactP)
-        binding.acContactPerson.setAdapter(adapter)
+//        binding.acContactPerson.setAdapter(adapter)
 
 
         callNatureErrandsAPi()

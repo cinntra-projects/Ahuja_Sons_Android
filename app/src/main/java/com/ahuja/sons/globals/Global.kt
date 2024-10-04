@@ -15,9 +15,6 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.res.ResourcesCompat
-import com.google.android.material.textfield.TextInputEditText
-import com.ozcanalasalvar.library.view.datePicker.DatePicker
-import com.ozcanalasalvar.library.view.popup.DatePickerPopup
 import com.ahuja.sons.R
 import com.ahuja.sons.ahujaSonsClasses.model.DoctorNameListModel
 import com.ahuja.sons.ahujaSonsClasses.model.SurgeryPersonModelData
@@ -29,6 +26,9 @@ import com.ahuja.sons.model.DocumentLine
 import com.ahuja.sons.newapimodel.DataFromJsonCheckList
 import com.ahuja.sons.newapimodel.SpareItemListApiModel
 import com.ahuja.sons.receiver.DataEmployeeAllData
+import com.google.android.material.textfield.TextInputEditText
+import com.ozcanalasalvar.library.view.datePicker.DatePicker
+import com.ozcanalasalvar.library.view.popup.DatePickerPopup
 import com.ozcanalasalvar.library.view.popup.TimePickerPopup
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -40,8 +40,8 @@ import java.text.SimpleDateFormat
 import java.time.Duration
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
 import java.util.*
-import kotlin.collections.ArrayList
 
 object Global {
 
@@ -88,6 +88,15 @@ object Global {
     var TicketAuthentication = false
     var TicketStartDate = ""
     var TicketEndDate = ""
+
+    const val AutoLogIn = "_AutoLogIn"
+    var APILog = "Login"
+    var SESSION_TIMEOUT = "_SESSION_TIMEOUT"
+    var SESSION_REMAIN_TIME = "_SESSION_REMAIN_TIME"
+
+    const val Location_FirstTime = "_Location_FirstTime"
+
+    const val LocationRestart = "_LocationRestart"
 
     const val SurgeryPersonService = "_SurgeryPersonService"
 
@@ -1030,6 +1039,20 @@ object Global {
         val formattedDateTime = dateTime.format(outputFormatter)
 
         return formattedDateTime
+    }
+
+    open fun secondsBetween(dateStr: String): Long {
+        // Define the date format
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+
+        // Parse the given date string into a LocalDateTime object
+        val givenDate = LocalDateTime.parse(dateStr, formatter)
+
+        // Get the current date and time
+        val currentDate = LocalDateTime.now()
+
+        // Calculate the difference in seconds between the given date and current date
+        return ChronoUnit.SECONDS.between(givenDate, currentDate)
     }
 
 

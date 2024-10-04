@@ -29,6 +29,8 @@ data class OrderOneResponseModel(
         val SurgeryTime: String = "",
         val UpdateDate: String = "",
         val UpdateTime: String = "",
+        val PreparedBy: String = "",
+        val InspectedBy: String = "",
         val id: Int = 0,
         val isOrderPrepared: Boolean = false
     )

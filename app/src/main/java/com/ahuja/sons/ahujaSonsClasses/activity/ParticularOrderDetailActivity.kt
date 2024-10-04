@@ -332,15 +332,16 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
 
         }
 
-/*
         binding.dispatchUpArrow.setOnClickListener {
-            binding.dispatchDetailsLayout.visibility = View.GONE
+            binding.dispatchTripDetail.visibility = View.GONE
+            binding.statusLayout.visibility = View.GONE
             binding.dispatchUpArrow.visibility = View.GONE
             binding.dispatchDownArrow.visibility = View.VISIBLE
         }
 
         binding.dispatchDownArrow.setOnClickListener {
-            binding.dispatchDetailsLayout.visibility = View.VISIBLE
+            binding.dispatchTripDetail.visibility = View.VISIBLE
+            binding.statusLayout.visibility = View.VISIBLE
             binding.dispatchDownArrow.visibility = View.GONE
             binding.dispatchUpArrow.visibility = View.VISIBLE
         }
@@ -356,7 +357,9 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
             binding.surgeryDetailsLayout.visibility = View.VISIBLE
             binding.surgeryDownArrow.visibility = View.GONE
             binding.surgeryUpArrow.visibility = View.VISIBLE
-        }*/
+        }
+
+
         //todo startTrip arrow-
 
         binding.tripStartUpArrow.setOnClickListener {
@@ -406,7 +409,7 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
 
     override fun stagesOnClick(id: Int, obj: String) {
 
-        if (obj.equals("Sales Order Request") || obj.equals("Order")){
+   /*     if (obj.equals("Sales Order Request") || obj.equals("Order")){
             binding.orderDetailLayoutCardView.visibility = View.VISIBLE
             binding.saleOrderLayouts.visibility = View.VISIBLE
             binding.dependencyCardViewLayout.visibility = View.GONE
@@ -429,6 +432,7 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
             binding.srugeryPersonLinearLayout.visibility = View.GONE
 
         }
+
         else if (obj.equals("Inspect Deliver")){
             binding.saleOrderLayouts.visibility = View.GONE
             binding.chipCardViewBtton.visibility = View.GONE
@@ -436,6 +440,7 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
             binding.deliveryLayout.visibility = View.GONE
             binding.srugeryPersonLinearLayout.visibility = View.GONE
         }
+
         else if (obj.equals("Delivery")){
             binding.saleOrderLayouts.visibility = View.GONE
             binding.inspectTabLayouts.visibility = View.GONE
@@ -495,7 +500,7 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
             binding.chipCardViewBtton.visibility = View.GONE
 
 
-        }
+        }*/
 
 
 
@@ -666,6 +671,8 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
                                 //todo set deafult data---
                                 setDefaultData(modelData)
 
+                                bindGetInspectionImages()
+
                                 callDispatchDetailsApi("")
 
                                 callSurgeryPersonDetailApi()
@@ -753,13 +760,13 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
         }else{
             binding.tvSalesPerson.setText("NA")
         }
-        if (modelData.SurgeryName.isNotEmpty()){
-            binding.tvPreparedBy.setText(modelData.SurgeryName)
+        if (!modelData.PreparedBy.isNullOrEmpty()){
+            binding.tvPreparedBy.setText(modelData.PreparedBy)
         }else{
             binding.tvPreparedBy.setText("NA")
         }
-        if (modelData.SurgeryDate.isNotEmpty()){
-            binding.tvInspectedBy.setText(Global.convert_yyyy_mm_dd_to_dd_mm_yyyy(modelData.SurgeryDate))
+        if (!modelData.InspectedBy.isNullOrEmpty()){
+            binding.tvInspectedBy.setText(modelData.InspectedBy)
         }else{
             binding.tvInspectedBy.setText("NA")
         }
@@ -774,6 +781,57 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
 
     }
 
+
+    //todo order detail images--
+    private fun bindGetInspectionImages() {
+        var jsonObject1 = JsonObject()
+        jsonObject1.addProperty("order_request_id", globalDataWorkQueueList.id)
+
+        val call: Call<UploadedPictureModel> = ApiClient().service.getInspectionImages(jsonObject1)
+        call.enqueue(object : Callback<UploadedPictureModel?> {
+            override fun onResponse(call: Call<UploadedPictureModel?>, response: Response<UploadedPictureModel?>) {
+                if (response.body()!!.status == 200) {
+
+                    Log.e("data", response.body()!!.data.toString())
+
+                    var listData = response.body()!!.data
+                    bindGETCameraImagesAdapter(listData)
+
+                } else {
+
+                    Global.warningmessagetoast(this@ParticularOrderDetailActivity, response.body()!!.message);
+
+                }
+            }
+
+            override fun onFailure(call: Call<UploadedPictureModel?>, t: Throwable) {
+
+                Log.e(TAG, "onFailure: "+t.message )
+                Toast.makeText(this@ParticularOrderDetailActivity, t.message, Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    //todo bind image adapter data----
+    private fun bindGETCameraImagesAdapter(mArrayUriList: ArrayList<UploadedPictureModel.Data>) {
+
+        if (mArrayUriList.size > 0) {
+
+            binding.inspectionViewLayout.visibility = View.VISIBLE
+
+            val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+            val adapter = PreviousImageViewAdapter(this, mArrayUriList, arrayOf(), arrayListOf())
+            binding.proofImageRecyclerView.layoutManager = linearLayoutManager
+            binding.proofImageRecyclerView.adapter = adapter
+            adapter.notifyDataSetChanged()
+
+        } else {
+            binding.inspectionViewLayout.visibility = View.GONE
+
+        }
+
+
+    }
 
 
 
@@ -827,7 +885,8 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
 
                     binding.loadingView.stop()
                     binding.loadingBackFrame.visibility = View.GONE
-                    Global.warningmessagetoast(this@ParticularOrderDetailActivity, response.message().toString());
+                    Log.e(TAG, "onResponse: "+response.message() )
+//                    Global.warningmessagetoast(this@ParticularOrderDetailActivity, response.message().toString());
 
                 }
             }
@@ -888,7 +947,8 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
 
                     binding.loadingView.stop()
                     binding.loadingBackFrame.visibility = View.GONE
-                    Global.warningmessagetoast(this@ParticularOrderDetailActivity, response.body()!!.errors.toString());
+                    Log.e(TAG, "onResponse: "+response.message() )
+//                    Global.warningmessagetoast(this@ParticularOrderDetailActivity, response.body()!!.errors.toString());
 
                 }
             }
@@ -987,7 +1047,7 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
         binding.loadingBackFrame.visibility = View.VISIBLE
         binding.loadingView.start()
         var jsonObject1 = JsonObject()
-        jsonObject1.addProperty(" ", globalDataWorkQueueList.id)
+        jsonObject1.addProperty("OrderID", globalDataWorkQueueList.id)
 
         val call: Call<TripDetailModel> = ApiClient().service.getTripDetailsApi(jsonObject1)
         call.enqueue(object : Callback<TripDetailModel?> {
@@ -1166,7 +1226,12 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
                             }else{
                                 tvSurgeryEndTime.setText("NA")
                             }
-                            tvSurgeryDuration.setText(Global.durationGet(data[0].StartAt, data[0].EndAt))
+                            if (data[0].StartAt.isNotEmpty() && data[0].EndAt.isNotEmpty()){
+                                tvSurgeryDuration.setText(Global.durationGet(data[0].StartAt, data[0].EndAt))
+                            }
+                            else{
+                                tvSurgeryDuration.setText("00:00:00")
+                            }
                             tvCRSNo.setText(data[0].NoOfCSRRequired)
 
                             val innerAdapter = SurgeryNameListAdapter(data)

@@ -84,7 +84,7 @@
                             android:layout_toRightOf="@id/name_icon"
                             android:ellipsize="end"
                             android:maxLines="1"
-                            android:text="Cinntra Infotech"
+                            android:text=""
                             android:textColor="@color/black"
                             android:textSize="@dimen/text_size_14"
                             android:textStyle="bold" />
@@ -104,7 +104,7 @@
                                 android:layout_weight="50"
                                 android:ellipsize="end"
                                 android:maxLines="1"
-                                android:text="Dr. Vijay Chauhan"
+                                android:text=""
                                 android:textColor="@color/gray"
                                 android:textSize="@dimen/text_size_12"
                                 android:textStyle="bold"
@@ -120,7 +120,7 @@
                                 android:layout_toRightOf="@+id/name_icon"
                                 android:ellipsize="end"
                                 android:maxLines="1"
-                                android:text="Order ID : 12345"
+                                android:text="Order ID : "
                                 android:textColor="@color/gray"
                                 android:textSize="@dimen/text_size_12"
                                 android:textStyle="bold"
@@ -138,7 +138,7 @@
                             android:layout_marginTop="@dimen/size_5"
                             android:layout_toRightOf="@+id/name_icon"
                             android:ellipsize="end"
-                            android:text="Order Information : Borem jdnjsnkj bjvbsdjkvbsdjipsum dolor sit hue , kdnm"
+                            android:text="Order Information : "
                             android:textColor="@color/black"
                             android:textSize="@dimen/text_size_12"
                             android:visibility="visible" />
@@ -228,7 +228,7 @@
                             android:drawablePadding="4dp"
                             android:ellipsize="end"
                             android:maxLines="1"
-                            android:text="SalesOrderRequested"
+                            android:text=""
                             android:textColor="@color/gray"
                             android:textSize="@dimen/text_size_12"
                             android:textStyle="bold"
@@ -246,7 +246,7 @@
                             android:layout_weight="50"
                             android:ellipsize="end"
                             android:maxLines="1"
-                            android:text="Surgery Date &amp; Time :12/11/2024 12:0:00"
+                            android:text="Surgery Date &amp; Time : "
                             android:textColor="@color/grey"
                             android:textSize="@dimen/text_size_12"
                             android:visibility="visible" />
@@ -982,7 +982,7 @@
 
                                     <TextView
                                         android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
+                                        android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:gravity="center_vertical"
                                         android:text="Start Location"
@@ -993,7 +993,7 @@
                                     <TextView
                                         android:id="@+id/tvStartLocation"
                                         android:layout_width="match_parent"
-                                        android:layout_height="@dimen/size_45"
+                                        android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:gravity="center_vertical"
                                         android:textColor="@color/black"
@@ -1042,7 +1042,7 @@
 
                                     <TextView
                                         android:layout_width="match_parent"
-                                        android:layout_height="@dimen/size_45"
+                                        android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:gravity="center_vertical"
                                         android:text="End Location"
@@ -1053,7 +1053,7 @@
                                     <TextView
                                         android:id="@+id/tvDispatchEndLocation"
                                         android:layout_width="match_parent"
-                                        android:layout_height="@dimen/size_45"
+                                        android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:gravity="center_vertical"
                                         android:textColor="@color/black"
@@ -1753,11 +1753,13 @@
                                 android:orientation="vertical">
 
                                 <LinearLayout
+                                    android:id="@+id/surgeryVehicleNoLayout"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/size_10"
                                     android:layout_marginRight="@dimen/size_10"
                                     android:gravity="center_vertical"
+                                    android:visibility="gone"
                                     android:orientation="horizontal">
 
                                     <TextView
@@ -1787,9 +1789,9 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/size_10"
                                     android:layout_marginRight="@dimen/size_10"
                                     android:gravity="center_vertical"
+                                    android:visibility="visible"
                                     android:orientation="horizontal">
 
                                     <TextView
@@ -1817,9 +1819,9 @@
 
 
                                 <LinearLayout
+                                    android:id="@+id/endSurgeryTimeLayout"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/size_10"
                                     android:layout_marginRight="@dimen/size_10"
                                     android:gravity="center_vertical"
                                     android:orientation="horizontal">
@@ -1849,11 +1851,12 @@
 
 
                                 <LinearLayout
+                                    android:id="@+id/surgeryDurationLayout"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/size_10"
                                     android:layout_marginRight="@dimen/size_10"
                                     android:gravity="center_vertical"
+                                    android:visibility="visible"
                                     android:orientation="horizontal">
 
                                     <TextView
@@ -1883,7 +1886,6 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/size_10"
                                     android:layout_marginRight="@dimen/size_10"
                                     android:gravity="center_vertical"
                                     android:orientation="horizontal">

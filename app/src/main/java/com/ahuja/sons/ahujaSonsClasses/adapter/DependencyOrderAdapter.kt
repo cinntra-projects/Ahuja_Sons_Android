@@ -39,7 +39,11 @@ class DependencyOrderAdapter : ListAdapter<AllDependencyAndErrandsListModel.Data
             binding.tvSaleOrderId.text = order.OrderDependency[0].id.toString()
 
             binding.tvOrderInfo.text = "${order.OrderDependency[0].OrderInformation}"
-            binding.tvSurgeryName.text = "${order.OrderDependency[0].SurgeryName}"
+            if (order.OrderDependency[0].SurgeryName.isNotEmpty()) {
+                binding.tvSurgeryName.text = "${order.OrderDependency[0].SurgeryName}"
+            }else{
+                binding.tvSurgeryName.text = "NA"
+            }
             binding.tvDoctorName.text = "${order.OrderDependency[0].Doctor[0].DoctorFirstName} ${ order.OrderDependency[0].Doctor[0].DoctorLastName}"
         }
     }

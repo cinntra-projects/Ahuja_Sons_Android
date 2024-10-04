@@ -51,6 +51,8 @@ dependencies {
 //    implementation 'com.google.firebase:firebase-analytics-ktx'
     def nav_version = "2.5.3"
 
+
+    implementation 'androidx.biometric:biometric:1.0.1'
     implementation 'com.google.firebase:firebase-crashlytics:18.3.2'
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.5.0'

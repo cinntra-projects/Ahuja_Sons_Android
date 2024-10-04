@@ -11,10 +11,15 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.BROADCAST_SMS" tools:ignore="ProtectedPermissions" />
+    <uses-permission
+        android:name="android.permission.BROADCAST_SMS"
+        tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" tools:ignore="ScopedStorage" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
@@ -36,10 +41,11 @@
         android:theme="@style/Theme.ServiceSupportPortal"
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
+
         <activity
             android:name=".ahujaSonsClasses.activity.OperationManagerDetailActivity"
             android:exported="false"
-            android:theme="@style/MaterialComponent"  />
+            android:theme="@style/MaterialComponent" />
         <activity
             android:name=".ahujaSonsClasses.activity.BillingCoordinatorDetailActivity"
             android:exported="false" />
@@ -77,8 +83,8 @@
         <activity
             android:name=".ahujaSonsClasses.activity.SurgeryCoordinatorActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan"
-            android:theme="@style/MaterialComponent"  />
+            android:theme="@style/MaterialComponent"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ahujaSonsClasses.activity.SurgeryPersonActivity"
             android:exported="false" />
@@ -221,12 +227,21 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize">
+
+        </activity>
+
+        <activity
+            android:name=".ahujaSonsClasses.activity.SplashActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name="com.ahuja.sons.activity.Searchactivity"
             android:screenOrientation="portrait"
@@ -337,7 +352,6 @@
             android:name="com.ahuja.sons.globals.WorkManagerApplication"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
-
         <service
             android:name="com.ahuja.sons.FirebaseMessageReceiver"
             android:exported="false">
@@ -345,7 +359,6 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
         <service
             android:name="com.ahuja.sons.service.MyFirebaseMessagingService"
             android:exported="false">
@@ -353,7 +366,6 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
         <service
             android:name="com.ahuja.sons.notification.FirebaseMessageNotificationReceiver"
             android:enabled="true"

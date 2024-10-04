@@ -54,6 +54,10 @@ class CounterActivity : AppCompatActivity() {
 
     var orderID = ""
 
+    companion object{
+        private const val TAG = "CounterActivity"
+    }
+
     private fun setUpViewModel() {
         val dispatchers: CoroutineDispatcher = Dispatchers.Main
         val mainRepos = DefaultMainRepositories() as MainRepos
@@ -388,10 +392,8 @@ class CounterActivity : AppCompatActivity() {
 
                         callDeliveryDetailItemList()
 
-
                         //todo set deafult data---
                         setDefaultData(modelData)
-
 
 
                     }
@@ -469,17 +471,16 @@ class CounterActivity : AppCompatActivity() {
         }else{
             binding.tvSalesPerson.setText("NA")
         }
-        if (modelData.OrderRequest!!.SurgeryName.isNotEmpty()){
-            binding.tvPreparedBy.setText(modelData.OrderRequest!!.SurgeryName)
+        if (!modelData.OrderRequest!!.PreparedBy.isNullOrEmpty()){
+            binding.tvPreparedBy.setText(modelData.OrderRequest!!.PreparedBy)
         }else{
             binding.tvPreparedBy.setText("NA")
         }
-        if (modelData.OrderRequest!!.SurgeryDate.isNotEmpty()){
-            binding.tvInspectedBy.setText(modelData.OrderRequest!!.SurgeryDate)
+        if (!modelData.OrderRequest!!.InspectedBy.isNullOrEmpty()){
+            binding.tvInspectedBy.setText(modelData.OrderRequest!!.InspectedBy)
         }else{
             binding.tvInspectedBy.setText("NA")
         }
-
         if (modelData.OrderRequest!!.Remarks.isNotEmpty()){
             binding.tvRemarks.setText(modelData.OrderRequest!!.Remarks)
         }else{
@@ -540,7 +541,8 @@ class CounterActivity : AppCompatActivity() {
 
                     binding.loadingView.stop()
                     binding.loadingBackFrame.visibility = View.GONE
-                    Global.warningmessagetoast(this@CounterActivity, response.message().toString());
+                    Log.e(TAG, "onResponse: "+response.message() )
+//                    Global.warningmessagetoast(this@CounterActivity, response.message().toString());
 
                 }
             }
@@ -564,10 +566,7 @@ class CounterActivity : AppCompatActivity() {
         binding.loadingBackFrame.visibility = View.VISIBLE
         val call: Call<AllErrandsListModel> = ApiClient().service.getErrandsList(jsonObject)
         call.enqueue(object : Callback<AllErrandsListModel?> {
-            override fun onResponse(
-                call: Call<AllErrandsListModel?>,
-                response: Response<AllErrandsListModel?>
-            ) {
+            override fun onResponse(call: Call<AllErrandsListModel?>, response: Response<AllErrandsListModel?>) {
                 if (response.body()!!.status == 200) {
                     binding.loadingView.stop()
                     binding.loadingBackFrame.visibility = View.GONE
@@ -585,8 +584,8 @@ class CounterActivity : AppCompatActivity() {
 
                         setupEarrandRecyclerview()
 
-
-                    }else{
+                    }
+                    else{
 
                         setupEarrandRecyclerview()
                         binding.errandsCardViewLayout.visibility = View.GONE
@@ -596,12 +595,15 @@ class CounterActivity : AppCompatActivity() {
                     }
 
                 } else {
+
                     binding.tvErrandsNoDataFound.visibility = View.VISIBLE
                     binding.rvEarrands.visibility = View.GONE
 
                     binding.loadingView.stop()
                     binding.loadingBackFrame.visibility = View.GONE
-                    Global.warningmessagetoast(this@CounterActivity, response.body()!!.errors.toString());
+                    Log.e(TAG, "onResponse: "+response.message())
+
+//                    Global.warningmessagetoast(this@CounterActivity, response.body()!!.errors.toString());
 
                 }
             }

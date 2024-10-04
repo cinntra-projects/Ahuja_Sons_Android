@@ -7,11 +7,9 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.*
 import android.net.Uri
-import android.os.Bundle
-import android.os.Environment
-import android.os.Handler
-import android.os.Looper
+import android.os.*
 import android.provider.MediaStore
+import android.provider.Settings
 import android.util.Log
 import android.view.View
 import android.widget.*
@@ -24,6 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ahuja.sons.R
 import com.ahuja.sons.BuildConfig
+import com.ahuja.sons.ahujaSonsClasses.Interface.LocationPermissionHelper
 import com.ahuja.sons.ahujaSonsClasses.adapter.DeliveryDetailsItemAdapter
 import com.ahuja.sons.ahujaSonsClasses.adapter.PreviousImageViewAdapter
 import com.ahuja.sons.ahujaSonsClasses.adapter.UploadImageListAdapter
@@ -138,15 +137,34 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
 
         binding.btnENdTrip.setOnClickListener {
 
-            givePermission("EndTrip")
-
+//            givePermission("EndTrip")
+            if (!LocationPermissionHelper.hasLocationPermission(this)) {
+                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                intent.data = Uri.parse("package:$packageName")
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            }
+            else {
+                getMyCurrentLocation("EndTrip")
+            }
         }
 
 
 
         binding.btnTrip.setOnClickListener {
 
-            givePermission("StartTrip")
+//            givePermission("StartTrip")
+
+            if (!LocationPermissionHelper.hasLocationPermission(this)) {
+                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                intent.data = Uri.parse("package:$packageName")
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            }
+            else {
+                getMyCurrentLocation("StartTrip")
+            }
+
         }
 
 
@@ -162,12 +180,11 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
         }
 
 
-
         binding.btnUploadProof.setOnClickListener {
+
             showItemListDialogBottomSheetDialog()
 
         }
-
 
     }
 
@@ -317,15 +334,6 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
     private fun setDefaultData(modelData: AllWorkQueueResponseModel.Data, fromWhere: String) {
 
 
-     /*   if (dispatchList.size > 0){
-            binding.btnSubmit.visibility = View.VISIBLE
-            binding.btnUploadProof.visibility = View.GONE
-
-        }else{
-            binding.btnSubmit.visibility = View.GONE
-            binding.btnUploadProof.visibility = View.VISIBLE
-        }
-*/
         isTripStarted = modelData.OrderRequest!!.isTripStarted
         isTripEnd = modelData.OrderRequest!!.isTripEnd
         isUploadProof = modelData.OrderRequest!!.isDepProofUp
@@ -336,12 +344,12 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
 
                 binding.apply {
                     btnTrip.visibility = View.GONE
-                    btnENdTrip.visibility = View.VISIBLE
+                    btnENdTrip.visibility = View.GONE
                     linearTripDetails.visibility = View.VISIBLE
-                    tvCountText.visibility = View.GONE
+                    tvCountText.visibility = View.VISIBLE
                     tvClickStartText.visibility = View.GONE
                     linearTripEndDetails.visibility = View.GONE
-                    uploadProofLayout.visibility = View.GONE
+                    btnUploadProof.visibility = View.VISIBLE
 
 
                 }
@@ -355,22 +363,42 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
 
             }
 
+            else if (isTripStarted == true && isUploadProof == true && isTripEnd == false){
+                binding.apply {
+                    tvCountText.visibility = View.GONE
+                    btnENdTrip.visibility = View.VISIBLE
+                    btnTrip.visibility = View.GONE
+                    tvClickStartText.visibility = View.GONE
+                    btnSubmit.visibility = View.GONE
+                    btnUploadProof.visibility = View.GONE
+
+                    Log.e(TAG, "onCreate: "+binding.tvCountText.text.toString() )
+
+                    tvTripStatus.setText("Status : Started" )
+
+                }
+
+                binding.apply {
+
+                    dispatchedDetailLayout.visibility = View.VISIBLE
+                    dispatchTripDetail.visibility = View.GONE
+                    dispatchDetailAfterEndTrip.visibility = View.VISIBLE
+                    EndTripFieldslayout.visibility = View.GONE
+
+                }
+
+
+            }
+
+
             else if (isTripStarted == true && isTripEnd == true && isUploadProof == false){
                 binding.apply {
                     tvCountText.visibility = View.GONE
                     btnENdTrip.visibility = View.GONE
                     btnTrip.visibility = View.GONE
                     tvClickStartText.visibility = View.GONE
-                    uploadProofLayout.visibility = View.GONE
-
-                    if (dispatchList.size > 0){
-                        btnSubmit.visibility = View.VISIBLE
-                        btnUploadProof.visibility = View.GONE
-
-                    }else{
-                        btnSubmit.visibility = View.GONE
-                        btnUploadProof.visibility = View.VISIBLE
-                    }
+                    btnSubmit.visibility = View.GONE
+                    btnUploadProof.visibility = View.VISIBLE
 
                     Log.e(TAG, "onCreate: "+binding.tvCountText.text.toString() )
 
@@ -387,13 +415,36 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
 
             }
 
+            else if (isTripStarted == true && isTripEnd == true && isUploadProof == true){
+                binding.apply {
+                    tvCountText.visibility = View.GONE
+                    btnENdTrip.visibility = View.GONE
+                    btnTrip.visibility = View.GONE
+                    tvClickStartText.visibility = View.GONE
+                    btnSubmit.visibility = View.VISIBLE
+                    btnUploadProof.visibility = View.GONE
+
+                    Log.e(TAG, "onCreate: "+binding.tvCountText.text.toString() )
+
+                    tvTripStatus.setText("Status : End Trip" )
+
+                }
+
+                binding.apply {
+                    dispatchedDetailLayout.visibility = View.VISIBLE
+                    dispatchTripDetail.visibility = View.GONE
+                    dispatchDetailAfterEndTrip.visibility = View.VISIBLE
+                    EndTripFieldslayout.visibility = View.VISIBLE
+                }
+
+            }
+
             else if (isTripStarted == false && isTripEnd == false && isUploadProof == false){
                 binding.apply {
                     tvCountText.visibility = View.GONE
                     btnENdTrip.visibility = View.GONE
                     btnTrip.visibility = View.VISIBLE
                     tvClickStartText.visibility = View.VISIBLE
-                    uploadProofLayout.visibility = View.GONE
                     btnSubmit.visibility = View.GONE
 
                     Log.e(TAG, "onCreate: "+binding.tvCountText.text.toString() )
@@ -409,7 +460,7 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
                     btnENdTrip.visibility = View.GONE
                     btnTrip.visibility = View.GONE
                     tvClickStartText.visibility = View.GONE
-                    uploadProofLayout.visibility = View.GONE
+                    btnUploadProof.visibility = View.GONE
                     btnSubmit.visibility = View.VISIBLE
 
                     Log.e(TAG, "onCreate: "+binding.tvCountText.text.toString() )
@@ -423,10 +474,10 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
                 }
             }
 
-        }else{
-
-            binding.uploadProofLayout.visibility = View.GONE
+        }
+        else{
             binding.btnSubmit.visibility = View.VISIBLE
+            binding.btnUploadProof.visibility = View.GONE
         }
 
 
@@ -493,13 +544,13 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
         }else{
             binding.tvSalesPerson.setText("NA")
         }
-        if (modelData.OrderRequest!!.SurgeryName.isNotEmpty()){
-            binding.tvPreparedBy.setText(modelData.OrderRequest!!.SurgeryName)
+        if (!modelData.OrderRequest!!.PreparedBy.isNullOrEmpty()){
+            binding.tvPreparedBy.setText(modelData.OrderRequest!!.PreparedBy)
         }else{
             binding.tvPreparedBy.setText("NA")
         }
-        if (modelData.OrderRequest!!.SurgeryDate.isNotEmpty()){
-            binding.tvInspectedBy.setText(modelData.OrderRequest!!.SurgeryDate)
+        if (!modelData.OrderRequest!!.InspectedBy.isNullOrEmpty()){
+            binding.tvInspectedBy.setText(modelData.OrderRequest!!.InspectedBy)
         }else{
             binding.tvInspectedBy.setText("NA")
         }
@@ -543,15 +594,57 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
 
                         var data = listData[0]
 
+
                         if (data.StartAt.isNotEmpty()){
+
+                            val dateStr = data.StartAt
+                            val secondsTimeer = Global.secondsBetween(dateStr)
+                            println("Seconds between $dateStr and now: $secondsTimeer")
+
+                            try {
+                                if (data.EndAt.toString().isBlank() && data.StartAt.toString().isNotBlank()) { //2024_09_24 11:20:00
+                                    if (data.EndAt.toString() != "foo" && data.StartAt.toString() != "foo") {
+                                        running = true
+                                        seconds = secondsTimeer.toLong()
+                                    }
+                                    Log.e("sec", seconds.toString())
+                                } else if (data.EndAt.toString().isNotBlank() && data.StartAt.toString().isBlank()) {
+                                    if (data.EndAt.toString() != "foo" && data.StartAt.toString() != "foo") {
+                                        seconds = secondsTimeer.toLong()
+                                        Log.e("sec", seconds.toString())
+                                    }
+                                }
+                            } catch (e: NumberFormatException) {
+                                e.printStackTrace()
+                            }
+
+                            runTimer()
+
 
                             binding.apply {
                                 tvStartLocation.setText(data.StartLocation)
                                 tvStartTripTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data.StartAt))
 
-
-                                if (data.EndAt.isNotEmpty()){
+                                if (data.StartAt.isNotEmpty() && data.EndAt.isEmpty()){
                                     if (data.Deliveryassigned.isNotEmpty()){
+                                        Log.e(TAG, "Deliveryassigned: "+data.Deliveryassigned )
+                                        tvDeliveryPersonOne.setText(data.Deliveryassigned[0].DeliveryPerson1)
+                                        tvDeliveryPersonTwo.setText(data.Deliveryassigned[0].DeliveryPerson2)
+                                        tvDeliveryPersonThree.setText(data.Deliveryassigned[0].DeliveryPerson3)
+                                        tvVehicleNum.setText(data.Deliveryassigned[0].VechicleNo)
+
+                                    }
+
+                                    tvStartLocation12.setText(data.StartLocation)
+                                    tvStartTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data.StartAt))
+
+                                }
+
+                                if (data.StartAt.isNotEmpty() && data.EndAt.isNotEmpty()){
+
+                                    EndTripFieldslayout.visibility = View.VISIBLE
+                                    if (data.Deliveryassigned.isNotEmpty()){
+                                        Log.e(TAG, "Deliveryassigned: "+data.Deliveryassigned )
                                         tvDeliveryPersonOne.setText(data.Deliveryassigned[0].DeliveryPerson1)
                                         tvDeliveryPersonTwo.setText(data.Deliveryassigned[0].DeliveryPerson2)
                                         tvDeliveryPersonThree.setText(data.Deliveryassigned[0].DeliveryPerson3)
@@ -565,11 +658,11 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
                                     tvEndTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data.EndAt))
 
                                 }else{
-                                    tvStartTime.setText("NA")
+                                 /*   tvStartTime.setText("NA")
                                     tvStartLocation12.setText("NA")
                                     tvEndLocation.setText("NA")
                                     tvEndTime.setText("NA")
-
+*/
                                 }
 
 
@@ -802,9 +895,10 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
         statusLayout = bottomSheetDialog.findViewById<LinearLayout>(R.id.statusLayout)!!
         var tv_employee_name = bottomSheetDialog.findViewById<TextView>(R.id.tv_employee_name)!!
 
-        tv_employee_name.setText("Upload Proof")
+        tv_employee_name.setText("Proof")
 
         bindingBottomSheet.acStatus.visibility = View.GONE
+        bindingBottomSheet.ivCloseDialog.visibility = View.VISIBLE
 
         var statusList = arrayListOf<String>("Not Good", "Good")
         var adapter = ArrayAdapter<String>(this, R.layout.drop_down_item_textview, statusList)
@@ -817,6 +911,12 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
         }
 
         bindingBottomSheet.ivCloseDialog.setOnClickListener {
+            bottomSheetDialog.dismiss()
+        }
+
+        bindingBottomSheet.ivRvCloseDialog.setOnClickListener {
+            mArrayUriList.clear()
+            pdfurilist.clear()
             bottomSheetDialog.dismiss()
         }
 
@@ -908,14 +1008,34 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
                     Global.successmessagetoast(this@OrderScreenForDeliveryPersonActivity, "Picture Uploaded Success")
                     bottomSheetDialog.dismiss()
 
-                    binding.btnSubmit.visibility = View.VISIBLE
+//                    binding.btnSubmit.visibility = View.VISIBLE
+
+                    //todo new flow
+                    binding.apply{
+                        linearTripDetails.visibility = View.VISIBLE
+                        btnENdTrip.visibility = View.VISIBLE
+                        tvCountText.visibility = View.VISIBLE
+                        tvClickStartText.visibility = View.GONE
+                        linearTripEndDetails.visibility = View.GONE
+                        uploadProofLayout.visibility = View.GONE
+
+                        tvTripStatus.setText("Status : Started" )
+
+                    }
 
                     var jsonObject = JsonObject()
                     jsonObject.addProperty("id", orderID)
                     viewModel.callWorkQueueDetailApi(jsonObject)
                     bindWorkQueueDetail("uploadProof")
 
-                    callTripDetailsApi("EndTrip")
+                    callTripDetailsApi("")
+
+                    binding.apply {
+                        dispatchTripDetail.visibility = View.GONE
+                        dispatchDetailAfterEndTrip.visibility = View.VISIBLE
+                        EndTripFieldslayout.visibility = View.GONE
+                    }
+
 
                 } else {
                     binding.btnSubmit.visibility = View.GONE
@@ -1011,6 +1131,10 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
 
                     // check for permanent denial of any permission
                     if (report.isAnyPermissionPermanentlyDenied) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                            // In Android 14 and above, guide user to settings
+                            goToAppSettings()
+                        }
                         // permission is denied permenantly, navigate user to app settings
                     }
                 }
@@ -1024,6 +1148,14 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
             })
             .onSameThread()
             .check()
+    }
+
+
+    private fun goToAppSettings() {
+        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+        val uri = Uri.fromParts("package", packageName, null)
+        intent.data = uri
+        startActivity(intent)
     }
 
 
@@ -1130,7 +1262,7 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
         jsonObject1.addProperty("DeliveryNote","")
         jsonObject1.addProperty("OrderID",globalDataWorkQueueList.OrderRequest?.id)
         jsonObject1.addProperty("StartAt",Global.getTodayDateDashFormatReverse() + " "+ Global.getfullformatCurrentTime())
-        jsonObject1.addProperty("StartLocation",address)
+        jsonObject1.addProperty("StartLocation",address)//address
         jsonObject1.addProperty("EndAt","")
         jsonObject1.addProperty("EndLocation","")
         jsonObject1.addProperty("DepositedBy", Prefs.getString(Global.Employee_Code, ""))
@@ -1144,17 +1276,19 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
 
                     binding.apply {
                         linearTripDetails.visibility = View.VISIBLE
-                        btnENdTrip.visibility = View.VISIBLE
+                        btnENdTrip.visibility = View.GONE
                         tvCountText.visibility = View.VISIBLE
                         tvClickStartText.visibility = View.GONE
                         linearTripEndDetails.visibility = View.GONE
-                        uploadProofLayout.visibility = View.GONE
+                        btnUploadProof.visibility = View.VISIBLE
 
                         tvTripStatus.setText("Status : Started" )
+
                     }
 
-                    startTimer()
+                    running = true
 
+//                    startTimer()
 
                     Log.e("data", response.body()!!.data.toString())
 
@@ -1163,6 +1297,9 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
                         dispatchTripDetail.visibility = View.VISIBLE
                         dispatchDetailAfterEndTrip.visibility = View.GONE
                     }
+
+//                    showItemListDialogBottomSheetDialog()
+
 
                     callTripDetailsApi("StartTrip")
 
@@ -1198,7 +1335,7 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
         jsonObject1.addProperty("DeliveryNote","")
         jsonObject1.addProperty("OrderID",globalDataWorkQueueList.OrderRequest?.id)
         jsonObject1.addProperty("EndAt",Global.getTodayDateDashFormatReverse() + " "+ Global.getfullformatCurrentTime())//binding.tvCountText.text.toString()
-        jsonObject1.addProperty("EndLocation",address)
+        jsonObject1.addProperty("EndLocation",address)//
         jsonObject1.addProperty("DepositedBy", Prefs.getString(Global.Employee_Code, ""))
 
         val call: Call<RouteListModel> = ApiClient().service.finishTripForDeliveryPerson(jsonObject1)
@@ -1214,27 +1351,29 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
                         btnENdTrip.visibility = View.GONE
                         btnTrip.visibility = View.GONE
                         linearTripEndDetails.visibility = View.VISIBLE
-//                        tvCountText.visibility = View.GONE
                         tvClickStartText.visibility = View.GONE
-                        uploadProofLayout.visibility = View.GONE
-                        btnUploadProof.visibility = View.VISIBLE
+                        btnUploadProof.visibility = View.GONE
+
+                        binding.btnSubmit.visibility = View.VISIBLE
 
                         Log.e(TAG, "onCreate: "+binding.tvCountText.text.toString() )
 
-                        showItemListDialogBottomSheetDialog()
+//                        showItemListDialogBottomSheetDialog()
                         tvTripStatus.setText("Status : Ended" )
 
                         callTripDetailsApi("EndTrip")
 
                     }
 
-                    stopTimer()
+//                    stopTimer()
+                    running = false
 
                     Log.e("data", response.body()!!.data.toString())
 
                     binding.apply {
                         dispatchTripDetail.visibility = View.GONE
                         dispatchDetailAfterEndTrip.visibility = View.VISIBLE
+                        EndTripFieldslayout.visibility = View.VISIBLE
                     }
 
                 } else {
@@ -1365,6 +1504,7 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
         handler.removeCallbacks(timerRunnable)
     }
 
+
     private val timerRunnable = object : Runnable {
         override fun run() {
             if (isRunning) {
@@ -1377,6 +1517,49 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
             }
         }
     }
+
+    private var seconds: Long = 0
+
+    // Is the stopwatch running?
+    private var running = false
+    private fun runTimer() {
+
+        // Get the text view.
+
+        // Creates a new Handler
+        val handler = Handler()
+
+        handler.post(object : Runnable {
+            override fun run() {
+                val hours: Long = seconds / 3600
+                val minutes: Long = seconds % 3600 / 60
+                val secs: Long = seconds % 60
+
+                // Format the seconds into hours, minutes,
+                // and seconds.
+                val time: String = java.lang.String
+                    .format(
+                        Locale.getDefault(),
+                        "%d:%02d:%02d", hours,
+                        minutes, secs
+                    )
+
+                // Set the text view text.
+                binding.tvCountText.text = time
+
+                // If running is true, increment the
+                // seconds variable.
+                if (running) {
+                    seconds++
+                }
+
+                // Post the code again
+                // with a delay of 1 second.
+                handler.postDelayed(this, 1000)
+            }
+        })
+    }
+
 
     override fun onDestroy() {
         super.onDestroy()

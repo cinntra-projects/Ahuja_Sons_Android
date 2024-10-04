@@ -51,7 +51,11 @@ class RouteItemListAdapter : ListAdapter<RouteListModel.Data, RouteItemListAdapt
             binding.tvDeliveryPerson.text = "Delivery Person : "+order.DeliveryPerson1
             binding.tvVehicleNumber.text = "Vehicle : "+order.VechicleNo
 
-            orderAdapter = RouteOrderListAdapter(order.OrderID ,RoleClass.deliveryPerson, order.DeliveryID)
+            if (order != null && order.OrderID != null) {
+                orderAdapter = RouteOrderListAdapter(order.OrderID, order.DeliveryID)
+            }else{
+                orderAdapter = RouteOrderListAdapter(ArrayList(), ArrayList())
+            }
 
             binding.rvOrderInRoute.apply {
                 layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)

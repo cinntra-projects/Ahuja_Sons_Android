@@ -72,6 +72,7 @@ class PendingItemsFragment(val SapOrderID : String) : Fragment() {
                             binding.pendingRecyclerView.layoutManager = linearLayoutManager
                             val adapter = PendingItemsListAdapter(pendingItemArrayList)
                             binding.pendingRecyclerView.adapter = adapter
+                            adapter.notifyDataSetChanged()
 
                         }else{
                             binding.pendingRecyclerView.visibility = View.GONE

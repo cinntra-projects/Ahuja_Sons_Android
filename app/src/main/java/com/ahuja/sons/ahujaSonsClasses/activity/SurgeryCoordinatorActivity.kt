@@ -311,13 +311,13 @@ class SurgeryCoordinatorActivity : AppCompatActivity() {
         }else{
             binding.tvSalesPerson.setText("NA")
         }
-        if (modelData.OrderRequest!!.SurgeryName.isNotEmpty()){
-            binding.tvPreparedBy.setText(modelData.OrderRequest!!.SurgeryName)
+        if (!modelData.OrderRequest!!.PreparedBy.isNullOrEmpty()){
+            binding.tvPreparedBy.setText(modelData.OrderRequest!!.PreparedBy)
         }else{
             binding.tvPreparedBy.setText("NA")
         }
-        if (modelData.OrderRequest!!.SurgeryDate.isNotEmpty()){
-            binding.tvInspectedBy.setText(modelData.OrderRequest!!.SurgeryDate)
+        if (!modelData.OrderRequest!!.InspectedBy.isNullOrEmpty()){
+            binding.tvInspectedBy.setText(modelData.OrderRequest!!.InspectedBy)
         }else{
             binding.tvInspectedBy.setText("NA")
         }
@@ -472,6 +472,7 @@ class SurgeryCoordinatorActivity : AppCompatActivity() {
 
                                 if (data.EndAt.isNotEmpty()){
                                     if (data.Deliveryassigned.isNotEmpty()){
+                                        Log.e(TAG, "Deliveryassigned: "+data.Deliveryassigned )
                                         tvDeliveryPersonOne.setText(data.Deliveryassigned[0].DeliveryPerson1)
                                         tvDeliveryPersonTwo.setText(data.Deliveryassigned[0].DeliveryPerson2)
                                         tvDeliveryPersonThree.setText(data.Deliveryassigned[0].DeliveryPerson3)
@@ -501,7 +502,13 @@ class SurgeryCoordinatorActivity : AppCompatActivity() {
                         binding.dispatchedDetailLayout.visibility = View.GONE
                     }
 
-                } else {
+                }
+                else if (response.body()!!.status == 401){
+                    binding.dispatchedDetailLayout.visibility = View.GONE
+                    binding.loadingBackFrame.visibility = View.GONE
+                    binding.loadingView.stop()
+
+                }else {
                     binding.loadingBackFrame.visibility = View.GONE
                     binding.loadingView.stop()
                     Global.warningmessagetoast(this@SurgeryCoordinatorActivity, response.body()!!.message);

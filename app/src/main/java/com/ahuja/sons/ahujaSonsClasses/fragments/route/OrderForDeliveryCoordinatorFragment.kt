@@ -39,7 +39,7 @@ import retrofit2.Response
 class OrderForDeliveryCoordinatorFragment(var tvCreateRoute: TextView, var ivCollapseCart: ImageButton, var searchBtn: ImageButton) : Fragment(), OnDialogClickListener {
 
     lateinit var binding: FragmentOrderBinding
-    lateinit var adapter: OrderListForDeliveryCoordinatorAdapter
+    var adapter: OrderListForDeliveryCoordinatorAdapter? = null
     lateinit var deliveryIDAdapter: DeliveryCoordinatorIDsAdapter
     lateinit var linearLayoutManager: LinearLayoutManager
     var pageno = 1
@@ -93,34 +93,48 @@ class OrderForDeliveryCoordinatorFragment(var tvCreateRoute: TextView, var ivCol
             if (assignCard!!.visibility == View.GONE) {
                 assignCard!!.visibility = View.VISIBLE
                 isMultiOrderCardSelectEnabled = true
-                adapter.isUpdated(isMultiOrderCardSelectEnabled)
+                adapter?.let {
+                    it.isUpdated(isMultiOrderCardSelectEnabled)
+                }
                 deliveryIDAdapter.isUpdated(isMultiOrderCardSelectEnabled)
             } else {
                 assignCard!!.visibility = View.GONE
                 isMultiOrderCardSelectEnabled = false
-                adapter.isUpdated(isMultiOrderCardSelectEnabled)
+                adapter?.let {
+                    it.isUpdated(isMultiOrderCardSelectEnabled)
+                }
+
                 deliveryIDAdapter.isUpdated(isMultiOrderCardSelectEnabled)
             }
-            adapter.notifyDataSetChanged()
+            adapter?.let {
+                it.notifyDataSetChanged()
+            }
 
         }
 
 
         tvCancelRoute!!.setOnClickListener {
-            GlobalClasses.cartListForOrderRequest.clear()
+            GlobalClasses.cartListForDeliveryCoordinatorCheck.clear()
             GlobalClasses.deliveryIDsList.clear()
             if (assignCard!!.visibility == View.GONE) {
                 assignCard!!.visibility = View.VISIBLE
                 isMultiOrderCardSelectEnabled = true
-                adapter.isUpdated(isMultiOrderCardSelectEnabled)
+                adapter?.let {
+                    it.isUpdated(isMultiOrderCardSelectEnabled)
+                }
                 deliveryIDAdapter.isUpdated(isMultiOrderCardSelectEnabled)
             } else {
                 assignCard!!.visibility = View.GONE
                 isMultiOrderCardSelectEnabled = false
-                adapter.isUpdated(isMultiOrderCardSelectEnabled)
+                adapter?.let {
+                    it.isUpdated(isMultiOrderCardSelectEnabled)
+                }
                 deliveryIDAdapter.isUpdated(isMultiOrderCardSelectEnabled)
             }
-            adapter.notifyDataSetChanged()
+            adapter?.let {
+                it.notifyDataSetChanged()
+            }
+
         }
 
 
@@ -340,7 +354,11 @@ class OrderForDeliveryCoordinatorFragment(var tvCreateRoute: TextView, var ivCol
                         }
 
                         setAdapter()
-                        adapter.notifyDataSetChanged()
+                        adapter?.let {
+                            it.notifyDataSetChanged()
+                        }
+
+//                        adapter.notifyDataSetChanged()
                         binding.nodatafound.visibility = View.GONE
                         binding.ssPullRefresh.setRefreshing(false)
 
@@ -381,8 +399,9 @@ class OrderForDeliveryCoordinatorFragment(var tvCreateRoute: TextView, var ivCol
         adapter = OrderListForDeliveryCoordinatorAdapter(AllitemsList, RoleClass.deliveryPerson, isMultiOrderCardSelectEnabled, binding.checkBoxSelectAll)
         binding.productRecyclerView.layoutManager = linearLayoutManager
         binding.productRecyclerView.adapter = adapter
-        adapter.notifyDataSetChanged()
-
+        adapter?.let {
+            it.notifyDataSetChanged()
+        }
 
     }
 

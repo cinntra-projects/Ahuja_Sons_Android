@@ -555,6 +555,9 @@ interface Apis {
     @POST("order_request/order_inspection")
     suspend fun orderInspectionComplete(@Body data: JsonObject ): Response<AllWorkQueueResponseModel>
 
+    @POST("order_request/order_inspection")
+    fun callInspectionCompleteApi(@Body data: JsonObject ): Call<AllWorkQueueResponseModel>
+
     @POST("order_request/get_inspection_proof")
     fun getInspectionImages(@Body data: JsonObject ): Call<UploadedPictureModel>
 

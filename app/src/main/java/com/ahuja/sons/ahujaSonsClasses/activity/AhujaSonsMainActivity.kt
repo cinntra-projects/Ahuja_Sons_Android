@@ -73,7 +73,7 @@ class AhujaSonsMainActivity : AppCompatActivity() {
         setUpViewModel()
 
         binding.chipAssign.setOnClickListener {
-            /*if (GlobalClasses.cartListForOrderRequest.isNotEmpty()) {
+            /*if (GlobalClasses.cartListForDeliveryCoordinatorCheck.isNotEmpty()) {
                 openDeliveryPersonDialog(this)
             } else {
                 Global.infomessagetoast(this, "No Order Selected")
@@ -133,7 +133,6 @@ class AhujaSonsMainActivity : AppCompatActivity() {
             dialog.cancel()
         }
 
-
         dialogBinding.btnSave.setOnClickListener {
 
             val idArrayList = ArrayList<Int>()
@@ -144,7 +143,7 @@ class AhujaSonsMainActivity : AppCompatActivity() {
 
 
             val orderIDList = ArrayList<String>()
-            for (order in GlobalClasses.cartListForOrderRequest) {
+            for (order in GlobalClasses.cartListForDeliveryCoordinatorCheck) {
                 orderIDList.add(order.value.orderId)
             }
 
@@ -158,7 +157,11 @@ class AhujaSonsMainActivity : AppCompatActivity() {
 
             if (!vehicleNumber.equals("") && validateVehicleNumber(vehicleNumber)) {
 
-                createAssignApi(dialog, dialogBinding.loadingback, dialogBinding.loadingView, commaSeparatedIds, vehicleNumber, orderCommaSeparatedIds)
+                if (dialogBinding.acDeliveryPersonOne.text.isNullOrEmpty()){
+                    Global.warningmessagetoast(this, "Select Delivery One Person")
+                }else{
+                    createAssignApi(dialog, dialogBinding.loadingback, dialogBinding.loadingView, commaSeparatedIds, vehicleNumber, orderCommaSeparatedIds)
+                }
 
             } else {
                 Global.warningmessagetoast(this@AhujaSonsMainActivity, "Invalid Vehicle Number or Empty")

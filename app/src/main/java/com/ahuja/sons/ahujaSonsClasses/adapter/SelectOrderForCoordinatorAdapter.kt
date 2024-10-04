@@ -330,7 +330,7 @@ class SelectOrderForCoordinatorAdapter(var AllitemsList: ArrayList<AllOrderListM
                 if (b) {
                     var localSelectedOrder = LocalSelectedOrder()
                     localSelectedOrder.apply {
-                        orderId = currentDocLine.SapOrderId
+                        orderId = currentDocLine.SapOrderId//SapOrderId
                         orderName = currentDocLine.CardName
                         id = currentDocLine.id.toString()
                     }

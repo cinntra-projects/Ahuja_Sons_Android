@@ -160,8 +160,10 @@ class ProfileFragment : Fragment() {
         pDialog.confirmText = "Yes,Logout!"
         pDialog.showCancelButton(true)
         pDialog.showConfirmButton(true)
+        pDialog.show()
+
         pDialog.setCancelClickListener { sDialog ->
-            sDialog.cancel()
+            sDialog.dismiss()
 
         }
         pDialog.setConfirmClickListener {
@@ -170,17 +172,16 @@ class ProfileFragment : Fragment() {
             hashMap["password"]=Prefs.getString(Global.LogInPassword)
             hashMap["FCM"]=""
             viewModel.logoutEmployeeNew(hashMap)
-            subscribeToObserver()
+            subscribeToObserver(pDialog)
 
 
         }
-        pDialog.show()
     }
 
     companion object{
         private const val TAG = "ProfileFragment"
     }
-    private fun subscribeToObserver() {
+    private fun subscribeToObserver(pDialog: Sweetalert) {
         viewModel.userlogout.observe(viewLifecycleOwner, Event.EventObserver(
             onError = {
                 Log.e(TAG, "subscribeToObserver: $it",)
@@ -214,7 +215,20 @@ class ProfileFragment : Fragment() {
             }
 
         ))
+
     }
 
+
+    override fun onDestroy() {
+        if (alertDialog!!.isShowing) {
+            alertDialog?.dismiss()
+        }
+        super.onDestroy()
+    }
+
+    override fun onDetach() {
+        alertDialog?.dismiss()
+        super.onDetach()
+    }
 
 }

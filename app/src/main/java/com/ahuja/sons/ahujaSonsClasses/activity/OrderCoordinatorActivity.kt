@@ -12,13 +12,12 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ahuja.sons.R
-import com.ahuja.sons.ahujaSonsClasses.adapter.DeliveryDetailsItemAdapter
-import com.ahuja.sons.ahujaSonsClasses.adapter.DependencyOrderAdapter
-import com.ahuja.sons.ahujaSonsClasses.adapter.EarrandsOrderAdapter
-import com.ahuja.sons.ahujaSonsClasses.adapter.ItemInOrderForDeliveryCoordinatorAdapter
+import com.ahuja.sons.ahujaSonsClasses.adapter.*
 import com.ahuja.sons.ahujaSonsClasses.model.AllDependencyAndErrandsListModel
 import com.ahuja.sons.ahujaSonsClasses.model.AllErrandsListModel
 import com.ahuja.sons.ahujaSonsClasses.model.DeliveryItemListModel
+import com.ahuja.sons.ahujaSonsClasses.model.SurgeryPersonNameListModel
+import com.ahuja.sons.ahujaSonsClasses.model.image_get_model.UploadedPictureModel
 import com.ahuja.sons.ahujaSonsClasses.model.orderModel.AllItemListResponseModel
 import com.ahuja.sons.ahujaSonsClasses.model.workQueue.AllWorkQueueResponseModel
 import com.ahuja.sons.apihelper.Event
@@ -434,13 +433,14 @@ class OrderCoordinatorActivity : AppCompatActivity() {
 
     //todo sap api link for order--
     private fun callSAPLinkOrderApi() {
-        if (binding.SapOrderIdEdt.text.toString().isEmpty()){
+
+        if (binding.SapOrderIdEdt.text.toString().trim().isEmpty()){
             Global.errormessagetoast(this@OrderCoordinatorActivity, "Enter SAP Order ID");
         }else{
 
             var jsonObject = JsonObject()
             jsonObject.addProperty("SalesEmployeeCode", Prefs.getString(Global.Employee_Code, ""))
-            jsonObject.addProperty("SapOrderId", binding.SapOrderIdEdt.text.toString())
+            jsonObject.addProperty("SapOrderId", binding.SapOrderIdEdt.text.toString().trim())
             jsonObject.addProperty("order_id", globalDataWorkQueueList.OrderRequest!!.id)
 
             binding.loadingView.start()
@@ -519,11 +519,12 @@ class OrderCoordinatorActivity : AppCompatActivity() {
 
                         callDeliveryDetailItemList()
 
+                        bindGetDeliveryDispatchImages()
+
+                        callSurgeryPersonDetailApi()
 
                         //todo set deafult data---
                         setDefaultData(modelData, flag)
-
-
 
                     }
 
@@ -634,13 +635,13 @@ class OrderCoordinatorActivity : AppCompatActivity() {
         }else{
             binding.tvSalesPerson.setText("NA")
         }
-        if (modelData.OrderRequest!!.SurgeryName.isNotEmpty()){
-            binding.tvPreparedBy.setText(modelData.OrderRequest!!.SurgeryName)
+        if (!modelData.OrderRequest!!.PreparedBy.isNullOrEmpty()){
+            binding.tvPreparedBy.setText(modelData.OrderRequest!!.PreparedBy)
         }else{
             binding.tvPreparedBy.setText("NA")
         }
-        if (modelData.OrderRequest!!.SurgeryDate.isNotEmpty()){
-            binding.tvInspectedBy.setText(modelData.OrderRequest!!.SurgeryDate)
+        if (!modelData.OrderRequest!!.InspectedBy.isNullOrEmpty()){
+            binding.tvInspectedBy.setText(modelData.OrderRequest!!.InspectedBy)
         }else{
             binding.tvInspectedBy.setText("NA")
         }
@@ -662,7 +663,6 @@ class OrderCoordinatorActivity : AppCompatActivity() {
             binding.btnOk.visibility = View.GONE
             binding.orderIDMand.visibility = View.GONE
             binding.orderIDNonMand.visibility = View.VISIBLE*/
-
 
             if (modelData.OrderRequest!!.DocumentLines.size > 0) {
 
@@ -878,6 +878,205 @@ class OrderCoordinatorActivity : AppCompatActivity() {
     }
 
 
+
+    //todo delovery dispatch upload proof api here---
+
+    var dispatchList = ArrayList<UploadedPictureModel.Data>()
+    private fun bindGetDeliveryDispatchImages() {
+        var jsonObject1 = JsonObject()
+        jsonObject1.addProperty("OrderID", globalDataWorkQueueList.OrderRequest!!.id)
+
+        val call: Call<UploadedPictureModel> = ApiClient().service.getDeliveryDispatchProofImage(jsonObject1)
+        call.enqueue(object : Callback<UploadedPictureModel?> {
+            override fun onResponse(call: Call<UploadedPictureModel?>, response: Response<UploadedPictureModel?>) {
+                if (response.body()!!.status == 200) {
+
+                    Log.e("data", response.body()!!.data.toString())
+
+                    var listData = response.body()!!.data
+                    dispatchList = response.body()!!.data
+
+                    bindGETDispatchCameraImagesAdapter(listData)
+
+                } else {
+
+                    Log.e(TAG, "onResponse: "+response.body()!!.errors)
+//                    Global.warningmessagetoast(this@OrderCoordinatorActivity, response.body()!!.errors);
+
+                }
+            }
+
+            override fun onFailure(call: Call<UploadedPictureModel?>, t: Throwable) {
+                Log.e(TAG, "onFailure: "+t.message )
+                Toast.makeText(this@OrderCoordinatorActivity, t.message, Toast.LENGTH_SHORT).show()
+
+            }
+        })
+    }
+
+
+    //todo bind dispatch image adater data----
+    private fun bindGETDispatchCameraImagesAdapter(mArrayUriList: ArrayList<UploadedPictureModel.Data>) {
+
+        if (mArrayUriList.size > 0) {
+
+            binding.deliveryProofViewLayout.visibility = View.VISIBLE
+
+            val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+            val adapter = PreviousImageViewAdapter(this, mArrayUriList, arrayOf(), arrayListOf())
+            binding.rvDeliveryImage.layoutManager = linearLayoutManager
+            binding.rvDeliveryImage.adapter = adapter
+            adapter.notifyDataSetChanged()
+
+        } else {
+            binding.deliveryProofViewLayout.visibility = View.GONE
+
+        }
+
+
+    }
+
+
+    //todo calling surgery person detail api here---
+
+    var surgeryDetailData_gl: java.util.ArrayList<SurgeryPersonNameListModel.Data> = java.util.ArrayList<SurgeryPersonNameListModel.Data>()
+
+    private fun callSurgeryPersonDetailApi() {
+        binding.loadingBackFrame.visibility = View.VISIBLE
+        binding.loadingView.start()
+        var jsonObject = JsonObject()
+        jsonObject.addProperty("OrderID", globalDataWorkQueueList.OrderRequest?.id)
+
+        val call: Call<SurgeryPersonNameListModel> = ApiClient().service.getSurgeryPersonDetail(jsonObject)
+        call.enqueue(object : Callback<SurgeryPersonNameListModel?> {
+            override fun onResponse(call: Call<SurgeryPersonNameListModel?>, response: Response<SurgeryPersonNameListModel?>) {
+                if (response.body()!!.status == 200) {
+                    binding.loadingBackFrame.visibility = View.GONE
+                    binding.loadingView.stop()
+                    surgeryDetailData_gl = response.body()!!.data
+                    var data = response.body()!!.data
+                    if (data.size > 0){
+
+                        binding.apply {
+                            surgeryDetailCardView.visibility = View.VISIBLE
+
+                            tvSurgeryStatus.setText("Status : Ended")
+
+                            tvSurgeryVehicleNo.setText("NA")
+                            if (data[0].StartAt.isNotEmpty()){
+                                tvSurgeryStartTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data[0].StartAt))
+                            }else{
+                                tvSurgeryStartTime.setText("NA")
+                            }
+                            if (data[0].EndAt.isNotEmpty()){
+                                tvSurgeryEndTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data[0].EndAt))
+                            }else{
+                                tvSurgeryEndTime.setText("NA")
+                            }
+                            if (data[0].StartAt.isNotEmpty() && data[0].EndAt.isNotEmpty()){
+                                tvSurgeryDuration.setText(Global.durationGet(data[0].StartAt, data[0].EndAt))
+                            }
+                            else{
+                                tvSurgeryDuration.setText("00:00:00")
+                            }
+                            tvCRSNo.setText(data[0].NoOfCSRRequired)
+
+                            val innerAdapter = SurgeryNameListAdapter(data)
+                            rvSurgeryPersonListName.layoutManager = LinearLayoutManager(this@OrderCoordinatorActivity, LinearLayoutManager.VERTICAL, false)
+                            rvSurgeryPersonListName.adapter = innerAdapter
+                            innerAdapter.notifyDataSetChanged()
+
+                        }
+
+                        getSurgeryUploadProofAPi()
+
+                    }
+                    else{
+
+                        binding.loadingBackFrame.visibility = View.GONE
+                        binding.loadingView.stop()
+                        binding.surgeryDetailCardView.visibility = View.GONE
+                        val innerAdapter = SurgeryNameListAdapter(java.util.ArrayList())
+                        innerAdapter.notifyDataSetChanged()
+
+                    }
+                } else {
+                    binding.loadingBackFrame.visibility = View.GONE
+                    binding.loadingView.stop()
+                    binding.surgeryDetailCardView.visibility = View.GONE
+                    Log.e(TAG, "onResponse: "+response.body()!!.message)
+//                    Global.warningmessagetoast(this@OperationManagerDetailActivity, response.body()!!.message);
+
+                }
+            }
+
+            override fun onFailure(call: Call<SurgeryPersonNameListModel?>, t: Throwable) {
+                binding.loadingBackFrame.visibility = View.GONE
+                binding.loadingView.stop()
+                Toast.makeText(this@OrderCoordinatorActivity, t.message, Toast.LENGTH_SHORT).show()
+            }
+        })
+
+    }
+
+    //todo get surgery image proof list images--
+
+    var surgeryProofList = java.util.ArrayList<UploadedPictureModel.Data>()
+    private fun getSurgeryUploadProofAPi() {
+        var jsonObject1 = JsonObject()
+        jsonObject1.addProperty("OrderID", globalDataWorkQueueList.OrderRequest!!.id)
+
+        val call: Call<UploadedPictureModel> = ApiClient().service.getSurgeryProof(jsonObject1)
+        call.enqueue(object : Callback<UploadedPictureModel?> {
+            override fun onResponse(call: Call<UploadedPictureModel?>, response: Response<UploadedPictureModel?>) {
+                if (response.body()!!.status == 200) {
+
+                    Log.e("data", response.body()!!.data.toString())
+
+                    var listData = response.body()!!.data
+                    surgeryProofList = response.body()!!.data
+                    bindSurgeryPersonUploadedProofAdapter(listData)
+
+                } else {
+
+                    Global.warningmessagetoast(this@OrderCoordinatorActivity, response.body()!!.message);
+
+                }
+            }
+
+            override fun onFailure(call: Call<UploadedPictureModel?>, t: Throwable) {
+
+                Log.e(TAG, "onFailure: "+t.message )
+                Toast.makeText(this@OrderCoordinatorActivity, t.message, Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+
+    //todo bind surgery image adapter data----
+    private fun bindSurgeryPersonUploadedProofAdapter(mArrayUriList: java.util.ArrayList<UploadedPictureModel.Data>) {
+
+        if (mArrayUriList.size > 0) {
+
+            binding.surgeryProofViewLayout.visibility = View.VISIBLE
+
+            val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+            val adapter = PreviousImageViewAdapter(this, mArrayUriList, arrayOf(), arrayListOf())
+            binding.rvSurgeryList.layoutManager = linearLayoutManager
+            binding.rvSurgeryList.adapter = adapter
+            adapter.notifyDataSetChanged()
+
+        } else {
+            binding.surgeryProofViewLayout.visibility = View.GONE
+
+        }
+
+
+    }
+
+
+
+
     private fun setupFlow() {
         binding.apply {
             btnOk.setOnClickListener {
@@ -892,7 +1091,7 @@ class OrderCoordinatorActivity : AppCompatActivity() {
         val bindingBottomSheet: BottomSheetItemListBinding = BottomSheetItemListBinding.inflate(layoutInflater)
         bottomSheetDialog.setContentView(bindingBottomSheet.getRoot())
 
-        bottomSheetDialog.show()
+
 
         bindingBottomSheet.headingMore.setOnClickListener {
             bottomSheetDialog.dismiss()
@@ -934,13 +1133,9 @@ class OrderCoordinatorActivity : AppCompatActivity() {
             viewModel.completeOrderApi(jsonObject)
             bindObserverCompleteOrderApi(bottomSheetDialog)
 
-
         }
 
-
-
-
-
+        bottomSheetDialog.show()
     }
 
     private fun callAllItemListAPi(bindingBottomSheet: BottomSheetItemListBinding, modelData : AllWorkQueueResponseModel.Data) {

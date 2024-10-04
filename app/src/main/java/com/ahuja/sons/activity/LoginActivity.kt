@@ -19,10 +19,6 @@ import android.widget.Button
 import android.widget.ImageView
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
-import com.bumptech.glide.Glide
-import com.google.android.gms.tasks.Task
-import com.google.firebase.messaging.FirebaseMessaging
-import com.pixplicity.easyprefs.library.Prefs
 import com.ahuja.sons.FirebaseMessageReceiver
 import com.ahuja.sons.R
 import com.ahuja.sons.ahujaSonsClasses.activity.AhujaSonsMainActivity
@@ -39,6 +35,10 @@ import com.ahuja.sons.service.repository.DefaultMainRepositories
 import com.ahuja.sons.service.repository.MainRepos
 import com.ahuja.sons.viewmodel.MainViewModel
 import com.ahuja.sons.viewmodel.MainViewModelProvider
+import com.bumptech.glide.Glide
+import com.google.android.gms.tasks.Task
+import com.google.firebase.messaging.FirebaseMessaging
+import com.pixplicity.easyprefs.library.Prefs
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import retrofit2.Call
@@ -413,6 +413,10 @@ class LoginActivity : MainBaseActivity() {
 
                 if (it.status == 200) {
                     gotoHome()
+
+                    Global.APILog = ""
+
+                    Prefs.putBoolean(Global.AutoLogIn, true)
                     Prefs.putString(Global.Employee_Name, it.data.SalesEmployeeName)
                     Prefs.putString(Global.MyID, it.data.id.toString())
                     Prefs.putString(Global.Employee_maILid, it.data.Email)
@@ -432,6 +436,14 @@ class LoginActivity : MainBaseActivity() {
                         Prefs.putString(Global.RememberMe, "CheckIn")
                     }
 
+                    Prefs.putBoolean(Global.Location_FirstTime, true)
+                    Prefs.putBoolean(Global.LocationRestart, false)
+
+                    var session = "30".toLong()
+                    session = session * 60 * 1000
+
+                    Prefs.putLong(Global.SESSION_TIMEOUT, session)
+                    Prefs.putLong(Global.SESSION_REMAIN_TIME, 0)
 
                     finish()
 
