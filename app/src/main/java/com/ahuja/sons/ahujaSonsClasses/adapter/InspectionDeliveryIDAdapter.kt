@@ -32,11 +32,14 @@ class InspectionDeliveryIDAdapter (private val itemsList: ArrayList<AllWorkQueue
         holder.itemView.setOnClickListener {
 
             if (Prefs.getString(Global.Employee_role, "").equals("Inspection")){
-                val intent = Intent(holder.itemView.context, InspectDeliveryOrderDetailActivity::class.java)
-                intent.putExtra("deliveryID", itemsList[position].id)
-                intent.putExtra("DeliveryStatus", itemsList[position].DeliveryStatus)
-                intent.putExtra("inspectionDeliveryPos", position)
-                context.startActivity(intent)
+                if (itemsList[position].DeliveryStatus == "Prepared"){
+                    val intent = Intent(holder.itemView.context, InspectDeliveryOrderDetailActivity::class.java)
+                    intent.putExtra("deliveryID", itemsList[position].id)
+                    intent.putExtra("DeliveryStatus", itemsList[position].DeliveryStatus)
+                    intent.putExtra("inspectionDeliveryPos", position)
+                    context.startActivity(intent)
+                }
+
             }
 
 

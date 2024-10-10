@@ -136,6 +136,7 @@ class AhujaSonsMainActivity : AppCompatActivity() {
         dialogBinding.btnSave.setOnClickListener {
 
             val idArrayList = ArrayList<Int>()
+            idArrayList.clear()
             for (order in GlobalClasses.deliveryIDsList) {
                 idArrayList.add(order.id.toInt())
             }

@@ -669,13 +669,17 @@ class AllOrdersCoordinatorDetailActivity : AppCompatActivity() {
             binding.tvSalesPerson.setText("NA")
         }
         if (!modelData.PreparedBy.isNullOrEmpty()){
+            binding.preparedByLayout.visibility = View.VISIBLE
             binding.tvPreparedBy.setText(modelData.PreparedBy)
         }else{
+            binding.preparedByLayout.visibility = View.GONE
             binding.tvPreparedBy.setText("NA")
         }
         if (!modelData.InspectedBy.isNullOrEmpty()){
+            binding.inspectedByLayout.visibility = View.VISIBLE
             binding.tvInspectedBy.setText(modelData.InspectedBy)
         }else{
+            binding.inspectedByLayout.visibility = View.GONE
             binding.tvInspectedBy.setText("NA")
         }
 

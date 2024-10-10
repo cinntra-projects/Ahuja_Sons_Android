@@ -426,14 +426,19 @@ class BillingCoordinatorDetailActivity : AppCompatActivity() {
         }else{
             binding.tvSalesPerson.setText("NA")
         }
+
         if (!modelData.OrderRequest!!.PreparedBy.isNullOrEmpty()){
+            binding.preparedByLayout.visibility = View.VISIBLE
             binding.tvPreparedBy.setText(modelData.OrderRequest!!.PreparedBy)
         }else{
+            binding.preparedByLayout.visibility = View.GONE
             binding.tvPreparedBy.setText("NA")
         }
         if (!modelData.OrderRequest!!.InspectedBy.isNullOrEmpty()){
+            binding.inspectedByLayout.visibility = View.VISIBLE
             binding.tvInspectedBy.setText(modelData.OrderRequest!!.InspectedBy)
         }else{
+            binding.inspectedByLayout.visibility = View.GONE
             binding.tvInspectedBy.setText("NA")
         }
 
