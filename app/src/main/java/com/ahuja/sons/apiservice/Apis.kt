@@ -595,6 +595,9 @@ interface Apis {
     @POST("delivery/order_trip_detail")
     fun getTripDetailsApi(@Body data: JsonObject ): Call<TripDetailModel>
 
+    @POST("delivery/get_pickup_details")
+    fun getPickUpTripDetailsApi(@Body data: JsonObject ): Call<TripDetailModel>
+
     @POST("delivery/deposit_order")
     suspend fun getDeliveryPersonComplete(@Body data: JsonObject ): Response<AllWorkQueueResponseModel>
 
@@ -649,6 +652,11 @@ interface Apis {
     //todo operational manager api
     @POST("order_request/allow_incomplete_return")
     fun allowIncompleteReturn(@Body data: JsonObject ): Call<AllWorkQueueResponseModel>
+
+
+    //todo return delivery person api--
+    @POST("returns/update_return_status")
+    fun reachedOffice(@Body data: JsonObject ): Call<RouteListModel>
 
 
 }

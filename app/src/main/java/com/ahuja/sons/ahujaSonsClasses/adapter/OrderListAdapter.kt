@@ -79,6 +79,7 @@ class OrderListAdapter(var AllitemsList: ArrayList<AllOrderListModel.Data>, var 
             holder.binding.deliveriesLayoutView.visibility = View.GONE
 
             holder.binding.tvOrderId.text = "Order ID: " + id
+            holder.binding.tvOrderInfo.text = OrderInformation
 
             if (!CardName.isEmpty()) {
                 holder.binding.tvOrderName.text = "" + CardName

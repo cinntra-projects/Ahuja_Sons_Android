@@ -79,11 +79,13 @@ class AhujaSonsMainActivity : AppCompatActivity() {
                 Global.infomessagetoast(this, "No Order Selected")
             }*/
 
-            if (GlobalClasses.deliveryIDsList.isNotEmpty()) {
-                openDeliveryPersonDialog(this)
+           /* if (GlobalClasses.deliveryIDsList.isNotEmpty()) {
+
             } else {
                 Global.infomessagetoast(this, "No Delivery Selected")
-            }
+            }*/
+
+            openDeliveryPersonDialog(this)
 
         }
 

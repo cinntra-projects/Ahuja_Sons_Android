@@ -11,12 +11,17 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.ahuja.sons.R
 import com.ahuja.sons.ahujaSonsClasses.activity.*
 import com.ahuja.sons.ahujaSonsClasses.model.local.LocalWorkQueueData
 import com.ahuja.sons.ahujaSonsClasses.model.workQueue.AllWorkQueueResponseModel
 import com.ahuja.sons.databinding.ItemWorkQueueBinding
 import com.ahuja.sons.globals.Global
+import com.amulyakhare.textdrawable.TextDrawable
+import com.amulyakhare.textdrawable.util.ColorGenerator
 import com.pixplicity.easyprefs.library.Prefs
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class WorkQueueAdapter(var AllitemsList: ArrayList<AllWorkQueueResponseModel.Data>, var where: String) : RecyclerView.Adapter<WorkQueueAdapter.OrderViewHolder>() {//(OrderDiffCallback())
@@ -43,13 +48,36 @@ class WorkQueueAdapter(var AllitemsList: ArrayList<AllWorkQueueResponseModel.Dat
     }
 
     override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
+
+        val generator: ColorGenerator = ColorGenerator.MATERIAL
+        val color1: Int = generator.randomColor
+        if (AllitemsList[position].OrderRequest!!.CardName.isNotEmpty()!!) {
+            val drawable: TextDrawable = TextDrawable.builder()
+                .beginConfig()
+                .withBorder(4) /* thickness in px */
+                .endConfig()
+                .buildRound(AllitemsList[position].OrderRequest!!.CardName[0].toString()
+                        .uppercase(Locale.getDefault()), color1
+                )
+            holder.binding.profilePic.setImageDrawable(drawable)
+        }
+
+
         if (AllitemsList.get(position).DeliveryNote.size > 0) {
             holder.bind(AllitemsList.get(position).DeliveryNote)
         }
 
         if (Prefs.getString(Global.Employee_role, "").equals("Inspection") || Prefs.getString(Global.Employee_role, "").equals("Delivery Person")){
-            holder.binding.deliveriesLayoutView.visibility = View.VISIBLE
+            if (AllitemsList[position].is_return == true) {
+                holder.binding.deliveriesLayoutView.visibility = View.GONE
+                holder.binding.ivDeliveryCoordinator.setImageDrawable(context.resources.getDrawable(R.drawable.return_icon))
+            }else{
+                holder.binding.ivDeliveryCoordinator.setImageDrawable(context.resources.getDrawable(R.drawable.dispatched_icon))
+                holder.binding.deliveriesLayoutView.visibility = View.VISIBLE
+            }
+
         }else{
+            holder.binding.ivDeliveryCoordinator.setImageDrawable(context.resources.getDrawable(R.drawable.dispatched_icon))
             holder.binding.deliveriesLayoutView.visibility = View.GONE
         }
 
@@ -75,7 +103,20 @@ class WorkQueueAdapter(var AllitemsList: ArrayList<AllWorkQueueResponseModel.Dat
             }
             holder.binding.tvSurgeryDateTime.text = "Surgery Date:${Global.convert_yyyy_mm_dd_to_dd_mm_yyyy(OrderRequest?.SurgeryDate)}\n Surgery Time: ${OrderRequest?.SurgeryTime}"
             holder.binding.tvStatusOrder.text = OrderRequest?.Status
+            holder.binding.tvOrderInfo.text = OrderRequest?.OrderInformation
+            holder.binding.tvLocationName.text = "Ahuja Sons Enterprises"
         }
+
+        if (Prefs.getString(Global.Employee_role, "").equals("Delivery Person")){
+            if (AllitemsList[position].is_return_to_office == true) {
+                holder.binding.returnToOfficeLayout.visibility = View.VISIBLE
+                holder.binding.constraintLayoutWorkQueue.visibility = View.GONE
+            }else{
+                holder.binding.returnToOfficeLayout.visibility = View.GONE
+                holder.binding.constraintLayoutWorkQueue.visibility = View.VISIBLE
+            }
+        }
+
 
         holder.itemView.setOnClickListener {
 
@@ -101,9 +142,16 @@ class WorkQueueAdapter(var AllitemsList: ArrayList<AllWorkQueueResponseModel.Dat
                 }
 
                 else if (Prefs.getString(Global.Employee_role, "").equals("Delivery Person")){
-                    val intent = Intent(holder.itemView.context, OrderScreenForDeliveryPersonActivity::class.java)
-                    intent.putExtra("id", AllitemsList[position].id)
-                    context.startActivity(intent)
+                    if (AllitemsList[position].is_return_to_office == true) {
+                        val intent = Intent(holder.itemView.context, ReturnAutoTrackingActivity::class.java)
+                        intent.putExtra("id", AllitemsList[position].id)
+                        context.startActivity(intent)
+                    }else{
+                        val intent = Intent(holder.itemView.context, OrderScreenForDeliveryPersonActivity::class.java)
+                        intent.putExtra("id", AllitemsList[position].id)
+                        context.startActivity(intent)
+                    }
+
                 }
 
                 else if (Prefs.getString(Global.Employee_role, "").equals("Surgery Coordinator")){
@@ -140,6 +188,18 @@ class WorkQueueAdapter(var AllitemsList: ArrayList<AllWorkQueueResponseModel.Dat
                 }*/
 
 
+            }else{
+                if (AllitemsList[position].is_return == true){
+                    if (Prefs.getString(Global.Employee_role, "").equals("Inspection")){
+                        val intent = Intent(holder.itemView.context, InspectDeliveryOrderDetailActivity::class.java)
+                        intent.putExtra("deliveryID", AllitemsList[position].DeliveryId)
+                        intent.putExtra("DeliveryStatus", AllitemsList[position].DeliveryStatus)
+                        intent.putExtra("inspectionDeliveryPos", position)
+                        intent.putExtra("OrderID", AllitemsList[position].OrderRequest!!.id.toString())
+                        intent.putExtra("is_return", AllitemsList[position].is_return)
+                        context.startActivity(intent)
+                    }
+                }
             }
 
         }

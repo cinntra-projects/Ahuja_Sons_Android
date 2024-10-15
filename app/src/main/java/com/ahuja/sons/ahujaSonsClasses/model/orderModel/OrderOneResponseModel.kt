@@ -32,7 +32,8 @@ data class OrderOneResponseModel(
         val PreparedBy: String = "",
         val InspectedBy: String = "",
         val id: Int = 0,
-        val isOrderPrepared: Boolean = false
+        val isOrderPrepared: Boolean = false,
+        val is_return: Boolean = false
     )
 
     data class DocumentLine(

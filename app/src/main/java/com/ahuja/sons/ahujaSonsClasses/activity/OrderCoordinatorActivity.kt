@@ -13,10 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ahuja.sons.R
 import com.ahuja.sons.ahujaSonsClasses.adapter.*
-import com.ahuja.sons.ahujaSonsClasses.model.AllDependencyAndErrandsListModel
-import com.ahuja.sons.ahujaSonsClasses.model.AllErrandsListModel
-import com.ahuja.sons.ahujaSonsClasses.model.DeliveryItemListModel
-import com.ahuja.sons.ahujaSonsClasses.model.SurgeryPersonNameListModel
+import com.ahuja.sons.ahujaSonsClasses.model.*
 import com.ahuja.sons.ahujaSonsClasses.model.image_get_model.UploadedPictureModel
 import com.ahuja.sons.ahujaSonsClasses.model.orderModel.AllItemListResponseModel
 import com.ahuja.sons.ahujaSonsClasses.model.workQueue.AllWorkQueueResponseModel
@@ -402,31 +399,37 @@ class OrderCoordinatorActivity : AppCompatActivity() {
 
         }
 
-/*
+
         binding.dispatchUpArrow.setOnClickListener {
-            binding.dispatchDetailsLayout.visibility = View.GONE
+            binding.dispatchTripDetail.visibility = View.GONE
+            binding.statusLayout.visibility = View.GONE
             binding.dispatchUpArrow.visibility = View.GONE
             binding.dispatchDownArrow.visibility = View.VISIBLE
         }
 
         binding.dispatchDownArrow.setOnClickListener {
-            binding.dispatchDetailsLayout.visibility = View.VISIBLE
+            binding.dispatchTripDetail.visibility = View.VISIBLE
+            binding.statusLayout.visibility = View.VISIBLE
             binding.dispatchDownArrow.visibility = View.GONE
             binding.dispatchUpArrow.visibility = View.VISIBLE
         }
 
 
-        binding.surgeryUpArrow.setOnClickListener {
-            binding.surgeryDetailsLayout.visibility = View.GONE
-            binding.surgeryUpArrow.visibility = View.GONE
-            binding.surgeryDownArrow.visibility = View.VISIBLE
-        }
+        binding.apply {
+            pickupDownArrow.setOnClickListener {
+                pickUpDetailsLayout.visibility = View.VISIBLE
+                pickupDownArrow.visibility = View.GONE
+                pickupUpArrow.visibility = View.VISIBLE
 
-        binding.surgeryDownArrow.setOnClickListener {
-            binding.surgeryDetailsLayout.visibility = View.VISIBLE
-            binding.surgeryDownArrow.visibility = View.GONE
-            binding.surgeryUpArrow.visibility = View.VISIBLE
-        }*/
+            }
+
+            pickupUpArrow.setOnClickListener {
+                pickupDownArrow.visibility = View.VISIBLE
+                pickupUpArrow.visibility = View.GONE
+                pickUpDetailsLayout.visibility = View.GONE
+            }
+
+        }
 
     }
 
@@ -486,7 +489,6 @@ class OrderCoordinatorActivity : AppCompatActivity() {
     }
 
 
-
     var globalDataWorkQueueList = AllWorkQueueResponseModel.Data()
 
     //todo work queue detail api --
@@ -520,6 +522,8 @@ class OrderCoordinatorActivity : AppCompatActivity() {
                         callDeliveryDetailItemList()
 
                         bindGetDeliveryDispatchImages()
+
+                        callDispatchDetailsApi("")
 
                         callSurgeryPersonDetailApi()
 
@@ -883,6 +887,184 @@ class OrderCoordinatorActivity : AppCompatActivity() {
 
 
 
+    //todo call trip detail--
+
+    private fun callDispatchDetailsApi(flag: String) {
+        binding.loadingBackFrame.visibility = View.VISIBLE
+        binding.loadingView.start()
+        var jsonObject1 = JsonObject()
+        jsonObject1.addProperty("OrderID", globalDataWorkQueueList.id)
+
+        val call: Call<TripDetailModel> = ApiClient().service.getTripDetailsApi(jsonObject1)
+        call.enqueue(object : Callback<TripDetailModel?> {
+            override fun onResponse(call: Call<TripDetailModel?>, response: Response<TripDetailModel?>) {
+                if (response.body()!!.status == 200) {
+                    binding.loadingBackFrame.visibility = View.GONE
+                    binding.loadingView.stop()
+                    Log.e("data", response.body()!!.data.toString())
+
+                    var listData = response.body()!!.data
+
+                    if (listData.size > 0){
+
+                        var data = listData[0]
+                        binding.dispatchedDetailLayout.visibility = View.VISIBLE
+                        if (data.StartAt.isNotEmpty()){
+
+                            binding.apply {
+                                tvStartLocation.setText(data.StartLocation)
+                                tvStartTripTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data.StartAt))
+
+                                if (!data.Deliveryassigned.isNullOrEmpty()){
+                                    Log.e(TAG, "Deliveryassigned: "+data.Deliveryassigned )
+                                    tvDeliveryPersonOne.setText(data.Deliveryassigned[0].DeliveryPerson1)
+                                    tvDeliveryPersonTwo.setText(data.Deliveryassigned[0].DeliveryPerson2)
+                                    tvDeliveryPersonThree.setText(data.Deliveryassigned[0].DeliveryPerson3)
+                                    tvVehicleNum.setText(data.Deliveryassigned[0].VechicleNo)
+                                }
+
+                                if (data.EndAt.isNotEmpty() && data.EndLocation.isNotEmpty()){
+                                    linearTripEndDetails.visibility = View.VISIBLE
+                                    tvTripStatus.setText("Status : Ended")
+                                    tvDispatchEndLocation.setText(data.EndLocation)
+                                    tvEndTripTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data.EndAt))
+
+                                }else{
+                                    tvTripStatus.setText("Status : Started")
+                                    linearTripEndDetails.visibility = View.GONE
+                                    tvDispatchEndLocation.setText("NA")
+                                    tvEndTripTime.setText("NA")
+
+                                }
+
+                                bindGetDeliveryDispatchImages()
+                            }
+                        }
+                    }else{
+                        binding.dispatchedDetailLayout.visibility = View.GONE
+                    }
+
+                }
+                else if (response.body()!!.status == 401){
+                    binding.dispatchedDetailLayout.visibility = View.GONE
+                    binding.loadingBackFrame.visibility = View.GONE
+                    binding.loadingView.stop()
+
+                }else {
+                    binding.loadingBackFrame.visibility = View.GONE
+                    binding.loadingView.stop()
+                    Global.warningmessagetoast(this@OrderCoordinatorActivity, response.body()!!.message);
+
+                }
+            }
+
+            override fun onFailure(call: Call<TripDetailModel?>, t: Throwable) {
+                binding.loadingBackFrame.visibility = View.GONE
+                binding.loadingView.stop()
+                Log.e(OrderCoordinatorActivity.TAG, "onFailure: "+t.message )
+                Toast.makeText(this@OrderCoordinatorActivity, t.message, Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    //todo call pickup trip detail--
+    private fun callPickUpTripDetailsApi(flag: String) {
+        binding.loadingBackFrame.visibility = View.VISIBLE
+        binding.loadingView.start()
+        var jsonObject1 = JsonObject()
+        jsonObject1.addProperty("OrderID", globalDataWorkQueueList.id)
+
+        val call: Call<TripDetailModel> = ApiClient().service.getPickUpTripDetailsApi(jsonObject1)
+        call.enqueue(object : Callback<TripDetailModel?> {
+            override fun onResponse(call: Call<TripDetailModel?>, response: Response<TripDetailModel?>) {
+                if (response.body()!!.status == 200) {
+                    binding.loadingBackFrame.visibility = View.GONE
+                    binding.loadingView.stop()
+                    Log.e("data", response.body()!!.data.toString())
+
+                    var listData = response.body()!!.data
+                    var proofData = response.body()!!.proof_data
+
+                    if (listData.size > 0){
+
+                        var data = listData[0]
+                        binding.pickupDetailCardView.visibility = View.VISIBLE
+
+                        if (data.StartAt.isNotEmpty()){
+
+                            binding.apply {
+
+                                if (data.StartAt.isNotEmpty() && data.EndAt.isEmpty()){
+                                    tvPickUpStartTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data.StartAt))
+                                    pickUpEndTimeLayout.visibility = View.GONE
+                                }
+
+                                if (data.StartAt.isNotEmpty() && data.EndAt.isNotEmpty()){
+                                    pickUpEndTimeLayout.visibility = View.VISIBLE
+                                    tvPickUpStartTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data.StartAt))
+                                    tvPickUpEndTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data.EndAt))
+
+                                }
+
+                                if (data.Deliveryassigned.isNotEmpty()){
+                                    Log.e(OrderCoordinatorActivity.TAG, "Deliveryassigned: "+data.Deliveryassigned )
+                                    tvPickUpDeliveryPersonOne.setText(data.Deliveryassigned[0].DeliveryPerson1)
+                                    tvPickUpDeliveryPersonTwo.setText(data.Deliveryassigned[0].DeliveryPerson2)
+                                    tvPickUpDeliveryPersonThree.setText(data.Deliveryassigned[0].DeliveryPerson3)
+                                    tvVehicleNo.setText(data.Deliveryassigned[0].VechicleNo)
+
+                                }
+
+
+                            }
+
+
+                            if (!proofData.isNullOrEmpty()){
+
+                                var mArrayUriList : java.util.ArrayList<UploadedPictureModel.Data> = java.util.ArrayList()
+
+                                mArrayUriList.clear()
+                                mArrayUriList.addAll(proofData)
+
+                                if (mArrayUriList.size > 0) {
+
+                                    binding.pickUpViewLayout.visibility = View.VISIBLE
+
+                                    val linearLayoutManager = LinearLayoutManager(this@OrderCoordinatorActivity, LinearLayoutManager.HORIZONTAL, false)
+                                    val adapter = PreviousImageViewAdapter(this@OrderCoordinatorActivity, mArrayUriList, arrayOf(), arrayListOf())
+                                    binding.pickUpProofRecyclerView.layoutManager = linearLayoutManager
+                                    binding.pickUpProofRecyclerView.adapter = adapter
+                                    adapter.notifyDataSetChanged()
+
+                                } else {
+
+                                    binding.pickUpViewLayout.visibility = View.GONE
+
+                                }
+                            }
+
+                        }
+                    }
+
+                } else {
+                    binding.loadingBackFrame.visibility = View.GONE
+                    binding.loadingView.stop()
+                    Global.warningmessagetoast(this@OrderCoordinatorActivity, response.body()!!.message);
+
+                }
+            }
+
+            override fun onFailure(call: Call<TripDetailModel?>, t: Throwable) {
+                binding.loadingBackFrame.visibility = View.GONE
+                binding.loadingView.stop()
+                Log.e(TAG, "onFailure: "+t.message )
+                Toast.makeText(this@OrderCoordinatorActivity, t.message, Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+
+
     //todo delovery dispatch upload proof api here---
 
     var dispatchList = ArrayList<UploadedPictureModel.Data>()
@@ -924,16 +1106,16 @@ class OrderCoordinatorActivity : AppCompatActivity() {
 
         if (mArrayUriList.size > 0) {
 
-            binding.deliveryProofViewLayout.visibility = View.VISIBLE
+            binding.dispatchViewLayout.visibility = View.VISIBLE
 
             val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
             val adapter = PreviousImageViewAdapter(this, mArrayUriList, arrayOf(), arrayListOf())
-            binding.rvDeliveryImage.layoutManager = linearLayoutManager
-            binding.rvDeliveryImage.adapter = adapter
+            binding.dispatchDeliveryProofRecyclerView.layoutManager = linearLayoutManager
+            binding.dispatchDeliveryProofRecyclerView.adapter = adapter
             adapter.notifyDataSetChanged()
 
         } else {
-            binding.deliveryProofViewLayout.visibility = View.GONE
+            binding.dispatchViewLayout.visibility = View.GONE
 
         }
 

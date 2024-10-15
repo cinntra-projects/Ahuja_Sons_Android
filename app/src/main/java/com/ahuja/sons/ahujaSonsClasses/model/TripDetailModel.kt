@@ -1,9 +1,12 @@
 package com.ahuja.sons.ahujaSonsClasses.model
 
+import com.ahuja.sons.ahujaSonsClasses.model.image_get_model.UploadedPictureModel
+
 data class TripDetailModel(
     var `data`: ArrayList<Data> = ArrayList(),
     var errors: String = "",
     var message: String = "",
+    val proof_data: ArrayList<UploadedPictureModel.Data> = ArrayList(),
     var status: Int = 0
 ) {
     data class Data(
@@ -108,5 +111,29 @@ data class TripDetailModel(
         val Department: String,
     )
 
+
+    data class ProofDaum(
+        val id: Int,
+        
+        val OrderID: String,
+        
+        val DeliveryNote: String,
+        
+        val Attachment: String,
+        
+        val UploadBy: String,
+        
+        val Status: String,
+        
+        val CreateDate: String,
+        
+        val CreateTime: String,
+        
+        val UpdateDate: String,
+        
+        val UpdateTime: String,
+        
+        val is_return: Boolean,
+    )
 
 }

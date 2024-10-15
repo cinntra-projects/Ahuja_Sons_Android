@@ -11,7 +11,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission
         android:name="android.permission.BROADCAST_SMS"
@@ -41,7 +41,9 @@
         android:theme="@style/Theme.ServiceSupportPortal"
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
-
+        <activity
+            android:name=".ahujaSonsClasses.activity.ReturnAutoTrackingActivity"
+            android:exported="false" />
         <activity
             android:name=".ahujaSonsClasses.activity.OperationManagerDetailActivity"
             android:exported="false"
@@ -226,10 +228,7 @@
             android:name="com.ahuja.sons.activity.LoginActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize">
-
-        </activity>
-
+            android:windowSoftInputMode="adjustResize"></activity>
         <activity
             android:name=".ahujaSonsClasses.activity.SplashActivity"
             android:exported="true"
@@ -241,7 +240,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="com.ahuja.sons.activity.Searchactivity"
             android:screenOrientation="portrait"

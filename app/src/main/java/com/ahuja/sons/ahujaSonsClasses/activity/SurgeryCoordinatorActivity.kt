@@ -473,27 +473,23 @@ class SurgeryCoordinatorActivity : AppCompatActivity() {
                                 tvStartLocation.setText(data.StartLocation)
                                 tvStartTripTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data.StartAt))
 
+                                if (!data.Deliveryassigned.isNullOrEmpty()){
+                                    Log.e(TAG, "Deliveryassigned: "+data.Deliveryassigned )
+                                    tvDeliveryPersonOne.setText(data.Deliveryassigned[0].DeliveryPerson1)
+                                    tvDeliveryPersonTwo.setText(data.Deliveryassigned[0].DeliveryPerson2)
+                                    tvDeliveryPersonThree.setText(data.Deliveryassigned[0].DeliveryPerson3)
+                                    tvVehicleNum.setText(data.Deliveryassigned[0].VechicleNo)
+                                }
 
-                                if (data.EndAt.isNotEmpty()){
-                                    if (data.Deliveryassigned.isNotEmpty()){
-                                        Log.e(TAG, "Deliveryassigned: "+data.Deliveryassigned )
-                                        tvDeliveryPersonOne.setText(data.Deliveryassigned[0].DeliveryPerson1)
-                                        tvDeliveryPersonTwo.setText(data.Deliveryassigned[0].DeliveryPerson2)
-                                        tvDeliveryPersonThree.setText(data.Deliveryassigned[0].DeliveryPerson3)
-                                        tvVehicleNum.setText(data.Deliveryassigned[0].VechicleNo)
-
-                                    }
-
+                                if (data.EndAt.isNotEmpty() && data.EndLocation.isNotEmpty()){
+                                    dispatchEndTimeLayout.visibility = View.VISIBLE
                                     tvTripStatus.setText("Status : Ended")
-                                    tvStartLocation.setText(data.StartLocation)
-                                    tvStartTripTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data.StartAt))
-
                                     tvDispatchEndLocation.setText(data.EndLocation)
                                     tvEndTripTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data.EndAt))
 
                                 }else{
-                                    tvStartTripTime.setText("NA")
-                                    tvStartLocation.setText("NA")
+                                    tvTripStatus.setText("Status : Started")
+                                    dispatchEndTimeLayout.visibility = View.GONE
                                     tvDispatchEndLocation.setText("NA")
                                     tvEndTripTime.setText("NA")
 

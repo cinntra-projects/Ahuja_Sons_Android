@@ -27,12 +27,11 @@
 
             <TextView
                 android:id="@+id/tvOrderId"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="4dp"
-                android:layout_weight="50"
                 android:fontFamily="@font/helvetica_regular"
                 android:gravity="start"
                 android:paddingStart="4dp"
@@ -42,6 +41,16 @@
                 android:text="Order ID: 2134"
                 android:textColor="@color/black"
                 android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/ivDeliveryCoordinator"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="4dp"
+                android:visibility="visible"
+                android:src="@drawable/dispatched_icon"/>
 
             <TextView
                 android:id="@+id/tvSurgeryDateTime"
@@ -156,6 +165,38 @@
 
             </LinearLayout>
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/helvetica_regular"
+                    android:gravity="start"
+                    android:text="Order Information: "
+                    android:textColor="@color/grey"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvOrderInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/helvetica_regular"
+                    android:gravity="start"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -201,6 +242,7 @@
 
 
         </LinearLayout>
+
 
         <LinearLayout
             android:id="@+id/deliveriesLayoutView"

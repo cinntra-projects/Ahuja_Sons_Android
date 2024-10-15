@@ -1,11 +1,12 @@
 package com.ahuja.sons.ahujaSonsClasses.model.workQueue
 
 data class AllWorkQueueResponseModel(
-    val `data`: ArrayList<Data>,
-    val message: String,
-    val errors: String,
-    val meta: Meta,
-    val status: Int
+    val `data`: ArrayList<Data> = ArrayList(),
+    val message: String = "",
+    val errors: String = "",
+    val is_return: Boolean = false,
+    val meta: Meta? = null,
+    val status: Int = 0
 ){
     data class Meta(
         val count: Int
@@ -14,6 +15,8 @@ data class AllWorkQueueResponseModel(
     data class Data(
         val AssignedToRole: AssignedToRole? = null,
         val CompletedBy: String = "",
+        val is_return: Boolean = false,
+        val is_return_to_office: Boolean = false,
         val CreateDate: String = "",
         val CreateTime: String = "",
         val DeliveryId: String = "",
@@ -32,6 +35,7 @@ data class AllWorkQueueResponseModel(
         var CreationDate: String = "",
         var DeliveryStatus: String = "",
         var isInspectionProofUpload: Boolean = false,
+        var isReturnInspectionProofUpload: Boolean = false,
         var DiscountPercent: String = "",
         var DocCurrency: String = "",
         var DocDate: String = "",
@@ -198,6 +202,11 @@ data class AllWorkQueueResponseModel(
         var isTripStarted: Boolean = false,
         var isTripEnd: Boolean = false,
         var isDepProofUp: Boolean = false,
+
+        var isReturnTripStarted: Boolean = false,
+        var isReturnTripEnd : Boolean = false,
+        var isReturnDepProofUp: Boolean = false,
+
         val CancelStatus: String,
         val CardCode: String,
         val CardName: String,

@@ -347,6 +347,23 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
         }
 
 
+
+        binding.apply {
+            pickupDownArrow.setOnClickListener {
+                pickUpDetailsLayout.visibility = View.VISIBLE
+                pickupDownArrow.visibility = View.GONE
+                pickupUpArrow.visibility = View.VISIBLE
+
+            }
+
+            pickupUpArrow.setOnClickListener {
+                pickupDownArrow.visibility = View.VISIBLE
+                pickupUpArrow.visibility = View.GONE
+                pickUpDetailsLayout.visibility = View.GONE
+            }
+
+        }
+
         binding.surgeryUpArrow.setOnClickListener {
             binding.surgeryDetailsLayout.visibility = View.GONE
             binding.surgeryUpArrow.visibility = View.GONE
@@ -404,106 +421,12 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
         }
 
 
+
+
     }
 
 
     override fun stagesOnClick(id: Int, obj: String) {
-
-   /*     if (obj.equals("Sales Order Request") || obj.equals("Order")){
-            binding.orderDetailLayoutCardView.visibility = View.VISIBLE
-            binding.saleOrderLayouts.visibility = View.VISIBLE
-            binding.dependencyCardViewLayout.visibility = View.GONE
-            binding.errandsCardViewLayout.visibility = View.GONE
-            binding.chipCardViewBtton.visibility = View.GONE
-            binding.inspectTabLayouts.visibility = View.GONE
-            binding.deliveryLayout.visibility = View.GONE
-            binding.srugeryPersonLinearLayout.visibility = View.GONE
-        }
-
-        else if (obj.equals("Counter")){
-            binding.orderDetailLayoutCardView.visibility = View.GONE
-            binding.dependencyCardViewLayout.visibility = View.VISIBLE
-            binding.errandsCardViewLayout.visibility = View.VISIBLE
-            binding.chipCardViewBtton.visibility = View.VISIBLE
-            binding.saleOrderLayouts.visibility = View.VISIBLE
-            binding.inspectTabLayouts.visibility = View.GONE
-            binding.deliveryLayout.visibility = View.GONE
-            binding.surgeryPersonBtnLayout.visibility = View.GONE
-            binding.srugeryPersonLinearLayout.visibility = View.GONE
-
-        }
-
-        else if (obj.equals("Inspect Deliver")){
-            binding.saleOrderLayouts.visibility = View.GONE
-            binding.chipCardViewBtton.visibility = View.GONE
-            binding.inspectTabLayouts.visibility = View.VISIBLE
-            binding.deliveryLayout.visibility = View.GONE
-            binding.srugeryPersonLinearLayout.visibility = View.GONE
-        }
-
-        else if (obj.equals("Delivery")){
-            binding.saleOrderLayouts.visibility = View.GONE
-            binding.inspectTabLayouts.visibility = View.GONE
-            binding.deliveryLayout.visibility = View.VISIBLE
-            binding.chipCardViewBtton.visibility = View.VISIBLE
-            binding.counterBtnLayout.visibility = View.GONE
-            binding.deliveryBtnLayout.visibility = View.VISIBLE
-            binding.surgeryPersonBtnLayout.visibility = View.GONE
-            binding.srugeryPersonLinearLayout.visibility = View.GONE
-            if (Global.mArrayUriList.size > 0){
-                val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-                val adapter = UploadImageListAdapter(
-                    this,
-                    Global.mArrayUriList,
-                    arrayOf(),
-                    ArrayList(),
-                    "OrderDetail"
-                )
-                binding.proofImageRecyclerView.layoutManager = linearLayoutManager
-                binding.proofImageRecyclerView.adapter = adapter
-            }
-
-        }
-
-        else if (obj.equals("Surgery Coordinator")){
-            binding.saleOrderLayouts.visibility = View.GONE
-            binding.inspectTabLayouts.visibility = View.GONE
-            binding.deliveryLayout.visibility = View.GONE
-            binding.chipCardViewBtton.visibility = View.VISIBLE
-            binding.counterBtnLayout.visibility = View.GONE
-            binding.deliveryBtnLayout.visibility = View.GONE
-            binding.surgeryPersonBtnLayout.visibility = View.VISIBLE
-            binding.surgeryCoordinatorLinearLayout.visibility = View.VISIBLE
-            binding.fillOutFormForSurgeryPersonLinearLayout.visibility = View.VISIBLE
-            binding.surgeryDetailLinearLayout.visibility = View.GONE
-            binding.srugeryPersonLinearLayout.visibility = View.GONE
-
-        }
-
-        else if (obj.equals("Surgery Person")){
-            //todo surgery persons tabs--
-            var pagerAdapter = ViewPagerAdapter(supportFragmentManager)
-
-            pagerAdapter.add(SurgeryPersonDetailsFragment(), "Details")
-//            pagerAdapter.add(DeliveryItemsFragment(), "Delivery Items")
-//            pagerAdapter.add(PendingItemsFragment(), "Pending Items")
-
-            binding.viewpagerSurgeryPerson.adapter = pagerAdapter
-
-            binding.tabLayoutSurgery.setupWithViewPager(binding.viewpagerSurgeryPerson)
-
-            binding.saleOrderLayouts.visibility = View.GONE
-            binding.inspectTabLayouts.visibility = View.GONE
-            binding.deliveryLayout.visibility = View.GONE
-            binding.surgeryCoordinatorLinearLayout.visibility = View.GONE
-            binding.srugeryPersonLinearLayout.visibility = View.VISIBLE
-            binding.chipCardViewBtton.visibility = View.GONE
-
-
-        }*/
-
-
-
     }
 
 
@@ -674,6 +597,8 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
                                 bindGetInspectionImages()
 
                                 callDispatchDetailsApi("")
+
+                                callPickUpTripDetailsApi("")
 
                                 callSurgeryPersonDetailApi()
 
@@ -1047,6 +972,7 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
 
 
     //todo call trip detail--
+
     private fun callDispatchDetailsApi(flag: String) {
         binding.loadingBackFrame.visibility = View.VISIBLE
         binding.loadingView.start()
@@ -1067,64 +993,155 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
 
                         var data = listData[0]
                         binding.dispatchedDetailLayout.visibility = View.VISIBLE
-                        Log.e(TAG, "onResponse: Trip Detail"+data )
                         if (data.StartAt.isNotEmpty()){
 
                             binding.apply {
                                 tvStartLocation.setText(data.StartLocation)
                                 tvStartTripTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data.StartAt))
 
+                                if (!data.Deliveryassigned.isNullOrEmpty()){
+                                    Log.e(TAG, "Deliveryassigned: "+data.Deliveryassigned )
+                                    tvDeliveryPersonOne.setText(data.Deliveryassigned[0].DeliveryPerson1)
+                                    tvDeliveryPersonTwo.setText(data.Deliveryassigned[0].DeliveryPerson2)
+                                    tvDeliveryPersonThree.setText(data.Deliveryassigned[0].DeliveryPerson3)
+                                    tvVehicleNum.setText(data.Deliveryassigned[0].VechicleNo)
+                                }
 
-                                if (data.EndAt.isNotEmpty()){
-                                    if (data.Deliveryassigned.isNotEmpty()){
-                                        tvDeliveryPersonOne.setText(data.Deliveryassigned[0].DeliveryPerson1)
-                                        tvDeliveryPersonTwo.setText(data.Deliveryassigned[0].DeliveryPerson2)
-                                        tvDeliveryPersonThree.setText(data.Deliveryassigned[0].DeliveryPerson3)
-                                        tvVehicleNum.setText(data.Deliveryassigned[0].VechicleNo)
-
-                                    }
-
+                                if (data.EndAt.isNotEmpty() && data.EndLocation.isNotEmpty()){
+                                    linearTripEndDetails.visibility = View.VISIBLE
                                     tvTripStatus.setText("Status : Ended")
-                                    tvStartLocation.setText(data.StartLocation)
-                                    tvStartTripTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data.StartAt))
-
                                     tvDispatchEndLocation.setText(data.EndLocation)
                                     tvEndTripTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data.EndAt))
 
                                 }else{
-                                    tvStartTripTime.setText("NA")
-                                    tvStartLocation.setText("NA")
+                                    tvTripStatus.setText("Status : Started")
+                                    linearTripEndDetails.visibility = View.GONE
                                     tvDispatchEndLocation.setText("NA")
                                     tvEndTripTime.setText("NA")
 
                                 }
 
                                 bindGetDeliveryDispatchImages()
-
                             }
-
-
-                        }else{
-
                         }
-
-                    }
-
-                    else{
+                    }else{
                         binding.dispatchedDetailLayout.visibility = View.GONE
                     }
 
-                } else {
+                }
+                else if (response.body()!!.status == 401){
                     binding.dispatchedDetailLayout.visibility = View.GONE
                     binding.loadingBackFrame.visibility = View.GONE
                     binding.loadingView.stop()
-                    Global.warningmessagetoast(this@ParticularOrderDetailActivity, response.body()!!.errors);
+
+                }else {
+                    binding.loadingBackFrame.visibility = View.GONE
+                    binding.loadingView.stop()
+                    Global.warningmessagetoast(this@ParticularOrderDetailActivity, response.body()!!.message);
 
                 }
             }
 
             override fun onFailure(call: Call<TripDetailModel?>, t: Throwable) {
-                binding.dispatchedDetailLayout.visibility = View.GONE
+                binding.loadingBackFrame.visibility = View.GONE
+                binding.loadingView.stop()
+                Log.e(TAG, "onFailure: "+t.message )
+                Toast.makeText(this@ParticularOrderDetailActivity, t.message, Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    //todo call pickup trip detail--
+    private fun callPickUpTripDetailsApi(flag: String) {
+        binding.loadingBackFrame.visibility = View.VISIBLE
+        binding.loadingView.start()
+        var jsonObject1 = JsonObject()
+        jsonObject1.addProperty("OrderID", globalDataWorkQueueList.id)
+
+        val call: Call<TripDetailModel> = ApiClient().service.getPickUpTripDetailsApi(jsonObject1)
+        call.enqueue(object : Callback<TripDetailModel?> {
+            override fun onResponse(call: Call<TripDetailModel?>, response: Response<TripDetailModel?>) {
+                if (response.body()!!.status == 200) {
+                    binding.loadingBackFrame.visibility = View.GONE
+                    binding.loadingView.stop()
+                    Log.e("data", response.body()!!.data.toString())
+
+                    var listData = response.body()!!.data
+                    var proofData = response.body()!!.proof_data
+
+                    if (listData.size > 0){
+
+                        var data = listData[0]
+                        binding.pickupDetailCardView.visibility = View.VISIBLE
+                        binding.pickUpAllDetail.visibility = View.VISIBLE
+
+                        if (data.StartAt.isNotEmpty()){
+
+                            binding.apply {
+
+                                if (data.StartAt.isNotEmpty() && data.EndAt.isEmpty()){
+                                    tvPickUpStartTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data.StartAt))
+                                    pickUpEndTimeLayout.visibility = View.GONE
+                                }
+
+                                if (data.StartAt.isNotEmpty() && data.EndAt.isNotEmpty()){
+                                    pickUpEndTimeLayout.visibility = View.VISIBLE
+                                    tvPickUpStartTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data.StartAt))
+                                    tvPickUpEndTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data.EndAt))
+
+                                }
+
+                                if (data.Deliveryassigned.isNotEmpty()){
+                                    Log.e(TAG, "Deliveryassigned: "+data.Deliveryassigned )
+                                    tvPickUpDeliveryPersonOne.setText(data.Deliveryassigned[0].DeliveryPerson1)
+                                    tvPickUpDeliveryPersonTwo.setText(data.Deliveryassigned[0].DeliveryPerson2)
+                                    tvPickUpDeliveryPersonThree.setText(data.Deliveryassigned[0].DeliveryPerson3)
+                                    tvVehicleNo.setText(data.Deliveryassigned[0].VechicleNo)
+
+                                }
+
+
+                            }
+
+
+                            if (!proofData.isNullOrEmpty()){
+
+                                var mArrayUriList : java.util.ArrayList<UploadedPictureModel.Data> = java.util.ArrayList()
+
+                                mArrayUriList.clear()
+                                mArrayUriList.addAll(proofData)
+
+                                if (mArrayUriList.size > 0) {
+
+                                    binding.pickUpViewLayout.visibility = View.VISIBLE
+
+                                    val linearLayoutManager = LinearLayoutManager(this@ParticularOrderDetailActivity, LinearLayoutManager.HORIZONTAL, false)
+                                    val adapter = PreviousImageViewAdapter(this@ParticularOrderDetailActivity, mArrayUriList, arrayOf(), arrayListOf())
+                                    binding.pickUpProofRecyclerView.layoutManager = linearLayoutManager
+                                    binding.pickUpProofRecyclerView.adapter = adapter
+                                    adapter.notifyDataSetChanged()
+
+                                } else {
+
+                                    binding.pickUpViewLayout.visibility = View.GONE
+
+                                }
+                            }
+
+                        }
+                    }else{
+                        binding.pickupDetailCardView.visibility = View.GONE
+                    }
+
+                } else {
+                    binding.loadingBackFrame.visibility = View.GONE
+                    binding.loadingView.stop()
+                    Global.warningmessagetoast(this@ParticularOrderDetailActivity, response.body()!!.message);
+
+                }
+            }
+
+            override fun onFailure(call: Call<TripDetailModel?>, t: Throwable) {
                 binding.loadingBackFrame.visibility = View.GONE
                 binding.loadingView.stop()
                 Log.e(TAG, "onFailure: "+t.message )
@@ -1134,7 +1151,7 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
     }
 
 
-    //todo delovery dispatch upload proof api here---
+    //todo delivery dispatch upload proof api here---
 
     var dispatchList = ArrayList<UploadedPictureModel.Data>()
     private fun bindGetDeliveryDispatchImages() {

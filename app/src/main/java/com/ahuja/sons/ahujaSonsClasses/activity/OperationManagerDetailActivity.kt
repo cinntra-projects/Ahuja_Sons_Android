@@ -228,6 +228,22 @@ class OperationManagerDetailActivity : AppCompatActivity() {
 
         }
 
+        binding.apply {
+            pickupDownArrow.setOnClickListener {
+                pickUpDetailsLayout.visibility = View.VISIBLE
+                pickupDownArrow.visibility = View.GONE
+                pickupUpArrow.visibility = View.VISIBLE
+
+            }
+
+            pickupUpArrow.setOnClickListener {
+                pickupDownArrow.visibility = View.VISIBLE
+                pickupUpArrow.visibility = View.GONE
+                pickUpDetailsLayout.visibility = View.GONE
+            }
+
+        }
+
     }
 
     var globalDataWorkQueueList = AllWorkQueueResponseModel.Data()
@@ -276,6 +292,10 @@ class OperationManagerDetailActivity : AppCompatActivity() {
                         callDispatchDetailsApi("")
 
                         callSurgeryPersonDetailApi()
+
+                        if (globalDataWorkQueueList.is_return == true){
+                            callPickUpTripDetailsApi("")
+                        }
 
                     }
 
@@ -437,6 +457,7 @@ class OperationManagerDetailActivity : AppCompatActivity() {
 
 
     //todo call trip detail--
+
     private fun callDispatchDetailsApi(flag: String) {
         binding.loadingBackFrame.visibility = View.VISIBLE
         binding.loadingView.start()
@@ -457,64 +478,160 @@ class OperationManagerDetailActivity : AppCompatActivity() {
 
                         var data = listData[0]
                         binding.dispatchedDetailLayout.visibility = View.VISIBLE
-                        Log.e(TAG, "onResponse: Trip Detail"+data )
                         if (data.StartAt.isNotEmpty()){
 
                             binding.apply {
                                 tvStartLocation.setText(data.StartLocation)
                                 tvStartTripTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data.StartAt))
 
+                                if (!data.Deliveryassigned.isNullOrEmpty()){
+                                    Log.e(TAG, "Deliveryassigned: "+data.Deliveryassigned )
+                                    tvDeliveryPersonOne.setText(data.Deliveryassigned[0].DeliveryPerson1)
+                                    tvDeliveryPersonTwo.setText(data.Deliveryassigned[0].DeliveryPerson2)
+                                    tvDeliveryPersonThree.setText(data.Deliveryassigned[0].DeliveryPerson3)
+                                    tvVehicleNo.setText(data.Deliveryassigned[0].VechicleNo)
+                                }
 
-                                if (data.EndAt.isNotEmpty()){
-                                    if (data.Deliveryassigned.isNotEmpty()){
-                                        tvDeliveryPersonOne.setText(data.Deliveryassigned[0].DeliveryPerson1)
-                                        tvDeliveryPersonTwo.setText(data.Deliveryassigned[0].DeliveryPerson2)
-                                        tvDeliveryPersonThree.setText(data.Deliveryassigned[0].DeliveryPerson3)
-                                        tvVehicleNum.setText(data.Deliveryassigned[0].VechicleNo)
-
-                                    }
-
+                                if (data.EndAt.isNotEmpty() && data.EndLocation.isNotEmpty()){
+                                    linearTripEndDetails.visibility = View.VISIBLE
                                     tvTripStatus.setText("Status : Ended")
-                                    tvStartLocation.setText(data.StartLocation)
-                                    tvStartTripTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data.StartAt))
-
                                     tvDispatchEndLocation.setText(data.EndLocation)
                                     tvEndTripTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data.EndAt))
 
                                 }else{
-                                    tvStartTripTime.setText("NA")
-                                    tvStartLocation.setText("NA")
+                                    tvTripStatus.setText("Status : Started")
+                                    linearTripEndDetails.visibility = View.GONE
                                     tvDispatchEndLocation.setText("NA")
                                     tvEndTripTime.setText("NA")
 
                                 }
 
-                                bindGetDeliveryDispatchImages()
-
                             }
-
-
-                        }else{
-
                         }
-
-                    }
-
-                    else{
+                    }else{
                         binding.dispatchedDetailLayout.visibility = View.GONE
                     }
 
-                } else {
+                }
+                else if (response.body()!!.status == 401){
                     binding.dispatchedDetailLayout.visibility = View.GONE
                     binding.loadingBackFrame.visibility = View.GONE
                     binding.loadingView.stop()
-                    Global.warningmessagetoast(this@OperationManagerDetailActivity, response.body()!!.errors);
+
+                }else {
+                    binding.loadingBackFrame.visibility = View.GONE
+                    binding.loadingView.stop()
+                    Global.warningmessagetoast(this@OperationManagerDetailActivity, response.body()!!.message);
 
                 }
             }
 
             override fun onFailure(call: Call<TripDetailModel?>, t: Throwable) {
-                binding.dispatchedDetailLayout.visibility = View.GONE
+                binding.loadingBackFrame.visibility = View.GONE
+                binding.loadingView.stop()
+                Log.e(TAG, "onFailure: "+t.message )
+                Toast.makeText(this@OperationManagerDetailActivity, t.message, Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+
+    //todo call pickup trip detail--
+    private fun callPickUpTripDetailsApi(flag: String) {
+        binding.loadingBackFrame.visibility = View.VISIBLE
+        binding.loadingView.start()
+        var jsonObject1 = JsonObject()
+        jsonObject1.addProperty("OrderID", globalDataWorkQueueList.OrderRequest!!.id)
+        jsonObject1.addProperty("is_return", globalDataWorkQueueList.is_return)
+
+        val call: Call<TripDetailModel> = ApiClient().service.getPickUpTripDetailsApi(jsonObject1)
+        call.enqueue(object : Callback<TripDetailModel?> {
+            override fun onResponse(call: Call<TripDetailModel?>, response: Response<TripDetailModel?>) {
+                if (response.body()!!.status == 200) {
+                    binding.loadingBackFrame.visibility = View.GONE
+                    binding.loadingView.stop()
+                    Log.e("data", response.body()!!.data.toString())
+
+                    var listData = response.body()!!.data
+                    var proofData = response.body()!!.proof_data
+
+                    if (listData.size > 0){
+
+                        var data = listData[0]
+                        binding.pickupDetailCardView.visibility = View.VISIBLE
+                        binding.pickUpAllDetail.visibility = View.VISIBLE
+
+                        if (data.StartAt.isNotEmpty()){
+
+
+                            if(globalDataWorkQueueList.is_return == true){
+
+                                binding.apply {
+
+                                    if (data.StartAt.isNotEmpty() && data.EndAt.isEmpty()){
+                                        tvPickUpStartTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data.StartAt))
+                                        pickUpEndTimeLayout.visibility = View.GONE
+                                    }
+
+                                    if (data.StartAt.isNotEmpty() && data.EndAt.isNotEmpty()){
+                                        pickUpEndTimeLayout.visibility = View.VISIBLE
+                                        tvPickUpStartTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data.StartAt))
+                                        tvPickUpEndTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data.EndAt))
+
+                                    }
+
+                                    if (data.Deliveryassigned.isNotEmpty()){
+                                        Log.e(TAG, "Deliveryassigned: "+data.Deliveryassigned )
+                                        tvPickUpDeliveryPersonOne.setText(data.Deliveryassigned[0].DeliveryPerson1)
+                                        tvPickUpDeliveryPersonTwo.setText(data.Deliveryassigned[0].DeliveryPerson2)
+                                        tvPickUpDeliveryPersonThree.setText(data.Deliveryassigned[0].DeliveryPerson3)
+                                        tvVehicleNo.setText(data.Deliveryassigned[0].VechicleNo)
+
+                                    }
+
+
+                                }
+
+                            }
+
+                            if (!proofData.isNullOrEmpty()){
+
+                                var mArrayUriList : ArrayList<UploadedPictureModel.Data> = ArrayList()
+
+                                mArrayUriList.clear()
+                                mArrayUriList.addAll(proofData)
+
+                                if (mArrayUriList.size > 0) {
+
+                                    binding.pickUpViewLayout.visibility = View.VISIBLE
+
+                                    val linearLayoutManager = LinearLayoutManager(this@OperationManagerDetailActivity, LinearLayoutManager.HORIZONTAL, false)
+                                    val adapter = PreviousImageViewAdapter(this@OperationManagerDetailActivity, mArrayUriList, arrayOf(), arrayListOf())
+                                    binding.pickUpProofRecyclerView.layoutManager = linearLayoutManager
+                                    binding.pickUpProofRecyclerView.adapter = adapter
+                                    adapter.notifyDataSetChanged()
+
+                                } else {
+
+                                    binding.pickUpViewLayout.visibility = View.GONE
+
+                                }
+                            }
+
+                        }
+                    }else{
+                        binding.pickupDetailCardView.visibility = View.GONE
+                    }
+
+                } else {
+                    binding.loadingBackFrame.visibility = View.GONE
+                    binding.loadingView.stop()
+                    Global.warningmessagetoast(this@OperationManagerDetailActivity, response.body()!!.message);
+
+                }
+            }
+
+            override fun onFailure(call: Call<TripDetailModel?>, t: Throwable) {
                 binding.loadingBackFrame.visibility = View.GONE
                 binding.loadingView.stop()
                 Log.e(TAG, "onFailure: "+t.message )

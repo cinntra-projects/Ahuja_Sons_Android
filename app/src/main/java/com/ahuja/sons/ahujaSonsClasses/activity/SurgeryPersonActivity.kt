@@ -1163,7 +1163,6 @@ class SurgeryPersonActivity : AppCompatActivity() {
 
     }
 
-
     //todo call trip detail--
     private fun callDispatchDetailsApi(flag: String) {
         binding.loadingBackFrame.visibility = View.VISIBLE
@@ -1185,33 +1184,29 @@ class SurgeryPersonActivity : AppCompatActivity() {
 
                         var data = listData[0]
                         binding.dispatchedDetailLayout.visibility = View.VISIBLE
-                        Log.e(TAG, "onResponse: Trip Detail"+data )
                         if (data.StartAt.isNotEmpty()){
 
                             binding.apply {
                                 tvStartLocation.setText(data.StartLocation)
                                 tvStartTripTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data.StartAt))
 
+                                if (!data.Deliveryassigned.isNullOrEmpty()){
+                                    Log.e(TAG, "Deliveryassigned: "+data.Deliveryassigned )
+                                    tvDeliveryPersonOne.setText(data.Deliveryassigned[0].DeliveryPerson1)
+                                    tvDeliveryPersonTwo.setText(data.Deliveryassigned[0].DeliveryPerson2)
+                                    tvDeliveryPersonThree.setText(data.Deliveryassigned[0].DeliveryPerson3)
+                                    tvVehicleNum.setText(data.Deliveryassigned[0].VechicleNo)
+                                }
 
-                                if (data.EndAt.isNotEmpty()){
-                                    if (data.Deliveryassigned.isNotEmpty()){
-                                        tvDeliveryPersonOne.setText(data.Deliveryassigned[0].DeliveryPerson1)
-                                        tvDeliveryPersonTwo.setText(data.Deliveryassigned[0].DeliveryPerson2)
-                                        tvDeliveryPersonThree.setText(data.Deliveryassigned[0].DeliveryPerson3)
-                                        tvVehicleNum.setText(data.Deliveryassigned[0].VechicleNo)
-
-                                    }
-
+                                if (data.EndAt.isNotEmpty() && data.EndLocation.isNotEmpty()){
+                                    dispatchEndTimeLayout.visibility = View.VISIBLE
                                     tvTripStatus.setText("Status : Ended")
-                                    tvStartLocation.setText(data.StartLocation)
-                                    tvStartTripTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data.StartAt))
-
                                     tvDispatchEndLocation.setText(data.EndLocation)
                                     tvEndTripTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data.EndAt))
 
                                 }else{
-                                    tvStartTripTime.setText("NA")
-                                    tvStartLocation.setText("NA")
+                                    tvTripStatus.setText("Status : Started")
+                                    dispatchEndTimeLayout.visibility = View.GONE
                                     tvDispatchEndLocation.setText("NA")
                                     tvEndTripTime.setText("NA")
 
@@ -1219,27 +1214,26 @@ class SurgeryPersonActivity : AppCompatActivity() {
 
 
                             }
-
-
                         }
-
-                    }
-
-                    else{
+                    }else{
                         binding.dispatchedDetailLayout.visibility = View.GONE
                     }
 
-                } else {
+                }
+                else if (response.body()!!.status == 401){
                     binding.dispatchedDetailLayout.visibility = View.GONE
                     binding.loadingBackFrame.visibility = View.GONE
                     binding.loadingView.stop()
-                    Global.warningmessagetoast(this@SurgeryPersonActivity, response.body()!!.errors);
+
+                }else {
+                    binding.loadingBackFrame.visibility = View.GONE
+                    binding.loadingView.stop()
+                    Global.warningmessagetoast(this@SurgeryPersonActivity, response.body()!!.message);
 
                 }
             }
 
             override fun onFailure(call: Call<TripDetailModel?>, t: Throwable) {
-                binding.dispatchedDetailLayout.visibility = View.GONE
                 binding.loadingBackFrame.visibility = View.GONE
                 binding.loadingView.stop()
                 Log.e(TAG, "onFailure: "+t.message )

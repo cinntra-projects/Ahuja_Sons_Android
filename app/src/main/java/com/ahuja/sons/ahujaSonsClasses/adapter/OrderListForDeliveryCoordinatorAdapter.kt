@@ -116,6 +116,7 @@ class OrderListForDeliveryCoordinatorAdapter(var AllitemsList: ArrayList<AllWork
             }
             holder.binding.tvSurgeryDateTime.text = "Surgery Date:${Global.convert_yyyy_mm_dd_to_dd_mm_yyyy(OrderRequest?.SurgeryDate)}\n Surgery Time: ${OrderRequest?.SurgeryTime}"
             holder.binding.tvStatusOrder.text = OrderRequest?.Status
+            holder.binding.tvOrderInfo.text = OrderRequest?.OrderInformation
         }
 
 
@@ -135,6 +136,17 @@ class OrderListForDeliveryCoordinatorAdapter(var AllitemsList: ArrayList<AllWork
         }
 
 
+        if (AllitemsList[position].is_return == true){
+            holder.binding.deliveriesLayoutView.visibility = View.GONE
+            holder.binding.ivDeliveryCoordinator.setImageDrawable(context.resources.getDrawable(R.drawable.return_icon))
+        }
+        else if (!AllitemsList[position].DeliveryNote.isNullOrEmpty() && AllitemsList[position].is_return == false){
+            holder.binding.deliveriesLayoutView.visibility = View.VISIBLE
+            holder.binding.ivDeliveryCoordinator.setImageDrawable(context.resources.getDrawable(R.drawable.dispatched_icon))
+        }
+
+
+
         val generator: ColorGenerator = ColorGenerator.MATERIAL
         val color1: Int = generator.randomColor
 
@@ -149,8 +161,7 @@ class OrderListForDeliveryCoordinatorAdapter(var AllitemsList: ArrayList<AllWork
                 )
             holder.binding.profilePic.setImageDrawable(drawable)
         } else {
-            holder.binding.profilePic.background =
-                ContextCompat.getDrawable(context, R.drawable.ic_group_18576)
+            holder.binding.profilePic.background = ContextCompat.getDrawable(context, R.drawable.ic_group_18576)
         }
 
 
