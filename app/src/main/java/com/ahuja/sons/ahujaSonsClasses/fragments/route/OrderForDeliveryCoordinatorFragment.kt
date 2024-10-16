@@ -21,6 +21,7 @@ import com.ahuja.sons.ahujaSonsClasses.adapter.DeliveryCoordinatorIDsAdapter
 import com.ahuja.sons.ahujaSonsClasses.adapter.OrderListForDeliveryCoordinatorAdapter
 import com.ahuja.sons.ahujaSonsClasses.ahujaconstant.GlobalClasses
 import com.ahuja.sons.ahujaSonsClasses.ahujaconstant.RoleClass
+import com.ahuja.sons.ahujaSonsClasses.model.local.LocalSelectedOrder
 import com.ahuja.sons.ahujaSonsClasses.model.workQueue.AllWorkQueueResponseModel
 import com.ahuja.sons.ahujaSonsClasses.model.workQueue.WorkQueueRequestModel
 import com.ahuja.sons.apiservice.ApiClient
@@ -206,9 +207,33 @@ class OrderForDeliveryCoordinatorFragment(var tvCreateRoute: TextView, var ivCol
             showFilterPopup()
         }
 
-
     }
 
+
+    fun onChildCheckboxSelected(selectedChildItem: AllWorkQueueResponseModel.InspectedDelivery) {
+        // Find the parent data corresponding to this child
+
+        Log.e(TAG, "onChildCheckboxSelected: parent selected" )
+        val parentData = this.findParentDataForChild(selectedChildItem)
+        if (parentData != null) {
+            // Check the parent checkbox
+            parentData.isSelected = true
+
+            // Add parent order to the cartListForDeliveryCoordinatorCheck
+            val localSelectedOrder = LocalSelectedOrder().apply {
+                orderId = parentData.OrderRequest?.id.toString() // Parent ID
+                orderName = parentData.CardName
+            }
+
+            GlobalClasses.cartListForDeliveryCoordinatorCheck[parentData.OrderRequest?.id.toString()] = localSelectedOrder
+        }
+    }
+
+
+    private fun findParentDataForChild(childItem: AllWorkQueueResponseModel.InspectedDelivery): AllWorkQueueResponseModel.Data? {
+        // Logic to find the parent data corresponding to the child item
+        return AllitemsList.find { parent -> parent.InspectedDeliverys.contains(childItem) }
+    }
 
 
     var fromDate = ""

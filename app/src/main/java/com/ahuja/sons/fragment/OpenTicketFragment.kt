@@ -300,8 +300,8 @@ class OpenTicketFragment(val ticketactbinding: TicektDetailsBinding, var flag: S
         viewModel.ticketAcceptRejectResponse.observe(this, Event.EventObserver(
             onError = {
 
-                Global.warningmessagetoast(requireContext(), it)
-                Log.e("ticketAcceptReject", it)
+//                Global.warningmessagetoast(requireContext(), it)
+//                Log.e("ticketAcceptReject", it)
             }, onLoading = {
 
             },

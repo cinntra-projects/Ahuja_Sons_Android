@@ -88,7 +88,7 @@ class AnnouncementListFragment : Fragment() {
         viewModel.getAnnouncementist.observe(viewLifecycleOwner, Event.EventObserver(
             onError = {
                 alertDialog?.dismiss()
-                Global.warningmessagetoast(requireContext(), it)
+//                Global.warningmessagetoast(requireContext(), it)
             }, onLoading = {
                 alertDialog?.show()
             }, { responseData ->

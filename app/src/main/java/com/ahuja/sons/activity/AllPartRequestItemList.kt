@@ -81,8 +81,8 @@ class AllPartRequestItemList : MainBaseActivity() {
             onError = {
                 binding.loadingback.visibility = View.GONE
                 binding.loadingView.stop()
-                Global.warningmessagetoast(this, it)
-                Log.e("partdata", it)
+//                Global.warningmessagetoast(this, it)
+//                Log.e("partdata", it)
             }, onLoading = {
                 binding.loadingback.visibility = View.VISIBLE
                 binding.loadingView.start()

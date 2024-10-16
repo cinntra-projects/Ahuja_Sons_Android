@@ -104,7 +104,7 @@ class AllPartRequest : Fragment() {
             onError = {
                 ticketFragment.progressBar.isVisible = false
                 ticketFragment.idPBLoading.isVisible = false
-                Global.warningmessagetoast(requireContext(), it)
+//                Global.warningmessagetoast(requireContext(), it)
                 Log.e("partdata==>", "attachmentObserverONERROR==>: $it")
             }, onLoading = {
                 ticketFragment.progressBar.isVisible = true

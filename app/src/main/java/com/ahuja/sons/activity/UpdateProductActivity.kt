@@ -280,7 +280,7 @@ class UpdateProductActivity : AppCompatActivity() {
     private fun bindUpdateProductObserver() {
         viewModel.productOneDetailData.observe(this, Event.EventObserver(
             onError = {
-                Global.warningmessagetoast(this, it)
+//                Global.warningmessagetoast(this, it)
                 binding.loadingback.visibility = View.GONE
                 binding.loadingview.stop()
             },
@@ -312,7 +312,7 @@ class UpdateProductActivity : AppCompatActivity() {
             com.ahuja.sons.apihelper.Event.EventObserver(
                 onError = {
                     Log.e(FileUtil.TAG, "errorInApi: $it")
-                    Global.warningmessagetoast(this@UpdateProductActivity, it)
+//                    Global.warningmessagetoast(this@UpdateProductActivity, it)
                 }, onLoading = {
 
                 },
@@ -469,7 +469,7 @@ class UpdateProductActivity : AppCompatActivity() {
     private fun bindCustomerObserver() {
         viewModel.customerListContact.observe(this, Event.EventObserver(
             onError = {
-                Global.warningmessagetoast(this, it)
+//                Global.warningmessagetoast(this, it)
             },
             onLoading = {
             },
@@ -499,8 +499,8 @@ class UpdateProductActivity : AppCompatActivity() {
     private fun bindBranchListObserver() {
         viewModel.branchAllList.observe(this, Event.EventObserver(
             onError = {
-                Log.e("fail==>", it)
-                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+//                Log.e("fail==>", it)
+//                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
             },
             onLoading = {
 
@@ -529,7 +529,7 @@ class UpdateProductActivity : AppCompatActivity() {
         viewModel.itemCategoryList.observe(this, Event.EventObserver(
             onError = {
                 Log.e("fail==>", it.toString())
-                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
             },
             onLoading = {
 

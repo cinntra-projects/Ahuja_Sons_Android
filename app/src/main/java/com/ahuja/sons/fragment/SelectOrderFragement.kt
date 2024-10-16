@@ -122,7 +122,7 @@ class SelectOrderFragement(
             onError = {
 
                 ticketFragment.loadingView.stop()
-                Global.warningmessagetoast(requireContext(), it)
+//                Global.warningmessagetoast(requireContext(), it)
             }, onLoading = {
                 ticketFragment.loadingView.start()
             }, {

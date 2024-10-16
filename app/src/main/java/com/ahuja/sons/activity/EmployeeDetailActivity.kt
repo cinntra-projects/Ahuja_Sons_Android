@@ -68,7 +68,7 @@ class EmployeeDetailActivity : AppCompatActivity() {
             com.ahuja.sons.apihelper.Event.EventObserver(
                 onError = {
                     Log.e(FileUtil.TAG, "errorInApi: $it")
-                    Global.warningmessagetoast(this@EmployeeDetailActivity, it)
+//                    Global.warningmessagetoast(this@EmployeeDetailActivity, it)
                 }, onLoading = {
 
                 },

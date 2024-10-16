@@ -947,8 +947,8 @@ class AllTicketFragment(
     private fun bindTicketStatusObserver(it: Sweetalert?) {
         viewModel.ticketAcceptRejectResponse.observe(this, Event.EventObserver(
             onError = {
-                Global.warningmessagetoast(requireContext(), it)
-                Log.e("ticketAcceptReject", it)
+//                Global.warningmessagetoast(requireContext(), it)
+//                Log.e("ticketAcceptReject", it)
             }, onLoading = {
 
             },

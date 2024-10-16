@@ -741,7 +741,8 @@ class OrderCoordinatorActivity : AppCompatActivity() {
             override fun onFailure(call: Call<AllDependencyAndErrandsListModel?>, t: Throwable) {
                 binding.loadingView.stop()
                 binding.loadingBackFrame.visibility = View.GONE
-                Toast.makeText(this@OrderCoordinatorActivity, t.message, Toast.LENGTH_SHORT).show()
+                Log.e(TAG, "onFailure: "+t.message )
+//                Toast.makeText(this@OrderCoordinatorActivity, t.message, Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -800,7 +801,8 @@ class OrderCoordinatorActivity : AppCompatActivity() {
             override fun onFailure(call: Call<AllErrandsListModel?>, t: Throwable) {
                 binding.loadingView.stop()
                 binding.loadingBackFrame.visibility = View.GONE
-                Toast.makeText(this@OrderCoordinatorActivity, t.message, Toast.LENGTH_SHORT).show()
+                Log.e(TAG, "onFailure: "+t.message )
+//                Toast.makeText(this@OrderCoordinatorActivity, t.message, Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -859,7 +861,8 @@ class OrderCoordinatorActivity : AppCompatActivity() {
             override fun onFailure(call: Call<DeliveryItemListModel?>, t: Throwable) {
                 binding.loadingView.stop()
                 binding.loadingBackFrame.visibility = View.GONE
-                Toast.makeText(this@OrderCoordinatorActivity, t.message, Toast.LENGTH_SHORT).show()
+                Log.e(TAG, "onFailure: "+t.message )
+//                Toast.makeText(this@OrderCoordinatorActivity, t.message, Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -953,7 +956,8 @@ class OrderCoordinatorActivity : AppCompatActivity() {
                 }else {
                     binding.loadingBackFrame.visibility = View.GONE
                     binding.loadingView.stop()
-                    Global.warningmessagetoast(this@OrderCoordinatorActivity, response.body()!!.message);
+                    Log.e(TAG, "onFailure: "+response.body()!!.message)
+//                    Global.warningmessagetoast(this@OrderCoordinatorActivity, response.body()!!.message);
 
                 }
             }
@@ -962,7 +966,7 @@ class OrderCoordinatorActivity : AppCompatActivity() {
                 binding.loadingBackFrame.visibility = View.GONE
                 binding.loadingView.stop()
                 Log.e(OrderCoordinatorActivity.TAG, "onFailure: "+t.message )
-                Toast.makeText(this@OrderCoordinatorActivity, t.message, Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this@OrderCoordinatorActivity, t.message, Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -1094,7 +1098,7 @@ class OrderCoordinatorActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<UploadedPictureModel?>, t: Throwable) {
                 Log.e(TAG, "onFailure: "+t.message )
-                Toast.makeText(this@OrderCoordinatorActivity, t.message, Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this@OrderCoordinatorActivity, t.message, Toast.LENGTH_SHORT).show()
 
             }
         })
@@ -1302,13 +1306,6 @@ class OrderCoordinatorActivity : AppCompatActivity() {
         }
 */
         bindingBottomSheet.btnConfirm.setOnClickListener {
-
-          /*  binding.apply {
-                linearOkCancelButton.visibility = View.GONE
-                linearCreateDependencyEarrands.visibility = View.VISIBLE
-            }*///todo dependency and errands created
-//            bottomSheetDialog.dismiss()
-
             binding.loadingView.start()
             binding.loadingBackFrame.visibility = View.VISIBLE
             var jsonObject = JsonObject()

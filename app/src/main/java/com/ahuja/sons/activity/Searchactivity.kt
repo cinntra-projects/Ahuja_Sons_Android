@@ -123,7 +123,7 @@ class Searchactivity : MainBaseActivity() {
             onError = {
                 searchPage.loadingback.visibility = View.GONE
                 searchPage.loadingView.stop()
-                Global.warningmessagetoast(this, it)
+//                Global.warningmessagetoast(this, it)
             },
             onLoading = {
                 searchPage.loadingback.visibility = View.VISIBLE

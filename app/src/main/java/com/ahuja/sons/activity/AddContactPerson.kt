@@ -157,7 +157,7 @@ class AddContactPerson : MainBaseActivity(), View.OnClickListener, SelectBusines
         viewModel.getDepartment.observe(this, Event.EventObserver(
 
             onError = {
-                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
             },
             onLoading = {
 
@@ -193,7 +193,7 @@ class AddContactPerson : MainBaseActivity(), View.OnClickListener, SelectBusines
             onError = {
                 addContactBinding.loadingback.visibility = View.GONE
                 addContactBinding.loadingView.stop()
-                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
             },
             onLoading = {
                 addContactBinding.loadingback.visibility = View.VISIBLE
@@ -227,7 +227,7 @@ class AddContactPerson : MainBaseActivity(), View.OnClickListener, SelectBusines
         viewModel.customerListContact.observe(this, Event.EventObserver(
             onError = {
                 Log.e(TAG, "subsCribeTObserverERROR:$it ")
-                Global.warningmessagetoast(this, it)
+//                Global.warningmessagetoast(this, it)
             }, onLoading = {
 
             }, { customer ->
@@ -345,7 +345,7 @@ class AddContactPerson : MainBaseActivity(), View.OnClickListener, SelectBusines
 
             onError = {
                 addContactBinding.loadingView.stop()
-                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
             },
             onLoading = {
                 addContactBinding.loadingView.start()

@@ -243,7 +243,7 @@ class UpdateEmployeeActivity : AppCompatActivity() {
             com.ahuja.sons.apihelper.Event.EventObserver(
                 onError = {
                     Log.e(FileUtil.TAG, "errorInApi: $it")
-                    Global.warningmessagetoast(this@UpdateEmployeeActivity, it)
+//                    Global.warningmessagetoast(this@UpdateEmployeeActivity, it)
                 }, onLoading = {
 
                 },
@@ -346,7 +346,7 @@ class UpdateEmployeeActivity : AppCompatActivity() {
                     binding.loadingback.visibility = View.GONE
                     binding.loadingview.stop()
                     Log.e(FileUtil.TAG, "errorInApi: $it")
-                    Global.warningmessagetoast(this@UpdateEmployeeActivity, it)
+//                    Global.warningmessagetoast(this@UpdateEmployeeActivity, it)
                 }, onLoading = {
                     binding.loadingback.visibility = View.VISIBLE
                     binding.loadingview.start()
@@ -383,7 +383,7 @@ class UpdateEmployeeActivity : AppCompatActivity() {
             com.ahuja.sons.apihelper.Event.EventObserver(
                 onError = {
                     Log.e(FileUtil.TAG, "errorInApi: $it")
-                    Global.warningmessagetoast(this@UpdateEmployeeActivity, it)
+//                    Global.warningmessagetoast(this@UpdateEmployeeActivity, it)
                 }, onLoading = {
 
                 },
@@ -429,7 +429,7 @@ class UpdateEmployeeActivity : AppCompatActivity() {
                 onError = {
 
                     Log.e(FileUtil.TAG, "errorInApi: $it")
-                    Global.warningmessagetoast(this@UpdateEmployeeActivity, it)
+//                    Global.warningmessagetoast(this@UpdateEmployeeActivity, it)
                 }, onLoading = {
 
                 },
@@ -464,7 +464,7 @@ class UpdateEmployeeActivity : AppCompatActivity() {
                 onError = {
 
                     Log.e(FileUtil.TAG, "errorInApi: $it")
-                    Global.warningmessagetoast(this@UpdateEmployeeActivity, it)
+//                    Global.warningmessagetoast(this@UpdateEmployeeActivity, it)
                 }, onLoading = {
 
                 },

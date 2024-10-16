@@ -529,7 +529,8 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
             }
 
             else {
-                binding.btnSubmit.visibility = View.VISIBLE
+                binding.btnENdTrip.visibility = View.VISIBLE
+//                binding.btnSubmit.visibility = View.VISIBLE
                 binding.btnUploadProof.visibility = View.GONE
             }
 
@@ -652,7 +653,8 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
             }
 
             else {
-                binding.btnSubmit.visibility = View.VISIBLE
+                binding.btnENdTrip.visibility = View.VISIBLE
+//                binding.btnSubmit.visibility = View.VISIBLE
                 binding.btnUploadProof.visibility = View.GONE
             }
 
@@ -1483,6 +1485,8 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
                             tvClickStartText.visibility = View.GONE
                             linearTripEndDetails.visibility = View.GONE
                             uploadProofLayout.visibility = View.GONE
+                            btnUploadProof.visibility = View.GONE
+                            btnSubmit.visibility = View.GONE
 
                             tvTripStatus.setText("Status : Started" )
 

@@ -84,7 +84,7 @@ class BranchListFragment(val accountdata: AccountBpData) : Fragment(), AccountDe
                 binding.loadingback.visibility = View.GONE
                 binding.loadingView.stop()
                 Log.e("fail==>", it.toString())
-                Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
+//                Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
             },
             onLoading = {
                 binding.loadingback.visibility = View.VISIBLE

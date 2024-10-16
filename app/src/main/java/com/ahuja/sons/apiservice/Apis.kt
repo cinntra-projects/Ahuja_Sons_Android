@@ -496,6 +496,9 @@ interface Apis {
     @POST("delivery/delivery_details")
     suspend fun callDeliveryDetailApi(@Body data: JsonObject): Response<AllWorkQueueResponseModel>
 
+    @POST("delivery/delivery_details")
+    fun callDeliveryDetailApiByMVC(@Body data: JsonObject): Call<AllWorkQueueResponseModel>
+
     @POST("order_request/one")
     suspend fun callOrderRequestOneApi(@Body data: JsonObject): Response<OrderOneResponseModel>
 

@@ -150,6 +150,10 @@ class BillingCoordinatorDetailActivity : AppCompatActivity() {
             callSubmitBillingApi()
         }
 
+        binding.billingDoneChip.setOnClickListener {
+            callSubmitBillingApi()
+        }
+
 
     }
 

@@ -110,7 +110,7 @@ class CustomerOrderFragment(val accountdata: AccountBpData) : Fragment() ,  Acco
             onError = {
 
                 ticketbiding.loadingView.visibility = View.GONE
-                Global.warningmessagetoast(requireContext(), it)
+//                Global.warningmessagetoast(requireContext(), it)
             }, onLoading = {
 
                 ticketbiding.loadingView.visibility = View.VISIBLE

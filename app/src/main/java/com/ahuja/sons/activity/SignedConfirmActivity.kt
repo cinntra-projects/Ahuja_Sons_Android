@@ -217,8 +217,8 @@ class SignedConfirmActivity : MainBaseActivity(), SmsListener, OnImageSelectedLi
         viewModel.ticketSignnConfirmResponse.observe(this, Event.EventObserver(
             onError = {
                 ticketbiding.loading.visibility = View.GONE
-                Global.warningmessagetoast(this, it)
-                Log.e("ticketAcceptReject", it)
+//                Global.warningmessagetoast(this, it)
+//                Log.e("ticketAcceptReject", it)
             },
             onLoading = {
                         ticketbiding.loading.visibility = View.VISIBLE

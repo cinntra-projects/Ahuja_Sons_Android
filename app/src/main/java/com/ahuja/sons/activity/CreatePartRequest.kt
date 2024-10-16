@@ -85,7 +85,7 @@ class CreatePartRequest : MainBaseActivity(), DataBaseClick {
         viewModel.particularTicket.observe(this, Event.EventObserver(
             onError = {
                 Log.e(TAG, "errorInApi: $it")
-                Global.warningmessagetoast(this, it)
+//                Global.warningmessagetoast(this, it)
             }, onLoading = {
 
             }, {
@@ -230,8 +230,8 @@ class CreatePartRequest : MainBaseActivity(), DataBaseClick {
             this, Event.EventObserver(
                 onError = {
                     loader.visibility = View.GONE
-                    Log.e("fail==>", it)
-                    Global.warningmessagetoast(this@CreatePartRequest, it)
+//                    Log.e("fail==>", it)
+//                    Global.warningmessagetoast(this@CreatePartRequest, it)
                 },
                 onLoading = {
                     loader.visibility = View.VISIBLE

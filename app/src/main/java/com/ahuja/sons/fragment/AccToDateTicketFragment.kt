@@ -204,7 +204,7 @@ class AccToDateTicketFragment(val startdate: Calendar, val enddate: Calendar) : 
                 // binding.loader.visibility = View.VISIBLE
                 ticketbiding.loadingback.visibility = View.GONE
                 ticketbiding.loadingView.stop()
-                Global.errormessagetoast(requireContext(), it)
+//                Global.errormessagetoast(requireContext(), it)
                 //  Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
             }, onLoading = {
                 ticketbiding.loadingback.visibility = View.VISIBLE

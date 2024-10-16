@@ -172,7 +172,7 @@ class CustomerDetailFragment(val accountdata: AccountBpData) : Fragment() ,  Acc
         viewModel.branchAllList.observe(viewLifecycleOwner, Event.EventObserver(
             onError = {
                 Log.e("fail==>", it.toString())
-                Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
+//                Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
             },
             onLoading = {
 
@@ -266,7 +266,7 @@ class CustomerDetailFragment(val accountdata: AccountBpData) : Fragment() ,  Acc
         viewModel.branchAllList.observe(viewLifecycleOwner, Event.EventObserver(
             onError = {
                 Log.e("fail==>", it.toString())
-                Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
+//                Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
             },
             onLoading = {
 

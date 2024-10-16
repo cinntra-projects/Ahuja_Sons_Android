@@ -221,7 +221,6 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
         binding.addSurgeryPerson.setOnClickListener {
             val newItem = SurgeryPersonModelData(
                 SurgeryPersonsName = "FOC"
-
             )
             addSurgeryPersonAdapter!!.addItem(newItem)
             content = ""
@@ -232,7 +231,6 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
             binding.chipCardViewBtton.visibility = View.GONE
             binding.surgeryDetailLinearLayout.visibility = View.VISIBLE
             binding.fillOutFormForSurgeryPersonLinearLayout.visibility = View.GONE
-
         }
 
 
@@ -750,8 +748,8 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
 
             val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
             val adapter = PreviousImageViewAdapter(this, mArrayUriList, arrayOf(), arrayListOf())
-            binding.proofImageRecyclerView.layoutManager = linearLayoutManager
-            binding.proofImageRecyclerView.adapter = adapter
+            binding.proofInspecImageRecyclerView.layoutManager = linearLayoutManager
+            binding.proofInspecImageRecyclerView.adapter = adapter
             adapter.notifyDataSetChanged()
 
         } else {

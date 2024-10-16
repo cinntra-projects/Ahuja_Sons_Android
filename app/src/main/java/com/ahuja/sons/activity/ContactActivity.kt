@@ -86,7 +86,7 @@ class ContactActivity : MainBaseActivity() {
             onError = {
                 binding.loadingview.stop()
                 binding.loadingback.visibility = View.GONE
-                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
             },
             onLoading = {
                 binding.loadingview.start()

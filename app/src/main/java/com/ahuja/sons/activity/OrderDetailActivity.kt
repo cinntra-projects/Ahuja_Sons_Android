@@ -70,7 +70,7 @@ class OrderDetailActivity : AppCompatActivity() {
             com.ahuja.sons.apihelper.Event.EventObserver(
                 onError = {
                     Log.e(FileUtil.TAG, "errorInApi: $it")
-                    Global.warningmessagetoast(this@OrderDetailActivity, it)
+//                    Global.warningmessagetoast(this@OrderDetailActivity, it)
                 }, onLoading = {
 
                 },

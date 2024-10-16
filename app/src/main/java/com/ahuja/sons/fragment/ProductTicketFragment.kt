@@ -200,7 +200,7 @@ class ProductTicketFragment(val ticketdata: TicketData) : Fragment() {
                 ticketbiding.loadingback.visibility = View.GONE
                 ticketbiding.loadingView.stop()
                 ticketbiding.idPBLoading.visibility = View.GONE
-                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+//                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
             },
             onLoading = {
                 ticketbiding.loadingback.visibility = View.VISIBLE

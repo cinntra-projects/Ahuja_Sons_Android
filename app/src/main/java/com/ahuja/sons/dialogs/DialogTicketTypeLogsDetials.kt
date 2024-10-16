@@ -107,7 +107,7 @@ class DialogTicketTypeLogsDetials : DialogFragment() {
             onError = {
                 binding.loadingView.visibility = View.GONE
                 Log.e(TAG, "subscribeToObserverERROR: $it")
-                Global.warningmessagetoast(requireContext(), it)
+//                Global.warningmessagetoast(requireContext(), it)
             }, onLoading = {
                 binding.loadingView.visibility = View.VISIBLE
             }, { response ->

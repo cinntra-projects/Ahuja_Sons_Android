@@ -143,7 +143,7 @@ class CreateRequestSubmitReport : MainBaseActivity() {
                 ticketFragment.loadingView.stop()
                 ticketFragment.loadingback.visibility = View.GONE
                 Log.e("tag==>", "errorInApi: $it")
-                Global.warningmessagetoast(this, it)
+//                Global.warningmessagetoast(this, it)
             }, onLoading = {
                 ticketFragment.loadingView.start()
                 ticketFragment.loadingback.visibility = View.VISIBLE
@@ -209,7 +209,7 @@ class CreateRequestSubmitReport : MainBaseActivity() {
     private fun bindPRAttachmentObserver() {
         viewModel.customerUpload.observe(this, Event.EventObserver(
             onError = {
-                Global.warningmessagetoast(this, it)
+//                Global.warningmessagetoast(this, it)
                 Log.e("Error===>", "attachmentObserverONERROR==>: $it")
             }, onLoading = {
 

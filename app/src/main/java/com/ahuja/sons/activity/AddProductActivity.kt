@@ -264,7 +264,7 @@ class AddProductActivity : AppCompatActivity() {
 
         viewModel.productOneDetailData.observe(this, Event.EventObserver(
             onError = {
-                Global.warningmessagetoast(this, it)
+//                Global.warningmessagetoast(this, it)
                 binding.loadingback.visibility = View.GONE
                 binding.loadingview.stop()
             },
@@ -298,7 +298,7 @@ class AddProductActivity : AppCompatActivity() {
     private fun bindCustomerObserver() {
         viewModel.customerListContact.observe(this, Event.EventObserver(
             onError = {
-                Global.warningmessagetoast(this, it)
+//                Global.warningmessagetoast(this, it)
 
             },
             onLoading = {
@@ -330,7 +330,7 @@ class AddProductActivity : AppCompatActivity() {
         viewModel.branchAllList.observe(this, Event.EventObserver(
             onError = {
                 Log.e("fail==>", it.toString())
-                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
             },
             onLoading = {
 
@@ -359,7 +359,7 @@ class AddProductActivity : AppCompatActivity() {
         viewModel.itemCategoryList.observe(this, Event.EventObserver(
             onError = {
                 Log.e("fail==>", it.toString())
-                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
             },
             onLoading = {
 

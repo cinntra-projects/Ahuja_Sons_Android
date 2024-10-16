@@ -2177,7 +2177,7 @@
                                 android:layout_height="@dimen/size_45"
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
-                                android:text="Surgery Proof"
+                                android:text="@string/surgery_proof"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/text_size_14"
                                 android:textStyle="bold" />
@@ -2265,7 +2265,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:elevation="2dp"
-                    android:text="Allow Incomplete Return"
+                    android:text=""
                     android:textAlignment="center"
                     android:textColor="@color/my_app_background_color"
                     android:textSize="14sp"

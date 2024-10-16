@@ -126,7 +126,7 @@ class ScannerAct : MainBaseActivity() {
 
             onError = {
                 Log.e("fail==>", it.toString())
-                Global.errormessagetoast(this@ScannerAct, it.toString())
+//                Global.errormessagetoast(this@ScannerAct, it.toString())
             },
             onLoading = {
 

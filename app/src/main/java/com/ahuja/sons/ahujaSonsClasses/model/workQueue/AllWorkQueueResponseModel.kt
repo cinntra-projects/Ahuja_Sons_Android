@@ -22,6 +22,7 @@ data class AllWorkQueueResponseModel(
         val DeliveryId: String = "",
         val OrderRequest: OrderRequest? = null,
         val TaskStatus: String  = "",
+        var isSelected: Boolean = false,
         val UpdateDate: String = "",
         val UpdateTime: String = "",
         val id: String = "",
@@ -35,7 +36,6 @@ data class AllWorkQueueResponseModel(
         var CreationDate: String = "",
         var DeliveryStatus: String = "",
         var isInspectionProofUpload: Boolean = false,
-        var isReturnInspectionProofUpload: Boolean = false,
         var DiscountPercent: String = "",
         var DocCurrency: String = "",
         var DocDate: String = "",
@@ -230,6 +230,7 @@ data class AllWorkQueueResponseModel(
         val UpdateTime: String,
         val id: Int,
         val isOrderPrepared: Boolean,
+        var isReturnInspectionProofUpload: Boolean = false,
 
     )
 

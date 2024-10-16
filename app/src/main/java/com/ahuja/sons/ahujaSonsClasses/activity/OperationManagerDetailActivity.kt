@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ahuja.sons.R
@@ -1099,7 +1100,31 @@ class OperationManagerDetailActivity : AppCompatActivity() {
         // Create a PopupMenu
         val popupMenu = PopupMenu(this, view)
         // Inflate the popup menu using the menu resource file
+        popupMenu.dismiss()
         popupMenu.getMenuInflater().inflate(R.menu.operational_allow_menu, popupMenu.getMenu())
+
+        var allowReturn = popupMenu.menu.findItem(R.id.allowIncompleteReturn)
+        var allowDispatch = popupMenu.menu.findItem(R.id.allowIncompleteDispatch)
+        var cancelOrder = popupMenu.menu.findItem(R.id.cancelOrder)
+
+        if (globalDataWorkQueueList.is_return == true){
+            allowReturn.isVisible = true
+            allowReturn.setTitle("Allow Incomplete Return") // Ensuring title is set correctly
+            binding.allowIncompleteChipBtn.setText("Allow Incomplete Return")
+            cancelOrder.isVisible = true
+            allowDispatch.isVisible = false
+        }
+        else if (globalDataWorkQueueList.is_return == false){
+            allowDispatch.isVisible = true
+            allowDispatch.setTitle("Allow Incomplete Dispatch") // Ensuring title is set correctly
+            cancelOrder.isVisible = true
+            allowReturn.isVisible = false
+            binding.allowIncompleteChipBtn.setText("Allow Incomplete Dispatch")
+//            popupMenu.invalidate()
+        }
+
+        Log.d("MenuVisibility", "is_return: ${globalDataWorkQueueList.is_return}, allowReturn visibility: ${allowReturn.isVisible}, allowDispatch visibility: ${allowDispatch.isVisible}")
+
 
         popupMenu.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
             override fun onMenuItemClick(p0: MenuItem?): Boolean {
@@ -1134,6 +1159,8 @@ class OperationManagerDetailActivity : AppCompatActivity() {
         var jsonObject1 = JsonObject()
         jsonObject1.addProperty("OrderID", globalDataWorkQueueList.OrderRequest!!.id)
         jsonObject1.addProperty("ReturnTypeStatus", type)
+        jsonObject1.addProperty("is_return", globalDataWorkQueueList.is_return)
+        jsonObject1.addProperty("CreatedBy", Prefs.getString(Global.Employee_Code))
 
         val call: Call<AllWorkQueueResponseModel> = ApiClient().service.allowIncompleteReturn(jsonObject1)
         call.enqueue(object : Callback<AllWorkQueueResponseModel?> {

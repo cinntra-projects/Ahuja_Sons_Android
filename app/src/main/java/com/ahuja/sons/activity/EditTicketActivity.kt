@@ -162,7 +162,7 @@ class EditTicketActivity : MainBaseActivity(),  ContactItemSelect, SelectBranchI
         viewModel.particularTicket.observe(this, Event.EventObserver(
             onError = {
                 binding.loadingback.visibility = View.GONE
-                Log.e(TAG, "subscribeToObserverrError:$it ")
+//                Log.e(TAG, "subscribeToObserverrError:$it ")
                 Global.warningmessagetoast(this, it)
             }, onLoading = {
                 binding.loadingback.visibility = View.VISIBLE

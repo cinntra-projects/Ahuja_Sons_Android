@@ -543,7 +543,7 @@ class SurgeryCoordinatorActivity : AppCompatActivity() {
                     binding.loadingBackFrame.visibility = View.GONE
                     binding.loadingView.stop()
                     Global.successmessagetoast(this@SurgeryCoordinatorActivity, response.message())
-                    onBackPressed()
+//                    onBackPressed()
                     finish()
 
                 } else {
@@ -773,12 +773,15 @@ class SurgeryCoordinatorActivity : AppCompatActivity() {
             // Separate the list based on SurgeryPersonCode being empty or not
              withPersonCode = surgeryDetailList_gl.filter { it.SurgeryPersonCode.isNotEmpty() } as MutableList<SurgeryPersonNameListModel.Data>
 
-            surgeryPersonOne = withPersonCode[0].SurgeryPersonCode
-            surgeryPersonOneName = withPersonCode[0].SurgeryPersonsName
-            surgeryPersonTwo = withPersonCode[1].SurgeryPersonCode
-            surgeryPersonTwoName = withPersonCode[1].SurgeryPersonsName
-            dialogBinding.acSurgeryPerson1.setText(withPersonCode[0].SurgeryPersonsName)
-            dialogBinding.acSurgeryPerson2.setText(withPersonCode[1].SurgeryPersonsName)
+            if (withPersonCode.isNotEmpty()){
+                surgeryPersonOne = withPersonCode[0].SurgeryPersonCode
+                surgeryPersonOneName = withPersonCode[0].SurgeryPersonsName
+                surgeryPersonTwo = withPersonCode[1].SurgeryPersonCode
+                surgeryPersonTwoName = withPersonCode[1].SurgeryPersonsName
+                dialogBinding.acSurgeryPerson1.setText(withPersonCode[0].SurgeryPersonsName)
+                dialogBinding.acSurgeryPerson2.setText(withPersonCode[1].SurgeryPersonsName)
+
+            }
 
 
         }

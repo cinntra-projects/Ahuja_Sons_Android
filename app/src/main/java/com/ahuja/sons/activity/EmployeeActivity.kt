@@ -275,7 +275,7 @@ class EmployeeActivity : AppCompatActivity() {
                     binding.loadingback.visibility = View.GONE
                     binding.loadingview.stop()
                     Log.e(FileUtil.TAG, "errorInApi: $it")
-                    Global.warningmessagetoast(this@EmployeeActivity, it)
+//                    Global.warningmessagetoast(this@EmployeeActivity, it)
                 }, onLoading = {
                     binding.loadingback.visibility = View.VISIBLE
                     binding.loadingview.start()

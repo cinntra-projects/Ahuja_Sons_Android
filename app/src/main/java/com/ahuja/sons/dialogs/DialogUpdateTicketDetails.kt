@@ -293,7 +293,7 @@ class DialogUpdateTicketDetails : DialogFragment() {
             onError = {
                 binding.loadingView.visibility = View.GONE
                 Log.e(TAG, "subscribeToObserverrError:$it ")
-                Global.warningmessagetoast(requireContext(), it)
+//                Global.warningmessagetoast(requireContext(), it)
             }, onLoading = {
                 binding.loadingView.visibility = View.VISIBLE
             }, { ticketResponse ->
@@ -355,7 +355,7 @@ class DialogUpdateTicketDetails : DialogFragment() {
             onError = {
                 binding.loadingView.visibility = View.GONE
                 Log.e(TAG, "subscribeToObserverERROR: $it")
-                Global.warningmessagetoast(requireContext(), it)
+//                Global.warningmessagetoast(requireContext(), it)
             }, onLoading = {
                 binding.loadingView.visibility = View.VISIBLE
             }, { response ->
@@ -426,7 +426,7 @@ class DialogUpdateTicketDetails : DialogFragment() {
                 binding.btnCancel.isEnabled = false
                 binding.loadingView.visibility = View.GONE
                 Log.e(TAG, "ADDQUALITY===>: $it")
-                Global.warningmessagetoast(requireContext(), it)
+//                Global.warningmessagetoast(requireContext(), it)
             }, onLoading = {
                 binding.btnSave.isEnabled = false
                 binding.btnCancel.isEnabled = false

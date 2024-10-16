@@ -168,15 +168,15 @@ class LoginActivity : MainBaseActivity() {
                     binding.loader.visibility = View.VISIBLE
                     binding.loader.start()
                     val logInDetail = NewLoginData()
-                    logInDetail.setUserName(binding.loginUsername.text.toString())
-                    logInDetail.setPassword(binding.loginPassword.text.toString())
+                    logInDetail.setUserName(binding.loginUsername.text.toString().trim())
+                    logInDetail.setPassword(binding.loginPassword.text.toString().trim())
                     logInDetail.setFcm(token!!)
 
                     var pass = binding.loginPassword.text.toString()
                     var hashMap = HashMap<String, String>()
                     //  {"userName":"anjli@gmail.com","password":"123","FCM":""}
 
-                    hashMap.put("userName", binding.loginUsername.text.toString())
+                    hashMap.put("userName", binding.loginUsername.text.toString().trim())
                     hashMap.put("password", pass)
                     hashMap.put("FCM", Prefs.getString(Global.FCM))
 //                    hashMap.put("p_id", "")
@@ -400,9 +400,9 @@ class LoginActivity : MainBaseActivity() {
     private fun subscribeToObserver() {
         viewModel.userStatus.observe(this, Event.EventObserver(
             onError = {
-                Log.e(TAG, "subscribeToObserver: $it")
+                Log.e(TAG, "subscribeToObserver: ${it}")
                 binding.loader.visibility = View.GONE
-                Global.errormessagetoast(this, it)
+//                Global.errormessagetoast(this, it)
                 if (it == "For input string: \"NA\"") {
                 }
             }, onLoading = {
@@ -447,7 +447,8 @@ class LoginActivity : MainBaseActivity() {
 
                     finish()
 
-                } else {
+                }
+               else {
                     Global.errormessagetoast(this, it.message)
                 }
 

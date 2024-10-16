@@ -228,7 +228,7 @@ class AddServiceContractActivty : AppCompatActivity(), SelectBusinessPartneer {
                     binding.loadingback.visibility = View.GONE
                     binding.loadingview.stop()
                     Log.e(FileUtil.TAG, "errorInApi: $it")
-                    Global.warningmessagetoast(this@AddServiceContractActivty, it)
+//                    Global.warningmessagetoast(this@AddServiceContractActivty, it)
                 }, onLoading = {
                     binding.loadingback.visibility = View.VISIBLE
                     binding.loadingview.start()
@@ -279,7 +279,7 @@ class AddServiceContractActivty : AppCompatActivity(), SelectBusinessPartneer {
         viewModel.branchAllList.observe(this, Event.EventObserver(
             onError = {
                 Log.e("fail==>", it.toString())
-                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
             },
             onLoading = {
 
@@ -366,7 +366,7 @@ class AddServiceContractActivty : AppCompatActivity(), SelectBusinessPartneer {
         viewModel.itemAllList.observe(this, Event.EventObserver(
             onError = {
                 Log.e(FileUtil.TAG, "errorInApi: $it")
-                Global.warningmessagetoast(this, it)
+//                Global.warningmessagetoast(this, it)
             }, onLoading = {
 
             },
@@ -448,7 +448,7 @@ class AddServiceContractActivty : AppCompatActivity(), SelectBusinessPartneer {
                 onError = {
 
                     Log.e(FileUtil.TAG, "errorInApi: $it")
-                    Global.warningmessagetoast(this@AddServiceContractActivty, it)
+//                    Global.warningmessagetoast(this@AddServiceContractActivty, it)
                 }, onLoading = {
 
                 },

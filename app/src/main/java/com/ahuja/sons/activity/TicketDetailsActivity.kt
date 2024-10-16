@@ -209,10 +209,7 @@ class TicketDetailsActivity : MainBaseActivity() {
         viewModel.itemAllList.observe(this, Event.EventObserver(
             onError = {
                 Log.e(FileUtil.TAG, "errorInApi: $it")
-                com.ahuja.sons.globals.Global.warningmessagetoast(
-                    this,
-                    it
-                )
+//                com.ahuja.sons.globals.Global.warningmessagetoast(this, it)
             }, onLoading = {
 
             },
@@ -280,7 +277,7 @@ class TicketDetailsActivity : MainBaseActivity() {
         viewModel.particularTicket.observe(this, Event.EventObserver(
             onError = {
                 Log.e(TAG, "errorInApi: $it")
-                Global.warningmessagetoast(this, it)
+//                Global.warningmessagetoast(this, it)
             }, onLoading = {
 
             }, {
@@ -382,7 +379,7 @@ class TicketDetailsActivity : MainBaseActivity() {
         viewModel.particularTicketViewPager.observe(this, Event.EventObserver(
             onError = {
                 Log.e(TAG, "errorInApi: $it")
-                Global.warningmessagetoast(this, it)
+//                Global.warningmessagetoast(this, it)
             }, onLoading = {
 
             }, {

@@ -250,7 +250,7 @@ class AddSalesOrderActivity : AppCompatActivity() {
     private fun bindHospitalObserver() {
         viewModel.businessPartnerList.observe(this, Event.EventObserver(
             onError = {
-                Global.warningmessagetoast(this, it)
+//                Global.warningmessagetoast(this, it)
                 binding.loadingback.visibility = View.GONE
                 binding.loadingView.stop()
             },

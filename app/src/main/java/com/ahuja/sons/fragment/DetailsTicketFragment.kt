@@ -222,7 +222,7 @@ class DetailsTicketFragment(val ticketID: TicketData) : Fragment() {
     private fun bindAttachmentObserver() {
         viewModel.allAttachmentList.observe(viewLifecycleOwner, Event.EventObserver(
             onError = {
-                Global.warningmessagetoast(requireContext(), it)
+//                Global.warningmessagetoast(requireContext(), it)
                 Log.e(TAG, "attachmentObserverONERROR==>: $it")
             }, onLoading = {
 
@@ -271,7 +271,7 @@ class DetailsTicketFragment(val ticketID: TicketData) : Fragment() {
     private fun bindDeleteAttachmentObserver() {
         viewModel.allAttachmentList.observe(viewLifecycleOwner, Event.EventObserver(
             onError = {
-                Global.warningmessagetoast(requireContext(), it)
+//                Global.warningmessagetoast(requireContext(), it)
                 Log.e(TAG, "attachmentObserverONERROR==>: $it")
             }, onLoading = {
 
@@ -309,8 +309,8 @@ class DetailsTicketFragment(val ticketID: TicketData) : Fragment() {
         viewModel.allItemWiseTicket.observe(
             this, Event.EventObserver(
                 onError = {
-                    Log.e("fail==>", it)
-                    Global.warningmessagetoast(requireContext(), it)
+//                    Log.e("fail==>", it)
+//                    Global.warningmessagetoast(requireContext(), it)
                 },
                 onLoading = {
                 },
@@ -421,7 +421,7 @@ class DetailsTicketFragment(val ticketID: TicketData) : Fragment() {
     private fun subscribeToObserver() {
         viewModel.inspectionList.observe(viewLifecycleOwner, Event.EventObserver(
             onError = {
-                Global.warningmessagetoast(requireContext(), it)
+//                Global.warningmessagetoast(requireContext(), it)
                 Log.e(TAG, "subscribeToObserverONERROR==>: $it")
             }, onLoading = {
 
@@ -617,7 +617,7 @@ class DetailsTicketFragment(val ticketID: TicketData) : Fragment() {
             onError = {
                 ticketbiding.progressbar.stop()
                 ticketbiding.loadingback.visibility = View.GONE
-                Global.warningmessagetoast(requireContext(), it)
+//                Global.warningmessagetoast(requireContext(), it)
                 Log.e("Error===>", "attachmentObserverONERROR==>: $it")
             }, onLoading = {
                 ticketbiding.progressbar.start()

@@ -57,7 +57,7 @@ class ParticularTicketDetailsFragement(val tickid: Int) : Fragment() {
             viewLifecycleOwner, Event.EventObserver(
                 onError = {
                     Log.e(TAG, "onFailure: $it")
-                    Global.warningmessagetoast(requireContext(), it)
+//                    Global.warningmessagetoast(requireContext(), it)
                 },
                 onLoading = {
                 },

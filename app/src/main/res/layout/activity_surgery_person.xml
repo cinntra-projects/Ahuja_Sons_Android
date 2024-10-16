@@ -1941,7 +1941,7 @@
                                     android:layout_height="@dimen/size_45"
                                     android:layout_weight="1"
                                     android:gravity="center_vertical"
-                                    android:text="Delivery Proof"
+                                    android:text="@string/surgery_proof"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/text_size_14"
                                     android:textStyle="bold" />

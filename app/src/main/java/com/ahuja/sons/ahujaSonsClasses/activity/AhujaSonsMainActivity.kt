@@ -25,6 +25,7 @@ import com.ahuja.sons.ahujaSonsClasses.ahujaconstant.GlobalClasses
 import com.ahuja.sons.ahujaSonsClasses.fragments.route.OrderForDeliveryCoordinatorFragment
 import com.ahuja.sons.ahujaSonsClasses.fragments.workqueue.WorkQueueFragment
 import com.ahuja.sons.ahujaSonsClasses.model.DeliveryPersonEmployeeModel
+import com.ahuja.sons.ahujaSonsClasses.model.local.LocalSelectedOrder
 import com.ahuja.sons.ahujaSonsClasses.model.workQueue.AllWorkQueueResponseModel
 import com.ahuja.sons.apiservice.ApiClient
 import com.ahuja.sons.apiservice.Apis
@@ -39,6 +40,7 @@ import com.ahuja.sons.viewmodel.MainViewModel
 import com.ahuja.sons.viewmodel.MainViewModelProvider
 import com.github.loadingview.LoadingView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.pixplicity.easyprefs.library.Prefs
@@ -60,6 +62,10 @@ class AhujaSonsMainActivity : AppCompatActivity() {
         val viewModelProviderfactory = MainViewModelProvider(application, mainRepos, dispatchers, fanxApi)
         viewModel = ViewModelProvider(this, viewModelProviderfactory)[MainViewModel::class.java]
 
+    }
+
+    companion object{
+        private const val TAG = "AhujaSonsMainActivity"
     }
 
 
@@ -110,7 +116,6 @@ class AhujaSonsMainActivity : AppCompatActivity() {
 
     }
 
-
     //todo open delivery dialog----
     lateinit var dialogBinding: DialogAssignDeliveryPersonBinding
 
@@ -138,14 +143,47 @@ class AhujaSonsMainActivity : AppCompatActivity() {
         dialogBinding.btnSave.setOnClickListener {
 
             val idArrayList = ArrayList<Int>()
+            val idArrayListID = mutableSetOf<Int>()
             idArrayList.clear()
-            for (order in GlobalClasses.deliveryIDsList) {
+           /* for (order in GlobalClasses.deliveryIDsList) {
                 idArrayList.add(order.id.toInt())
+            }*/
+            for (order in GlobalClasses.deliveryIDsList) {
+                val ID = order.id.toInt()
+                // Check if the OrderID is already present in the Set
+                if (!idArrayListID.contains(ID)) {
+                    idArrayList.add(ID)
+                    idArrayListID.add(ID)  // Add to the set after adding to the list
+                }
             }
+
             val commaSeparatedIds = idArrayList.joinToString(separator = ",")
 
+            //todo set order rid from delivery id list
+            val orderIDArrayList = ArrayList<Int>()
+            val orderIDSet = mutableSetOf<Int>()
 
+            orderIDArrayList.clear()
+            /*for (order in GlobalClasses.deliveryIDsList) {
+                orderIDArrayList.add(order.OrderID.toInt())
+            }*/
+
+            for (order in GlobalClasses.deliveryIDsList) {
+                val orderID = order.OrderID.toInt()
+                // Check if the OrderID is already present in the Set
+                if (!orderIDSet.contains(orderID)) {
+                    orderIDArrayList.add(orderID)
+                    orderIDSet.add(orderID)  // Add to the set after adding to the list
+                }
+            }
+
+            Log.e(TAG, "openDeliveryPersonDialog: "+orderIDSet )
+            val orderSeparateID = orderIDArrayList.joinToString(separator = ",")
+
+
+            //todo order id from list
             val orderIDList = ArrayList<String>()
+            orderIDList.clear()
             for (order in GlobalClasses.cartListForDeliveryCoordinatorCheck) {
                 orderIDList.add(order.value.orderId)
             }
@@ -163,7 +201,7 @@ class AhujaSonsMainActivity : AppCompatActivity() {
                 if (dialogBinding.acDeliveryPersonOne.text.isNullOrEmpty()){
                     Global.warningmessagetoast(this, "Select Delivery One Person")
                 }else{
-                    createAssignApi(dialog, dialogBinding.loadingback, dialogBinding.loadingView, commaSeparatedIds, vehicleNumber, orderCommaSeparatedIds)
+                    createAssignApi(dialog, dialogBinding.loadingback, dialogBinding.loadingView, commaSeparatedIds, vehicleNumber, orderCommaSeparatedIds, orderSeparateID)
                 }
 
             } else {
@@ -183,7 +221,7 @@ class AhujaSonsMainActivity : AppCompatActivity() {
 
 
     //todo calling Create Assign api here---
-    private fun createAssignApi(dialog: Dialog, loadingback: FrameLayout, loadingView: LoadingView, idArray: String, vehicleNumber: String, orderCommaSeparatedIds : String) {
+    private fun createAssignApi(dialog: Dialog, loadingback: FrameLayout, loadingView: LoadingView, idArray: String, vehicleNumber: String, orderCommaSeparatedIds : String, orderSeparateID : String) {
 
         loadingback.visibility = View.VISIBLE
         loadingView.start()
@@ -193,14 +231,21 @@ class AhujaSonsMainActivity : AppCompatActivity() {
             jsonArray.add(id)
         }
 
+        val jsonArray1 = JsonArray()
+        orderSeparateID.forEach { id ->
+            jsonArray1.add(id)
+        }
+
         var jsonObject1 = JsonObject()
         jsonObject1.addProperty("DeliveryNote", idArray)
         jsonObject1.addProperty("DeliveryPerson1", deliveryPersonOne)
         jsonObject1.addProperty("DeliveryPerson2", deliveryPersonTwo)
         jsonObject1.addProperty("DeliveryPerson3", deliveryPersonThree)
         jsonObject1.addProperty("VechicleNo", vehicleNumber)
-        jsonObject1.addProperty("OrderID", orderCommaSeparatedIds)
+        jsonObject1.addProperty("OrderID", orderSeparateID)//orderCommaSeparatedIds
         jsonObject1.addProperty("CreatedBy", Prefs.getString(Global.Employee_Code, ""))
+
+        Log.e("payload", jsonObject1.toString())
 
         val call: Call<AllWorkQueueResponseModel> = ApiClient().service.createAssign(jsonObject1)
         call.enqueue(object : Callback<AllWorkQueueResponseModel?> {

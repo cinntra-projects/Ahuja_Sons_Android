@@ -93,8 +93,8 @@ class ItemsList : MainBaseActivity(), View.OnClickListener {
             onError = {
                 binding.loadingback.visibility = View.GONE
                 binding.noDatafound.visibility = View.VISIBLE
-                Log.e("fail", it)
-                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+//                Log.e("fail", it)
+//                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
             },
             onLoading = {
                 binding.loadingback.visibility = View.VISIBLE

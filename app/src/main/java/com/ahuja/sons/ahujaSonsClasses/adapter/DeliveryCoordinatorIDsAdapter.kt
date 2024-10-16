@@ -1,16 +1,21 @@
 package com.ahuja.sons.ahujaSonsClasses.adapter
 
+import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ahuja.sons.ahujaSonsClasses.ahujaconstant.GlobalClasses
+import com.ahuja.sons.ahujaSonsClasses.fragments.route.OrderForDeliveryCoordinatorFragment
 import com.ahuja.sons.ahujaSonsClasses.model.workQueue.AllWorkQueueResponseModel
 import com.ahuja.sons.databinding.InspectionDeliveryIdLayoutBinding
 
 class DeliveryCoordinatorIDsAdapter (private val items: ArrayList<AllWorkQueueResponseModel.InspectedDelivery>, var isMultiOrderCardSelectEnabled: Boolean) : RecyclerView.Adapter<DeliveryCoordinatorIDsAdapter.InnerViewHolder>() {
 
+    interface ClickOnDeliveryID {
+        fun onClickDeliveryID(mArrayUriList: ArrayList<Uri>)
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InnerViewHolder {
         val binding = InspectionDeliveryIdLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return InnerViewHolder(binding)
@@ -50,6 +55,8 @@ class DeliveryCoordinatorIDsAdapter (private val items: ArrayList<AllWorkQueueRe
                     GlobalClasses.deliveryIDsList.add(item)
                 }
 
+                (holder.binding.checkBoxOrder.context as? OrderForDeliveryCoordinatorFragment)?.onChildCheckboxSelected(item)
+
             } else {
                 GlobalClasses.deliveryIDsList.remove(item)
             }
@@ -59,7 +66,6 @@ class DeliveryCoordinatorIDsAdapter (private val items: ArrayList<AllWorkQueueRe
             for (item in GlobalClasses.deliveryIDsList) {
                 Log.e("SELECTED ORDER11>>>>>", "bindChild: ${item.toString()}")
             }
-
 
         }
 

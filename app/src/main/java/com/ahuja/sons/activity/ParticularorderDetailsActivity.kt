@@ -99,7 +99,7 @@ class ParticularorderDetailsActivity : MainBaseActivity(), View.OnClickListener 
         viewModel.orderOne.observe(this, Event.EventObserver(
             onError = {
                 binding.loader.isVisible = false
-                Global.warningmessagetoast(this, it)
+//                Global.warningmessagetoast(this, it)
             }, onLoading = {
                 binding.loader.isVisible = true
             }, {

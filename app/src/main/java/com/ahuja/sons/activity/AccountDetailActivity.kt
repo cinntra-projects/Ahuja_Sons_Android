@@ -189,7 +189,7 @@ class AccountDetailActivity : MainBaseActivity(), View.OnClickListener {
     private fun bindBranchListObserver() {
         viewModel.branchAllList.observe(this, Event.EventObserver(
             onError = {
-                Log.e("fail==>", it.toString())
+                Log.e("fail==>", it)
                 Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
             },
             onLoading = {

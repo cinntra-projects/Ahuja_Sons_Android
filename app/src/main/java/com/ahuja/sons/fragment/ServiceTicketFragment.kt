@@ -315,8 +315,8 @@ class ServiceTicketFragment(val ticketID: TicketData) : Fragment(), View.OnClick
             this, Event.EventObserver(
                 onError = {
                     ticketbiding.progressbar.stop()
-                    Log.e("error===>", it)
-                    Global.warningmessagetoast(requireContext(), it)
+//                    Log.e("error===>", it)
+//                    Global.warningmessagetoast(requireContext(), it)
                 },
                 onLoading = {
                     ticketbiding.progressbar.start()
@@ -714,7 +714,7 @@ class ServiceTicketFragment(val ticketID: TicketData) : Fragment(), View.OnClick
         viewModel.solutionList.observe(viewLifecycleOwner, Event.EventObserver(
             onError = {
                 Log.e(FileUtil.TAG, "errorInApi: $it")
-                Global.warningmessagetoast(requireActivity(), it)
+//                Global.warningmessagetoast(requireActivity(), it)
             }, onLoading = {
 
             },
@@ -747,7 +747,7 @@ class ServiceTicketFragment(val ticketID: TicketData) : Fragment(), View.OnClick
         viewModel.solutionList.observe(viewLifecycleOwner, Event.EventObserver(
             onError = {
                 Log.e(FileUtil.TAG, "errorInApi: $it")
-                Global.warningmessagetoast(requireActivity(), it)
+//                Global.warningmessagetoast(requireActivity(), it)
             }, onLoading = {
 
             },
@@ -825,7 +825,7 @@ class ServiceTicketFragment(val ticketID: TicketData) : Fragment(), View.OnClick
         viewModel.IssueCategoryList.observe(viewLifecycleOwner, Event.EventObserver(
             onError = {
                 Log.e(FileUtil.TAG, "errorInApi: $it")
-                Global.warningmessagetoast(requireActivity(), it)
+//                Global.warningmessagetoast(requireActivity(), it)
             }, onLoading = {
 
             },
@@ -860,7 +860,7 @@ class ServiceTicketFragment(val ticketID: TicketData) : Fragment(), View.OnClick
         viewModel.itemAllList.observe(viewLifecycleOwner, Event.EventObserver(
             onError = {
                 Log.e(FileUtil.TAG, "errorInApi: $it")
-                Global.warningmessagetoast(requireActivity(), it)
+//                Global.warningmessagetoast(requireActivity(), it)
             }, onLoading = {
 
             },
@@ -893,7 +893,7 @@ class ServiceTicketFragment(val ticketID: TicketData) : Fragment(), View.OnClick
         viewModel.checkList.observe(viewLifecycleOwner, Event.EventObserver(
             onError = {
                 Log.e(TAG, "subscribeToObserverError: $it")
-                Global.warningmessagetoast(requireContext(), it)
+//                Global.warningmessagetoast(requireContext(), it)
             }, onLoading = {
 
             }, {
@@ -1047,8 +1047,8 @@ class ServiceTicketFragment(val ticketID: TicketData) : Fragment(), View.OnClick
 
                 viewModel.updatecheckList.observe(viewLifecycleOwner, Event.EventObserver(
                     onError = {
-                        Log.e(TAG, "subscribeToObserverError: $it")
-                        Global.warningmessagetoast(requireContext(), it)
+//                        Log.e(TAG, "subscribeToObserverError: $it")
+//                        Global.warningmessagetoast(requireContext(), it)
 
                     }, onLoading = {
 
@@ -1175,8 +1175,8 @@ class ServiceTicketFragment(val ticketID: TicketData) : Fragment(), View.OnClick
             onError = {
                 ticketbiding.progressbar.stop()
                 ticketbiding.loadingback.visibility = View.GONE
-                Global.warningmessagetoast(requireContext(), it)
-                Log.e("ticketAcceptReject", it)
+//                Global.warningmessagetoast(requireContext(), it)
+//                Log.e("ticketAcceptReject", it)
             },
             onLoading = {
                 ticketbiding.progressbar.start()
@@ -1505,7 +1505,7 @@ class ServiceTicketFragment(val ticketID: TicketData) : Fragment(), View.OnClick
     private fun bindStartStopObserver() {
         viewModel.ticketCheckList.observe(this, Event.EventObserver(
             onError = {
-                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+//                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
             },
             onLoading = {
 
@@ -1554,7 +1554,7 @@ class ServiceTicketFragment(val ticketID: TicketData) : Fragment(), View.OnClick
             onError = {
                 ticketbiding.loadingback.visibility = View.GONE
 
-                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+//                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
             },
             onLoading = {
                 ticketbiding.loadingback.visibility = View.VISIBLE
@@ -1622,8 +1622,8 @@ class ServiceTicketFragment(val ticketID: TicketData) : Fragment(), View.OnClick
             this, Event.EventObserver(
                 onError = {
                     loader.visibility = View.GONE
-                    Log.e("fail==>", it)
-                    Global.warningmessagetoast(requireContext(), it)
+//                    Log.e("fail==>", it)
+//                    Global.warningmessagetoast(requireContext(), it)
                 },
                 onLoading = {
                     loader.visibility = View.VISIBLE

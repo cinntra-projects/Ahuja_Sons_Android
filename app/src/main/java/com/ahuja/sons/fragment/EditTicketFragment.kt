@@ -127,7 +127,7 @@ class EditTicketFragment : Fragment() , ContactItemSelect{
             onError = {
                 binding.loadingback.visibility = View.GONE
                 Log.e(TAG, "subscribeToObserverrError:$it ")
-                Global.warningmessagetoast(requireContext(), it)
+//                Global.warningmessagetoast(requireContext(), it)
             }, onLoading = {
                 binding.loadingback.visibility = View.VISIBLE
             }, { ticketResponse ->
@@ -153,7 +153,7 @@ class EditTicketFragment : Fragment() , ContactItemSelect{
 
         viewModel.typeTicket.observe(viewLifecycleOwner, Event.EventObserver(
             onError = {
-                Global.warningmessagetoast(requireContext(), it)
+//                Global.warningmessagetoast(requireContext(), it)
             }, onLoading = {
 
             }, { type ->
@@ -210,7 +210,7 @@ class EditTicketFragment : Fragment() , ContactItemSelect{
 
         viewModel.subTypeTicket.observe(viewLifecycleOwner, Event.EventObserver(
             onError = {
-                Global.warningmessagetoast(requireContext(), it)
+//                Global.warningmessagetoast(requireContext(), it)
             }, onLoading = {
 
             }, { subType ->
@@ -471,7 +471,7 @@ class EditTicketFragment : Fragment() , ContactItemSelect{
             onError = {
                 binding.loadingback.visibility = View.GONE
                 Log.e(TAG, "subscribeToObserverrError:$it ")
-                Global.warningmessagetoast(requireContext(), it)
+//                Global.warningmessagetoast(requireContext(), it)
             }, onLoading = {
                 binding.loadingback.visibility = View.VISIBLE
             }, { ticketResponse ->
@@ -679,7 +679,7 @@ class EditTicketFragment : Fragment() , ContactItemSelect{
         viewModel.contactNameList.observe(viewLifecycleOwner, Event.EventObserver(
             onError = {
                 Log.e("fail==>", it.toString())
-                Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
+//                Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
             },
             onLoading = {
 

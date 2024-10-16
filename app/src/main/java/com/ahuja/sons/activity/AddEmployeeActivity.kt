@@ -227,7 +227,7 @@ class AddEmployeeActivity : AppCompatActivity() {
                     binding.loadingback.visibility = View.GONE
                     binding.loadingview.stop()
                     Log.e(FileUtil.TAG, "errorInApi: $it")
-                    Global.warningmessagetoast(this@AddEmployeeActivity, it)
+//                    Global.warningmessagetoast(this@AddEmployeeActivity, it)
                 }, onLoading = {
                     binding.loadingback.visibility = View.VISIBLE
                     binding.loadingview.start()
@@ -264,7 +264,7 @@ class AddEmployeeActivity : AppCompatActivity() {
             com.ahuja.sons.apihelper.Event.EventObserver(
                 onError = {
                     Log.e(FileUtil.TAG, "errorInApi: $it")
-                    Global.warningmessagetoast(this@AddEmployeeActivity, it)
+//                    Global.warningmessagetoast(this@AddEmployeeActivity, it)
                 }, onLoading = {
 
                 },
@@ -298,7 +298,7 @@ class AddEmployeeActivity : AppCompatActivity() {
                 onError = {
 
                     Log.e(FileUtil.TAG, "errorInApi: $it")
-                    Global.warningmessagetoast(this@AddEmployeeActivity, it)
+//                    Global.warningmessagetoast(this@AddEmployeeActivity, it)
                 }, onLoading = {
 
                 },
@@ -333,7 +333,7 @@ class AddEmployeeActivity : AppCompatActivity() {
                 onError = {
 
                     Log.e(FileUtil.TAG, "errorInApi: $it")
-                    Global.warningmessagetoast(this@AddEmployeeActivity, it)
+//                    Global.warningmessagetoast(this@AddEmployeeActivity, it)
                 }, onLoading = {
 
                 },

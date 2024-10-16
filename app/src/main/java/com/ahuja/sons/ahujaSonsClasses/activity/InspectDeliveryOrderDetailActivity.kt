@@ -39,7 +39,6 @@ import com.ahuja.sons.apiservice.Apis
 import com.ahuja.sons.databinding.ActivityInspectDeliveryOrderDetailBinding
 import com.ahuja.sons.databinding.UploadInspectionImageProofLayoutBottomSheetBinding
 import com.ahuja.sons.globals.Global
-import com.ahuja.sons.model.DeliveryID
 import com.ahuja.sons.service.repository.DefaultMainRepositories
 import com.ahuja.sons.service.repository.MainRepos
 import com.ahuja.sons.viewmodel.MainViewModel
@@ -158,6 +157,8 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
         viewModel.callDeliveryDetailApi(jsonObject)
         bindWorkQueueDetail("DeliveryDetail")
 
+//        callDeliveryDetailApi("DeliveryDetail")
+
         hideAndShowViews()
 
         onClickListeners()
@@ -168,6 +169,66 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
 
     var globalDataWorkQueueList = AllWorkQueueResponseModel.Data()
     var globalReturnValue = AllWorkQueueResponseModel()
+
+
+    private fun callDeliveryDetailApi(flag: String) {
+        var jsonObject = JsonObject()
+        jsonObject.addProperty("delivery_id", deliveryID)
+        jsonObject.addProperty("is_return", isReturn)
+        jsonObject.addProperty("OrderID", orderID)
+
+        binding.loadingView.start()
+        binding.loadingBackFrame.visibility = View.VISIBLE
+        val call: Call<AllWorkQueueResponseModel> = ApiClient().service.callDeliveryDetailApiByMVC(jsonObject)
+        call.enqueue(object : Callback<AllWorkQueueResponseModel?> {
+            override fun onResponse(call: Call<AllWorkQueueResponseModel?>, response: Response<AllWorkQueueResponseModel?>) {
+                if (response.body()!!.status == 200) {
+                    binding.loadingView.stop()
+                    binding.loadingBackFrame.visibility = View.GONE
+                    Log.e("data", response.body()!!.data.toString())
+
+                    if (response.body()!!.data.size > 0) {
+                        var modelData = response.body()!!.data[0]
+
+                        globalDataWorkQueueList = response.body()!!.data[0]
+                        globalReturnValue = response.body()!!
+
+                        bindGetInspectionImages(flag)
+
+                        //todo calling dependency and errand list
+
+                        callDependencyAllList()
+
+                        callErrandsAllList()
+
+                        callDeliveryDetailItemList()
+
+                        //todo set deafult data---
+                        setDefaultData(modelData)
+
+                        callDispatchDetailsApi("")
+
+                        if (globalReturnValue.is_return == true) {
+                            callPickUpTripDetailsApi("")
+                        }
+
+
+                    }
+
+                } else {
+                    binding.loadingView.stop()
+                    binding.loadingBackFrame.visibility = View.GONE
+                    Log.e(TAG, "onResponse: "+response.message().toString() )
+                }
+            }
+
+            override fun onFailure(call: Call<AllWorkQueueResponseModel?>, t: Throwable) {
+                binding.loadingView.stop()
+                binding.loadingBackFrame.visibility = View.GONE
+                Toast.makeText(this@InspectDeliveryOrderDetailActivity, t.message, Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
 
     //todo work queue detail api --
     private fun bindWorkQueueDetail(flag: String) {
@@ -869,7 +930,7 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
             onError = {
                 binding.loadingBackFrame.visibility = View.GONE
                 binding.loadingView.stop()
-                Global.warningmessagetoast(this, it)
+//                Global.warningmessagetoast(this, it)
             },
             onLoading = {
                 binding.loadingBackFrame.visibility = View.VISIBLE
@@ -1146,8 +1207,12 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
                     /*jsonObject.addProperty("id", orderID)
                     viewModel.callWorkQueueDetailApi(jsonObject)*/
                     jsonObject.addProperty("delivery_id", deliveryID)
+                    jsonObject.addProperty("is_return", isReturn)
+                    jsonObject.addProperty("OrderID", orderID)
                     viewModel.callDeliveryDetailApi(jsonObject)
                     bindWorkQueueDetail("WorkQueueDetail")
+
+//                    callDeliveryDetailApi()
 
                 } else {
                     loadingback.visibility = View.GONE
@@ -1258,20 +1323,17 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
                     binding.uploadProofChipGroup.visibility = View.VISIBLE
                     binding.submitChipGroup.visibility = View.GONE
 
-                }/*else{
-                binding.uploadProofChipGroup.visibility = View.VISIBLE
-                binding.submitChipGroup.visibility = View.GONE
-            }*/
+                }
             }
 
             else if (globalReturnValue.is_return == true){
-                if (globalDataWorkQueueList.isReturnInspectionProofUpload == true && globalReturnValue.is_return == true){
+                if (globalDataWorkQueueList.OrderRequest!!.isReturnInspectionProofUpload == true && globalReturnValue.is_return == true){
                     Log.e(TAG, "bindGETCameraImagesAdapter:  Upload Proof btn not visible", )
                     binding.uploadProofChipGroup.visibility = View.GONE
                     binding.submitChipGroup.visibility = View.VISIBLE
 
                 }
-                else if (globalReturnValue.is_return == true && globalDataWorkQueueList.isReturnInspectionProofUpload == false){
+                else if (globalReturnValue.is_return == true && globalDataWorkQueueList.OrderRequest!!.isReturnInspectionProofUpload == false){
                     Log.e(TAG, "bindGETCameraImagesAdapter: Upload Proof btn visible", )
                     binding.uploadProofChipGroup.visibility = View.VISIBLE
                     binding.submitChipGroup.visibility = View.GONE

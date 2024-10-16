@@ -91,7 +91,7 @@ class SelectBusinessPartnerFragement(val addTicketActivity: AddTicketActivity, v
     private fun bindObserver() {
         viewModel.customerListContact.observe(viewLifecycleOwner, Event.EventObserver(
             onError = {
-                Global.warningmessagetoast(requireContext(), it)
+//                Global.warningmessagetoast(requireContext(), it)
                 ticketFragment.loadingView.stop()
             },
             onLoading = {

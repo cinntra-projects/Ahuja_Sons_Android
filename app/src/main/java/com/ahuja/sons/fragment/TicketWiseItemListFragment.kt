@@ -244,7 +244,7 @@ class TicketWiseItemListFragment(var ticketID: TicketData) : Fragment() {
         viewModel.particularTicket.observe(viewLifecycleOwner, Event.EventObserver(
             onError = {
                 Log.e(TAG, "errorInApi: $it")
-                Global.warningmessagetoast(requireContext(), it)
+//                Global.warningmessagetoast(requireContext(), it)
             }, onLoading = {
 
             }, {
@@ -298,10 +298,7 @@ class TicketWiseItemListFragment(var ticketID: TicketData) : Fragment() {
                 ticketbiding.loadingback.visibility = View.GONE
                 ticketbiding.progressbar.stop()
                 Log.e(FileUtil.TAG, "errorInApi: $it")
-                com.ahuja.sons.globals.Global.warningmessagetoast(
-                    requireActivity(),
-                    it
-                )
+//                com.ahuja.sons.globals.Global.warningmessagetoast(requireActivity(), it)
             }, onLoading = {
                 ticketbiding.loadingback.visibility = View.VISIBLE
                 ticketbiding.progressbar.start()

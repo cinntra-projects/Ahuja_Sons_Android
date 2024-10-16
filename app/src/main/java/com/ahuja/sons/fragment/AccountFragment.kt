@@ -339,7 +339,7 @@ class AccountFragment : Fragment() {
     private fun bindObserver() {
         viewModel.businessPartnerList.observe(viewLifecycleOwner, Event.EventObserver(
             onError = {
-                Global.warningmessagetoast(requireContext(), it)
+//                Global.warningmessagetoast(requireContext(), it)
                 binding.loadingView.stop()
                 binding.loadingback.visibility = View.GONE
                 binding.ssPullRefresh.setRefreshing(false)
