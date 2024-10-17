@@ -32,6 +32,7 @@ data class AllOrderListModel(
         val SurgeryTime: String = "",
         val UpdateDate: String = "",
         val UpdateTime: String = "",
+        val is_return: Boolean = false,
         val id: Int = 0
     )
 

@@ -1953,44 +1953,6 @@
             </androidx.cardview.widget.CardView>
 
 
-            <TextView
-                android:id="@+id/tvReturnStartClick"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/size_45"
-                android:layout_weight="1"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:paddingStart="10dp"
-                android:text="Click on start button to start the Pick Up"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_14"
-                android:textStyle="bold"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/surgeryDetailCardView" />
-
-
-            <TextView
-                android:id="@+id/tvReturnCountText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_weight="1"
-                android:background="@color/white"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:text="00:00:01 "
-                android:textAlignment="textEnd"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_14"
-                android:textStyle="bold"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvReturnStartClick" />
-
-
             <androidx.cardview.widget.CardView
                 android:id="@+id/pickupDetailCardView"
                 android:layout_width="match_parent"
@@ -2093,74 +2055,6 @@
 
                         </LinearLayout>
 
-
-                        <LinearLayout
-                            android:id="@+id/pickUpStartTripDetail"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:visibility="visible">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/size_10"
-                                android:layout_marginRight="@dimen/size_10"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:gravity="center_vertical"
-                                    android:text="Start Location"
-                                    android:textColor="@color/grey"
-                                    android:textSize="@dimen/text_size_14" />
-
-
-                                <TextView
-                                    android:id="@+id/tvPickUPStartLocation"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:gravity="center_vertical"
-                                    android:textColor="@color/black"
-                                    android:textSize="@dimen/text_size_14" />
-
-
-                            </LinearLayout>
-
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/size_10"
-                                android:layout_marginRight="@dimen/size_10"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="@dimen/size_45"
-                                    android:layout_weight="1"
-                                    android:gravity="center_vertical"
-                                    android:text="Start Time"
-                                    android:textColor="@color/grey"
-                                    android:textSize="@dimen/text_size_14" />
-
-
-                                <TextView
-                                    android:id="@+id/tvPickUpStartTripTime"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="@dimen/size_45"
-                                    android:layout_weight="1"
-                                    android:gravity="center_vertical"
-                                    android:textColor="@color/black"
-                                    android:textSize="@dimen/text_size_14" />
-
-
-                            </LinearLayout>
-
-                        </LinearLayout>
 
                         <LinearLayout
                             android:id="@+id/pickUpAllDetail"

@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ahuja.sons.ahujaSonsClasses.adapter.PendingItemsListAdapter
+import com.ahuja.sons.ahujaSonsClasses.adapter.PendingItemAfterGroupingAdapter
 import com.ahuja.sons.ahujaSonsClasses.model.workQueue.AllItemsForOrderModel
 import com.ahuja.sons.apiservice.ApiClient
 import com.ahuja.sons.databinding.FragmentPendingItemsBinding
@@ -36,8 +36,6 @@ class PendingItemsFragment(val SapOrderID : String) : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         var dataList = arrayListOf<String>("Attune Femur123", "Attune Femur1", "Attune Femur2")
-
-
 
         callPendingListApi()
 
@@ -68,9 +66,28 @@ class PendingItemsFragment(val SapOrderID : String) : Fragment() {
                             pendingItemArrayList.clear()
                             pendingItemArrayList.addAll(response.body()!!.data[0].pending_item)
 
+                            val resultList = ArrayList<AllItemsForOrderModel.PendingItem>()
+
+                            resultList.addAll(pendingItemArrayList
+                                    .groupBy { it.ItemDescription }
+                                    .map { (description, itemsList) ->
+                                        val totalQuantity = itemsList.sumOf { it.Quantity.toInt() }
+                                        val uniqueMeasureQuantities = itemsList.map { it.U_Size }
+                                                .toSet()
+                                                .joinToString(", ")
+
+                                        AllItemsForOrderModel.PendingItem(
+                                            ItemDescription = description,
+                                            Quantity = totalQuantity.toDouble(), // Ensure this is a String
+                                            U_Size = uniqueMeasureQuantities
+                                        )
+                                    }
+                            )
+
                             var linearLayoutManager : LinearLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
                             binding.pendingRecyclerView.layoutManager = linearLayoutManager
-                            val adapter = PendingItemsListAdapter(pendingItemArrayList)
+//                            val adapter = PendingItemsListAdapter(pendingItemArrayList)
+                            val adapter = PendingItemAfterGroupingAdapter(resultList)
                             binding.pendingRecyclerView.adapter = adapter
                             adapter.notifyDataSetChanged()
 

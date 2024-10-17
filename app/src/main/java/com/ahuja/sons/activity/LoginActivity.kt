@@ -403,6 +403,11 @@ class LoginActivity : MainBaseActivity() {
                 Log.e(TAG, "subscribeToObserver: ${it}")
                 binding.loader.visibility = View.GONE
 //                Global.errormessagetoast(this, it)
+                if (it.contains("java.lang.IllegalStateException: Expected BEGIN_OBJECT but was BEGIN_ARRAY at line 1 column 69 path \$.data")){
+                    Global.errormessagetoast(this, "Username or Password is incorrect")
+                }else{
+                    Global.errormessagetoast(this, "Something Went Wrong!")
+                }
                 if (it == "For input string: \"NA\"") {
                 }
             }, onLoading = {

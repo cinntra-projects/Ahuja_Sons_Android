@@ -25,7 +25,7 @@ data class AllWorkQueueResponseModel(
         var isSelected: Boolean = false,
         val UpdateDate: String = "",
         val UpdateTime: String = "",
-        val id: String = "",
+        var id: String = "",
         val DeliveryNote: ArrayList<DeliveryNote> = ArrayList(),
         var BuyBack: String = "",
         var CancelStatus: String = "",

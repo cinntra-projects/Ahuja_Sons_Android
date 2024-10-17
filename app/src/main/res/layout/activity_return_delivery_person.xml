@@ -1,0 +1,2324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainframelayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:layout_collapseMode="pin"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_24">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Order Name"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_18" />
+
+            <LinearLayout
+                android:id="@+id/openThreeDotMenu"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="10dp"
+                android:gravity="end"
+                android:paddingEnd="10dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Edit"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_18" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <LinearLayout
+        android:id="@+id/linearHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <TextView
+            android:id="@+id/tvOrderStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginLeft="@dimen/size_15"
+            android:layout_marginTop="@dimen/size_5"
+            android:layout_marginEnd="5dp"
+            android:layout_toRightOf="@id/name_icon"
+            android:background="@color/blueLightShade"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingStart="15dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="15dp"
+            android:paddingBottom="5dp"
+            android:text="Cinntra Infotech"
+            android:textAlignment="textEnd"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_14"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_15"
+            android:layout_marginTop="@dimen/size_10"
+            android:layout_marginBottom="10dp">
+
+
+            <ImageView
+                android:id="@+id/name_icon"
+                android:layout_width="@dimen/size_35"
+                android:layout_height="@dimen/size_35"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/ic_group_18584" />
+
+            <LinearLayout
+                android:id="@+id/nameDetailLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/name_icon"
+                android:layout_weight="90"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/company_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_15"
+                    android:layout_marginTop="@dimen/size_5"
+                    android:layout_toRightOf="@id/name_icon"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_14"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tvDoctorName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/company_name"
+                        android:layout_marginLeft="@dimen/size_15"
+                        android:layout_marginTop="@dimen/size_5"
+                        android:layout_toRightOf="@+id/name_icon"
+                        android:layout_weight="50"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text=""
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/text_size_12"
+                        android:textStyle="bold"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/tvOrderID"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/company_name"
+                        android:layout_marginLeft="@dimen/size_15"
+                        android:layout_marginTop="@dimen/size_5"
+                        android:layout_toRightOf="@+id/name_icon"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="Order ID : "
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/text_size_12"
+                        android:textStyle="bold"
+                        android:visibility="visible" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvOrderInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvOrderID"
+                    android:layout_marginLeft="@dimen/size_15"
+                    android:layout_marginTop="@dimen/size_5"
+                    android:layout_toRightOf="@+id/name_icon"
+                    android:ellipsize="end"
+                    android:text="Order Information : "
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_12"
+                    android:visibility="visible" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_toRightOf="@id/nameDetailLayout"
+                android:layout_weight="10"
+                android:background="@drawable/ripple_effect"
+                android:clickable="true"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/headerDownArrow"
+                    android:layout_width="@dimen/text_size_14"
+                    android:layout_height="@dimen/text_size_14"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/down_arrow_icon"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/headerUpArrow"
+                    android:layout_width="@dimen/text_size_14"
+                    android:layout_height="@dimen/text_size_14"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/arrow_up_icon"
+                    android:visibility="visible" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_2"
+            android:layout_marginTop="@dimen/size_10"
+            android:background="@color/divider_color" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="@dimen/size_15"
+                android:layout_marginTop="@dimen/size_5"
+                android:layout_weight="50"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Status :"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/text_size_16"
+
+                android:visibility="visible" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="end"
+                android:layout_marginEnd="@dimen/dimen_8"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvSTatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/company_name"
+                    android:layout_gravity="end"
+                    android:layout_marginLeft="@dimen/size_15"
+                    android:layout_marginTop="@dimen/size_5"
+                    android:layout_toRightOf="@+id/name_icon"
+                    android:layout_weight="50"
+                    android:drawableStart="@drawable/ic_check_green"
+                    android:drawablePadding="4dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text=""
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/text_size_12"
+                    android:textStyle="bold"
+                    android:visibility="visible" />
+
+
+                <TextView
+                    android:id="@+id/tvSurgeryDateAndTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/company_name"
+                    android:layout_marginLeft="@dimen/size_15"
+                    android:layout_marginTop="@dimen/size_5"
+                    android:layout_toRightOf="@+id/name_icon"
+                    android:layout_weight="50"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="Surgery Date &amp; Time : "
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/text_size_12"
+                    android:visibility="visible" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="60dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@+id/btnTrip"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearHeader">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/orderDetailLayoutCardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_10"
+                android:visibility="visible"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/size_8"
+                app:cardElevation="@dimen/size_4"
+                app:cardMaxElevation="@dimen/size_4"
+                app:cardPreventCornerOverlap="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:visibility="visible">
+
+
+                        <TextView
+                            android:id="@+id/tv_employee_name"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/size_45"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="40"
+                            android:background="@drawable/heading_bg_shape"
+                            android:gravity="center_vertical"
+                            android:text="Order Details  "
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_14" />
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="80"
+                            android:gravity="end"
+                            android:orientation="vertical"
+                            android:paddingEnd="10dp">
+
+                            <ImageView
+                                android:id="@+id/orderDownArrow"
+                                android:layout_width="@dimen/text_size_14"
+                                android:layout_height="@dimen/text_size_14"
+                                android:layout_centerVertical="true"
+                                android:layout_margin="10dp"
+                                android:background="@drawable/down_arrow_icon"
+                                android:visibility="gone" />
+
+                            <ImageView
+                                android:id="@+id/orderUpArrow"
+                                android:layout_width="@dimen/text_size_14"
+                                android:layout_height="@dimen/text_size_14"
+                                android:layout_centerVertical="true"
+                                android:layout_margin="10dp"
+                                android:background="@drawable/arrow_up_icon"
+                                android:visibility="visible" />
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/orderDetailsLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/size_10"
+                            android:layout_marginRight="@dimen/size_10"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/size_45"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="OMS ID"
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                            <TextView
+                                android:id="@+id/tvOMSID"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text=""
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/size_10"
+                            android:layout_marginRight="@dimen/size_10"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/size_45"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Remarks"
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                            <TextView
+                                android:id="@+id/tvRemarks"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/size_10"
+                            android:layout_marginRight="@dimen/size_10"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/size_45"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Sales Person"
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                            <TextView
+                                android:id="@+id/tvSalesPerson"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/preparedByLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/size_10"
+                            android:layout_marginRight="@dimen/size_10"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:visibility="visible">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/size_45"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Prepared By"
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                            <TextView
+                                android:id="@+id/tvPreparedBy"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/inspectedByLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/size_10"
+                            android:layout_marginRight="@dimen/size_10"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:visibility="visible">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/text_45"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Inspected By"
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                            <TextView
+                                android:id="@+id/tvInspectedBy"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/inspectionViewLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="@dimen/dimen_8"
+                            android:orientation="vertical"
+                            android:visibility="gone">
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/size_45"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Inspection Proof"
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                            <HorizontalScrollView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/size_10"
+                                android:layout_marginTop="@dimen/size_10">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="10dp"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+
+                                    <androidx.recyclerview.widget.RecyclerView
+                                        android:id="@+id/imageRecyclerView"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="8dp"
+                                        android:orientation="horizontal"
+                                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                        tools:itemCount="2"
+                                        tools:listitem="@layout/camera_image_list_adapter" />
+
+
+                                    <ImageView
+                                        android:id="@+id/tvAddNewImages"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="10dp"
+                                        android:layout_marginEnd="10dp"
+                                        android:src="@drawable/add_new_image"
+                                        android:visibility="gone" />
+
+                                </LinearLayout>
+
+
+                            </HorizontalScrollView>
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/itemViewDetailCardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_10"
+                android:visibility="gone"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/size_8"
+                app:cardElevation="@dimen/size_4"
+                app:cardMaxElevation="@dimen/size_4"
+                app:cardPreventCornerOverlap="true"
+                app:layout_constraintTop_toBottomOf="@+id/orderDetailLayoutCardView">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:visibility="visible">
+
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/size_45"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="40"
+                            android:background="@drawable/heading_bg_shape"
+                            android:gravity="center_vertical"
+                            android:text="Item Details  "
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_14" />
+
+
+                        <LinearLayout
+                            android:id="@+id/itemDetailView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="80"
+                            android:gravity="end"
+                            android:orientation="vertical"
+                            android:paddingEnd="10dp">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_margin="10dp"
+                                android:background="@drawable/ic_baseline_keyboard_arrow_right_24"
+                                android:visibility="visible" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/deliveryDetailLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_10"
+                android:visibility="gone"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/size_8"
+                app:cardElevation="@dimen/size_4"
+                app:cardMaxElevation="@dimen/size_4"
+                app:cardPreventCornerOverlap="true"
+                app:layout_constraintTop_toBottomOf="@+id/itemViewDetailCardView">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:visibility="visible">
+
+
+                        <TextView
+                            android:id="@+id/tvDeliveryDetail"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/size_45"
+                            android:layout_weight="50"
+                            android:background="@drawable/heading_bg_shape"
+                            android:gravity="center_vertical"
+                            android:text="Delivery Details  "
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_14" />
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="50"
+                            android:gravity="end"
+                            android:orientation="vertical"
+                            android:paddingEnd="10dp">
+
+                            <ImageView
+                                android:id="@+id/deliveryDownArrow"
+                                android:layout_width="14dp"
+                                android:layout_height="@dimen/text_size_14"
+                                android:layout_centerVertical="true"
+                                android:layout_margin="10dp"
+                                android:background="@drawable/down_arrow_icon"
+                                android:visibility="gone" />
+
+                            <ImageView
+                                android:id="@+id/deliveryUpArrow"
+                                android:layout_width="14dp"
+                                android:layout_height="@dimen/text_size_14"
+                                android:layout_centerVertical="true"
+                                android:layout_margin="10dp"
+                                android:src="@drawable/arrow_up_icon"
+                                android:visibility="visible" />
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvDeliveryDetail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"
+                        tools:itemCount="1"
+                        tools:listitem="@layout/delivery_detail_item_layout" />
+
+
+                    <TextView
+                        android:id="@+id/tvDeliveryDetailNoDataFound"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size_45"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|center"
+                        android:paddingStart="10dp"
+                        android:text="No Data found"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/text_size_14"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+            <LinearLayout
+                android:id="@+id/dispatchedDetailLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="50dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/deliveryDetailLayout">
+
+
+                <LinearLayout
+                    android:id="@+id/linearTripDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/rounded_border"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:visibility="visible">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/size_45"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@drawable/heading_bg_shape"
+                            android:gravity="center_vertical"
+                            android:text="Dispatch Detail  "
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_14" />
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="40"
+                            android:gravity="end"
+                            android:orientation="vertical"
+                            android:paddingEnd="10dp">
+
+                            <ImageView
+                                android:id="@+id/dispatchDownArrow"
+                                android:layout_width="@dimen/text_size_14"
+                                android:layout_height="@dimen/text_size_14"
+                                android:layout_centerVertical="true"
+                                android:layout_margin="10dp"
+                                android:background="@drawable/down_arrow_icon"
+                                android:visibility="gone" />
+
+                            <ImageView
+                                android:id="@+id/dispatchUpArrow"
+                                android:layout_width="@dimen/text_size_14"
+                                android:layout_height="@dimen/text_size_14"
+                                android:layout_centerVertical="true"
+                                android:layout_margin="10dp"
+                                android:background="@drawable/arrow_up_icon"
+                                android:visibility="visible" />
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/statusLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size_10"
+                        android:layout_marginRight="@dimen/size_10"
+                        android:gravity="end"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvTripStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@drawable/round"
+                            android:backgroundTint="@color/blue_light"
+                            android:gravity="center_vertical"
+                            android:padding="8dp"
+                            android:text="Status : Started"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_size_14" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/dispatchTripDetail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/size_10"
+                            android:layout_marginRight="@dimen/size_10"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/size_45"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Delivery Person 1"
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                            <TextView
+                                android:id="@+id/tvDeliveryPersonOne"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text=""
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/size_10"
+                            android:layout_marginRight="@dimen/size_10"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/size_45"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Delivery Person 2"
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                            <TextView
+                                android:id="@+id/tvDeliveryPersonTwo"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text=""
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/size_10"
+                            android:layout_marginRight="@dimen/size_10"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/size_45"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Delivery Person 3"
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                            <TextView
+                                android:id="@+id/tvDeliveryPersonThree"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text=""
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/size_10"
+                            android:layout_marginRight="@dimen/size_10"
+                            android:visibility="gone"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/size_45"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Start Location"
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                            <TextView
+                                android:id="@+id/tvStartLocation"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/size_45"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/size_10"
+                            android:layout_marginRight="@dimen/size_10"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/size_45"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Start Time"
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                            <TextView
+                                android:id="@+id/tvStartTripTime"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/size_45"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/linearTripEndDetails"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+
+                            <LinearLayout
+                                android:id="@+id/dispatchEndTimeLayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:visibility="visible">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/size_10"
+                                    android:layout_marginRight="@dimen/size_10"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/size_45"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:text="End Location"
+                                        android:textColor="@color/grey"
+                                        android:textSize="@dimen/text_size_14" />
+
+
+                                    <TextView
+                                        android:id="@+id/tvDispatchEndLocation"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/size_45"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/text_size_14" />
+
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/size_10"
+                                    android:layout_marginRight="@dimen/size_10"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/size_45"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:text="End Time"
+                                        android:textColor="@color/grey"
+                                        android:textSize="@dimen/text_size_14" />
+
+
+                                    <TextView
+                                        android:id="@+id/tvEndTripTime"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/size_45"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/text_size_14" />
+
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/size_10"
+                                android:layout_marginRight="@dimen/size_10"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/size_45"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:text="Vehicle No."
+                                    android:textColor="@color/grey"
+                                    android:textSize="@dimen/text_size_14" />
+
+
+                                <TextView
+                                    android:id="@+id/tvVehicleNum"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/size_45"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/text_size_14" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/deliveryProofViewLayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="@dimen/dimen_8"
+                                android:orientation="vertical"
+                                android:visibility="gone">
+
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/size_45"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:text="Delivery Proof"
+                                    android:textColor="@color/grey"
+                                    android:textSize="@dimen/text_size_14"
+                                    android:textStyle="bold" />
+
+
+                                <HorizontalScrollView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/size_10"
+                                    android:layout_marginTop="@dimen/size_10">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="10dp"
+                                        android:gravity="center_vertical"
+                                        android:orientation="horizontal">
+
+
+                                        <androidx.recyclerview.widget.RecyclerView
+                                            android:id="@+id/dispatchDeliveryProofRecyclerView"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginBottom="8dp"
+                                            android:orientation="horizontal"
+                                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                            tools:itemCount="2"
+                                            tools:listitem="@layout/camera_image_list_adapter" />
+
+
+                                    </LinearLayout>
+
+
+                                </HorizontalScrollView>
+
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/uploadProofLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dispatchedDetailLayout">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+
+                        <LinearLayout
+                            android:id="@+id/clickNewImageLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:visibility="visible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="10dp"
+                                    android:text="Upload Delivery Proof"
+                                    android:textColor="@color/black"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:paddingStart="@dimen/size_10"
+                                android:paddingEnd="@dimen/size_10">
+
+                                <ImageView
+                                    android:id="@+id/ivAddNewImage"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="100dp"
+                                    android:src="@drawable/click_image_dot_icon" />
+
+
+                            </FrameLayout>
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/recyclerViewMoreImageLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/dimen_8"
+                            android:background="@drawable/rounded_border"
+                            android:orientation="vertical"
+                            android:visibility="gone">
+
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:visibility="visible">
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="@dimen/size_45"
+                                    android:layout_marginTop="8dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:layout_weight="40"
+                                    android:background="@drawable/heading_bg_shape"
+                                    android:gravity="center_vertical"
+                                    android:text="Delivery Proof  "
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/text_size_14" />
+
+
+                            </LinearLayout>
+
+
+                            <HorizontalScrollView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/size_10"
+                                android:layout_marginTop="@dimen/size_10">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+
+                                    <androidx.recyclerview.widget.RecyclerView
+                                        android:id="@+id/proofImageRecyclerView"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                        tools:listitem="@layout/camera_image_list_adapter" />
+
+
+                                    <ImageView
+                                        android:id="@+id/tvAddMoreImages"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="10dp"
+                                        android:layout_marginEnd="10dp"
+                                        android:src="@drawable/add_new_image" />
+
+                                </LinearLayout>
+
+
+                            </HorizontalScrollView>
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/surgeryDetailCardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_10"
+                android:visibility="gone"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/size_8"
+                app:cardElevation="@dimen/size_4"
+                app:cardMaxElevation="@dimen/size_4"
+                app:cardPreventCornerOverlap="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/uploadProofLayout">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:visibility="visible">
+
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/size_45"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="40"
+                            android:background="@drawable/heading_bg_shape"
+                            android:gravity="center_vertical"
+                            android:text="Surgery Details  "
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_14" />
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="80"
+                            android:gravity="end"
+                            android:orientation="vertical"
+                            android:paddingEnd="10dp">
+
+                            <ImageView
+                                android:id="@+id/surgeryDownArrow"
+                                android:layout_width="@dimen/text_size_14"
+                                android:layout_height="@dimen/text_size_14"
+                                android:layout_centerVertical="true"
+                                android:layout_margin="10dp"
+                                android:background="@drawable/down_arrow_icon"
+                                android:visibility="gone" />
+
+                            <ImageView
+                                android:id="@+id/surgeryUpArrow"
+                                android:layout_width="@dimen/text_size_14"
+                                android:layout_height="@dimen/text_size_14"
+                                android:layout_centerVertical="true"
+                                android:layout_margin="10dp"
+                                android:background="@drawable/arrow_up_icon"
+                                android:visibility="visible" />
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/surgeryDetailsLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/size_10"
+                            android:layout_marginRight="@dimen/size_10"
+                            android:gravity="end"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tvSurgeryStatus"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:background="@drawable/round"
+                                android:backgroundTint="@color/blue_light"
+                                android:gravity="center_vertical"
+                                android:padding="8dp"
+                                android:text="Status : Yet to Start"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14"
+                                android:visibility="visible" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/surgeryAllDetailsLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="visible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/size_10"
+                                android:layout_marginRight="@dimen/size_10">
+
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/rvSurgeryPersonListName"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    tools:itemCount="2"
+                                    tools:listitem="@layout/surgery_person_name_layout" />
+
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:id="@+id/surgeryTimeDetails"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/size_10"
+                                android:layout_marginRight="@dimen/size_10"
+                                android:orientation="vertical"
+                                android:visibility="visible">
+
+                                <LinearLayout
+                                    android:id="@+id/surgeryVehicleNoLayout"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/size_10"
+                                    android:layout_marginRight="@dimen/size_10"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal"
+                                    android:visibility="gone">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/size_45"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:text="Vehicle No."
+                                        android:textColor="@color/grey"
+                                        android:textSize="@dimen/text_size_14" />
+
+
+                                    <TextView
+                                        android:id="@+id/tvSurgeryVehicleNo"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:text=""
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/text_size_14" />
+
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="@dimen/size_10"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal"
+                                    android:visibility="visible">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/size_45"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:text="Start Time"
+                                        android:textColor="@color/grey"
+                                        android:textSize="@dimen/text_size_14" />
+
+
+                                    <TextView
+                                        android:id="@+id/tvSurgeryStartTime"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:text=""
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/text_size_14" />
+
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:id="@+id/endSurgeryTimeLayout"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="@dimen/size_10"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/size_45"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:text="End Time"
+                                        android:textColor="@color/grey"
+                                        android:textSize="@dimen/text_size_14" />
+
+
+                                    <TextView
+                                        android:id="@+id/tvSurgeryEndTime"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:text=""
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/text_size_14" />
+
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:id="@+id/surgeryDurationLayout"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="@dimen/size_10"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal"
+                                    android:visibility="visible">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/size_45"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:text="Duration"
+                                        android:textColor="@color/grey"
+                                        android:textSize="@dimen/text_size_14" />
+
+
+                                    <TextView
+                                        android:id="@+id/tvSurgeryDuration"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:text=""
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/text_size_14" />
+
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="@dimen/size_10"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/size_45"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:text="No. of CRS Required"
+                                        android:textColor="@color/grey"
+                                        android:textSize="@dimen/text_size_14" />
+
+
+                                    <TextView
+                                        android:id="@+id/tvCRSNo"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:text=""
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/text_size_14" />
+
+
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:id="@+id/surgeryProofViewLayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="@dimen/dimen_8"
+                                android:orientation="vertical"
+                                android:visibility="gone">
+
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/size_45"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:text="Delivery Proof"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/text_size_14"
+                                    android:textStyle="bold" />
+
+
+                                <HorizontalScrollView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/size_10"
+                                    android:layout_marginTop="@dimen/size_10">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="10dp"
+                                        android:gravity="center_vertical"
+                                        android:orientation="horizontal">
+
+
+                                        <androidx.recyclerview.widget.RecyclerView
+                                            android:id="@+id/rvSurgeryList"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginBottom="8dp"
+                                            android:orientation="horizontal"
+                                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                            tools:itemCount="2"
+                                            tools:listitem="@layout/camera_image_list_adapter" />
+
+
+                                    </LinearLayout>
+
+
+                                </HorizontalScrollView>
+
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+            <TextView
+                android:id="@+id/tvReturnStartClick"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_45"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:paddingStart="10dp"
+                android:text="Click on start button to start the Pick Up"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_14"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/surgeryDetailCardView" />
+
+
+            <TextView
+                android:id="@+id/tvReturnCountText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="00:00:01 "
+                android:textAlignment="textEnd"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_14"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvReturnStartClick" />
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/pickupDetailCardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_10"
+                android:visibility="gone"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/size_8"
+                app:cardElevation="@dimen/size_4"
+                app:cardMaxElevation="@dimen/size_4"
+                app:cardPreventCornerOverlap="true"
+                app:layout_constraintTop_toBottomOf="@id/tvReturnCountText">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:visibility="visible">
+
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/size_45"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="40"
+                            android:background="@drawable/heading_bg_shape"
+                            android:gravity="center_vertical"
+                            android:text="Pickup Details  "
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_14" />
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="80"
+                            android:gravity="end"
+                            android:orientation="vertical"
+                            android:paddingEnd="10dp">
+
+                            <ImageView
+                                android:id="@+id/pickupDownArrow"
+                                android:layout_width="@dimen/text_size_14"
+                                android:layout_height="@dimen/text_size_14"
+                                android:layout_centerVertical="true"
+                                android:layout_margin="10dp"
+                                android:background="@drawable/down_arrow_icon"
+                                android:visibility="gone" />
+
+                            <ImageView
+                                android:id="@+id/pickupUpArrow"
+                                android:layout_width="@dimen/text_size_14"
+                                android:layout_height="@dimen/text_size_14"
+                                android:layout_centerVertical="true"
+                                android:layout_margin="10dp"
+                                android:background="@drawable/arrow_up_icon"
+                                android:visibility="visible" />
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/pickUpDetailsLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:layout_marginLeft="@dimen/size_10"
+                            android:layout_marginRight="@dimen/size_10"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tvPickUpStatus"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:padding="8dp"
+                                android:background="@drawable/round"
+                                android:backgroundTint="@color/blue_light"
+                                android:gravity="center_vertical"
+                                android:text="Status : Started"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_14" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/pickUpStartTripDetail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="visible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/size_10"
+                                android:layout_marginRight="@dimen/size_10"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:text="Start Location"
+                                    android:textColor="@color/grey"
+                                    android:textSize="@dimen/text_size_14" />
+
+
+                                <TextView
+                                    android:id="@+id/tvPickUPStartLocation"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/text_size_14" />
+
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/size_10"
+                                android:layout_marginRight="@dimen/size_10"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/size_45"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:text="Start Time"
+                                    android:textColor="@color/grey"
+                                    android:textSize="@dimen/text_size_14" />
+
+
+                                <TextView
+                                    android:id="@+id/tvPickUpStartTripTime"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/size_45"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/text_size_14" />
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/pickUpAllDetail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="gone">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/size_10"
+                                android:layout_marginRight="@dimen/size_10"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/size_45"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:text="Delivery Person 1"
+                                    android:textColor="@color/grey"
+                                    android:textSize="@dimen/text_size_14" />
+
+
+                                <TextView
+                                    android:id="@+id/tvPickUpDeliveryPersonOne"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:text=""
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/text_size_14" />
+
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/size_10"
+                                android:layout_marginRight="@dimen/size_10"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/size_45"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:text="Delivery Person 2"
+                                    android:textColor="@color/grey"
+                                    android:textSize="@dimen/text_size_14" />
+
+
+                                <TextView
+                                    android:id="@+id/tvPickUpDeliveryPersonTwo"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:text=""
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/text_size_14" />
+
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/size_10"
+                                android:layout_marginRight="@dimen/size_10"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/size_45"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:text="Delivery Person 3"
+                                    android:textColor="@color/grey"
+                                    android:textSize="@dimen/text_size_14" />
+
+
+                                <TextView
+                                    android:id="@+id/tvPickUpDeliveryPersonThree"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:text=""
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/text_size_14" />
+
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/size_10"
+                                android:layout_marginRight="@dimen/size_10"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/size_45"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:text="Vehicle No."
+                                    android:textColor="@color/grey"
+                                    android:textSize="@dimen/text_size_14" />
+
+
+                                <TextView
+                                    android:id="@+id/tvVehicleNo"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:text=""
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/text_size_14" />
+
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/size_10"
+                                android:layout_marginRight="@dimen/size_10"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/size_45"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:text="Start Time"
+                                    android:textColor="@color/grey"
+                                    android:textSize="@dimen/text_size_14" />
+
+
+                                <TextView
+                                    android:id="@+id/tvPickUpStartTime"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:text=""
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/text_size_14" />
+
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:id="@+id/pickUpEndTimeLayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/size_10"
+                                android:layout_marginRight="@dimen/size_10"
+                                android:gravity="center_vertical"
+                                android:visibility="gone"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/size_45"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:text="End Time"
+                                    android:textColor="@color/grey"
+                                    android:textSize="@dimen/text_size_14" />
+
+
+                                <TextView
+                                    android:id="@+id/tvPickUpEndTime"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:text=""
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/text_size_14" />
+
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:id="@+id/pickUpViewLayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="@dimen/dimen_8"
+                                android:orientation="vertical"
+                                android:visibility="gone">
+
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/size_45"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:text="PickUp Proof"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/grey"
+                                    android:textSize="@dimen/text_size_14" />
+
+
+                                <HorizontalScrollView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/size_10"
+                                    android:layout_marginTop="@dimen/size_10">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center_vertical"
+                                        android:layout_marginBottom="10dp"
+                                        android:orientation="horizontal">
+
+
+                                        <androidx.recyclerview.widget.RecyclerView
+                                            android:id="@+id/pickUpProofRecyclerView"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginBottom="8dp"
+                                            android:orientation="horizontal"
+                                            tools:itemCount="2"
+                                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                            tools:listitem="@layout/camera_image_list_adapter" />
+
+
+                                        <ImageView
+                                            android:id="@+id/ivAddDeliveryImage"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="10dp"
+                                            android:layout_marginEnd="10dp"
+                                            android:visibility="gone"
+                                            android:src="@drawable/add_new_image" />
+
+                                    </LinearLayout>
+
+
+                                </HorizontalScrollView>
+
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+    <Button
+        android:id="@+id/btnTrip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_8"
+        android:background="@drawable/round"
+        android:text="Start Trip"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        />
+
+    <Button
+        android:id="@+id/btnENdTrip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_8"
+        android:background="@drawable/round"
+        android:text="End Trip"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        />
+
+    <Button
+        android:id="@+id/btnUploadProof"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_8"
+        android:background="@drawable/round"
+        android:text="Upload Proof"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        />
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_8"
+        android:background="@drawable/round"
+        android:text="Submit"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        />
+
+
+    <FrameLayout
+        android:id="@+id/loadingBackFrame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#3B505050"
+        android:clickable="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.github.loadingview.LoadingView
+            android:id="@+id/loadingView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

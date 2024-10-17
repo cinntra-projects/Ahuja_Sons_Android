@@ -103,6 +103,13 @@ class OperationManagerDetailActivity : AppCompatActivity() {
 
         }
 
+        if (globalDataWorkQueueList.is_return == true){
+            binding.allowIncompleteChipBtn.setText("Allow Incomplete Return")
+        }
+        else if (globalDataWorkQueueList.is_return == false){
+            binding.allowIncompleteChipBtn.setText("Allow Incomplete Dispatch")
+        }
+
         binding.allowIncompleteChipBtn.setOnClickListener {
             showOperationalAction(binding.allowIncompleteChipBtn)
         }

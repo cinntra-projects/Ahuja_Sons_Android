@@ -77,8 +77,14 @@ class WorkQueueAdapter(var AllitemsList: ArrayList<AllWorkQueueResponseModel.Dat
             }
 
         }else{
-            holder.binding.ivDeliveryCoordinator.setImageDrawable(context.resources.getDrawable(R.drawable.dispatched_icon))
             holder.binding.deliveriesLayoutView.visibility = View.GONE
+            if (AllitemsList[position].is_return == true) {
+                holder.binding.ivDeliveryCoordinator.setImageDrawable(context.resources.getDrawable(R.drawable.return_icon))
+            }else{
+                holder.binding.ivDeliveryCoordinator.setImageDrawable(context.resources.getDrawable(R.drawable.dispatched_icon))
+            }
+           /* holder.binding.ivDeliveryCoordinator.setImageDrawable(context.resources.getDrawable(R.drawable.dispatched_icon))
+            holder.binding.deliveriesLayoutView.visibility = View.GONE*/
         }
 
 
@@ -147,9 +153,18 @@ class WorkQueueAdapter(var AllitemsList: ArrayList<AllWorkQueueResponseModel.Dat
                         intent.putExtra("id", AllitemsList[position].id)
                         context.startActivity(intent)
                     }else{
-                        val intent = Intent(holder.itemView.context, OrderScreenForDeliveryPersonActivity::class.java)
-                        intent.putExtra("id", AllitemsList[position].id)
-                        context.startActivity(intent)
+                        if (AllitemsList[position].is_return == true){
+                            Log.e("adapter--", "onBindViewHolder: Return Delivery Person" )
+                            val intent = Intent(holder.itemView.context, ReturnDeliveryPersonActivity::class.java)
+                            intent.putExtra("id", AllitemsList[position].id)
+                            context.startActivity(intent)
+                        }else{
+                            Log.e("adapter--", "onBindViewHolder: Delivery Person" )
+                            val intent = Intent(holder.itemView.context, OrderScreenForDeliveryPersonActivity::class.java)
+                            intent.putExtra("id", AllitemsList[position].id)
+                            context.startActivity(intent)
+                        }
+
                     }
 
                 }

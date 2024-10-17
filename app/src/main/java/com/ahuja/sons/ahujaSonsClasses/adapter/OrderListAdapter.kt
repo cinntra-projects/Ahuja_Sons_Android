@@ -101,6 +101,16 @@ class OrderListAdapter(var AllitemsList: ArrayList<AllOrderListModel.Data>, var 
         }
 
 
+        holder.binding.deliveriesLayoutView.visibility = View.GONE
+        if (AllitemsList[position].Status == "Pickup Planned" || AllitemsList[position].Status == "Pickup done"
+            || AllitemsList[position].Status == "Arrived" || AllitemsList[position].Status == "Part Return"
+            || AllitemsList[position].Status == "Returned") {
+            holder.binding.ivDeliveryCoordinator.setImageDrawable(context.resources.getDrawable(R.drawable.return_icon))
+        }else{
+            holder.binding.ivDeliveryCoordinator.setImageDrawable(context.resources.getDrawable(R.drawable.dispatched_icon))
+        }
+
+
         val generator: ColorGenerator = ColorGenerator.MATERIAL
         val color1: Int = generator.randomColor
 

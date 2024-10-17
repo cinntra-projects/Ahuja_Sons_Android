@@ -148,9 +148,10 @@ class AhujaSonsMainActivity : AppCompatActivity() {
            /* for (order in GlobalClasses.deliveryIDsList) {
                 idArrayList.add(order.id.toInt())
             }*/
+            Log.e(TAG, "openDeliveryPersonDialog: "+GlobalClasses.deliveryIDsList.size )
+
             for (order in GlobalClasses.deliveryIDsList) {
                 val ID = order.id.toInt()
-                // Check if the OrderID is already present in the Set
                 if (!idArrayListID.contains(ID)) {
                     idArrayList.add(ID)
                     idArrayListID.add(ID)  // Add to the set after adding to the list
@@ -164,11 +165,32 @@ class AhujaSonsMainActivity : AppCompatActivity() {
             val orderIDSet = mutableSetOf<Int>()
 
             orderIDArrayList.clear()
-            /*for (order in GlobalClasses.deliveryIDsList) {
-                orderIDArrayList.add(order.OrderID.toInt())
-            }*/
 
-            for (order in GlobalClasses.deliveryIDsList) {
+            // Add unique order IDs from GlobalClasses.deliveryIDsList
+            if (GlobalClasses.deliveryIDsList.isNotEmpty()) {
+                for (order in GlobalClasses.deliveryIDsList) {
+                    val orderID = order.OrderID.toInt() // Convert OrderID to Int
+                    // Check if the OrderID is not in the Set
+                    if (!orderIDSet.contains(orderID)) {
+                        orderIDArrayList.add(orderID)  // Add to ArrayList
+                        orderIDSet.add(orderID)        // Add to Set
+                    }
+                }
+            }
+
+            // Add unique order IDs from GlobalClasses.cartListForDeliveryCoordinatorCheck
+            if (GlobalClasses.cartListForDeliveryCoordinatorCheck.isNotEmpty()) {
+                for (order in GlobalClasses.cartListForDeliveryCoordinatorCheck) {
+                    val orderID = order.value.orderId.toInt() // Convert orderId to Int
+                    // Check if the OrderID is not in the Set
+                    if (!orderIDSet.contains(orderID)) {
+                        orderIDArrayList.add(orderID)  // Add to ArrayList
+                        orderIDSet.add(orderID)        // Add to Set
+                    }
+                }
+            }
+
+          /*  for (order in GlobalClasses.deliveryIDsList) {
                 val orderID = order.OrderID.toInt()
                 // Check if the OrderID is already present in the Set
                 if (!orderIDSet.contains(orderID)) {
@@ -176,7 +198,7 @@ class AhujaSonsMainActivity : AppCompatActivity() {
                     orderIDSet.add(orderID)  // Add to the set after adding to the list
                 }
             }
-
+*/
             Log.e(TAG, "openDeliveryPersonDialog: "+orderIDSet )
             val orderSeparateID = orderIDArrayList.joinToString(separator = ",")
 
@@ -185,14 +207,11 @@ class AhujaSonsMainActivity : AppCompatActivity() {
             val orderIDList = ArrayList<String>()
             orderIDList.clear()
             for (order in GlobalClasses.cartListForDeliveryCoordinatorCheck) {
-                orderIDList.add(order.value.orderId)
+                orderIDList.add(order.value.id)
             }
 
             val orderCommaSeparatedIds = orderIDList.joinToString(separator = ",")
 
-         /*   val idStringList = commaSeparatedIds.split(",") as ArrayList
-
-            val idArray = idStringList.map { it.toInt() } as ArrayList*/
 
             val vehicleNumber = dialogBinding.edtVehicleNo.text.toString()
 
@@ -247,45 +266,46 @@ class AhujaSonsMainActivity : AppCompatActivity() {
 
         Log.e("payload", jsonObject1.toString())
 
-        val call: Call<AllWorkQueueResponseModel> = ApiClient().service.createAssign(jsonObject1)
-        call.enqueue(object : Callback<AllWorkQueueResponseModel?> {
-            override fun onResponse(call: Call<AllWorkQueueResponseModel?>, response: Response<AllWorkQueueResponseModel?>) {
-                if (response.body()!!.status == 200) {
 
-                    loadingback.visibility = View.GONE
-                    loadingView.stop()
+         val call: Call<AllWorkQueueResponseModel> = ApiClient().service.createAssign(jsonObject1)
+         call.enqueue(object : Callback<AllWorkQueueResponseModel?> {
+             override fun onResponse(call: Call<AllWorkQueueResponseModel?>, response: Response<AllWorkQueueResponseModel?>) {
+                 if (response.body()!!.status == 200) {
 
-                    Log.e("data", response.body()!!.data.toString())
-                    Global.successmessagetoast(this@AhujaSonsMainActivity, "Assign SuccessFully")
+                     loadingback.visibility = View.GONE
+                     loadingView.stop()
 
-                    GlobalClasses.deliveryIDsList.clear()
+                     Log.e("data", response.body()!!.data.toString())
+                     Global.successmessagetoast(this@AhujaSonsMainActivity, "Assign SuccessFully")
 
-                    dialog.dismiss()
+                     GlobalClasses.deliveryIDsList.clear()
+                     GlobalClasses.cartListForDeliveryCoordinatorCheck.clear()
 
-                    val fragment = supportFragmentManager.findFragmentById(R.id.nav_host_ahuja_sons)
-                        ?.childFragmentManager?.fragments?.find { it is WorkQueueFragment } as? OnDialogClickListener
+                     dialog.dismiss()
 
-                    fragment?.onButtonClick()
+                     val fragment = supportFragmentManager.findFragmentById(R.id.nav_host_ahuja_sons)
+                         ?.childFragmentManager?.fragments?.find { it is WorkQueueFragment } as? OnDialogClickListener
 
-                    binding.cardAssignButton.visibility = View.GONE
+                     fragment?.onButtonClick()
+
+                     binding.cardAssignButton.visibility = View.GONE
 
 
-                } else {
-                    loadingback.visibility = View.GONE
-                    loadingView.stop()
-                    Global.warningmessagetoast(this@AhujaSonsMainActivity, response.body()!!.message);
+                 } else {
+                     loadingback.visibility = View.GONE
+                     loadingView.stop()
+                     Global.warningmessagetoast(this@AhujaSonsMainActivity, response.body()!!.message);
 
-                }
-            }
+                 }
+             }
 
-            override fun onFailure(call: Call<AllWorkQueueResponseModel?>, t: Throwable) {
-                loadingback.visibility = View.GONE
-                loadingView.stop()
-                Log.e("AhujaMainActivity", "onFailure: "+t.message )
-                Toast.makeText(this@AhujaSonsMainActivity, t.message, Toast.LENGTH_SHORT).show()
-            }
-        })
-
+             override fun onFailure(call: Call<AllWorkQueueResponseModel?>, t: Throwable) {
+                 loadingback.visibility = View.GONE
+                 loadingView.stop()
+                 Log.e("AhujaMainActivity", "onFailure: "+t.message )
+                 Toast.makeText(this@AhujaSonsMainActivity, t.message, Toast.LENGTH_SHORT).show()
+             }
+         })
 
     }
 

@@ -69,9 +69,28 @@ class DeliveryItemsFragment(val SapOrderId : String, var DeliveryID : Int, var f
                             documentline_gl.clear()
                             documentline_gl.addAll(response.body()!!.data[0].delivery_item)
 
+                            //todo
+                            val resultList = ArrayList<AllItemsForOrderModel.DeliveryItem>()
+
+                            resultList.addAll(documentline_gl
+                                .groupBy { it.ItemDescription }
+                                .map { (description, itemsList) ->
+                                    val totalQuantity = itemsList.sumOf { it.Quantity.toInt() }
+                                    val uniqueMeasureQuantities = itemsList.map { it.U_Size }
+                                        .toSet()
+                                        .joinToString(", ")
+
+                                    AllItemsForOrderModel.DeliveryItem(
+                                        ItemDescription = description,
+                                        Quantity = totalQuantity.toDouble(), // Ensure this is a String
+                                        U_Size = uniqueMeasureQuantities
+                                    )
+                                }
+                            )
+
                             var linearLayoutManager : LinearLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
                             binding.deliveryRecyclerView.layoutManager = linearLayoutManager
-                            val adapter = DeliveryItemsListAdapter(documentline_gl)
+                            val adapter = DeliveryItemsListAdapter(resultList)
                             binding.deliveryRecyclerView.adapter = adapter
 
                         }else{

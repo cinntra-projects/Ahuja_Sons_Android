@@ -69,13 +69,32 @@ class AllItemListFragment(val SapOrderId : String) : Fragment() {
                                 documentline_gl.clear()
                                 documentline_gl.addAll(response.body()!!.data[0].all_item)
 
+                                val resultList = ArrayList<AllItemsForOrderModel.AllItem>()
+
+                                resultList.addAll(documentline_gl
+                                    .groupBy { it.ItemDescription }
+                                    .map { (description, itemsList) ->
+                                        val totalQuantity = itemsList.sumOf { it.Quantity.toInt() }
+                                        val uniqueMeasureQuantities = itemsList.map { it.U_Size }
+                                            .toSet()
+                                            .joinToString(", ")
+
+                                        AllItemsForOrderModel.AllItem(
+                                            ItemDescription = description,
+                                            Quantity = totalQuantity.toDouble(), // Ensure this is a String
+                                            U_Size = uniqueMeasureQuantities
+                                        )
+                                    }
+                                )
+
+
                                 try {
                                     var linearLayoutManager : LinearLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
                                     binding.allItemListRecyclerView.layoutManager = linearLayoutManager
                                 } catch (e: Exception) {
                                     e.printStackTrace()
                                 }
-                                val adapter = AllItemListAdapter(documentline_gl)
+                                val adapter = AllItemListAdapter(resultList)
                                 binding.allItemListRecyclerView.adapter = adapter
                                 adapter.notifyDataSetChanged()
                             }else{
