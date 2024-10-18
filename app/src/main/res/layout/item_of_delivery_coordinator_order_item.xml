@@ -31,11 +31,10 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tvItemQuantity"
+            android:id="@+id/tvSize"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-
             android:drawablePadding="4dp"
             android:fontFamily="@font/helvetica_regular"
             android:gravity="start"
@@ -54,13 +53,10 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:fontFamily="@font/helvetica_regular"
                 android:gravity="start"
-
                 android:text="UOM: "
                 android:textColor="@color/black"
                 android:textSize="14sp" />
@@ -69,10 +65,8 @@
                 android:id="@+id/tvUOM"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:fontFamily="@font/helvetica_regular"
                 android:gravity="start"
-
                 android:text="close"
                 android:textColor="@color/black"
                 android:textSize="14sp" />

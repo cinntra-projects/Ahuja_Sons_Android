@@ -29,9 +29,9 @@ class AllItemListAdapter (val AllitemsList: ArrayList<AllItemsForOrderModel.AllI
         holder.binding.apply {
             tvItemDescription.setText(obj.ItemDescription)
             tvQTy.setText("Qty : "+obj.Quantity)
-            tvUOM.visibility = View.GONE
-//            tvUOM.setText("UOM : "+obj.UomNo)
-            tvItemCode.setText("Item Code : "+obj.ItemCode)
+            tvUOM.setText("UOM : "+obj.MeasureUnit)
+            tvSize.visibility = View.GONE
+            tvSize.setText("Item Code : "+obj.ItemCode)
 
         }
 

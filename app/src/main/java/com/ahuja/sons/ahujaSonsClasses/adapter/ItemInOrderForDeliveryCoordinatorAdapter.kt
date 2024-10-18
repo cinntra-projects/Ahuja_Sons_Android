@@ -37,7 +37,7 @@ class ItemInOrderForDeliveryCoordinatorAdapter : ListAdapter<AllItemListResponse
         fun bind(order: AllItemListResponseModel.Data) {
             binding.ItemDescription.text = order.ItemDescription
 
-            binding.tvItemQuantity.text = "12,11,13"
+            binding.tvSize.text = "12,11,13"
             binding.tvUOM.text = "${order.MeasureUnit}"
             binding.tvQty.text = "${order.Quantity}"
         }

@@ -6,8 +6,10 @@ import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.widget.PopupMenu
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -104,10 +106,57 @@ class DeliveryCoordinatorActivity : AppCompatActivity() {
 
         hideAndShowViews()
 
+        binding.apply {
+            tvCreateOrder.setOnClickListener {
+                showPopupMenu(binding.tvCreateOrder)
+            }
+
+        }
+
 
 
     }
 
+    private fun showPopupMenu(view: View) {
+        // Create a PopupMenu
+        val popupMenu = PopupMenu(this, view)
+        // Inflate the popup menu using the menu resource file
+        popupMenu.getMenuInflater().inflate(R.menu.pop_menu_for_counter_role, popupMenu.getMenu())
+        var menuCreateDependency = popupMenu.menu.findItem(R.id.menuCreateDependency)
+        menuCreateDependency.isVisible = false
+
+        popupMenu.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
+            override fun onMenuItemClick(p0: MenuItem?): Boolean {
+                return when (p0?.getItemId()) {
+                    R.id.menuCreateErrand -> {
+                        Intent(this@DeliveryCoordinatorActivity, AddErrandActivity::class.java).also {
+                            it.putExtra("orderID", globalDataWorkQueueList.OrderRequest!!.id.toString())
+                            startActivity(it)
+                        }
+                        true
+                    }
+
+                    else -> false
+                }
+            }
+
+        })
+
+
+        // Show the popup menu
+        popupMenu.show()
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+
+        var jsonObject = JsonObject()
+        jsonObject.addProperty("id", orderID)
+        viewModel.callWorkQueueDetailApi(jsonObject)
+        bindWorkQueueDetail()
+
+    }
 
     //todo hide and show arrows--
     private fun hideAndShowViews() {
@@ -372,7 +421,7 @@ class DeliveryCoordinatorActivity : AppCompatActivity() {
         binding.loadingBackFrame.visibility = View.VISIBLE
         binding.loadingView.start()
         var jsonObject1 = JsonObject()
-        jsonObject1.addProperty("OrderID", globalDataWorkQueueList.id)
+        jsonObject1.addProperty("OrderID",  globalDataWorkQueueList.OrderRequest!!.id)
 
         val call: Call<TripDetailModel> = ApiClient().service.getTripDetailsApi(jsonObject1)
         call.enqueue(object : Callback<TripDetailModel?> {

@@ -376,10 +376,6 @@ class ReturnDeliveryPersonActivity : AppCompatActivity() {
     //todo set default data here---
     private fun setDefaultData(modelData: AllWorkQueueResponseModel.Data, fromWhere: String) {
 
-        isTripStarted = modelData.OrderRequest!!.isTripStarted
-        isTripEnd = modelData.OrderRequest!!.isTripEnd
-        isUploadProof = modelData.OrderRequest!!.isDepProofUp
-
         isPickUpTripStarted = modelData.OrderRequest!!.isReturnTripStarted
         isPickUpTripEnd = modelData.OrderRequest!!.isReturnTripEnd
         isPickUpUploadProof = modelData.OrderRequest!!.isReturnDepProofUp
@@ -748,7 +744,6 @@ class ReturnDeliveryPersonActivity : AppCompatActivity() {
         binding.loadingView.start()
         var jsonObject1 = JsonObject()
         jsonObject1.addProperty("OrderID", globalDataWorkQueueList.OrderRequest!!.id)
-        jsonObject1.addProperty("is_return", globalDataWorkQueueList.is_return)
 
         val call: Call<TripDetailModel> = ApiClient().service.getTripDetailsApi(jsonObject1)
         call.enqueue(object : Callback<TripDetailModel?> {
@@ -1175,10 +1170,7 @@ class ReturnDeliveryPersonActivity : AppCompatActivity() {
             bottomSheetDialog.dismiss()
         }
 
-        bindingBottomSheet.btnConfirm.setOnClickListener {
 
-            bottomSheetDialog.dismiss()
-        }
 
         bindingBottomSheet.linearAddImage.setOnClickListener {
 
@@ -1202,7 +1194,11 @@ class ReturnDeliveryPersonActivity : AppCompatActivity() {
 
 
         bindingBottomSheet.btnConfirm.setOnClickListener {
-            callUploadProofApi(bottomSheetDialog, bindingBottomSheet.loadingback, bindingBottomSheet.loadingView)
+            if (pdfurilist.size > 0) {
+                callUploadProofApi(bottomSheetDialog, bindingBottomSheet.loadingback, bindingBottomSheet.loadingView)
+            }else{
+                Global.errormessagetoast(this, "Upload Image!")
+            }
         }
 
     }

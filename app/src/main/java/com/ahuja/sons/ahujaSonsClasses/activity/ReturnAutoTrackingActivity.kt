@@ -48,7 +48,7 @@ import java.util.*
 
 class ReturnAutoTrackingActivity : AppCompatActivity() {
 
-    lateinit var binding : ActivityReturnAutoTrackingBinding
+    lateinit var binding: ActivityReturnAutoTrackingBinding
     lateinit var viewModel: MainViewModel
     lateinit var client: FusedLocationProviderClient
     var orderID = ""
@@ -58,12 +58,13 @@ class ReturnAutoTrackingActivity : AppCompatActivity() {
         val dispatchers: CoroutineDispatcher = Dispatchers.Main
         val mainRepos = DefaultMainRepositories() as MainRepos
         val fanxApi: Apis = ApiClient().service
-        val viewModelProviderfactory = MainViewModelProvider(application, mainRepos, dispatchers, fanxApi)
+        val viewModelProviderfactory =
+            MainViewModelProvider(application, mainRepos, dispatchers, fanxApi)
         viewModel = ViewModelProvider(this, viewModelProviderfactory)[MainViewModel::class.java]
 
     }
 
-    companion object{
+    companion object {
         private const val TAG = "ReturnAutoTrackingActiv"
         private const val REQUEST_ID_MULTIPLE_PERMISSIONS = 1001
     }
@@ -101,8 +102,7 @@ class ReturnAutoTrackingActivity : AppCompatActivity() {
                 intent.data = Uri.parse("package:$packageName")
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
-            }
-            else {
+            } else {
                 getMyCurrentLocation("StartTrip")
             }
         }
@@ -113,8 +113,7 @@ class ReturnAutoTrackingActivity : AppCompatActivity() {
                 intent.data = Uri.parse("package:$packageName")
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
-            }
-            else {
+            } else {
                 getMyCurrentLocation("EndTrip")
             }
         }
@@ -123,6 +122,7 @@ class ReturnAutoTrackingActivity : AppCompatActivity() {
 
 
     var globalDataWorkQueueList = AllWorkQueueResponseModel.Data()
+    var globalDataWorkValue = AllWorkQueueResponseModel()
 
     //todo work queue detail api --
     private fun bindWorkQueueDetail() {
@@ -145,8 +145,9 @@ class ReturnAutoTrackingActivity : AppCompatActivity() {
                         var modelData = response.data[0]
 
                         globalDataWorkQueueList = response.data[0]
+                        globalDataWorkValue = response
 
-
+                        callReturnTripDetailApi("")
 
                     }
 
@@ -163,11 +164,14 @@ class ReturnAutoTrackingActivity : AppCompatActivity() {
     @SuppressLint("MissingPermission")
     private fun getMyCurrentLocation(type: String) {
         // Initialize Location manager
-        val locationManager = this@ReturnAutoTrackingActivity.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        val locationManager =
+            this@ReturnAutoTrackingActivity.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
         // Check condition
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
-                LocationManager.NETWORK_PROVIDER)) {
+                LocationManager.NETWORK_PROVIDER
+            )
+        ) {
             // When location service is enabled
             // Get last location
             client.lastLocation?.addOnCompleteListener { task ->
@@ -181,8 +185,13 @@ class ReturnAutoTrackingActivity : AppCompatActivity() {
                     var addresses: List<Address>? = null
 
                     try {
-                        addresses = geocoder.getFromLocation(location.latitude, location.longitude, 1) // Here 1 represents max location result to return, as per documentation recommended 1 to 5
-                        val address = addresses?.get(0)?.getAddressLine(0) // If any additional address line present, check with max available address lines by getMaxAddressLineIndex()
+                        addresses = geocoder.getFromLocation(
+                            location.latitude,
+                            location.longitude,
+                            1
+                        ) // Here 1 represents max location result to return, as per documentation recommended 1 to 5
+                        val address = addresses?.get(0)
+                            ?.getAddressLine(0) // If any additional address line present, check with max available address lines by getMaxAddressLineIndex()
                         val city = addresses?.get(0)?.locality
                         val state = addresses?.get(0)?.adminArea
                         val country = addresses?.get(0)?.countryName
@@ -192,8 +201,7 @@ class ReturnAutoTrackingActivity : AppCompatActivity() {
                         Log.e(TAG, "onComplete: Call Api" + address)
                         if (type == "StartTrip") {
                             startTripApiCall(location?.latitude!!, location?.longitude!!, address)
-                        }
-                        else{
+                        } else {
                             reachedTripApiCall(location?.latitude!!, location?.longitude!!, address)
                         }
                     } catch (e: IOException) {
@@ -202,26 +210,33 @@ class ReturnAutoTrackingActivity : AppCompatActivity() {
                 } else {
                     Log.e(TAG, "onComplete: locationNull")
                     // When location result is null, initialize location request
-                    val locationRequest = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 10000L)
-                        .setMinUpdateIntervalMillis(1000L)
-                        .setMaxUpdates(1)
-                        .build()
+                    val locationRequest =
+                        LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 10000L)
+                            .setMinUpdateIntervalMillis(1000L)
+                            .setMaxUpdates(1)
+                            .build()
 
                     // Initialize location callback
                     val locationCallback = object : LocationCallback() {
                         override fun onLocationResult(locationResult: LocationResult) {
                             // Initialize location
                             val location1 = locationResult.lastLocation
-                            val geocoder = Geocoder(this@ReturnAutoTrackingActivity, Locale.getDefault())
+                            val geocoder =
+                                Geocoder(this@ReturnAutoTrackingActivity, Locale.getDefault())
                             var addresses: List<Address>? = null
 
                             try {
-                                addresses = geocoder.getFromLocation(location1!!.latitude, location1.longitude, 1) // Here 1 represent max location result to return, as per documentation recommended 1 to 5
+                                addresses = geocoder.getFromLocation(
+                                    location1!!.latitude,
+                                    location1.longitude,
+                                    1
+                                ) // Here 1 represent max location result to return, as per documentation recommended 1 to 5
                             } catch (e: IOException) {
                                 e.printStackTrace()
                             }
 
-                            val address = addresses?.get(0)?.getAddressLine(0) // If any additional address line present, check with max available address lines by getMaxAddressLineIndex()
+                            val address = addresses?.get(0)
+                                ?.getAddressLine(0) // If any additional address line present, check with max available address lines by getMaxAddressLineIndex()
                             val city = addresses?.get(0)?.locality
                             val state = addresses?.get(0)?.adminArea
                             val country = addresses?.get(0)?.countryName
@@ -230,16 +245,28 @@ class ReturnAutoTrackingActivity : AppCompatActivity() {
                             Log.e(TAG, "onComplete: Call Api123" + address)
 
                             if (type == "StartTrip") {
-                                startTripApiCall(location?.latitude!!, location?.longitude!!, address)
-                            }else{
-                                reachedTripApiCall(location?.latitude!!, location?.longitude!!, address)
+                                startTripApiCall(
+                                    location?.latitude!!,
+                                    location?.longitude!!,
+                                    address
+                                )
+                            } else {
+                                reachedTripApiCall(
+                                    location?.latitude!!,
+                                    location?.longitude!!,
+                                    address
+                                )
                             }
 
                         }
                     }
 
                     // Request location updates
-                    client.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper())
+                    client.requestLocationUpdates(
+                        locationRequest,
+                        locationCallback,
+                        Looper.myLooper()
+                    )
                 }
             }
         } else {
@@ -257,19 +284,22 @@ class ReturnAutoTrackingActivity : AppCompatActivity() {
         binding.loadingView.start()
 
         var jsonObject1 = JsonObject()
-        jsonObject1.addProperty("WorkQueueId",globalDataWorkQueueList.id)
-        jsonObject1.addProperty("DeliveryAssigned",globalDataWorkQueueList.DeliveryAssigned)
-        jsonObject1.addProperty("DeliveryNote","")
-        jsonObject1.addProperty("OrderID",globalDataWorkQueueList.OrderRequest?.id)
-        jsonObject1.addProperty("StartAt", Global.getTodayDateDashFormatReverse() + " "+ Global.getfullformatCurrentTime())
-        jsonObject1.addProperty("StartLocation",address)//address
+        jsonObject1.addProperty("WorkQueueId", globalDataWorkQueueList.id)
+        jsonObject1.addProperty("DeliveryAssigned", globalDataWorkQueueList.DeliveryAssigned)
+        jsonObject1.addProperty("DeliveryNote", "")
+        jsonObject1.addProperty("OrderID", globalDataWorkQueueList.OrderRequest?.id)
+        jsonObject1.addProperty("StartAt", Global.getTodayDateDashFormatReverse() + " " + Global.getfullformatCurrentTime())
+        jsonObject1.addProperty("StartLocation", address)//address
         jsonObject1.addProperty("DepositedBy", Prefs.getString(Global.Employee_Code, ""))
         jsonObject1.addProperty("is_return", globalDataWorkQueueList.is_return)
         jsonObject1.addProperty("is_return_to_office", globalDataWorkQueueList.is_return_to_office)
 
         val call: Call<RouteListModel> = ApiClient().service.startTripForDeliveryPerson(jsonObject1)
         call.enqueue(object : Callback<RouteListModel?> {
-            override fun onResponse(call: Call<RouteListModel?>, response: Response<RouteListModel?>) {
+            override fun onResponse(
+                call: Call<RouteListModel?>,
+                response: Response<RouteListModel?>
+            ) {
                 if (response.body()!!.status == 200) {
                     binding.loadingBackFrame.visibility = View.GONE
                     binding.loadingView.stop()
@@ -284,12 +314,15 @@ class ReturnAutoTrackingActivity : AppCompatActivity() {
 
                     running = true
 
-                    callTripDetailsApi("StartTrip")
+                    callReturnTripDetailApi("StartTrip")
                 } else {
 
                     binding.loadingBackFrame.visibility = View.GONE
                     binding.loadingView.stop()
-                    Global.warningmessagetoast(this@ReturnAutoTrackingActivity, response.body()!!.errors);
+                    Global.warningmessagetoast(
+                        this@ReturnAutoTrackingActivity,
+                        response.body()!!.errors
+                    );
 
                 }
             }
@@ -297,7 +330,7 @@ class ReturnAutoTrackingActivity : AppCompatActivity() {
             override fun onFailure(call: Call<RouteListModel?>, t: Throwable) {
                 binding.loadingBackFrame.visibility = View.GONE
                 binding.loadingView.stop()
-                Log.e(TAG, "onFailure: "+t.message )
+                Log.e(TAG, "onFailure: " + t.message)
             }
         })
 
@@ -310,21 +343,24 @@ class ReturnAutoTrackingActivity : AppCompatActivity() {
         binding.loadingView.start()
 
         var jsonObject1 = JsonObject()
-        jsonObject1.addProperty("id",globalDataWorkQueueList.id)
+        jsonObject1.addProperty("id", globalDataWorkQueueList.id)
         jsonObject1.addProperty("CreatedBy", Prefs.getString(Global.Employee_Code, ""))
         jsonObject1.addProperty("is_return", globalDataWorkQueueList.is_return)
 
 
         val call: Call<RouteListModel> = ApiClient().service.reachedOffice(jsonObject1)
         call.enqueue(object : Callback<RouteListModel?> {
-            override fun onResponse(call: Call<RouteListModel?>, response: Response<RouteListModel?>) {
+            override fun onResponse(
+                call: Call<RouteListModel?>,
+                response: Response<RouteListModel?>
+            ) {
                 if (response.body()!!.status == 200) {
                     binding.loadingBackFrame.visibility = View.GONE
                     binding.loadingView.stop()
 
                     running = false
 
-                    callTripDetailsApi("EndTrip")
+                    callReturnTripDetailApi("EndTrip")
 
 
                     Log.e("data", response.body()!!.data.toString())
@@ -335,12 +371,14 @@ class ReturnAutoTrackingActivity : AppCompatActivity() {
                     finish()
 
 
-
                 } else {
 
                     binding.loadingBackFrame.visibility = View.GONE
                     binding.loadingView.stop()
-                    Global.warningmessagetoast(this@ReturnAutoTrackingActivity, response.body()!!.errors);
+                    Global.warningmessagetoast(
+                        this@ReturnAutoTrackingActivity,
+                        response.body()!!.errors
+                    );
 
                 }
             }
@@ -348,194 +386,212 @@ class ReturnAutoTrackingActivity : AppCompatActivity() {
             override fun onFailure(call: Call<RouteListModel?>, t: Throwable) {
                 binding.loadingBackFrame.visibility = View.GONE
                 binding.loadingView.stop()
-                Log.e(TAG, "onFailure: "+t.message )
+                Log.e(TAG, "onFailure: " + t.message)
             }
         })
 
 
-}
+    }
 
 
-//todo call trip detail--
-private fun callTripDetailsApi(flag: String) {
-binding.loadingBackFrame.visibility = View.VISIBLE
-binding.loadingView.start()
-var jsonObject1 = JsonObject()
-jsonObject1.addProperty("OrderID", globalDataWorkQueueList.OrderRequest!!.id)
-jsonObject1.addProperty("is_return", globalDataWorkQueueList.is_return)
+    //todo call trip detail--
+    private fun callReturnTripDetailApi(flag: String) {
+        binding.loadingBackFrame.visibility = View.VISIBLE
+        binding.loadingView.start()
+        var jsonObject1 = JsonObject()
+        jsonObject1.addProperty("WorkQueueId", globalDataWorkQueueList.id)
+        jsonObject1.addProperty("OrderID", globalDataWorkQueueList.OrderRequest!!.id)
 
-val call: Call<TripDetailModel> = ApiClient().service.getTripDetailsApi(jsonObject1)
-call.enqueue(object : Callback<TripDetailModel?> {
-  override fun onResponse(call: Call<TripDetailModel?>, response: Response<TripDetailModel?>) {
-      if (response.body()!!.status == 200) {
-          binding.loadingBackFrame.visibility = View.GONE
-          binding.loadingView.stop()
-          Log.e("data", response.body()!!.data.toString())
+        val call: Call<TripDetailModel> = ApiClient().service.getReturnOrderTripApi(jsonObject1)
+        call.enqueue(object : Callback<TripDetailModel?> {
+            override fun onResponse(
+                call: Call<TripDetailModel?>,
+                response: Response<TripDetailModel?>
+            ) {
+                if (response.body()!!.status == 200) {
+                    binding.loadingBackFrame.visibility = View.GONE
+                    binding.loadingView.stop()
+                    Log.e("data", response.body()!!.data.toString())
 
-          var listData = response.body()!!.data
+                    var listData = response.body()!!.data
 
-          if (listData.size > 0){
+                    if (listData.size > 0) {
 
-              var data = listData[0]
-
-
-              if (data.StartAt.isNotEmpty()){
-
-                  val dateStr = data.StartAt
-                  val secondsTimeer = Global.secondsBetween(dateStr)
-                  println("Seconds between $dateStr and now: $secondsTimeer")
-
-                  try {
-                      if (data.EndAt.toString().isBlank() && data.StartAt.toString().isNotBlank()) { //2024_09_24 11:20:00
-                          if (data.EndAt.toString() != "foo" && data.StartAt.toString() != "foo") {
-                              running = true
-                              seconds = secondsTimeer.toLong()
-                          }
-                          Log.e("sec", seconds.toString())
-                      } else if (data.EndAt.toString().isNotBlank() && data.StartAt.toString().isBlank()) {
-                          if (data.EndAt.toString() != "foo" && data.StartAt.toString() != "foo") {
-                              seconds = secondsTimeer.toLong()
-                              Log.e("sec", seconds.toString())
-                          }
-                      }
-                  } catch (e: NumberFormatException) {
-                      e.printStackTrace()
-                  }
+                        var data = listData[0]
 
 
-                  binding.apply {
+                        if (data.StartAt.isNotEmpty()) {
 
-                      if (data.StartAt.isNotEmpty() && data.EndAt.isEmpty()){
-                          tvStartLocation.setText(data.StartLocation)
-                          tvStartTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data.StartAt))
+                            val dateStr = data.StartAt
+                            val secondsTimeer = Global.secondsBetween(dateStr)
+                            println("Seconds between $dateStr and now: $secondsTimeer")
 
-                      }
-
-                      if (data.StartAt.isNotEmpty() && data.EndAt.isNotEmpty()){
-
-                      }
-
-
-                  }
-
-                  runTimer()
-
-              }
-          }
-
-      } else {
-          binding.loadingBackFrame.visibility = View.GONE
-          binding.loadingView.stop()
-          Global.warningmessagetoast(this@ReturnAutoTrackingActivity, response.body()!!.message);
-
-      }
-  }
-
-  override fun onFailure(call: Call<TripDetailModel?>, t: Throwable) {
-      binding.loadingBackFrame.visibility = View.GONE
-      binding.loadingView.stop()
-      Log.e(TAG, "onFailure: "+t.message )
-      Toast.makeText(this@ReturnAutoTrackingActivity, t.message, Toast.LENGTH_SHORT).show()
-  }
-})
-}
+                            try {
+                                if (data.EndAt.toString().isBlank() && data.StartAt.toString().isNotBlank()) { //2024_09_24 11:20:00
+                                    if (data.EndAt.toString() != "foo" && data.StartAt.toString() != "foo") {
+                                        running = true
+                                        seconds = secondsTimeer.toLong()
+                                    }
+                                    Log.e("sec", seconds.toString())
+                                } else if (data.EndAt.toString().isNotBlank() && data.StartAt.toString().isBlank()) {
+                                    if (data.EndAt.toString() != "foo" && data.StartAt.toString() != "foo") {
+                                        seconds = secondsTimeer.toLong()
+                                        Log.e("sec", seconds.toString())
+                                    }
+                                }
+                            } catch (e: NumberFormatException) {
+                                e.printStackTrace()
+                            }
 
 
-private fun checkAndRequestPermissions(): Boolean {
-val camera = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-val write =
-  ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-val read =
-  ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                            binding.apply {
 
-val listPermissionsNeeded = mutableListOf<String>()
+                                if (data.StartAt.isNotEmpty() && data.EndAt.isEmpty()) {
+                                    tvStartLocation.setText(data.StartLocation)
+                                    tvStartTime.setText(Global.convert_yy_MM_dd_HH_mm_ss_into_dd_MM_yy_HH_mm_ss(data.StartAt))
 
-if (write != PackageManager.PERMISSION_GRANTED) {
-  listPermissionsNeeded.add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-}
-if (camera != PackageManager.PERMISSION_GRANTED) {
-  listPermissionsNeeded.add(Manifest.permission.CAMERA)
-}
-if (read != PackageManager.PERMISSION_GRANTED) {
-  listPermissionsNeeded.add(Manifest.permission.READ_EXTERNAL_STORAGE)
-}
+                                    binding.apply {
+                                        tvDuration.visibility = View.VISIBLE
+                                        startLocationLayout.visibility = View.VISIBLE
+                                        startTimeLayout.visibility = View.VISIBLE
+                                        btnStartTrip.visibility = View.GONE
+                                        btnReachedOffice.visibility = View.VISIBLE
+                                    }
 
-return if (listPermissionsNeeded.isNotEmpty()) {
-  ActivityCompat.requestPermissions(this, listPermissionsNeeded.toTypedArray(), REQUEST_ID_MULTIPLE_PERMISSIONS)
-  false
-} else {
-  true
-}
-}
+                                }
+
+                                if (data.StartAt.isNotEmpty() && data.EndAt.isNotEmpty()) {
+
+                                }
 
 
-private var isRunning = false
-private var elapsedTime = 0L
-private val handler = Handler(Looper.getMainLooper())
+                            }
+
+                            runTimer()
+
+                        }
+                    }
+
+                } else {
+                    binding.loadingBackFrame.visibility = View.GONE
+                    binding.loadingView.stop()
+                    Global.warningmessagetoast(
+                        this@ReturnAutoTrackingActivity,
+                        response.body()!!.message
+                    );
+
+                }
+            }
+
+            override fun onFailure(call: Call<TripDetailModel?>, t: Throwable) {
+                binding.loadingBackFrame.visibility = View.GONE
+                binding.loadingView.stop()
+                Log.e(TAG, "onFailure: " + t.message)
+                Toast.makeText(this@ReturnAutoTrackingActivity, t.message, Toast.LENGTH_SHORT)
+                    .show()
+            }
+        })
+    }
 
 
-private val timerRunnable = object : Runnable {
-override fun run() {
-  if (isRunning) {
-      elapsedTime += 1000
-      val hours = (elapsedTime / (1000 * 60 * 60)).toInt()
-      val minutes = ((elapsedTime / (1000 * 60)) % 60).toInt()
-      val seconds = ((elapsedTime / 1000) % 60).toInt()
-      binding.tvDuration.text = String.format("%02d:%02d:%02d", hours, minutes, seconds)
-      handler.postDelayed(this, 1000)
-  }
-}
-}
+    private fun checkAndRequestPermissions(): Boolean {
+        val camera = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+        val write =
+            ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        val read =
+            ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
 
-private var seconds: Long = 0
+        val listPermissionsNeeded = mutableListOf<String>()
 
-// Is the stopwatch running?
-private var running = false
+        if (write != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        }
+        if (camera != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.CAMERA)
+        }
+        if (read != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.READ_EXTERNAL_STORAGE)
+        }
 
-private fun runTimer() {
+        return if (listPermissionsNeeded.isNotEmpty()) {
+            ActivityCompat.requestPermissions(
+                this,
+                listPermissionsNeeded.toTypedArray(),
+                REQUEST_ID_MULTIPLE_PERMISSIONS
+            )
+            false
+        } else {
+            true
+        }
+    }
+
+
+    private var isRunning = false
+    private var elapsedTime = 0L
+    private val handler = Handler(Looper.getMainLooper())
+
+
+    private val timerRunnable = object : Runnable {
+        override fun run() {
+            if (isRunning) {
+                elapsedTime += 1000
+                val hours = (elapsedTime / (1000 * 60 * 60)).toInt()
+                val minutes = ((elapsedTime / (1000 * 60)) % 60).toInt()
+                val seconds = ((elapsedTime / 1000) % 60).toInt()
+                binding.tvDuration.text = String.format("%02d:%02d:%02d", hours, minutes, seconds)
+                handler.postDelayed(this, 1000)
+            }
+        }
+    }
+
+    private var seconds: Long = 0
+
+    // Is the stopwatch running?
+    private var running = false
+
+    private fun runTimer() {
 
 // Get the text view.
 
 // Creates a new Handler
-val handler = Handler()
+        val handler = Handler()
 
-handler.post(object : Runnable {
-  override fun run() {
-      val hours: Long = seconds / 3600
-      val minutes: Long = seconds % 3600 / 60
-      val secs: Long = seconds % 60
+        handler.post(object : Runnable {
+            override fun run() {
+                val hours: Long = seconds / 3600
+                val minutes: Long = seconds % 3600 / 60
+                val secs: Long = seconds % 60
 
-      // Format the seconds into hours, minutes,
-      // and seconds.
-      val time: String = java.lang.String
-          .format(
-              Locale.getDefault(),
-              "%d:%02d:%02d", hours,
-              minutes, secs
-          )
+                // Format the seconds into hours, minutes,
+                // and seconds.
+                val time: String = java.lang.String
+                    .format(
+                        Locale.getDefault(),
+                        "%d:%02d:%02d", hours,
+                        minutes, secs
+                    )
 
-      // Set the text view text.
-      binding.tvDuration.text = time
+                // Set the text view text.
+                binding.tvDuration.text = time
 
-      // If running is true, increment the
-      // seconds variable.
-      if (running) {
-          seconds++
-      }
+                // If running is true, increment the
+                // seconds variable.
+                if (running) {
+                    seconds++
+                }
 
-      // Post the code again
-      // with a delay of 1 second.
-      handler.postDelayed(this, 1000)
-  }
-})
-}
+                // Post the code again
+                // with a delay of 1 second.
+                handler.postDelayed(this, 1000)
+            }
+        })
+    }
 
 
-override fun onDestroy() {
-super.onDestroy()
-handler.removeCallbacks(timerRunnable)
-}
-
+    override fun onDestroy() {
+        super.onDestroy()
+        handler.removeCallbacks(timerRunnable)
+    }
 
 
 }

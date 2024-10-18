@@ -179,6 +179,7 @@
                     </LinearLayout>
 
                 </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/size_2"
@@ -192,7 +193,6 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
                         android:layout_alignParentTop="true"
                         android:layout_alignParentBottom="true"
                         android:layout_marginLeft="@dimen/size_15"
@@ -203,7 +203,6 @@
                         android:text="Status :"
                         android:textColor="@color/grey"
                         android:textSize="@dimen/text_size_16"
-
                         android:visibility="gone" />
 
                     <LinearLayout

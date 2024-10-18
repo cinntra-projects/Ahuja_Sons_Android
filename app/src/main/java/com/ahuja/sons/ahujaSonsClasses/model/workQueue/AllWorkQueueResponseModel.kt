@@ -17,6 +17,7 @@ data class AllWorkQueueResponseModel(
         val CompletedBy: String = "",
         val is_return: Boolean = false,
         val is_return_to_office: Boolean = false,
+        var is_errands : Boolean = false,
         val CreateDate: String = "",
         val CreateTime: String = "",
         val DeliveryId: String = "",

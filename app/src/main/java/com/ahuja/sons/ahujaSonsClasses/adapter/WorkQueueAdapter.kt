@@ -108,7 +108,15 @@ class WorkQueueAdapter(var AllitemsList: ArrayList<AllWorkQueueResponseModel.Dat
                 holder.binding.tvOrderDoctorName.text = OrderRequest!!.Doctor[0].DoctorFirstName + " "+OrderRequest!!.Doctor[0].DoctorLastName
             }
             holder.binding.tvSurgeryDateTime.text = "Surgery Date:${Global.convert_yyyy_mm_dd_to_dd_mm_yyyy(OrderRequest?.SurgeryDate)}\n Surgery Time: ${OrderRequest?.SurgeryTime}"
-            holder.binding.tvStatusOrder.text = OrderRequest?.Status
+
+            if (is_errands == true){
+                if(Prefs.getString(Global.Employee_role, "").equals("Delivery Person")){
+                    holder.binding.tvStatusOrder.text = "Assigned"
+                }
+            }else{
+                holder.binding.tvStatusOrder.text = OrderRequest?.Status
+            }
+//            holder.binding.tvStatusOrder.text = OrderRequest?.Status
             holder.binding.tvOrderInfo.text = OrderRequest?.OrderInformation
             holder.binding.tvLocationName.text = "Ahuja Sons Enterprises"
         }
@@ -212,6 +220,19 @@ class WorkQueueAdapter(var AllitemsList: ArrayList<AllWorkQueueResponseModel.Dat
                         intent.putExtra("inspectionDeliveryPos", position)
                         intent.putExtra("OrderID", AllitemsList[position].OrderRequest!!.id.toString())
                         intent.putExtra("is_return", AllitemsList[position].is_return)
+                        intent.putExtra("flagForItemViewList", "FromOrderSelect")
+                        context.startActivity(intent)
+                    }
+                }
+                else if (AllitemsList[position].is_return == false){
+                    if (Prefs.getString(Global.Employee_role, "").equals("Inspection")){
+                        val intent = Intent(holder.itemView.context, InspectDeliveryOrderDetailActivity::class.java)
+                        intent.putExtra("deliveryID", AllitemsList[position].DeliveryId)
+                        intent.putExtra("DeliveryStatus", AllitemsList[position].DeliveryStatus)
+                        intent.putExtra("inspectionDeliveryPos", position)
+                        intent.putExtra("OrderID", AllitemsList[position].OrderRequest!!.id.toString())
+                        intent.putExtra("is_return", AllitemsList[position].is_return)
+                        intent.putExtra("flagForItemViewList", "FromOrderSelect")
                         context.startActivity(intent)
                     }
                 }

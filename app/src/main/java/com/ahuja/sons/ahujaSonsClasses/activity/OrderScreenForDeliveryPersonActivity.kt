@@ -1349,10 +1349,6 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
             bottomSheetDialog.dismiss()
         }
 
-        bindingBottomSheet.btnConfirm.setOnClickListener {
-
-            bottomSheetDialog.dismiss()
-        }
 
         bindingBottomSheet.linearAddImage.setOnClickListener {
 
@@ -1376,7 +1372,11 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
 
 
         bindingBottomSheet.btnConfirm.setOnClickListener {
-            callUploadProofApi(bottomSheetDialog, bindingBottomSheet.loadingback, bindingBottomSheet.loadingView)
+            if (pdfurilist.size > 0) {
+                callUploadProofApi(bottomSheetDialog, bindingBottomSheet.loadingback, bindingBottomSheet.loadingView)
+            }else{
+                Global.errormessagetoast(this, "Upload Image!")
+            }
         }
 
     }

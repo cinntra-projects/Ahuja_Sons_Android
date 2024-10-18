@@ -78,7 +78,7 @@ class PendingItemsFragment(val SapOrderID : String) : Fragment() {
 
                                         AllItemsForOrderModel.PendingItem(
                                             ItemDescription = description,
-                                            Quantity = totalQuantity.toDouble(), // Ensure this is a String
+                                            Quantity = totalQuantity, // Ensure this is a String
                                             U_Size = uniqueMeasureQuantities
                                         )
                                     }

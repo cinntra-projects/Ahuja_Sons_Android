@@ -102,6 +102,7 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
 
     var orderID = ""
     var isReturn = false
+    var FromWhereFlag = ""
 
     private fun setUpViewModel() {
         val dispatchers: CoroutineDispatcher = Dispatchers.Main
@@ -145,10 +146,19 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
         DeliveryStatus = intent.getStringExtra("DeliveryStatus").toString()
         isReturn = intent.getBooleanExtra("is_return", false)
         orderID = intent.getStringExtra("OrderID").toString()
+        FromWhereFlag = intent.getStringExtra("flagForItemViewList").toString()
+
+
+        if (isReturn == false){
+            if (FromWhereFlag == "FromOrderSelect"){
+                binding.chipCardViewBtton.visibility = View.GONE
+            }
+        }else{
+            binding.chipCardViewBtton.visibility = View.VISIBLE
+        }
 
         binding.loadingBackFrame.visibility = View.GONE
         binding.loadingView.stop()
-
 
         var jsonObject = JsonObject()
         jsonObject.addProperty("delivery_id", deliveryID)
@@ -333,6 +343,7 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
                     intent.putExtra("SapOrderId", modelData.OrderRequest!!.SapOrderId)
                     intent.putExtra("deliveryID", deliveryID)
                     intent.putExtra("flag", "Inspection")
+                    intent.putExtra("flagForItemViewList", FromWhereFlag)
                     startActivity(intent)
                 }
 
@@ -605,7 +616,7 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
         binding.loadingBackFrame.visibility = View.VISIBLE
         binding.loadingView.start()
         var jsonObject1 = JsonObject()
-        jsonObject1.addProperty("OrderID", globalDataWorkQueueList.id)
+        jsonObject1.addProperty("OrderID",  globalDataWorkQueueList.OrderRequest!!.id)
 
         val call: Call<TripDetailModel> = ApiClient().service.getTripDetailsApi(jsonObject1)
         call.enqueue(object : Callback<TripDetailModel?> {
@@ -684,7 +695,7 @@ class InspectDeliveryOrderDetailActivity : AppCompatActivity() {
         binding.loadingBackFrame.visibility = View.VISIBLE
         binding.loadingView.start()
         var jsonObject1 = JsonObject()
-        jsonObject1.addProperty("OrderID", globalDataWorkQueueList.id)
+        jsonObject1.addProperty("OrderID",  globalDataWorkQueueList.OrderRequest!!.id)
 
         val call: Call<TripDetailModel> = ApiClient().service.getPickUpTripDetailsApi(jsonObject1)
         call.enqueue(object : Callback<TripDetailModel?> {

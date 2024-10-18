@@ -35,7 +35,7 @@ class DeliveryItemsFragment(val SapOrderId : String, var DeliveryID : Int, var f
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (flag.equals("Inspection")){
+        if (flag.equals("FromDeliveryIdSelect")){
             callAllItemListApi()
         }else {
             callDeliveryListApi()
@@ -82,7 +82,7 @@ class DeliveryItemsFragment(val SapOrderId : String, var DeliveryID : Int, var f
 
                                     AllItemsForOrderModel.DeliveryItem(
                                         ItemDescription = description,
-                                        Quantity = totalQuantity.toDouble(), // Ensure this is a String
+                                        Quantity = totalQuantity, // Ensure this is a String
                                         U_Size = uniqueMeasureQuantities
                                     )
                                 }

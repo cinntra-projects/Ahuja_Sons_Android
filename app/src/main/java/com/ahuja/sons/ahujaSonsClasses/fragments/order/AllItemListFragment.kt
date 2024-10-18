@@ -81,7 +81,7 @@ class AllItemListFragment(val SapOrderId : String) : Fragment() {
 
                                         AllItemsForOrderModel.AllItem(
                                             ItemDescription = description,
-                                            Quantity = totalQuantity.toDouble(), // Ensure this is a String
+                                            Quantity = totalQuantity, // Ensure this is a String
                                             U_Size = uniqueMeasureQuantities
                                         )
                                     }

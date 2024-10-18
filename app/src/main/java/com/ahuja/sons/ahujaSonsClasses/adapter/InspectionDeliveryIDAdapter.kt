@@ -37,6 +37,7 @@ class InspectionDeliveryIDAdapter (private val itemsList: ArrayList<AllWorkQueue
                     intent.putExtra("deliveryID", itemsList[position].id)
                     intent.putExtra("DeliveryStatus", itemsList[position].DeliveryStatus)
                     intent.putExtra("inspectionDeliveryPos", position)
+                    intent.putExtra("flagForItemViewList", "FromDeliveryIdSelect")
                     context.startActivity(intent)
                 }
 

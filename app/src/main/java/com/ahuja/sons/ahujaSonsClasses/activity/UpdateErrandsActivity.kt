@@ -6,16 +6,26 @@ import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import com.ahuja.sons.R
 import com.ahuja.sons.ahujaSonsClasses.adapter.autoCompleteAdapter.NatureErrandsAdapter
 import com.ahuja.sons.ahujaSonsClasses.model.AllErrandsListModel
 import com.ahuja.sons.ahujaSonsClasses.model.orderModel.AllItemListResponseModel
 import com.ahuja.sons.ahujaSonsClasses.model.orderModel.NatureErrandsResponseModel
+import com.ahuja.sons.apihelper.Event
 import com.ahuja.sons.apiservice.ApiClient
+import com.ahuja.sons.apiservice.Apis
 import com.ahuja.sons.databinding.ActivityUpdateErrandsBinding
 import com.ahuja.sons.globals.Global
+import com.ahuja.sons.model.AccountBpData
+import com.ahuja.sons.service.repository.DefaultMainRepositories
+import com.ahuja.sons.service.repository.MainRepos
+import com.ahuja.sons.viewmodel.MainViewModel
+import com.ahuja.sons.viewmodel.MainViewModelProvider
 import com.google.gson.JsonObject
 import com.pixplicity.easyprefs.library.Prefs
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,6 +33,21 @@ import retrofit2.Response
 class UpdateErrandsActivity : AppCompatActivity() {
 
     lateinit var binding : ActivityUpdateErrandsBinding
+    var PickUpName = ""
+    var PickUpCode = ""
+    var DropName = ""
+    var DropCode = ""
+    lateinit var viewModel: MainViewModel
+
+    private fun setUpViewModel() {
+        val dispatchers: CoroutineDispatcher = Dispatchers.Main
+        val mainRepos = DefaultMainRepositories() as MainRepos
+        val fanxApi: Apis = ApiClient().service
+        val viewModelProviderfactory = MainViewModelProvider(application, mainRepos, dispatchers, fanxApi)
+        viewModel = ViewModelProvider(this, viewModelProviderfactory)[MainViewModel::class.java]
+
+    }
+
 
     companion object{
         private const val TAG = "UpdateErrandsActivity"
@@ -43,11 +68,14 @@ class UpdateErrandsActivity : AppCompatActivity() {
         }
 
         binding.toolbar.heading.setText("Update Errands")
-
+        setUpViewModel()
 
         var listContactP = arrayListOf<String>("Rahul", "Deepanshu", "Arif")
         var adapter = ArrayAdapter<String>(this@UpdateErrandsActivity, R.layout.drop_down_item_textview, listContactP)
 //        binding.acContactPerson.setAdapter(adapter)
+
+        viewModel.getBPList()
+        bindPickUpObserver()
 
 
         callNatureErrandsAPi()
@@ -62,6 +90,136 @@ class UpdateErrandsActivity : AppCompatActivity() {
 
 
     }
+
+
+    var AllitemsList = ArrayList<AccountBpData>()
+
+    //todo bind observer...
+    private fun bindPickUpObserver() {
+        viewModel.businessPartnerList.observe(this, Event.EventObserver(
+            onError = {
+//                Global.warningmessagetoast(this, it)
+                binding.loadingback.visibility = View.GONE
+                binding.loadingView.stop()
+            },
+            onLoading = {
+                binding.loadingback.visibility = View.VISIBLE
+                binding.loadingView.start()
+            },
+            onSuccess = { response ->
+                if (response.status == 200) {
+                    binding.loadingback.visibility = View.GONE
+                    binding.loadingView.stop()
+
+                    AllitemsList.clear()
+                    var itemsList = filterList(response.data)
+                    AllitemsList.addAll(itemsList)
+
+                    var itemNames = itemsList.map { it.CardName }
+                    val cardCodeName = itemsList.map { it.CardCode }
+
+                    //TODO set Pick Up Location Data---
+                    val adapter = ArrayAdapter(this, com.ahuja.sons.R.layout.drop_down_item_textview, itemNames)
+                    binding.acPickUpLocation.setAdapter(adapter)
+
+                    // Handle bill to address dropdown item selection
+                    binding.acPickUpLocation.setOnItemClickListener { parent, _, position, _ ->
+                        try {
+                            val hospitalName = parent.getItemAtPosition(position) as String
+                            PickUpName = hospitalName
+
+                            val pos = Global.getHospitalPos(AllitemsList, hospitalName)
+                            PickUpCode = AllitemsList[pos].CardCode
+
+                            if (hospitalName.isEmpty()) {
+                                binding.pickUpRecyclerViewLayout.visibility = View.GONE
+                                binding.rvPickUpList.visibility = View.GONE
+                            } else {
+                                binding.pickUpRecyclerViewLayout.visibility = View.VISIBLE
+                                binding.rvPickUpList.visibility = View.VISIBLE
+
+                            }
+
+                            if (hospitalName.isNotEmpty()) {
+                                adapter.notifyDataSetChanged()
+                                binding.acPickUpLocation.setText(hospitalName, false)
+                                binding.acPickUpLocation.setSelection(hospitalName.length)
+
+                            } else {
+                                PickUpName = ""
+                                PickUpCode = ""
+                                binding.acPickUpLocation.setText("")
+                            }
+
+                        } catch (e: Exception) {
+                            Log.e("catch", "onItemClick: ${e.message}")
+                            e.printStackTrace()
+                        }
+                    }
+
+
+                    //TODO set Drop Location Data---
+
+                    val dropAdapter = ArrayAdapter(this, com.ahuja.sons.R.layout.drop_down_item_textview, itemNames)
+                    binding.acDropLocation.setAdapter(dropAdapter)
+
+                    // Handle bill to address dropdown item selection
+                    binding.acDropLocation.setOnItemClickListener { parent, _, position, _ ->
+                        try {
+                            val hospitalName = parent.getItemAtPosition(position) as String
+                            DropName = hospitalName
+
+                            val pos = Global.getHospitalPos(AllitemsList, hospitalName)
+                            DropCode = AllitemsList[pos].CardCode
+
+                            if (hospitalName.isEmpty()) {
+                                binding.dropLocRecyclerViewLayout.visibility = View.GONE
+                                binding.rvDropLocationList.visibility = View.GONE
+                            } else {
+                                binding.dropLocRecyclerViewLayout.visibility = View.VISIBLE
+                                binding.rvDropLocationList.visibility = View.VISIBLE
+
+                            }
+
+                            if (hospitalName.isNotEmpty()) {
+                                adapter.notifyDataSetChanged()
+                                binding.acDropLocation.setText(hospitalName, false)
+                                binding.acDropLocation.setSelection(hospitalName.length)
+
+                            } else {
+                                DropName = ""
+                                DropCode = ""
+                                binding.acDropLocation.setText("")
+                            }
+
+                        } catch (e: Exception) {
+                            Log.e("catch", "onItemClick: ${e.message}")
+                            e.printStackTrace()
+                        }
+
+                    }
+
+                }
+
+
+            }
+
+        ))
+
+
+    }
+
+
+    private fun filterList(value: List<AccountBpData>): List<AccountBpData> {
+        val tempList = mutableListOf<AccountBpData>()
+        for (customer in value) {
+            if (customer.CardName != "foo") {
+                tempList.add(customer)
+            }
+        }
+        return tempList
+    }
+
 
 
     var errandsListModels = ArrayList<AllErrandsListModel.Data>()
@@ -106,8 +264,10 @@ class UpdateErrandsActivity : AppCompatActivity() {
 
     private fun setDefaultData(data: AllErrandsListModel.Data) {
 
-        binding.edtPickUplocation.setText(data.PickupLocation)
-        binding.edtDroplocation.setText(data.DropLocation)
+        PickUpName = data.PickupLocation
+        binding.acPickUpLocation.setText(data.PickupLocation)
+        DropName = data.DropLocation
+        binding.acDropLocation.setText(data.DropLocation)
         binding.acNatureErrand.setText(data.NatureOfErrands.Name)
         binding.acContactPerson.setText(data.ContactPerson)
         binding.edRemarks.setText(data.Remark)
@@ -161,7 +321,7 @@ class UpdateErrandsActivity : AppCompatActivity() {
 
     //todo calling create errands api here--
     private fun callUpdateErrandsApi(orderID: Int) {
-        if (validation(binding.edtPickUplocation.text.toString().trim(), binding.edtDroplocation.text.toString().trim(), binding.acNatureErrand.text.toString(), binding.acContactPerson.text.toString())){
+        if (validation(binding.acPickUpLocation.text.toString().trim(), binding.acDropLocation.text.toString().trim(), binding.acNatureErrand.text.toString(), binding.acContactPerson.text.toString())){
 
             binding.loadingView.start()
             binding.loadingback.visibility = View.VISIBLE
@@ -169,8 +329,8 @@ class UpdateErrandsActivity : AppCompatActivity() {
             var jsonObject = JsonObject()
             jsonObject.addProperty("id", errandsListModels[errandPos].id)
             jsonObject.addProperty("OrderRequestID", orderID)
-            jsonObject.addProperty("PickupLocation", binding.edtPickUplocation.text.toString())
-            jsonObject.addProperty("DropLocation", binding.edtDroplocation.text.toString().trim())
+            jsonObject.addProperty("PickupLocation", binding.acPickUpLocation.text.toString())
+            jsonObject.addProperty("DropLocation", binding.acDropLocation.text.toString().trim())
             jsonObject.addProperty("NatureOfErrands", errandID)
             jsonObject.addProperty("CreatedBy", Prefs.getString(Global.Employee_Code, ""))
             jsonObject.addProperty("ContactPerson", binding.acContactPerson.text.toString().trim())
@@ -214,14 +374,14 @@ class UpdateErrandsActivity : AppCompatActivity() {
 
     fun validation(edtPickUplocation : String, edtDroplocation : String, acNatureErrand : String, acContactPerson : String) : Boolean{
         if (edtPickUplocation.isEmpty()) {
-            binding.edtPickUplocation.requestFocus()
-            binding.edtPickUplocation.setError(" Pick Up Location is Required")
+            binding.acPickUpLocation.requestFocus()
+            binding.acPickUpLocation.setError(" Pick Up Location is Required")
             return false
         }
 
         else if (edtDroplocation.isEmpty()) {
-            binding.edtDroplocation.requestFocus()
-            binding.edtDroplocation.setError(" Drop Location is Required")
+            binding.acDropLocation.requestFocus()
+            binding.acDropLocation.setError(" Drop Location is Required")
             return false
         }
 

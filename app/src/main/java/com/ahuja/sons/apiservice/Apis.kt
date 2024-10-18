@@ -598,6 +598,9 @@ interface Apis {
     @POST("delivery/order_trip_detail")
     fun getTripDetailsApi(@Body data: JsonObject ): Call<TripDetailModel>
 
+    @POST("delivery/return_order_trip_detail")
+    fun getReturnOrderTripApi(@Body data: JsonObject ): Call<TripDetailModel>
+
     @POST("delivery/get_pickup_details")
     fun getPickUpTripDetailsApi(@Body data: JsonObject ): Call<TripDetailModel>
 

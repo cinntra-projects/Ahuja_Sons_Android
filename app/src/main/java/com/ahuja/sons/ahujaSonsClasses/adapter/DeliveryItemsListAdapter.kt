@@ -2,6 +2,7 @@ package com.ahuja.sons.ahujaSonsClasses.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ahuja.sons.ahujaSonsClasses.model.workQueue.AllItemsForOrderModel
@@ -30,7 +31,8 @@ class DeliveryItemsListAdapter(val AllitemsList: ArrayList<AllItemsForOrderModel
             tvItemDescription.setText(obj.ItemDescription)
             tvQTy.setText("Qty : "+obj.Quantity)
             tvUOM.setText("UOM : "+obj.UomNo)
-            tvItemCode.setText("Item Code : "+obj.ItemCode)
+            tvSize.visibility = View.GONE
+            tvSize.setText("Item Code : "+obj.ItemCode)
 
         }
 

@@ -2,6 +2,7 @@ package com.ahuja.sons.ahujaSonsClasses.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ahuja.sons.ahujaSonsClasses.model.workQueue.AllItemsForOrderModel
@@ -25,9 +26,12 @@ class PendingItemAfterGroupingAdapter(val AllitemsList: ArrayList<AllItemsForOrd
     override fun onBindViewHolder(holder: Category_Holder, position: Int) {
         val obj = AllitemsList[holder.adapterPosition]
         holder.binding.apply {
+
             tvItemDescription.setText(obj.ItemDescription)
             tvQTy.setText("Qty : "+obj.Quantity)
-//            tvItemCode.setText("Item Code : "+obj.Pen)
+            tvUOM.setText("UOM : "+obj.MeasureUnit)
+            tvSize.visibility = View.GONE
+            tvSize.setText("Item Code : "+obj.ItemCode)
 
         }
 

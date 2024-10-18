@@ -470,7 +470,7 @@ class OperationManagerDetailActivity : AppCompatActivity() {
         binding.loadingBackFrame.visibility = View.VISIBLE
         binding.loadingView.start()
         var jsonObject1 = JsonObject()
-        jsonObject1.addProperty("OrderID", globalDataWorkQueueList.id)
+        jsonObject1.addProperty("OrderID",  globalDataWorkQueueList.OrderRequest!!.id)
 
         val call: Call<TripDetailModel> = ApiClient().service.getTripDetailsApi(jsonObject1)
         call.enqueue(object : Callback<TripDetailModel?> {

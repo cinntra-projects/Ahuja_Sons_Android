@@ -115,7 +115,12 @@ class OrderListForDeliveryCoordinatorAdapter(var AllitemsList: ArrayList<AllWork
                 holder.binding.tvOrderDoctorName.text = OrderRequest!!.Doctor[0].DoctorFirstName + " "+OrderRequest!!.Doctor[0].DoctorLastName
             }
             holder.binding.tvSurgeryDateTime.text = "Surgery Date:${Global.convert_yyyy_mm_dd_to_dd_mm_yyyy(OrderRequest?.SurgeryDate)}\n Surgery Time: ${OrderRequest?.SurgeryTime}"
-            holder.binding.tvStatusOrder.text = OrderRequest?.Status
+            if (is_errands == true){
+                holder.binding.tvStatusOrder.text = "Created"
+            }else{
+                holder.binding.tvStatusOrder.text = OrderRequest?.Status
+            }
+//            holder.binding.tvStatusOrder.text = OrderRequest?.Status
             holder.binding.tvOrderInfo.text = OrderRequest?.OrderInformation
         }
 

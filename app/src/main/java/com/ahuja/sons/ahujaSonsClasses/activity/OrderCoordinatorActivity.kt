@@ -16,6 +16,7 @@ import com.ahuja.sons.ahujaSonsClasses.adapter.*
 import com.ahuja.sons.ahujaSonsClasses.model.*
 import com.ahuja.sons.ahujaSonsClasses.model.image_get_model.UploadedPictureModel
 import com.ahuja.sons.ahujaSonsClasses.model.orderModel.AllItemListResponseModel
+import com.ahuja.sons.ahujaSonsClasses.model.workQueue.AllItemsForOrderModel
 import com.ahuja.sons.ahujaSonsClasses.model.workQueue.AllWorkQueueResponseModel
 import com.ahuja.sons.apihelper.Event
 import com.ahuja.sons.apiservice.ApiClient
@@ -896,7 +897,7 @@ class OrderCoordinatorActivity : AppCompatActivity() {
         binding.loadingBackFrame.visibility = View.VISIBLE
         binding.loadingView.start()
         var jsonObject1 = JsonObject()
-        jsonObject1.addProperty("OrderID", globalDataWorkQueueList.id)
+        jsonObject1.addProperty("OrderID",  globalDataWorkQueueList.OrderRequest!!.id)
 
         val call: Call<TripDetailModel> = ApiClient().service.getTripDetailsApi(jsonObject1)
         call.enqueue(object : Callback<TripDetailModel?> {
@@ -976,7 +977,7 @@ class OrderCoordinatorActivity : AppCompatActivity() {
         binding.loadingBackFrame.visibility = View.VISIBLE
         binding.loadingView.start()
         var jsonObject1 = JsonObject()
-        jsonObject1.addProperty("OrderID", globalDataWorkQueueList.id)
+        jsonObject1.addProperty("OrderID",  globalDataWorkQueueList.OrderRequest!!.id)
 
         val call: Call<TripDetailModel> = ApiClient().service.getPickUpTripDetailsApi(jsonObject1)
         call.enqueue(object : Callback<TripDetailModel?> {
@@ -1341,9 +1342,29 @@ class OrderCoordinatorActivity : AppCompatActivity() {
                         bindingBottomSheet.noDataFound.visibility = View.VISIBLE
                     } else {
                         var data = response.body()!!.data
+
+                        val resultList = ArrayList<AllItemListResponseModel.Data>()
+
+                        resultList.addAll(data
+                            .groupBy { it.ItemDescription }
+                            .map { (description, itemsList) ->
+                                val totalQuantity = itemsList.sumOf { it.Quantity.toInt() }
+                                val uniqueMeasureQuantities = itemsList.map { it.U_Size }
+                                    .toSet()
+                                    .joinToString(", ")
+
+                                AllItemListResponseModel.Data(
+                                    ItemDescription = description,
+                                    Quantity = totalQuantity, // Ensure this is a String
+                                    U_Size = uniqueMeasureQuantities
+                                )
+                            }
+                        )
+
+
                         var itemInOrderForDeliveryCoordinatorAdapter = ItemInOrderForDeliveryCoordinatorAdapter()
 
-                        itemInOrderForDeliveryCoordinatorAdapter.submitList(data)
+                        itemInOrderForDeliveryCoordinatorAdapter.submitList(resultList)
 
                         bindingBottomSheet.rvItemList.apply {
                             adapter = itemInOrderForDeliveryCoordinatorAdapter

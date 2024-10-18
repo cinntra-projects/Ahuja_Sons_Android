@@ -2,6 +2,7 @@ package com.ahuja.sons.ahujaSonsClasses.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ahuja.sons.ahujaSonsClasses.model.workQueue.AllItemsForOrderModel
@@ -28,11 +29,12 @@ class DeliveryDetailItemAdapter(val AllitemsList: ArrayList<DeliveryDetailItemLi
     override fun onBindViewHolder(holder: Category_Holder, position: Int) {
         val obj = AllitemsList[position]
         holder.binding.apply {
+
             tvItemDescription.setText(obj.ItemDescription)
             tvQTy.setText("Qty : "+obj.Quantity)
             tvUOM.setText("UOM : "+obj.UomNo)
-            tvItemCode.setText("Item Code : "+obj.ItemCode)
-
+            tvSize.visibility = View.GONE
+            tvSize.setText("Item Code : "+obj.ItemCode)
         }
 
         holder.itemView.setOnClickListener {

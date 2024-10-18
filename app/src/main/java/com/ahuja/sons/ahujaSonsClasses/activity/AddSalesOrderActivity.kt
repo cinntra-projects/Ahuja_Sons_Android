@@ -99,39 +99,6 @@ class AddSalesOrderActivity : AppCompatActivity() {
         binding.search.visibility=View.GONE
 
 
-    /*    binding.acHospitalName.setOnItemClickListener { adapterView, view, i, l ->
-
-            if (AllitemsList.size > 0){
-                binding.acHospitalName.setText(AllitemsList[i].CardName)
-                HospitalName = AllitemsList[i].CardName
-                HospitalCode = AllitemsList[i].CardCode
-
-            }else{
-                binding.acHospitalName.setText("")
-                HospitalName = ""
-                HospitalCode = ""
-            }
-
-        }
-
-
-        binding.acDoctorName.setOnItemClickListener { adapterView, view, i, l ->
-
-            if (allDoctorNameList.size > 0){
-                binding.acDoctorName.setText(allDoctorNameList[i].DoctorFirstName + " " +allDoctorNameList[i].DoctorLastName)
-                DoctorName = allDoctorNameList[i].DoctorFirstName + " " +allDoctorNameList[i].DoctorLastName
-                DoctorCode = allDoctorNameList[i].id.toString()
-
-            }else{
-                binding.acDoctorName.setText("")
-                DoctorName = ""
-                DoctorCode = ""
-            }
-
-        }
-*/
-
-
         val order = arrayOf("0","1", "2", "3")
         val orderInfoAdapter = ArrayAdapter(this, R.layout.simple_dropdown_item_1line, order)
         binding.acCRSNo.setAdapter(orderInfoAdapter)

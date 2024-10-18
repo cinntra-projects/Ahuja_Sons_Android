@@ -50,6 +50,7 @@ class ItemDetailActivity : AppCompatActivity() {
     var SapOrderId = ""
     var DeliveryID = 0
     var flag = ""
+    var FlagFromWhere = ""
 
     lateinit var pagerAdapter : ViewPagerAdapter
     private val TAG = "ItemDetailActivity"
@@ -64,6 +65,7 @@ class ItemDetailActivity : AppCompatActivity() {
         SapOrderId = intent.getStringExtra("SapOrderId").toString()
         DeliveryID = intent.getIntExtra("deliveryID", 0)
         flag = intent.getStringExtra("flag").toString()
+        FlagFromWhere = intent.getStringExtra("flagForItemViewList").toString()
         Log.e(TAG, "onCreate: $SapOrderId")
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
@@ -87,16 +89,16 @@ class ItemDetailActivity : AppCompatActivity() {
         //todo inspection tabs
         pagerAdapter = ViewPagerAdapter(supportFragmentManager)
 
-        if (flag.equals("Inspection")){
+        if (FlagFromWhere.equals("FromDeliveryIdSelect")){
             binding.heading.setText("Delivery Items")
-            pagerAdapter.add(DeliveryItemsFragment(SapOrderId, DeliveryID, flag), "Delivery Items")
+            pagerAdapter.add(DeliveryItemsFragment(SapOrderId, DeliveryID, FlagFromWhere), "Delivery Items")
             binding.tabLayout.tabGravity = TabLayout.GRAVITY_START
             binding.tabLayout.tabMode = TabLayout.MODE_SCROLLABLE
 
         }else{
             binding.heading.setText("Items List")
             pagerAdapter.add(AllItemListFragment(SapOrderId), "All Items")
-            pagerAdapter.add(DeliveryItemsFragment(SapOrderId, DeliveryID, flag), "Delivery Items")
+            pagerAdapter.add(DeliveryItemsFragment(SapOrderId, DeliveryID, FlagFromWhere), "Delivery Items")
             pagerAdapter.add(PendingItemsFragment(SapOrderId), "Pending Items")
         }
 

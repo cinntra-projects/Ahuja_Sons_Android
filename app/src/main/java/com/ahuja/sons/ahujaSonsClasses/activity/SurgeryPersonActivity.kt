@@ -1305,7 +1305,11 @@ class SurgeryPersonActivity : AppCompatActivity() {
 
 
         bindingBottomSheet.btnConfirm.setOnClickListener {
-            callUploadProofApi(bottomSheetDialog, bindingBottomSheet.loadingback, bindingBottomSheet.loadingView)
+            if (pdfurilist.size > 0) {
+                callUploadProofApi(bottomSheetDialog, bindingBottomSheet.loadingback, bindingBottomSheet.loadingView)
+            }else{
+                Global.errormessagetoast(this, "Upload Image!")
+            }
         }
 
         bottomSheetDialog.show()
