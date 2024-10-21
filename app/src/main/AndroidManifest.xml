@@ -42,6 +42,9 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
         <activity
+            android:name=".ahujaSonsClasses.activity.ErrandDeliveryPersonActivity"
+            android:exported="false" />
+        <activity
             android:name=".ahujaSonsClasses.activity.ReturnDeliveryPersonActivity"
             android:exported="false" />
         <activity

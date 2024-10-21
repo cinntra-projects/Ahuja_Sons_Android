@@ -11,6 +11,8 @@ object GlobalClasses {
 
     val cartListForDeliveryCoordinatorCheck = hashMapOf<String,LocalSelectedOrder>()
 
+    val allOrderIDCoordinatorCheck = ArrayList<LocalSelectedOrder>()
+
     val deliveryIDsList = ArrayList<AllWorkQueueResponseModel.InspectedDelivery>()
 
     val demoForOrderRequest: MutableList<ParentItemModel.ChildItem> = mutableListOf()

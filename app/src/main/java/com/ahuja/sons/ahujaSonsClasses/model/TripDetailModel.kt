@@ -7,7 +7,10 @@ data class TripDetailModel(
     var errors: String = "",
     var message: String = "",
     val proof_data: ArrayList<UploadedPictureModel.Data> = ArrayList(),
-    var status: Int = 0
+    var status: Int = 0,
+    var is_trip_started: Boolean = false,
+    var is_trip_ended: Boolean = false,
+    var is_proff_uploded: Boolean = false,
 ) {
     data class Data(
         var StartAt: String = "",
@@ -19,6 +22,7 @@ data class TripDetailModel(
         var CreateTime: String = "",
         var UpdateDate: String = "",
         var UpdateTime: String = "",
+
         val Deliveryassigned: ArrayList<DeliveryassignedClass>,
 
         )

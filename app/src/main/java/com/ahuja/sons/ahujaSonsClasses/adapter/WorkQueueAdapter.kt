@@ -76,6 +76,11 @@ class WorkQueueAdapter(var AllitemsList: ArrayList<AllWorkQueueResponseModel.Dat
                 holder.binding.deliveriesLayoutView.visibility = View.VISIBLE
             }
 
+            if (AllitemsList[position].is_errands == true) {
+                holder.binding.deliveriesLayoutView.visibility = View.GONE
+                holder.binding.ivDeliveryCoordinator.setImageDrawable(context.resources.getDrawable(R.drawable.dispatched_icon))
+            }
+
         }else{
             holder.binding.deliveriesLayoutView.visibility = View.GONE
             if (AllitemsList[position].is_return == true) {
@@ -166,7 +171,14 @@ class WorkQueueAdapter(var AllitemsList: ArrayList<AllWorkQueueResponseModel.Dat
                             val intent = Intent(holder.itemView.context, ReturnDeliveryPersonActivity::class.java)
                             intent.putExtra("id", AllitemsList[position].id)
                             context.startActivity(intent)
-                        }else{
+                        }
+                        else if (AllitemsList[position].is_errands == true){
+                            Log.e("adapter--", "onBindViewHolder: Errand Delivery Person" )
+                            val intent = Intent(holder.itemView.context, ErrandDeliveryPersonActivity::class.java)
+                            intent.putExtra("id", AllitemsList[position].id)
+                            context.startActivity(intent)
+                        }
+                        else{
                             Log.e("adapter--", "onBindViewHolder: Delivery Person" )
                             val intent = Intent(holder.itemView.context, OrderScreenForDeliveryPersonActivity::class.java)
                             intent.putExtra("id", AllitemsList[position].id)

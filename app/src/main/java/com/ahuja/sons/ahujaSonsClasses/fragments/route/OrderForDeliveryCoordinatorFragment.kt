@@ -115,8 +115,10 @@ class OrderForDeliveryCoordinatorFragment(var tvCreateRoute: TextView, var ivCol
 
 
         tvCancelRoute!!.setOnClickListener {
-            GlobalClasses.cartListForDeliveryCoordinatorCheck.clear()
+
             GlobalClasses.deliveryIDsList.clear()
+            GlobalClasses.allOrderIDCoordinatorCheck.clear()
+
             if (assignCard!!.visibility == View.GONE) {
                 assignCard!!.visibility = View.VISIBLE
                 isMultiOrderCardSelectEnabled = true
@@ -130,9 +132,27 @@ class OrderForDeliveryCoordinatorFragment(var tvCreateRoute: TextView, var ivCol
                 adapter?.let {
                     it.isUpdated(isMultiOrderCardSelectEnabled)
                 }
+
                 deliveryIDAdapter.isUpdated(isMultiOrderCardSelectEnabled)
+
             }
+
+            pageno = 1
+            recallApi = true
+            AllitemsList.clear()
+            SearchText = ""
+            binding.searchView.clearFocus()
+            binding.searchView.visibility = View.GONE
+            binding.loadingView.start()
+            binding.loadingback.visibility = View.VISIBLE
+            callWorkQueueList(pageno, SearchText, fromDate, toDate)
+
+
             adapter?.let {
+                it.notifyDataSetChanged()
+            }
+
+            deliveryIDAdapter?.let {
                 it.notifyDataSetChanged()
             }
 
@@ -207,26 +227,6 @@ class OrderForDeliveryCoordinatorFragment(var tvCreateRoute: TextView, var ivCol
             showFilterPopup()
         }
 
-    }
-
-
-    fun onChildCheckboxSelected(selectedChildItem: AllWorkQueueResponseModel.InspectedDelivery) {
-        // Find the parent data corresponding to this child
-
-        Log.e(TAG, "onChildCheckboxSelected: parent selected" )
-        val parentData = this.findParentDataForChild(selectedChildItem)
-        if (parentData != null) {
-            // Check the parent checkbox
-            parentData.isSelected = true
-
-            // Add parent order to the cartListForDeliveryCoordinatorCheck
-            val localSelectedOrder = LocalSelectedOrder().apply {
-                orderId = parentData.OrderRequest?.id.toString() // Parent ID
-                orderName = parentData.CardName
-            }
-
-            GlobalClasses.cartListForDeliveryCoordinatorCheck[parentData.OrderRequest?.id.toString()] = localSelectedOrder
-        }
     }
 
 

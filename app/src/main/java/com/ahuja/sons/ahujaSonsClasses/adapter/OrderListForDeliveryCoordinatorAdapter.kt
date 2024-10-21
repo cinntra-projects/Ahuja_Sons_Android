@@ -40,9 +40,12 @@ import com.amulyakhare.textdrawable.util.ColorGenerator
 import com.lid.lib.LabelTextView
 import com.pixplicity.easyprefs.library.Prefs
 import java.util.*
+import kotlin.collections.ArrayList
 
-class OrderListForDeliveryCoordinatorAdapter(var AllitemsList: ArrayList<AllWorkQueueResponseModel.Data>,
-    var where: String, var isMultiOrderCardSelectEnabled: Boolean, var checkBox: CheckBox) :
+class OrderListForDeliveryCoordinatorAdapter(
+    var AllitemsList: ArrayList<AllWorkQueueResponseModel.Data>,
+    var where: String, var isMultiOrderCardSelectEnabled: Boolean, var checkBox: CheckBox
+) :
     RecyclerView.Adapter<OrderListForDeliveryCoordinatorAdapter.Category_Holder>() {
 
     private lateinit var context: Context
@@ -56,8 +59,10 @@ class OrderListForDeliveryCoordinatorAdapter(var AllitemsList: ArrayList<AllWork
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Category_Holder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_work_queue, parent, false)
-        val binding = RouteInnerItemsLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_work_queue, parent, false)
+        val binding =
+            RouteInnerItemsLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         tempList.clear()
         tempList.addAll(AllitemsList)
         context = parent.context
@@ -80,10 +85,10 @@ class OrderListForDeliveryCoordinatorAdapter(var AllitemsList: ArrayList<AllWork
         holder.bind(model, context)
 
         // todo Initialize child RecyclerView
-      /*  val childAdapter = DeliveryCoordinatorIDsAdapter(model.childItemList)
-        holder.binding.deliveryIdRecyclerView.adapter = childAdapter
-        holder.binding.deliveryIdRecyclerView.layoutManager = LinearLayoutManager(holder.itemView.context)
-*/
+        /*  val childAdapter = DeliveryCoordinatorIDsAdapter(model.childItemList)
+          holder.binding.deliveryIdRecyclerView.adapter = childAdapter
+          holder.binding.deliveryIdRecyclerView.layoutManager = LinearLayoutManager(holder.itemView.context)
+  */
 
         //todo dropdown arrows for delivery id's--
         holder.binding.deliveryIDUpArrow.setOnClickListener {
@@ -108,16 +113,18 @@ class OrderListForDeliveryCoordinatorAdapter(var AllitemsList: ArrayList<AllWork
 
         }
 
-        with(AllitemsList[position]){
-            holder.binding.tvOrderId.text = "Order ID : "+OrderRequest?.id
+        with(AllitemsList[position]) {
+            holder.binding.tvOrderId.text = "Order ID : " + OrderRequest?.id
             holder.binding.tvOrderName.text = OrderRequest?.CardName
-            if (OrderRequest!!.Doctor.isNotEmpty()){
-                holder.binding.tvOrderDoctorName.text = OrderRequest!!.Doctor[0].DoctorFirstName + " "+OrderRequest!!.Doctor[0].DoctorLastName
+            if (OrderRequest!!.Doctor.isNotEmpty()) {
+                holder.binding.tvOrderDoctorName.text =
+                    OrderRequest!!.Doctor[0].DoctorFirstName + " " + OrderRequest!!.Doctor[0].DoctorLastName
             }
-            holder.binding.tvSurgeryDateTime.text = "Surgery Date:${Global.convert_yyyy_mm_dd_to_dd_mm_yyyy(OrderRequest?.SurgeryDate)}\n Surgery Time: ${OrderRequest?.SurgeryTime}"
-            if (is_errands == true){
+            holder.binding.tvSurgeryDateTime.text =
+                "Surgery Date:${Global.convert_yyyy_mm_dd_to_dd_mm_yyyy(OrderRequest?.SurgeryDate)}\n Surgery Time: ${OrderRequest?.SurgeryTime}"
+            if (is_errands == true) {
                 holder.binding.tvStatusOrder.text = "Created"
-            }else{
+            } else {
                 holder.binding.tvStatusOrder.text = OrderRequest?.Status
             }
 //            holder.binding.tvStatusOrder.text = OrderRequest?.Status
@@ -141,15 +148,13 @@ class OrderListForDeliveryCoordinatorAdapter(var AllitemsList: ArrayList<AllWork
         }
 
 
-        if (AllitemsList[position].is_return == true){
+        if (AllitemsList[position].is_return == true || AllitemsList[position].is_errands == true) {
             holder.binding.deliveriesLayoutView.visibility = View.GONE
             holder.binding.ivDeliveryCoordinator.setImageDrawable(context.resources.getDrawable(R.drawable.return_icon))
-        }
-        else if (!AllitemsList[position].DeliveryNote.isNullOrEmpty() && AllitemsList[position].is_return == false){
+        } else if (!AllitemsList[position].DeliveryNote.isNullOrEmpty() && AllitemsList[position].is_return == false) {
             holder.binding.deliveriesLayoutView.visibility = View.VISIBLE
             holder.binding.ivDeliveryCoordinator.setImageDrawable(context.resources.getDrawable(R.drawable.dispatched_icon))
         }
-
 
 
         val generator: ColorGenerator = ColorGenerator.MATERIAL
@@ -166,7 +171,8 @@ class OrderListForDeliveryCoordinatorAdapter(var AllitemsList: ArrayList<AllWork
                 )
             holder.binding.profilePic.setImageDrawable(drawable)
         } else {
-            holder.binding.profilePic.background = ContextCompat.getDrawable(context, R.drawable.ic_group_18576)
+            holder.binding.profilePic.background =
+                ContextCompat.getDrawable(context, R.drawable.ic_group_18576)
         }
 
 
@@ -174,6 +180,12 @@ class OrderListForDeliveryCoordinatorAdapter(var AllitemsList: ArrayList<AllWork
 
     override fun getItemCount(): Int {
         return AllitemsList.size
+    }
+
+
+    // Method to return the list of items
+    fun getItems(): MutableList<AllWorkQueueResponseModel.Data> {
+        return AllitemsList
     }
 
 
@@ -208,12 +220,16 @@ class OrderListForDeliveryCoordinatorAdapter(var AllitemsList: ArrayList<AllWork
     }
 
 
-    inner class Category_Holder(var binding: RouteInnerItemsLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class Category_Holder(var binding: RouteInnerItemsLayoutBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
 
         fun bind(currentDocLine: AllWorkQueueResponseModel.Data, context: Context) {
 
-            Log.d("ParentAdapter", "Binding child adapter with ${currentDocLine.DeliveryNote.size} items")
+            Log.d(
+                "ParentAdapter",
+                "Binding child adapter with ${currentDocLine.DeliveryNote.size} items"
+            )
 
             val innerAdapter = DeliveryCoordinatorIDsAdapter(currentDocLine.InspectedDeliverys, isMultiOrderCardSelectEnabled)
             binding.deliveryIdRecyclerView.layoutManager = LinearLayoutManager(itemView.context, LinearLayoutManager.VERTICAL, false)
@@ -223,6 +239,9 @@ class OrderListForDeliveryCoordinatorAdapter(var AllitemsList: ArrayList<AllWork
 
 
             itemView.setOnClickListener {
+
+                GlobalClasses.deliveryIDsList.clear()
+                GlobalClasses.allOrderIDCoordinatorCheck.clear()
 
                 if (Prefs.getString(Global.Employee_role, "").equals("Delivery Coordinator")) {
                     val intent = Intent(itemView.context, DeliveryCoordinatorActivity::class.java)
@@ -240,9 +259,9 @@ class OrderListForDeliveryCoordinatorAdapter(var AllitemsList: ArrayList<AllWork
 
             }
 
-            if (GlobalClasses.cartListForDeliveryCoordinatorCheck.isNotEmpty()) {
+            if (GlobalClasses.allOrderIDCoordinatorCheck.isNotEmpty()) {
 
-                for ((k, v) in GlobalClasses.cartListForDeliveryCoordinatorCheck) {
+                for ((k, v) in GlobalClasses.allOrderIDCoordinatorCheck) {
                     if (k.equals(currentDocLine.id)) {
                         binding.checkBoxOrder.visibility = View.VISIBLE
                         binding.profilePic.visibility = View.INVISIBLE
@@ -258,21 +277,31 @@ class OrderListForDeliveryCoordinatorAdapter(var AllitemsList: ArrayList<AllWork
 
 
             binding.checkBoxOrder.setOnCheckedChangeListener { compoundButton, b ->
+                var localSelectedOrder = LocalSelectedOrder()
                 if (b) {
                     isAllSelectedMethodisWorking = false
-                    var localSelectedOrder = LocalSelectedOrder()
+
                     localSelectedOrder.apply {
                         orderId = currentDocLine.OrderRequest!!.id.toString()//id
                         orderName = currentDocLine.CardName
+                        orderName = currentDocLine.CardName
+                        errandId = currentDocLine.DeliveryId
+                        isErrand = currentDocLine.is_errands
+                        isReturn = currentDocLine.is_return
+                        id = currentDocLine.id
                     }
 
-                    GlobalClasses.cartListForDeliveryCoordinatorCheck[currentDocLine.OrderRequest!!.id.toString()] = localSelectedOrder
+                    GlobalClasses.allOrderIDCoordinatorCheck.add(localSelectedOrder)
+//                    GlobalClasses.cartListForDeliveryCoordinatorCheck[currentDocLine.OrderRequest!!.id.toString()] = localSelectedOrder
 
-                    val newColorStateList = ColorStateList.valueOf(context.resources.getColor(R.color.blue_light))
+                    val newColorStateList =
+                        ColorStateList.valueOf(context.resources.getColor(R.color.blue_light))
                     binding.constraintLayoutWorkQueue.backgroundTintList = newColorStateList
 
                     //todo trial
-                    val itemsToAdd = currentDocLine.InspectedDeliverys.filterNot { GlobalClasses.deliveryIDsList.contains(it) }
+                    val itemsToAdd = currentDocLine.InspectedDeliverys.filterNot {
+                        GlobalClasses.deliveryIDsList.contains(it)
+                    }
 
                     if (itemsToAdd.isNotEmpty()) {
                         GlobalClasses.deliveryIDsList.addAll(itemsToAdd)
@@ -282,6 +311,8 @@ class OrderListForDeliveryCoordinatorAdapter(var AllitemsList: ArrayList<AllWork
                     }
 
                 }
+
+
                 else {
                     isAllSelectedMethodisWorking = false
                     var pos = -1
@@ -289,7 +320,16 @@ class OrderListForDeliveryCoordinatorAdapter(var AllitemsList: ArrayList<AllWork
                     val newColorStateList = ColorStateList.valueOf(Color.WHITE)
                     binding.constraintLayoutWorkQueue.backgroundTintList = newColorStateList
 
-                    GlobalClasses.cartListForDeliveryCoordinatorCheck.remove(currentDocLine.OrderRequest!!.id.toString())
+                    val orderId = currentDocLine.id
+
+                    var positionIndex = getPosition(orderId, GlobalClasses.allOrderIDCoordinatorCheck)
+
+                    Log.e("positionIndex>>", "bind: $positionIndex")
+
+                    var check = GlobalClasses.allOrderIDCoordinatorCheck.removeAt(positionIndex)
+                    Log.e("CHECKING>>", "bind: $check")
+
+//                    GlobalClasses.cartListForDeliveryCoordinatorCheck.remove(currentDocLine.OrderRequest!!.id.toString())
 
                     //todo trial
                     GlobalClasses.deliveryIDsList.removeAll(currentDocLine.InspectedDeliverys)
@@ -297,10 +337,10 @@ class OrderListForDeliveryCoordinatorAdapter(var AllitemsList: ArrayList<AllWork
                 }
 
 
-                Log.e("SELECTED ORDER>>>>>", "bind: ${GlobalClasses.cartListForDeliveryCoordinatorCheck.size}")
+                Log.e("SELECTED ORDER>>>>>", "bindParent: ${GlobalClasses.allOrderIDCoordinatorCheck.size}")
 
-                for (item in GlobalClasses.cartListForDeliveryCoordinatorCheck) {
-                    Log.e("SELECTED ORDER>>>>>", "bind: ${item.toString()}")
+                for (item in GlobalClasses.allOrderIDCoordinatorCheck) {
+                    Log.e("SELECTED ORDER>>>>>", "bindParent: ${item.toString()}")
                 }
 
 
@@ -308,10 +348,10 @@ class OrderListForDeliveryCoordinatorAdapter(var AllitemsList: ArrayList<AllWork
                 currentDocLine.InspectedDeliverys.forEach { it.isSelected = b }
                 innerAdapter.notifyDataSetChanged()
 
-                Log.e("SELECTED ORDER>>>>>", "bindParent : ${GlobalClasses.deliveryIDsList.size}")
+                Log.e("SELECTED Child ORDER>>>>>", "bindChild : ${GlobalClasses.deliveryIDsList.size}")
 
                 for (item in GlobalClasses.deliveryIDsList) {
-                    Log.e("SELECTED ORDER12>>>>>", "bindParent: ${item.toString()}")
+                    Log.e("SELECTED Child ORDER12>>>>>", "bindChild: ${item.toString()}")
                 }
 
 
@@ -324,4 +364,20 @@ class OrderListForDeliveryCoordinatorAdapter(var AllitemsList: ArrayList<AllWork
     }
 
 
+
+    fun getPosition(id : String, list: ArrayList<LocalSelectedOrder>):Int{
+        var orderIndex = -1
+
+        for (current in list.withIndex()) {
+            if (current.value.id.equals(id)){
+                orderIndex = current.index
+                return  orderIndex
+            }
+            Log.e("REMOVE ORDER", "Order removed at index $orderIndex.")
+        }
+        return orderIndex
     }
+
+
+
+}

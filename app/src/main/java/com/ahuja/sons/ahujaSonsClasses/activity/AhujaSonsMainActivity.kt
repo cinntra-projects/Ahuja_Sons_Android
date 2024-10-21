@@ -22,17 +22,14 @@ import com.ahuja.sons.R
 import com.ahuja.sons.ahujaSonsClasses.Interface.OnDialogClickListener
 import com.ahuja.sons.ahujaSonsClasses.adapter.autoCompleteAdapter.DeliveryPersonAdapter
 import com.ahuja.sons.ahujaSonsClasses.ahujaconstant.GlobalClasses
-import com.ahuja.sons.ahujaSonsClasses.fragments.route.OrderForDeliveryCoordinatorFragment
 import com.ahuja.sons.ahujaSonsClasses.fragments.workqueue.WorkQueueFragment
 import com.ahuja.sons.ahujaSonsClasses.model.DeliveryPersonEmployeeModel
-import com.ahuja.sons.ahujaSonsClasses.model.local.LocalSelectedOrder
 import com.ahuja.sons.ahujaSonsClasses.model.workQueue.AllWorkQueueResponseModel
 import com.ahuja.sons.apiservice.ApiClient
 import com.ahuja.sons.apiservice.Apis
 import com.ahuja.sons.databinding.ActivityAhujaSonsMainBinding
 import com.ahuja.sons.databinding.DialogAssignDeliveryPersonBinding
 import com.ahuja.sons.globals.Global
-import com.ahuja.sons.globals.Global.isValidVehicleNumber
 import com.ahuja.sons.globals.Global.validateVehicleNumber
 import com.ahuja.sons.service.repository.DefaultMainRepositories
 import com.ahuja.sons.service.repository.MainRepos
@@ -40,7 +37,6 @@ import com.ahuja.sons.viewmodel.MainViewModel
 import com.ahuja.sons.viewmodel.MainViewModelProvider
 import com.github.loadingview.LoadingView
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.pixplicity.easyprefs.library.Prefs
@@ -140,14 +136,33 @@ class AhujaSonsMainActivity : AppCompatActivity() {
             dialog.cancel()
         }
 
-        dialogBinding.btnSave.setOnClickListener {
+    /*    dialogBinding.btnSave.setOnClickListener {
 
+            //todo errand based id selected--
+            val idErrand = ArrayList<Int>()
+            val errandIdList = mutableSetOf<Int>()
+            idErrand.clear()
+
+            for (order in GlobalClasses.cartListForDeliveryCoordinatorCheck) {
+                if (order.value.isErrand == true){
+                    val ID = order.value.errandId.toInt()
+                    if (!errandIdList.contains(ID)) {
+                        idErrand.add(ID)
+                        errandIdList.add(ID)  // Add to the set after adding to the list
+                    }
+                }
+
+            }
+
+            val commaSeparatedErrandIDs= idErrand.joinToString(separator = ",")
+
+
+
+            //todo delivery note id selcted--
             val idArrayList = ArrayList<Int>()
             val idArrayListID = mutableSetOf<Int>()
             idArrayList.clear()
-           /* for (order in GlobalClasses.deliveryIDsList) {
-                idArrayList.add(order.id.toInt())
-            }*/
+
             Log.e(TAG, "openDeliveryPersonDialog: "+GlobalClasses.deliveryIDsList.size )
 
             for (order in GlobalClasses.deliveryIDsList) {
@@ -190,15 +205,6 @@ class AhujaSonsMainActivity : AppCompatActivity() {
                 }
             }
 
-          /*  for (order in GlobalClasses.deliveryIDsList) {
-                val orderID = order.OrderID.toInt()
-                // Check if the OrderID is already present in the Set
-                if (!orderIDSet.contains(orderID)) {
-                    orderIDArrayList.add(orderID)
-                    orderIDSet.add(orderID)  // Add to the set after adding to the list
-                }
-            }
-*/
             Log.e(TAG, "openDeliveryPersonDialog: "+orderIDSet )
             val orderSeparateID = orderIDArrayList.joinToString(separator = ",")
 
@@ -213,6 +219,7 @@ class AhujaSonsMainActivity : AppCompatActivity() {
             val orderCommaSeparatedIds = orderIDList.joinToString(separator = ",")
 
 
+
             val vehicleNumber = dialogBinding.edtVehicleNo.text.toString()
 
             if (!vehicleNumber.equals("") && validateVehicleNumber(vehicleNumber)) {
@@ -220,7 +227,130 @@ class AhujaSonsMainActivity : AppCompatActivity() {
                 if (dialogBinding.acDeliveryPersonOne.text.isNullOrEmpty()){
                     Global.warningmessagetoast(this, "Select Delivery One Person")
                 }else{
-                    createAssignApi(dialog, dialogBinding.loadingback, dialogBinding.loadingView, commaSeparatedIds, vehicleNumber, orderCommaSeparatedIds, orderSeparateID)
+                    createAssignApi(dialog, dialogBinding.loadingback, dialogBinding.loadingView, commaSeparatedIds, vehicleNumber, orderCommaSeparatedIds, orderSeparateID, commaSeparatedErrandIDs)
+                }
+
+            } else {
+                Global.warningmessagetoast(this@AhujaSonsMainActivity, "Invalid Vehicle Number or Empty")
+            }
+
+
+        }*/
+
+
+        dialogBinding.btnSave.setOnClickListener {
+
+            //todo errand based id selected--
+            val idErrand = ArrayList<Int>()
+            val errandIdList = mutableSetOf<Int>()
+            idErrand.clear()
+
+
+            var commaSeparatedDeliveryIds = ""
+            var orderSeparateID = ""
+            var commaSeparatedErrandIDs = ""
+
+            val orderIDArrayList = ArrayList<Int>()
+            val orderIDSet = mutableSetOf<Int>()
+
+            for (order in GlobalClasses.allOrderIDCoordinatorCheck) {
+                if (order.isErrand == true) {
+                    val ID = order.errandId.toInt()
+                    if (!errandIdList.contains(ID)) {
+                        idErrand.add(ID)
+                        errandIdList.add(ID)  // Add to the set after adding to the list
+                    }
+
+                    commaSeparatedErrandIDs= idErrand.joinToString(separator = ",")
+
+                }
+                else if (order.isReturn == true){
+                    //todo set order rid from delivery id list
+
+
+                    val orderID = order.orderId.toInt() // Convert orderId to Int
+                    // Check if the OrderID is not in the Set
+                    if (!orderIDSet.contains(orderID)) {
+                        orderIDArrayList.add(orderID)  // Add to ArrayList
+                        orderIDSet.add(orderID)        // Add to Set
+                    }
+
+                    Log.e(TAG, "openDeliveryPersonDialog: "+orderIDSet )
+                    orderSeparateID = orderIDArrayList.joinToString(separator = ",")
+
+                }
+                else{
+                    //todo delivery note id selcted--
+                    val idArrayList = ArrayList<Int>()
+                    val idArrayListID = mutableSetOf<Int>()
+                    idArrayList.clear()
+
+                    Log.e(TAG, "openDeliveryPersonDialog: "+GlobalClasses.deliveryIDsList.size )
+
+                    for (order in GlobalClasses.deliveryIDsList) {
+                        val ID = order.id.toInt()
+                        if (!idArrayListID.contains(ID)) {
+                            idArrayList.add(ID)
+                            idArrayListID.add(ID)  // Add to the set after adding to the list
+                        }
+                    }
+
+                    commaSeparatedDeliveryIds = idArrayList.joinToString(separator = ",")
+
+                    //todo set order rid from delivery id list
+
+
+                    // Add unique order IDs from GlobalClasses.deliveryIDsList
+                    if (GlobalClasses.deliveryIDsList.isNotEmpty()) {
+                        for (order in GlobalClasses.deliveryIDsList) {
+                            val orderID = order.OrderID.toInt() // Convert OrderID to Int
+                            // Check if the OrderID is not in the Set
+                            if (!orderIDSet.contains(orderID)) {
+                                orderIDArrayList.add(orderID)  // Add to ArrayList
+                                orderIDSet.add(orderID)        // Add to Set
+                            }
+                        }
+                    }
+
+                    // Add unique order IDs from GlobalClasses.cartListForDeliveryCoordinatorCheck
+                    if (GlobalClasses.allOrderIDCoordinatorCheck.isNotEmpty()) {
+                        for (order in GlobalClasses.allOrderIDCoordinatorCheck) {
+                            val orderID = order.orderId.toInt() // Convert orderId to Int
+                            // Check if the OrderID is not in the Set
+                            if (!orderIDSet.contains(orderID)) {
+                                orderIDArrayList.add(orderID)  // Add to ArrayList
+                                orderIDSet.add(orderID)        // Add to Set
+                            }
+                        }
+                    }
+
+                    Log.e(TAG, "openDeliveryPersonDialog: "+orderIDSet )
+                    orderSeparateID = orderIDArrayList.joinToString(separator = ",")
+
+                }
+
+            }
+
+
+            //todo order id from list
+            val orderIDList = ArrayList<String>()
+            orderIDList.clear()
+            for (order in GlobalClasses.cartListForDeliveryCoordinatorCheck) {
+                orderIDList.add(order.value.id)
+            }
+
+            val orderCommaSeparatedIds = orderIDList.joinToString(separator = ",")
+
+
+
+            val vehicleNumber = dialogBinding.edtVehicleNo.text.toString()
+
+            if (!vehicleNumber.equals("") && validateVehicleNumber(vehicleNumber)) {
+
+                if (dialogBinding.acDeliveryPersonOne.text.isNullOrEmpty()){
+                    Global.warningmessagetoast(this, "Select Delivery One Person")
+                }else{
+                    createAssignApi(dialog, dialogBinding.loadingback, dialogBinding.loadingView, commaSeparatedDeliveryIds, vehicleNumber, orderCommaSeparatedIds, orderSeparateID, commaSeparatedErrandIDs)
                 }
 
             } else {
@@ -229,6 +359,8 @@ class AhujaSonsMainActivity : AppCompatActivity() {
 
 
         }
+
+
 
         dialogBinding.tvTitle.setOnClickListener {
             dialog.cancel()
@@ -240,7 +372,16 @@ class AhujaSonsMainActivity : AppCompatActivity() {
 
 
     //todo calling Create Assign api here---
-    private fun createAssignApi(dialog: Dialog, loadingback: FrameLayout, loadingView: LoadingView, idArray: String, vehicleNumber: String, orderCommaSeparatedIds : String, orderSeparateID : String) {
+    private fun createAssignApi(
+        dialog: Dialog,
+        loadingback: FrameLayout,
+        loadingView: LoadingView,
+        idArray: String,
+        vehicleNumber: String,
+        orderCommaSeparatedIds: String,
+        orderSeparateID: String,
+        commaSeparatedErrandIDs: String
+    ) {
 
         loadingback.visibility = View.VISIBLE
         loadingView.start()
@@ -255,6 +396,11 @@ class AhujaSonsMainActivity : AppCompatActivity() {
             jsonArray1.add(id)
         }
 
+        val jsonErrandArray = JsonArray()
+        commaSeparatedErrandIDs.forEach { id ->
+            jsonErrandArray.add(id)
+        }
+
         var jsonObject1 = JsonObject()
         jsonObject1.addProperty("DeliveryNote", idArray)
         jsonObject1.addProperty("DeliveryPerson1", deliveryPersonOne)
@@ -262,6 +408,7 @@ class AhujaSonsMainActivity : AppCompatActivity() {
         jsonObject1.addProperty("DeliveryPerson3", deliveryPersonThree)
         jsonObject1.addProperty("VechicleNo", vehicleNumber)
         jsonObject1.addProperty("OrderID", orderSeparateID)//orderCommaSeparatedIds
+        jsonObject1.addProperty("ErrandsId", commaSeparatedErrandIDs)
         jsonObject1.addProperty("CreatedBy", Prefs.getString(Global.Employee_Code, ""))
 
         Log.e("payload", jsonObject1.toString())
@@ -279,7 +426,7 @@ class AhujaSonsMainActivity : AppCompatActivity() {
                      Global.successmessagetoast(this@AhujaSonsMainActivity, "Assign SuccessFully")
 
                      GlobalClasses.deliveryIDsList.clear()
-                     GlobalClasses.cartListForDeliveryCoordinatorCheck.clear()
+                     GlobalClasses.allOrderIDCoordinatorCheck.clear()
 
                      dialog.dismiss()
 

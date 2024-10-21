@@ -72,15 +72,12 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
+class ErrandDeliveryPersonActivity : AppCompatActivity() {
     lateinit var binding: ActivityOrderScreenForDeliveryPersonBinding
-    var isTripStarted = false
-    var isTripEnd = false
-    var isUploadProof = false
+    var isErrandTripStarted = false
+    var isErrandTripEnd = false
+    var isErrandUploadProof = false
 
-    var isPickUpTripStarted = false
-    var isPickUpTripEnd = false
-    var isPickUpUploadProof = false
     lateinit var viewModel: MainViewModel
 
     private val PICK_IMAGES_REQUEST_CODE = 1111
@@ -143,7 +140,6 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
 
         binding.btnENdTrip.setOnClickListener {
 
-//            givePermission("EndTrip")
             if (!LocationPermissionHelper.hasLocationPermission(this)) {
                 val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
                 intent.data = Uri.parse("package:$packageName")
@@ -158,8 +154,6 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
 
 
         binding.btnTrip.setOnClickListener {
-
-//            givePermission("StartTrip")
 
             if (!LocationPermissionHelper.hasLocationPermission(this)) {
                 val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
@@ -387,294 +381,6 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
     //todo set default data here---
     private fun setDefaultData(modelData: AllWorkQueueResponseModel.Data, fromWhere: String) {
 
-        isTripStarted = modelData.OrderRequest!!.isTripStarted
-        isTripEnd = modelData.OrderRequest!!.isTripEnd
-        isUploadProof = modelData.OrderRequest!!.isDepProofUp
-
-        isPickUpTripStarted = modelData.OrderRequest!!.isReturnTripStarted
-        isPickUpTripEnd = modelData.OrderRequest!!.isReturnTripEnd
-        isPickUpUploadProof = modelData.OrderRequest!!.isReturnDepProofUp
-
-        if (!fromWhere.equals("uploadProof")) {
-            if (isTripStarted == false && isTripEnd == false && isUploadProof == false) {
-                binding.apply {
-                    tvCountText.visibility = View.GONE
-                    btnENdTrip.visibility = View.GONE
-                    btnTrip.visibility = View.VISIBLE
-                    tvClickStartText.visibility = View.VISIBLE
-                    btnSubmit.visibility = View.GONE
-
-                    Log.e(TAG, "onCreate: " + binding.tvCountText.text.toString())
-
-                    tvTripStatus.setText("Status : Pending")
-                }
-
-            }
-
-            else if (isTripStarted == true && isTripEnd == false && isUploadProof == false) {
-
-                binding.apply {
-                    btnTrip.visibility = View.GONE
-                    btnENdTrip.visibility = View.GONE
-                    linearTripDetails.visibility = View.VISIBLE
-                    tvCountText.visibility = View.VISIBLE
-                    tvClickStartText.visibility = View.GONE
-                    linearTripEndDetails.visibility = View.GONE
-                    btnUploadProof.visibility = View.VISIBLE
-
-
-                }
-
-                binding.apply {
-                    dispatchedDetailLayout.visibility = View.VISIBLE
-                    dispatchTripDetail.visibility = View.VISIBLE
-                    dispatchDetailAfterEndTrip.visibility = View.GONE
-                }
-
-
-            }
-
-
-            else if (isTripStarted == true && isUploadProof == true && isTripEnd == false) {
-                binding.apply {
-                    tvCountText.visibility = View.VISIBLE
-                    btnENdTrip.visibility = View.VISIBLE
-                    btnTrip.visibility = View.GONE
-                    tvClickStartText.visibility = View.GONE
-                    btnSubmit.visibility = View.GONE
-                    btnUploadProof.visibility = View.GONE
-
-                    Log.e(TAG, "onCreate: " + binding.tvCountText.text.toString())
-
-                    tvTripStatus.setText("Status : Started")
-
-                }
-
-                binding.apply {
-
-                    dispatchedDetailLayout.visibility = View.VISIBLE
-                    dispatchTripDetail.visibility = View.GONE
-                    dispatchDetailAfterEndTrip.visibility = View.VISIBLE
-                    EndTripFieldslayout.visibility = View.GONE
-
-                }
-
-
-            }
-
-
-            else if (isTripStarted == true && isTripEnd == true && isUploadProof == false) {
-                binding.apply {
-                    tvCountText.visibility = View.GONE
-                    btnENdTrip.visibility = View.GONE
-                    btnTrip.visibility = View.GONE
-                    tvClickStartText.visibility = View.GONE
-                    btnSubmit.visibility = View.GONE
-                    btnUploadProof.visibility = View.VISIBLE
-
-                    Log.e(TAG, "onCreate: " + binding.tvCountText.text.toString())
-
-                    tvTripStatus.setText("Status : End Trip")
-
-                }
-
-                binding.apply {
-                    dispatchedDetailLayout.visibility = View.VISIBLE
-                    dispatchTripDetail.visibility = View.GONE
-                    dispatchDetailAfterEndTrip.visibility = View.VISIBLE
-                }
-
-
-            }
-
-
-            else if (isTripStarted == true && isTripEnd == true && isUploadProof == true) {
-                binding.apply {
-                    tvCountText.visibility = View.GONE
-                    btnENdTrip.visibility = View.GONE
-                    btnTrip.visibility = View.GONE
-                    tvClickStartText.visibility = View.GONE
-                    btnSubmit.visibility = View.VISIBLE
-                    btnUploadProof.visibility = View.GONE
-
-                    Log.e(TAG, "onCreate: " + binding.tvCountText.text.toString())
-
-                    tvTripStatus.setText("Status : End Trip")
-
-                }
-
-                binding.apply {
-                    dispatchedDetailLayout.visibility = View.VISIBLE
-                    dispatchTripDetail.visibility = View.GONE
-                    dispatchDetailAfterEndTrip.visibility = View.VISIBLE
-                    EndTripFieldslayout.visibility = View.VISIBLE
-                }
-
-            }
-
-            else {
-                binding.apply {
-                    tvCountText.visibility = View.GONE
-                    btnENdTrip.visibility = View.GONE
-                    btnTrip.visibility = View.GONE
-                    tvClickStartText.visibility = View.GONE
-                    btnUploadProof.visibility = View.GONE
-                    btnSubmit.visibility = View.VISIBLE
-
-                    Log.e(TAG, "onCreate: " + binding.tvCountText.text.toString())
-
-                }
-
-                binding.apply {
-                    dispatchedDetailLayout.visibility = View.VISIBLE
-                    dispatchTripDetail.visibility = View.GONE
-                    dispatchDetailAfterEndTrip.visibility = View.VISIBLE
-                }
-            }
-
-        }
-
-        else {
-            binding.btnENdTrip.visibility = View.VISIBLE
-//                binding.btnSubmit.visibility = View.VISIBLE
-            binding.btnUploadProof.visibility = View.GONE
-        }
-
-        if (modelData.is_return == false) {
-
-
-
-        }
-
-
-        /*else if (modelData.is_return == true){
-            binding.btnSubmit.visibility = View.GONE
-
-            if (!fromWhere.equals("returnUploadProof")) {
-
-                if (isPickUpTripStarted == true && isPickUpTripEnd == false && isPickUpUploadProof == false) {
-                    binding.apply {
-                        btnTrip.visibility = View.GONE
-                        btnENdTrip.visibility = View.GONE
-                        tvReturnCountText.visibility = View.VISIBLE
-                        tvReturnStartClick.visibility = View.GONE
-                        btnUploadProof.visibility = View.VISIBLE
-
-
-                    }
-
-                    binding.apply {
-                        pickUpAllDetail.visibility = View.GONE
-                        pickUpStartTripDetail.visibility = View.VISIBLE
-                        pickupDetailCardView.visibility = View.VISIBLE
-
-                    }
-
-                }
-
-
-                else if (isPickUpTripStarted == true && isPickUpTripEnd == false && isPickUpUploadProof == true) {
-
-                    binding.apply {
-                        tvReturnCountText.visibility = View.GONE
-                        btnENdTrip.visibility = View.VISIBLE
-                        btnTrip.visibility = View.GONE
-                        tvReturnStartClick.visibility = View.GONE
-                        btnSubmit.visibility = View.GONE
-                        btnUploadProof.visibility = View.GONE
-
-                        Log.e(TAG, "onCreate: " + binding.tvReturnCountText.text.toString())
-
-                        tvPickUpStatus.setText("Status : Started")
-
-                    }
-
-                    binding.apply {
-
-                        pickupDetailCardView.visibility = View.VISIBLE
-                        pickUpStartTripDetail.visibility = View.GONE
-                        pickUpAllDetail.visibility = View.VISIBLE
-                        pickUpEndTimeLayout.visibility = View.GONE
-
-                    }
-
-                }
-
-
-                else if (isPickUpTripStarted == true && isPickUpTripEnd == true && isPickUpUploadProof == true) {
-
-                    binding.apply {
-                        tvReturnCountText.visibility = View.GONE
-                        btnENdTrip.visibility = View.GONE
-                        btnTrip.visibility = View.GONE
-                        tvReturnStartClick.visibility = View.GONE
-                        btnSubmit.visibility = View.VISIBLE
-                        btnUploadProof.visibility = View.GONE
-
-                        Log.e(TAG, "onCreate: " + binding.tvReturnCountText.text.toString())
-
-                        tvPickUpStatus.setText("Status : End Trip")
-
-                    }
-
-                    binding.apply {
-                        pickupDetailCardView.visibility = View.VISIBLE
-                        pickUpStartTripDetail.visibility = View.GONE
-                        pickUpAllDetail.visibility = View.VISIBLE
-                        pickUpEndTimeLayout.visibility = View.VISIBLE
-                    }
-                }
-
-
-                else if (isPickUpTripStarted == false && isPickUpTripEnd == false && isPickUpUploadProof == false) {
-
-                    binding.apply {
-                        tvReturnCountText.visibility = View.GONE
-                        btnENdTrip.visibility = View.GONE
-                        btnTrip.visibility = View.VISIBLE
-                        tvReturnStartClick.visibility = View.VISIBLE
-                        btnSubmit.visibility = View.GONE
-
-                        Log.e(TAG, "onCreate: " + binding.tvReturnCountText.text.toString())
-
-                        tvPickUpStatus.setText("Status : Yet to Start")
-                    }
-
-                }
-
-                else{
-                    binding.apply {
-                        tvReturnCountText.visibility = View.GONE
-                        btnENdTrip.visibility = View.GONE
-                        btnTrip.visibility = View.GONE
-                        tvReturnStartClick.visibility = View.GONE
-                        btnUploadProof.visibility = View.GONE
-                        btnSubmit.visibility = View.VISIBLE
-
-                        Log.e(TAG, "onCreate: " + binding.tvReturnCountText.text.toString())
-
-                    }
-
-                    binding.apply {
-                        pickupDetailCardView.visibility = View.VISIBLE
-                        pickUpStartTripDetail.visibility = View.GONE
-                        pickUpAllDetail.visibility = View.VISIBLE
-                    }
-
-                }
-
-            }
-
-            else {
-                binding.btnENdTrip.visibility = View.VISIBLE
-//                binding.btnSubmit.visibility = View.VISIBLE
-                binding.btnUploadProof.visibility = View.GONE
-            }
-
-        }*/
-
-
-
         val generator: ColorGenerator = ColorGenerator.MATERIAL
         val color1: Int = generator.randomColor
         if (modelData.OrderRequest!!.CardName.isNotEmpty()!!) {
@@ -707,7 +413,7 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
 
                 itemViewDetailCardView.visibility = View.VISIBLE
                 itemDetailView.setOnClickListener {
-                    var intent = Intent(this@OrderScreenForDeliveryPersonActivity, ItemDetailActivity::class.java)
+                    var intent = Intent(this@ErrandDeliveryPersonActivity, ItemDetailActivity::class.java)
                     intent.putExtra("SapOrderId", modelData.OrderRequest!!.SapOrderId)
                     intent.putExtra("deliveryID", orderID)
                     intent.putExtra("flag", "Delivery Person")
@@ -815,7 +521,7 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
                             tvCRSNo.setText(data[0].NoOfCSRRequired)
 
                             val innerAdapter = SurgeryNameListAdapter(data)
-                            rvSurgeryPersonListName.layoutManager = LinearLayoutManager(this@OrderScreenForDeliveryPersonActivity, LinearLayoutManager.VERTICAL, false)
+                            rvSurgeryPersonListName.layoutManager = LinearLayoutManager(this@ErrandDeliveryPersonActivity, LinearLayoutManager.VERTICAL, false)
                             rvSurgeryPersonListName.adapter = innerAdapter
                             innerAdapter.notifyDataSetChanged()
 
@@ -837,7 +543,7 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
                     binding.loadingBackFrame.visibility = View.GONE
                     binding.loadingView.stop()
 
-                    Global.warningmessagetoast(this@OrderScreenForDeliveryPersonActivity, response.body()!!.message);
+                    Global.warningmessagetoast(this@ErrandDeliveryPersonActivity, response.body()!!.message);
 
                 }
             }
@@ -845,7 +551,7 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
             override fun onFailure(call: Call<SurgeryPersonNameListModel?>, t: Throwable) {
                 binding.loadingBackFrame.visibility = View.GONE
                 binding.loadingView.stop()
-                Toast.makeText(this@OrderScreenForDeliveryPersonActivity, t.message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@ErrandDeliveryPersonActivity, t.message, Toast.LENGTH_SHORT).show()
             }
         })
 
@@ -873,7 +579,7 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
 
                 } else {
 
-                    Global.warningmessagetoast(this@OrderScreenForDeliveryPersonActivity, response.body()!!.message);
+                    Global.warningmessagetoast(this@ErrandDeliveryPersonActivity, response.body()!!.message);
 
                 }
             }
@@ -881,7 +587,7 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
             override fun onFailure(call: Call<UploadedPictureModel?>, t: Throwable) {
 
                 Log.e(TAG, "onFailure: "+t.message )
-                Toast.makeText(this@OrderScreenForDeliveryPersonActivity, t.message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@ErrandDeliveryPersonActivity, t.message, Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -931,6 +637,158 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
                     Log.e("data", response.body()!!.data.toString())
 
                     var listData = response.body()!!.data
+
+
+                    isErrandTripStarted = response.body()!!.is_trip_started
+                    isErrandTripEnd = response.body()!!.is_trip_ended
+                    isErrandUploadProof = response.body()!!.is_proff_uploded
+
+                    if (!flag.equals("uploadProof")) {
+
+                        if (isErrandTripStarted == false && isErrandTripEnd == false && isErrandUploadProof == false) {
+                            binding.apply {
+                                tvCountText.visibility = View.GONE
+                                btnENdTrip.visibility = View.GONE
+                                btnTrip.visibility = View.VISIBLE
+                                tvClickStartText.visibility = View.VISIBLE
+                                btnSubmit.visibility = View.GONE
+
+                                Log.e(TAG, "onCreate: " + binding.tvCountText.text.toString())
+
+                                tvTripStatus.setText("Status : Pending")
+                            }
+
+                        }
+
+                        else if (isErrandTripStarted == true && isErrandTripEnd == false && isErrandUploadProof == false) {
+
+                            binding.apply {
+                                btnTrip.visibility = View.GONE
+                                btnENdTrip.visibility = View.GONE
+                                linearTripDetails.visibility = View.VISIBLE
+                                tvCountText.visibility = View.VISIBLE
+                                tvClickStartText.visibility = View.GONE
+                                linearTripEndDetails.visibility = View.GONE
+                                btnUploadProof.visibility = View.VISIBLE
+
+
+                            }
+
+                            binding.apply {
+                                dispatchedDetailLayout.visibility = View.VISIBLE
+                                dispatchTripDetail.visibility = View.VISIBLE
+                                dispatchDetailAfterEndTrip.visibility = View.GONE
+                            }
+
+
+                        }
+
+
+                        else if (isErrandTripStarted == true && isErrandUploadProof == true && isErrandTripEnd == false) {
+                            binding.apply {
+                                tvCountText.visibility = View.GONE
+                                btnENdTrip.visibility = View.VISIBLE
+                                btnTrip.visibility = View.GONE
+                                tvClickStartText.visibility = View.GONE
+                                btnSubmit.visibility = View.GONE
+                                btnUploadProof.visibility = View.GONE
+
+                                Log.e(TAG, "onCreate: " + binding.tvCountText.text.toString())
+
+                                tvTripStatus.setText("Status : Started")
+
+                            }
+
+                            binding.apply {
+
+                                dispatchedDetailLayout.visibility = View.VISIBLE
+                                dispatchTripDetail.visibility = View.GONE
+                                dispatchDetailAfterEndTrip.visibility = View.VISIBLE
+                                EndTripFieldslayout.visibility = View.GONE
+
+                            }
+
+
+                        }
+
+
+                        else if (isErrandTripStarted == true && isErrandTripEnd == true && isErrandUploadProof == false) {
+                            binding.apply {
+                                tvCountText.visibility = View.GONE
+                                btnENdTrip.visibility = View.GONE
+                                btnTrip.visibility = View.GONE
+                                tvClickStartText.visibility = View.GONE
+                                btnSubmit.visibility = View.GONE
+                                btnUploadProof.visibility = View.VISIBLE
+
+                                Log.e(TAG, "onCreate: " + binding.tvCountText.text.toString())
+
+                                tvTripStatus.setText("Status : End Trip")
+
+                            }
+
+                            binding.apply {
+                                dispatchedDetailLayout.visibility = View.VISIBLE
+                                dispatchTripDetail.visibility = View.GONE
+                                dispatchDetailAfterEndTrip.visibility = View.VISIBLE
+                            }
+
+
+                        }
+
+
+                        else if (isErrandTripStarted == true && isErrandTripEnd == true && isErrandUploadProof == true) {
+                            binding.apply {
+                                tvCountText.visibility = View.GONE
+                                btnENdTrip.visibility = View.GONE
+                                btnTrip.visibility = View.GONE
+                                tvClickStartText.visibility = View.GONE
+                                btnSubmit.visibility = View.VISIBLE
+                                btnUploadProof.visibility = View.GONE
+
+                                Log.e(TAG, "onCreate: " + binding.tvCountText.text.toString())
+
+                                tvTripStatus.setText("Status : End Trip")
+
+                            }
+
+                            binding.apply {
+                                dispatchedDetailLayout.visibility = View.VISIBLE
+                                dispatchTripDetail.visibility = View.GONE
+                                dispatchDetailAfterEndTrip.visibility = View.VISIBLE
+                                EndTripFieldslayout.visibility = View.VISIBLE
+                            }
+
+                        }
+
+
+                        else {
+                            binding.apply {
+                                tvCountText.visibility = View.GONE
+                                btnENdTrip.visibility = View.GONE
+                                btnTrip.visibility = View.GONE
+                                tvClickStartText.visibility = View.GONE
+                                btnUploadProof.visibility = View.GONE
+                                btnSubmit.visibility = View.VISIBLE
+
+                                Log.e(TAG, "onCreate: " + binding.tvCountText.text.toString())
+
+                            }
+
+                            binding.apply {
+                                dispatchedDetailLayout.visibility = View.VISIBLE
+                                dispatchTripDetail.visibility = View.GONE
+                                dispatchDetailAfterEndTrip.visibility = View.VISIBLE
+                            }
+                        }
+
+                    }
+
+                    else {
+                        binding.btnENdTrip.visibility = View.VISIBLE
+                        binding.btnUploadProof.visibility = View.GONE
+                    }
+
 
                     if (listData.size > 0){
 
@@ -1005,10 +863,12 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
                         }
                     }
 
-                } else {
+                }
+
+                else {
                     binding.loadingBackFrame.visibility = View.GONE
                     binding.loadingView.stop()
-                    Global.warningmessagetoast(this@OrderScreenForDeliveryPersonActivity, response.body()!!.message);
+                    Global.warningmessagetoast(this@ErrandDeliveryPersonActivity, response.body()!!.message);
 
                 }
             }
@@ -1017,7 +877,7 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
                 binding.loadingBackFrame.visibility = View.GONE
                 binding.loadingView.stop()
                 Log.e(TAG, "onFailure: "+t.message )
-                Toast.makeText(this@OrderScreenForDeliveryPersonActivity, t.message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@ErrandDeliveryPersonActivity, t.message, Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -1090,8 +950,8 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
 
                                     binding.pickUpViewLayout.visibility = View.VISIBLE
 
-                                    val linearLayoutManager = LinearLayoutManager(this@OrderScreenForDeliveryPersonActivity, LinearLayoutManager.HORIZONTAL, false)
-                                    val adapter = PreviousImageViewAdapter(this@OrderScreenForDeliveryPersonActivity, mArrayUriList, arrayOf(), arrayListOf())
+                                    val linearLayoutManager = LinearLayoutManager(this@ErrandDeliveryPersonActivity, LinearLayoutManager.HORIZONTAL, false)
+                                    val adapter = PreviousImageViewAdapter(this@ErrandDeliveryPersonActivity, mArrayUriList, arrayOf(), arrayListOf())
                                     binding.pickUpProofRecyclerView.layoutManager = linearLayoutManager
                                     binding.pickUpProofRecyclerView.adapter = adapter
                                     adapter.notifyDataSetChanged()
@@ -1111,7 +971,7 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
                 } else {
                     binding.loadingBackFrame.visibility = View.GONE
                     binding.loadingView.stop()
-                    Global.warningmessagetoast(this@OrderScreenForDeliveryPersonActivity, response.body()!!.message);
+                    Global.warningmessagetoast(this@ErrandDeliveryPersonActivity, response.body()!!.message);
 
                 }
             }
@@ -1120,7 +980,7 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
                 binding.loadingBackFrame.visibility = View.GONE
                 binding.loadingView.stop()
                 Log.e(TAG, "onFailure: "+t.message )
-                Toast.makeText(this@OrderScreenForDeliveryPersonActivity, t.message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@ErrandDeliveryPersonActivity, t.message, Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -1144,7 +1004,7 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
 
                 } else {
 
-                    Global.warningmessagetoast(this@OrderScreenForDeliveryPersonActivity, response.body()!!.message);
+                    Global.warningmessagetoast(this@ErrandDeliveryPersonActivity, response.body()!!.message);
 
                 }
             }
@@ -1152,7 +1012,7 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
             override fun onFailure(call: Call<UploadedPictureModel?>, t: Throwable) {
 
                 Log.e(TAG, "onFailure: "+t.message )
-                Toast.makeText(this@OrderScreenForDeliveryPersonActivity, t.message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@ErrandDeliveryPersonActivity, t.message, Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -1207,7 +1067,7 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
 
                 } else {
 
-                    Global.warningmessagetoast(this@OrderScreenForDeliveryPersonActivity, response.body()!!.message);
+                    Global.warningmessagetoast(this@ErrandDeliveryPersonActivity, response.body()!!.message);
 
                 }
             }
@@ -1215,7 +1075,7 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
             override fun onFailure(call: Call<UploadedPictureModel?>, t: Throwable) {
 
                 Log.e(TAG, "onFailure: "+t.message )
-                Toast.makeText(this@OrderScreenForDeliveryPersonActivity, t.message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@ErrandDeliveryPersonActivity, t.message, Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -1306,7 +1166,7 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
             override fun onFailure(call: Call<DeliveryItemListModel?>, t: Throwable) {
                 binding.loadingView.stop()
                 binding.loadingBackFrame.visibility = View.GONE
-                Toast.makeText(this@OrderScreenForDeliveryPersonActivity, t.message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@ErrandDeliveryPersonActivity, t.message, Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -1314,7 +1174,7 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
 
     private fun setupDeliveryDetailRecyclerview() = binding.rvDeliveryDetail.apply {
         adapter = deliveryDetailAdapter
-        layoutManager = LinearLayoutManager(this@OrderScreenForDeliveryPersonActivity)
+        layoutManager = LinearLayoutManager(this@ErrandDeliveryPersonActivity)
         deliveryDetailAdapter.notifyDataSetChanged()
     }
 
@@ -1369,11 +1229,11 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
 
         bindingBottomSheet.linearAddImage.setOnClickListener {
 
-          /*  if (allPermissionsGranted()) {
+            /*  if (allPermissionsGranted()) {
 
-            } else {
-                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE), REQUEST_CODE_PERMISSIONS)
-            }*/
+              } else {
+                  ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE), REQUEST_CODE_PERMISSIONS)
+              }*/
             dispatchTakePictureIntent()
         }
 
@@ -1464,7 +1324,7 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
                     loadingView.stop()
 
                     Log.e("data", response.body()!!.data.toString())
-                    Global.successmessagetoast(this@OrderScreenForDeliveryPersonActivity, "Picture Uploaded Success")
+                    Global.successmessagetoast(this@ErrandDeliveryPersonActivity, "Picture Uploaded Success")
                     bottomSheetDialog.dismiss()
 
 //                    binding.btnSubmit.visibility = View.VISIBLE
@@ -1489,7 +1349,7 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
                     viewModel.callWorkQueueDetailApi(jsonObject)
                     bindWorkQueueDetail("uploadProof")
 
-                    callTripDetailsApi("")
+                    callTripDetailsApi("uploadProof")
 
                     binding.apply {
                         dispatchTripDetail.visibility = View.GONE
@@ -1502,7 +1362,7 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
                     binding.btnSubmit.visibility = View.GONE
                     loadingback.visibility = View.GONE
                     loadingView.stop()
-                    Global.warningmessagetoast(this@OrderScreenForDeliveryPersonActivity, response.body()!!.message);
+                    Global.warningmessagetoast(this@ErrandDeliveryPersonActivity, response.body()!!.message);
 
                 }
             }
@@ -1511,7 +1371,7 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
                 loadingback.visibility = View.GONE
                 loadingView.stop()
                 Log.e(TAG, "onFailure: "+t.message )
-                Toast.makeText(this@OrderScreenForDeliveryPersonActivity, t.message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@ErrandDeliveryPersonActivity, t.message, Toast.LENGTH_SHORT).show()
             }
         })
 
@@ -1624,7 +1484,7 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
     @SuppressLint("MissingPermission")
     private fun getMyCurrentLocation(type: String) {
         // Initialize Location manager
-        val locationManager = this@OrderScreenForDeliveryPersonActivity.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        val locationManager = this@ErrandDeliveryPersonActivity.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
         // Check condition
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
@@ -1672,7 +1532,7 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
                         override fun onLocationResult(locationResult: LocationResult) {
                             // Initialize location
                             val location1 = locationResult.lastLocation
-                            val geocoder = Geocoder(this@OrderScreenForDeliveryPersonActivity, Locale.getDefault())
+                            val geocoder = Geocoder(this@ErrandDeliveryPersonActivity, Locale.getDefault())
                             var addresses: List<Address>? = null
 
                             try {
@@ -1775,7 +1635,7 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
 
                     binding.loadingBackFrame.visibility = View.GONE
                     binding.loadingView.stop()
-                    Global.warningmessagetoast(this@OrderScreenForDeliveryPersonActivity, response.body()!!.errors);
+                    Global.warningmessagetoast(this@ErrandDeliveryPersonActivity, response.body()!!.errors);
 
                 }
             }
@@ -1858,7 +1718,7 @@ class OrderScreenForDeliveryPersonActivity : AppCompatActivity() {
 
                     binding.loadingBackFrame.visibility = View.GONE
                     binding.loadingView.stop()
-                    Global.warningmessagetoast(this@OrderScreenForDeliveryPersonActivity, response.body()!!.errors);
+                    Global.warningmessagetoast(this@ErrandDeliveryPersonActivity, response.body()!!.errors);
 
                 }
             }

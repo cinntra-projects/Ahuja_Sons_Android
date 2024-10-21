@@ -26,6 +26,11 @@ class DeliveryCoordinatorIDsAdapter (private val items: ArrayList<AllWorkQueueRe
         notifyDataSetChanged()
     }
 
+    // Method to return the list of items
+    fun getItems(): MutableList<AllWorkQueueResponseModel.InspectedDelivery> {
+        return items
+    }
+
     override fun onBindViewHolder(holder: InnerViewHolder, position: Int) {
         val item = items[position]
         holder.bind(item)
@@ -55,7 +60,6 @@ class DeliveryCoordinatorIDsAdapter (private val items: ArrayList<AllWorkQueueRe
                     GlobalClasses.deliveryIDsList.add(item)
                 }
 
-                (holder.binding.checkBoxOrder.context as? OrderForDeliveryCoordinatorFragment)?.onChildCheckboxSelected(item)
 
             } else {
                 GlobalClasses.deliveryIDsList.remove(item)
