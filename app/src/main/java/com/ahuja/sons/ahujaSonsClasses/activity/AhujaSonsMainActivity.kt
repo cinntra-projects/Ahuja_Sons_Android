@@ -253,6 +253,8 @@ class AhujaSonsMainActivity : AppCompatActivity() {
             val orderIDArrayList = ArrayList<Int>()
             val orderIDSet = mutableSetOf<Int>()
 
+
+
             for (order in GlobalClasses.allOrderIDCoordinatorCheck) {
                 if (order.isErrand == true) {
                     val ID = order.errandId.toInt()
@@ -298,7 +300,6 @@ class AhujaSonsMainActivity : AppCompatActivity() {
                     commaSeparatedDeliveryIds = idArrayList.joinToString(separator = ",")
 
                     //todo set order rid from delivery id list
-
 
                     // Add unique order IDs from GlobalClasses.deliveryIDsList
                     if (GlobalClasses.deliveryIDsList.isNotEmpty()) {

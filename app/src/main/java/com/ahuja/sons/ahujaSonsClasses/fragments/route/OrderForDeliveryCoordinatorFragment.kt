@@ -16,7 +16,6 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ahuja.sons.R
 import com.ahuja.sons.ahujaSonsClasses.Interface.OnDialogClickListener
-import com.ahuja.sons.ahujaSonsClasses.activity.AhujaSonsMainActivity
 import com.ahuja.sons.ahujaSonsClasses.adapter.DeliveryCoordinatorIDsAdapter
 import com.ahuja.sons.ahujaSonsClasses.adapter.OrderListForDeliveryCoordinatorAdapter
 import com.ahuja.sons.ahujaSonsClasses.ahujaconstant.GlobalClasses
@@ -82,7 +81,11 @@ class OrderForDeliveryCoordinatorFragment(var tvCreateRoute: TextView, var ivCol
 
         binding.toolbar.visibility = View.GONE
 
-        deliveryIDAdapter = DeliveryCoordinatorIDsAdapter(ArrayList(), isMultiOrderCardSelectEnabled)
+        deliveryIDAdapter = DeliveryCoordinatorIDsAdapter(
+            ArrayList(),
+            isMultiOrderCardSelectEnabled,
+            OrderListForDeliveryCoordinatorAdapter.checkBOxOuter
+        )
 
         binding.chipGroup.visibility = View.GONE//todo hide filter
         tvCreateRoute.visibility = View.VISIBLE
@@ -229,6 +232,28 @@ class OrderForDeliveryCoordinatorFragment(var tvCreateRoute: TextView, var ivCol
 
     }
 
+
+    fun onChildCheckboxSelected(selectedChildItem: AllWorkQueueResponseModel.InspectedDelivery) {
+        // Find the parent data corresponding to this child
+        Log.e(TAG, "onChildCheckboxSelected: parent selected" )
+        val parentData = this.findParentDataForChild(selectedChildItem)
+        if (parentData != null) {
+            // Check the parent checkbox
+            parentData.isSelected = true
+            // Add parent order to the cartListForDeliveryCoordinatorCheck
+            val localSelectedOrder = LocalSelectedOrder().apply {
+                orderId = parentData.OrderRequest!!.id.toString()//id
+                orderName = parentData.CardName
+                orderName = parentData.CardName
+                errandId = parentData.DeliveryId
+                isErrand = parentData.is_errands
+                isReturn = parentData.is_return
+                id = parentData.id
+            }
+            GlobalClasses.allOrderIDCoordinatorCheck.add(localSelectedOrder)
+//            GlobalClasses.cartListForDeliveryCoordinatorCheck[parentData.OrderRequest?.id.toString()] = localSelectedOrder
+        }
+    }
 
     private fun findParentDataForChild(childItem: AllWorkQueueResponseModel.InspectedDelivery): AllWorkQueueResponseModel.Data? {
         // Logic to find the parent data corresponding to the child item

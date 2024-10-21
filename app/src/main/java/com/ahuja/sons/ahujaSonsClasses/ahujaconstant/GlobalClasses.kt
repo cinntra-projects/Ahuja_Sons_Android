@@ -17,4 +17,6 @@ object GlobalClasses {
 
     val demoForOrderRequest: MutableList<ParentItemModel.ChildItem> = mutableListOf()
 
+    var isAllShouldSelected=false
+
 }

@@ -13,7 +13,7 @@ data class DeliveryDetailItemListModel(
         var ItemDescription: String = "",
         var LineNum: Int = 0,
         var MainSystem: String = "",
-        var Quantity: Double = 1.0,
+        var Quantity: Int = 0,
         var SerialNumbers: List<Any> = listOf(),
         var ShipToCode: String = "",
         var System: String = "",
@@ -22,6 +22,7 @@ data class DeliveryDetailItemListModel(
         var U_REPTYP: String = "",
         var UnitPrice: Double = 0.0,
         var UomNo: String = "",
+        var U_Size: String = "",
         var id: Int = 0
     )
 }

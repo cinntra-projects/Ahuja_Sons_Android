@@ -9,35 +9,19 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AlphaAnimation
-import android.view.animation.Animation
-import android.view.animation.LinearInterpolator
 import android.widget.CheckBox
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ahuja.sons.R
-import com.ahuja.sons.activity.ChatActivity
 import com.ahuja.sons.ahujaSonsClasses.activity.DeliveryCoordinatorActivity
-import com.ahuja.sons.ahujaSonsClasses.activity.ParticularOrderDetailActivity
-import com.ahuja.sons.ahujaSonsClasses.activity.SalesPersonRoleDetailActivity
 import com.ahuja.sons.ahujaSonsClasses.ahujaconstant.GlobalClasses
-import com.ahuja.sons.ahujaSonsClasses.ahujaconstant.RoleClass
-import com.ahuja.sons.ahujaSonsClasses.demo.ChildAdapter
-import com.ahuja.sons.ahujaSonsClasses.model.AllOrderListResponseModel
-import com.ahuja.sons.ahujaSonsClasses.model.local.LocalRouteData
 import com.ahuja.sons.ahujaSonsClasses.model.local.LocalSelectedOrder
-import com.ahuja.sons.ahujaSonsClasses.model.orderModel.AllOrderListModel
 import com.ahuja.sons.ahujaSonsClasses.model.workQueue.AllWorkQueueResponseModel
-import com.ahuja.sons.databinding.ItemWorkQueueBinding
 import com.ahuja.sons.databinding.RouteInnerItemsLayoutBinding
 import com.ahuja.sons.globals.Global
 import com.amulyakhare.textdrawable.TextDrawable
 import com.amulyakhare.textdrawable.util.ColorGenerator
-import com.lid.lib.LabelTextView
 import com.pixplicity.easyprefs.library.Prefs
 import java.util.*
 import kotlin.collections.ArrayList
@@ -219,19 +203,21 @@ class OrderListForDeliveryCoordinatorAdapter(
         notifyDataSetChanged()
     }
 
+    companion object{
+        var checkBOxOuter:CheckBox?=null
+    }
+
 
     inner class Category_Holder(var binding: RouteInnerItemsLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
 
         fun bind(currentDocLine: AllWorkQueueResponseModel.Data, context: Context) {
+             checkBOxOuter=  binding.checkBoxOrder
 
-            Log.d(
-                "ParentAdapter",
-                "Binding child adapter with ${currentDocLine.DeliveryNote.size} items"
-            )
+            Log.d("ParentAdapter", "Binding child adapter with ${currentDocLine.DeliveryNote.size} items")
 
-            val innerAdapter = DeliveryCoordinatorIDsAdapter(currentDocLine.InspectedDeliverys, isMultiOrderCardSelectEnabled)
+            val innerAdapter = DeliveryCoordinatorIDsAdapter(currentDocLine.InspectedDeliverys, isMultiOrderCardSelectEnabled, checkBOxOuter)
             binding.deliveryIdRecyclerView.layoutManager = LinearLayoutManager(itemView.context, LinearLayoutManager.VERTICAL, false)
             binding.deliveryIdRecyclerView.adapter = innerAdapter
 
@@ -294,18 +280,22 @@ class OrderListForDeliveryCoordinatorAdapter(
                     GlobalClasses.allOrderIDCoordinatorCheck.add(localSelectedOrder)
 //                    GlobalClasses.cartListForDeliveryCoordinatorCheck[currentDocLine.OrderRequest!!.id.toString()] = localSelectedOrder
 
-                    val newColorStateList =
-                        ColorStateList.valueOf(context.resources.getColor(R.color.blue_light))
+                    val newColorStateList = ColorStateList.valueOf(context.resources.getColor(R.color.blue_light))
                     binding.constraintLayoutWorkQueue.backgroundTintList = newColorStateList
 
                     //todo trial
+
                     val itemsToAdd = currentDocLine.InspectedDeliverys.filterNot {
                         GlobalClasses.deliveryIDsList.contains(it)
                     }
 
+                    itemsToAdd.map {
+                        it.workQueueId = currentDocLine!!.id
+                    }
+
                     if (itemsToAdd.isNotEmpty()) {
                         GlobalClasses.deliveryIDsList.addAll(itemsToAdd)
-                        Log.e("childItemCheck==>", "onBindViewHolder: Added new items")
+                        Log.e("childItemCheck123==>", "onBindViewHolder: Added new items")
                     } else {
                         Log.e("childItemCheck==>", "onBindViewHolder: Already exists")
                     }

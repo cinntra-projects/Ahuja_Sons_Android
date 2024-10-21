@@ -469,6 +469,10 @@ interface Apis {
     @POST("order_request/all_filter_page")
     fun callOrderListApi(@Body data: AllOrderRequestModel): Call<AllOrderListModel>
 
+    @POST("order_request/all_deposited_orders")
+    fun callOrderListForDependency(@Body data: AllOrderRequestModel): Call<AllOrderListModel>
+
+
     @POST("order/one")
     suspend fun getOrderOneDetail(@Body data: JsonObject): Response<OrderOneResponseModel>
 
@@ -531,6 +535,7 @@ interface Apis {
     //todo counter Api's
     @POST("order_request/create_dependency")
     fun createDependency(@Body data: CreateDependencyRequestModel): Call<AllItemListResponseModel>
+
 
     @POST("order_request/create_errands")
     fun createErrands(@Body jsonObject: JsonObject): Call<AllItemListResponseModel>

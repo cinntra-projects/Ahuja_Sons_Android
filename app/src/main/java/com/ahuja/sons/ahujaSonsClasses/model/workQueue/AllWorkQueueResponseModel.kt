@@ -15,6 +15,7 @@ data class AllWorkQueueResponseModel(
     data class Data(
         val AssignedToRole: AssignedToRole? = null,
         val CompletedBy: String = "",
+        val has_dependency: Boolean = false,
         val is_return: Boolean = false,
         val is_return_to_office: Boolean = false,
         var is_errands : Boolean = false,
@@ -115,7 +116,8 @@ data class AllWorkQueueResponseModel(
         var UpdateTime: String = "",
         var VatSum: String = "",
         var id: Int = 0,
-        var isSelected: Boolean,
+        var isSelected: Boolean =false,
+        var workQueueId: String="",
     )
 
     data class DeliveryNote(

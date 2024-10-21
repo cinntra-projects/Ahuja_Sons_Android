@@ -33,8 +33,8 @@ class DeliveryDetailItemAdapter(val AllitemsList: ArrayList<DeliveryDetailItemLi
             tvItemDescription.setText(obj.ItemDescription)
             tvQTy.setText("Qty : "+obj.Quantity)
             tvUOM.setText("UOM : "+obj.UomNo)
-            tvSize.visibility = View.GONE
-            tvSize.setText("Item Code : "+obj.ItemCode)
+            tvSize.visibility = View.VISIBLE
+            tvSize.setText("Item Code : "+obj.U_Size)
         }
 
         holder.itemView.setOnClickListener {

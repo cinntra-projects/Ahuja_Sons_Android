@@ -5,13 +5,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import androidx.recyclerview.widget.RecyclerView
 import com.ahuja.sons.ahujaSonsClasses.ahujaconstant.GlobalClasses
 import com.ahuja.sons.ahujaSonsClasses.fragments.route.OrderForDeliveryCoordinatorFragment
 import com.ahuja.sons.ahujaSonsClasses.model.workQueue.AllWorkQueueResponseModel
 import com.ahuja.sons.databinding.InspectionDeliveryIdLayoutBinding
 
-class DeliveryCoordinatorIDsAdapter (private val items: ArrayList<AllWorkQueueResponseModel.InspectedDelivery>, var isMultiOrderCardSelectEnabled: Boolean) : RecyclerView.Adapter<DeliveryCoordinatorIDsAdapter.InnerViewHolder>() {
+class DeliveryCoordinatorIDsAdapter(
+    private val items: ArrayList<AllWorkQueueResponseModel.InspectedDelivery>,
+    var isMultiOrderCardSelectEnabled: Boolean,
+    checkBOxOuter: CheckBox? = null,
+) : RecyclerView.Adapter<DeliveryCoordinatorIDsAdapter.InnerViewHolder>() {
 
     interface ClickOnDeliveryID {
         fun onClickDeliveryID(mArrayUriList: ArrayList<Uri>)
@@ -57,8 +62,14 @@ class DeliveryCoordinatorIDsAdapter (private val items: ArrayList<AllWorkQueueRe
                 if (GlobalClasses.deliveryIDsList.contains(item)){
                     Log.e("childItemCheck==>", "onBindViewHolder: Already exist" )
                 }else{
+                    Log.e("inner adapter add list", "onBindViewHolder: ID Add on Inner adapter")
+
                     GlobalClasses.deliveryIDsList.add(item)
+                    OrderListForDeliveryCoordinatorAdapter.checkBOxOuter!!.isChecked=true
+
                 }
+
+                (holder.binding.checkBoxOrder.context as? OrderForDeliveryCoordinatorFragment)?.onChildCheckboxSelected(item)
 
 
             } else {

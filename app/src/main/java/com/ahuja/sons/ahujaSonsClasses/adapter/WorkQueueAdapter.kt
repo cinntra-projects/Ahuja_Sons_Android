@@ -78,7 +78,7 @@ class WorkQueueAdapter(var AllitemsList: ArrayList<AllWorkQueueResponseModel.Dat
 
             if (AllitemsList[position].is_errands == true) {
                 holder.binding.deliveriesLayoutView.visibility = View.GONE
-                holder.binding.ivDeliveryCoordinator.setImageDrawable(context.resources.getDrawable(R.drawable.dispatched_icon))
+                holder.binding.ivDeliveryCoordinator.setImageDrawable(context.resources.getDrawable(R.drawable.errand_icon))
             }
 
         }else{
@@ -92,6 +92,10 @@ class WorkQueueAdapter(var AllitemsList: ArrayList<AllWorkQueueResponseModel.Dat
             holder.binding.deliveriesLayoutView.visibility = View.GONE*/
         }
 
+
+        if (AllitemsList[position].has_dependency == true && AllitemsList[position].is_return == false && AllitemsList[position].is_errands == false){
+            holder.binding.constraintLayoutWorkQueue.setBackgroundColor(context.resources.getColor(R.color.card_sky_blue_back))
+        }
 
         //todo dropdown arrows for delivery id's--
         holder.binding.deliveryIDUpArrow.setOnClickListener {

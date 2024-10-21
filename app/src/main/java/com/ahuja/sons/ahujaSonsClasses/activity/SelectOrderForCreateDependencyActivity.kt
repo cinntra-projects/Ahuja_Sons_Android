@@ -274,7 +274,7 @@ class SelectOrderForCreateDependencyActivity : AppCompatActivity() {
             maxItem = maxItem,
         )
 
-        val call: Call<AllOrderListModel> = ApiClient().service.callOrderListApi(requestModel)
+        val call: Call<AllOrderListModel> = ApiClient().service.callOrderListForDependency(requestModel)
         call.enqueue(object : Callback<AllOrderListModel> {
             override fun onResponse(
                 call: Call<AllOrderListModel>,
