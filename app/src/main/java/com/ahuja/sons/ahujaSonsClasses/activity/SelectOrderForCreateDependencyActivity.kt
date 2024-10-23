@@ -52,7 +52,6 @@ class SelectOrderForCreateDependencyActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySelectOrderForCreateDependencyBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.cardAssignButton!!!!.visibility = View.VISIBLE
 
         orderID = intent.getStringExtra("orderID")!!
 
@@ -287,6 +286,7 @@ class SelectOrderForCreateDependencyActivity : AppCompatActivity() {
                         AllitemsList.addAll(response.body()!!.data)
                         setAdapter()
                         binding.nodatafound.visibility = View.VISIBLE
+                        binding.cardAssignButton.visibility = View.GONE
 
                     } else {
 
@@ -312,6 +312,8 @@ class SelectOrderForCreateDependencyActivity : AppCompatActivity() {
                     binding.idPBLoading.visibility = View.GONE
                     binding.loadingback.visibility = View.GONE
                     binding.loadingView.stop()
+
+                    binding.cardAssignButton.visibility = View.VISIBLE
 
 
                 } else if (response.body()!!.status == 201) {

@@ -32,7 +32,7 @@ class DeliveryItemsListAdapter(val AllitemsList: ArrayList<AllItemsForOrderModel
             tvQTy.setText("Qty : "+obj.Quantity)
             tvUOM.setText("UOM : "+obj.UomNo)
             tvSize.visibility = View.VISIBLE
-            tvSize.setText("Item Code : "+obj.U_Size)
+            tvSize.setText("Size : "+obj.U_Size)
 
         }
 

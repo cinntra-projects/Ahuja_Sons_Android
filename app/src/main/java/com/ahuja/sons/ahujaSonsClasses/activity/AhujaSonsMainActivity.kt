@@ -254,7 +254,6 @@ class AhujaSonsMainActivity : AppCompatActivity() {
             val orderIDSet = mutableSetOf<Int>()
 
 
-
             for (order in GlobalClasses.allOrderIDCoordinatorCheck) {
                 if (order.isErrand == true) {
                     val ID = order.errandId.toInt()
@@ -428,6 +427,8 @@ class AhujaSonsMainActivity : AppCompatActivity() {
 
                      GlobalClasses.deliveryIDsList.clear()
                      GlobalClasses.allOrderIDCoordinatorCheck.clear()
+
+                     Prefs.putBoolean(GlobalClasses.isChildCheckTriggeredParent, false)
 
                      dialog.dismiss()
 

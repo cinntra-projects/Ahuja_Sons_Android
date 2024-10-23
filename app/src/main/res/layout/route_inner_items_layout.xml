@@ -53,6 +53,25 @@
                 android:src="@drawable/dispatched_icon"/>
 
             <TextView
+                android:id="@+id/tvErrands"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="@font/helvetica_regular"
+                android:gravity="start"
+                android:paddingStart="4dp"
+                android:paddingTop="2dp"
+                android:paddingEnd="4dp"
+                android:paddingBottom="2dp"
+                android:text=""
+                android:visibility="gone"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:textSize="10sp" />
+
+            <TextView
                 android:id="@+id/tvSurgeryDateTime"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

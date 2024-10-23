@@ -19,6 +19,7 @@ data class AllErrandsListModel(
         val Remark: String,
         val UpdateDate: String,
         val UpdateTime: String,
+        val Status: String,
         val id: Int
     )
 

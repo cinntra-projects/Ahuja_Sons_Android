@@ -31,7 +31,7 @@ class PendingItemAfterGroupingAdapter(val AllitemsList: ArrayList<AllItemsForOrd
             tvQTy.setText("Qty : "+obj.Quantity)
             tvUOM.setText("UOM : "+obj.MeasureUnit)
             tvSize.visibility = View.VISIBLE
-            tvSize.setText("Item Code : "+obj.U_Size)
+            tvSize.setText("Size : "+obj.U_Size)
 
         }
 

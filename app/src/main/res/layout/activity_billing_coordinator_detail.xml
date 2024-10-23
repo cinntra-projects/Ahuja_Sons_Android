@@ -349,7 +349,7 @@
                         android:layout_marginRight="10dp"
                         android:gravity="end"
                         android:paddingEnd="10dp"
-                        android:visibility="visible">
+                        android:visibility="gone">
 
                         <TextView
                             android:id="@+id/tvCreateOrder"

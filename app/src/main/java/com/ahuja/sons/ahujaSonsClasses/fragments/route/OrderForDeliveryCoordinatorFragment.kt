@@ -18,6 +18,7 @@ import com.ahuja.sons.R
 import com.ahuja.sons.ahujaSonsClasses.Interface.OnDialogClickListener
 import com.ahuja.sons.ahujaSonsClasses.adapter.DeliveryCoordinatorIDsAdapter
 import com.ahuja.sons.ahujaSonsClasses.adapter.OrderListForDeliveryCoordinatorAdapter
+import com.ahuja.sons.ahujaSonsClasses.adapter.demoAdapter.ParentCheckBoxAdapter
 import com.ahuja.sons.ahujaSonsClasses.ahujaconstant.GlobalClasses
 import com.ahuja.sons.ahujaSonsClasses.ahujaconstant.RoleClass
 import com.ahuja.sons.ahujaSonsClasses.model.local.LocalSelectedOrder
@@ -39,7 +40,8 @@ import retrofit2.Response
 class OrderForDeliveryCoordinatorFragment(var tvCreateRoute: TextView, var ivCollapseCart: ImageButton, var searchBtn: ImageButton) : Fragment(), OnDialogClickListener {
 
     lateinit var binding: FragmentOrderBinding
-    var adapter: OrderListForDeliveryCoordinatorAdapter? = null
+//    var adapter: OrderListForDeliveryCoordinatorAdapter? = null
+    var adapter: ParentCheckBoxAdapter? = null
     lateinit var deliveryIDAdapter: DeliveryCoordinatorIDsAdapter
     lateinit var linearLayoutManager: LinearLayoutManager
     var pageno = 1
@@ -81,6 +83,8 @@ class OrderForDeliveryCoordinatorFragment(var tvCreateRoute: TextView, var ivCol
 
         binding.toolbar.visibility = View.GONE
 
+        Prefs.putBoolean(GlobalClasses.isChildCheckTriggeredParent, false)
+
         deliveryIDAdapter = DeliveryCoordinatorIDsAdapter(
             ArrayList(),
             isMultiOrderCardSelectEnabled,
@@ -121,6 +125,8 @@ class OrderForDeliveryCoordinatorFragment(var tvCreateRoute: TextView, var ivCol
 
             GlobalClasses.deliveryIDsList.clear()
             GlobalClasses.allOrderIDCoordinatorCheck.clear()
+
+            Prefs.putBoolean(GlobalClasses.isChildCheckTriggeredParent, false)
 
             if (assignCard!!.visibility == View.GONE) {
                 assignCard!!.visibility = View.VISIBLE
@@ -167,6 +173,11 @@ class OrderForDeliveryCoordinatorFragment(var tvCreateRoute: TextView, var ivCol
             override fun onRefresh() {
                 binding.searchView.clearFocus()
                 binding.searchView.visibility = View.GONE
+
+                GlobalClasses.deliveryIDsList.clear()
+                GlobalClasses.allOrderIDCoordinatorCheck.clear()
+
+                Prefs.putBoolean(GlobalClasses.isChildCheckTriggeredParent, false)
 
                 if (Global.checkForInternet(requireContext())) {
                     pageno = 1
@@ -446,7 +457,8 @@ class OrderForDeliveryCoordinatorFragment(var tvCreateRoute: TextView, var ivCol
 
     private fun setAdapter() {
         linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        adapter = OrderListForDeliveryCoordinatorAdapter(AllitemsList, RoleClass.deliveryPerson, isMultiOrderCardSelectEnabled, binding.checkBoxSelectAll)
+//        adapter = OrderListForDeliveryCoordinatorAdapter(AllitemsList, RoleClass.deliveryPerson, isMultiOrderCardSelectEnabled, binding.checkBoxSelectAll)
+        adapter = ParentCheckBoxAdapter(AllitemsList, RoleClass.deliveryPerson, isMultiOrderCardSelectEnabled, binding.checkBoxSelectAll)
         binding.productRecyclerView.layoutManager = linearLayoutManager
         binding.productRecyclerView.adapter = adapter
         adapter?.let {

@@ -12,11 +12,7 @@ import com.ahuja.sons.ahujaSonsClasses.fragments.route.OrderForDeliveryCoordinat
 import com.ahuja.sons.ahujaSonsClasses.model.workQueue.AllWorkQueueResponseModel
 import com.ahuja.sons.databinding.InspectionDeliveryIdLayoutBinding
 
-class DeliveryCoordinatorIDsAdapter(
-    private val items: ArrayList<AllWorkQueueResponseModel.InspectedDelivery>,
-    var isMultiOrderCardSelectEnabled: Boolean,
-    checkBOxOuter: CheckBox? = null,
-) : RecyclerView.Adapter<DeliveryCoordinatorIDsAdapter.InnerViewHolder>() {
+class DeliveryCoordinatorIDsAdapter(private val items: ArrayList<AllWorkQueueResponseModel.InspectedDelivery>, var isMultiOrderCardSelectEnabled: Boolean, var checkBOxOuter: CheckBox? = null, ) : RecyclerView.Adapter<DeliveryCoordinatorIDsAdapter.InnerViewHolder>() {
 
     interface ClickOnDeliveryID {
         fun onClickDeliveryID(mArrayUriList: ArrayList<Uri>)
@@ -65,7 +61,10 @@ class DeliveryCoordinatorIDsAdapter(
                     Log.e("inner adapter add list", "onBindViewHolder: ID Add on Inner adapter")
 
                     GlobalClasses.deliveryIDsList.add(item)
-                    OrderListForDeliveryCoordinatorAdapter.checkBOxOuter!!.isChecked=true
+
+                    checkBOxOuter!!.isChecked=true
+
+
 
                 }
 

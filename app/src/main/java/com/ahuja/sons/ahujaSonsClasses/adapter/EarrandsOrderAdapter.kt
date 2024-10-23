@@ -43,7 +43,7 @@ class EarrandsOrderAdapter : ListAdapter<AllErrandsListModel.Data, EarrandsOrder
             binding.tvDropLocation.text = order.DropLocation
             binding.tvNatureEarrand.text = "${order.NatureOfErrands.Name}"
             binding.tvContactPerson.text = "${order.ContactPerson}"
-            binding.status.text = "Status : ${order.OrderRequestID.Status}"
+            binding.status.text = "Status : ${order.Status}"
 
             if(order.Remark.isNotEmpty())
                 binding.tvRemark.text ="${order.Remark}"
