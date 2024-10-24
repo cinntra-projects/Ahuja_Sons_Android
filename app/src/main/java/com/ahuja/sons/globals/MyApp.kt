@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.content.ContextWrapper
 import android.os.Bundle
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.pixplicity.easyprefs.library.Prefs
 
 class MyApp : Application() {
@@ -26,6 +27,7 @@ class MyApp : Application() {
             .build()
 
         currentApp= this
+        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true);
 
         registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
             override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {

@@ -6,15 +6,14 @@ plugins {
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
     id 'androidx.navigation.safeargs.kotlin'
-
 }
 
 android {
     buildFeatures {
         viewBinding = true
-
     }
 }
+
 
 android {
     compileSdk 33

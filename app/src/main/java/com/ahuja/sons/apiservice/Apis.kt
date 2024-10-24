@@ -659,6 +659,9 @@ interface Apis {
     @POST("order_request/billing_submit")
     fun submitBilling(@Body data: JsonObject ): Call<AllWorkQueueResponseModel>
 
+    @POST("order_request/get_billing_details")
+    fun getBillingDetailApi(@Body data: JsonObject ): Call<BillingDetailModel>
+
 
     //todo operational manager api
     @POST("order_request/allow_incomplete_return")

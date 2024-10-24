@@ -27,6 +27,7 @@ class SplashActivity : AppCompatActivity() {
         bindind = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(bindind.root)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+//        crashApp()
 
         // Hold animation for the ImageView
         val hold = AnimationUtils.loadAnimation(this, R.anim.hold)
@@ -66,6 +67,10 @@ class SplashActivity : AppCompatActivity() {
         // Start the hold animation
         imageView.startAnimation(hold)
     }
+
+//    public fun crashApp() {
+//        throw  RuntimeException("Test Crash")
+//    }; // Force a crash }
 
     private fun login() {
         if (Prefs.getBoolean(com.ahuja.sons.globals.Global.AutoLogIn, false)) {

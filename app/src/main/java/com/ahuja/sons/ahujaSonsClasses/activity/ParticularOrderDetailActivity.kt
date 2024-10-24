@@ -38,8 +38,10 @@ import com.ahuja.sons.viewmodel.MainViewModelProvider
 import com.amulyakhare.textdrawable.TextDrawable
 import com.amulyakhare.textdrawable.util.ColorGenerator
 import com.google.gson.JsonObject
+import com.pixplicity.easyprefs.library.Prefs
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -235,6 +237,57 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
 
 
 
+
+
+    }
+
+
+    //todo Billing detail api calling--
+    private fun callBillingDetailApiHere() {
+        var jsonObject1 = JsonObject()
+        jsonObject1.addProperty("OrderID", globalDataWorkQueueList.id)
+
+        val call: Call<BillingDetailModel> = ApiClient().service.getBillingDetailApi(jsonObject1)
+        call.enqueue(object : Callback<BillingDetailModel?> {
+            override fun onResponse(call: Call<BillingDetailModel?>, response: Response<BillingDetailModel?>) {
+                if (response.body()!!.status == 200) {
+
+                    Log.e("data", response.body()!!.data.toString())
+
+                    var listData = response.body()!!.data
+
+                    if (listData != null){
+                        if (Prefs.getString(Global.Employee_role, "").equals("Sales Person") ||
+                            Prefs.getString(Global.Employee_role, "").equals("Counter") ||
+                            Prefs.getString(Global.Employee_role, "").equals("Inspection")||
+                            Prefs.getString(Global.Employee_role, "").equals("Billing Coordinator") ||
+                            Prefs.getString(Global.Employee_role, "").equals("Operation Manager")){
+
+                            binding.billingCardView.visibility = View.VISIBLE
+
+                            binding.tvBillingBy.text = listData.CompletedBy
+
+                            binding.tvTime.setText(Global.convert_yyyy_mm_dd_to_dd_mm_yyyy(listData.UpdateDate) +" "+ listData.UpdateTime)
+
+
+                        }else{
+                            binding.billingCardView.visibility = View.GONE
+                        }
+                    }
+
+                } else {
+                    binding.billingCardView.visibility = View.VISIBLE
+                    Global.warningmessagetoast(this@ParticularOrderDetailActivity, response.body()!!.message);
+
+                }
+            }
+
+            override fun onFailure(call: Call<BillingDetailModel?>, t: Throwable) {
+
+                Log.e(TAG, "onFailure: "+t.message )
+                Toast.makeText(this@ParticularOrderDetailActivity, t.message, Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
 
@@ -419,6 +472,21 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
         }
 
 
+        binding.apply {
+            billingDownArrow.setOnClickListener {
+                billingDetailsLayout.visibility = View.VISIBLE
+                billingDownArrow.visibility = View.GONE
+                billingUpArrow.visibility = View.VISIBLE
+
+            }
+
+            billingUpArrow.setOnClickListener {
+                billingDownArrow.visibility = View.VISIBLE
+                billingUpArrow.visibility = View.GONE
+                billingDetailsLayout.visibility = View.GONE
+            }
+
+        }
 
 
     }
@@ -599,6 +667,8 @@ class ParticularOrderDetailActivity : AppCompatActivity(), OrderStageItemClick {
                                 callPickUpTripDetailsApi("")
 
                                 callSurgeryPersonDetailApi()
+
+                                callBillingDetailApiHere()
 
                             }
                         } else {
